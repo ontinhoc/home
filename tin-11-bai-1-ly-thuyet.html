@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bài 1: Hệ điều hành - Lịch sử phát triển, đặc điểm, chức năng và mối quan hệ với phần cứng và phần mềm ứng dụng. Windows, Linux, iOS, Android.">
+    <meta name="keywords" content="hệ điều hành, operating system, Windows, Linux, iOS, Android, máy tính cá nhân, thiết bị di động">
+    <meta name="author" content="Ontinhoc">
+    <title>Bài 1: Hệ Điều Hành | Tin Học 11</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            margin: 20px 0 10px;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .feature-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .history-timeline {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .history-item {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .history-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -26px;
+            top: 6px;
+        }
+
+        .highlight {
+            background: #e0f2fe;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .relationship-diagram {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .relationship-diagram div {
+            padding: 15px;
+            margin: 10px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+        }
+
+        #tableOfContents {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        #tableOfContents h2 {
+            margin-top: 0;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>BÀI 1: HỆ ĐIỀU HÀNH</h1>
+
+            <div id="tableOfContents">
+                <h2>Mục lục</h2>
+                <ol>
+                    <li><a href="#phan1">Lịch sử phát triển của hệ điều hành máy tính cá nhân</a></li>
+                    <li><a href="#phan2">Hệ điều hành cho thiết bị di động</a></li>
+                    <li><a href="#phan3">Quan hệ giữa hệ điều hành, phần cứng và phần mềm ứng dụng</a></li>
+                </ol>
+            </div>
+
+            <section id="phan1">
+                <h2>1. Lịch sử phát triển của hệ điều hành máy tính cá nhân</h2>
+                
+                <div class="feature-box">
+                    <h3>Chức năng chính của hệ điều hành</h3>
+                    <ul>
+                        <li>Quản lí thiết bị (CPU, bộ nhớ hay thiết bị ngoại vi)</li>
+                        <li>Quản lí việc lưu trữ dữ liệu (quản lí tệp và thư mục)</li>
+                        <li>Tổ chức thực hiện các chương trình, điều phối tài nguyên</li>
+                        <li>Cung cấp môi trường giao tiếp với người sử dụng</li>
+                        <li>Cung cấp các tiện ích nâng cao hiệu quả sử dụng máy tính</li>
+                    </ul>
+                </div>
+
+                <h3>Đặc điểm phát triển</h3>
+                <ul>
+                    <li><span class="highlight">Giao diện đồ họa (GUI)</span>: Chuyển từ giao diện dòng lệnh sang giao diện đồ họa trực quan</li>
+                    <li><span class="highlight">Cơ chế "plug & play"</span>: Tự động nhận biết và cài đặt thiết bị ngoại vi</li>
+                </ul>
+
+                <div class="history-timeline">
+                    <h3>Lịch sử Windows</h3>
+                    <div class="history-item">Windows 1.0 (1985): Phiên bản đầu tiên với giao diện đồ họa</div>
+                    <div class="history-item">Windows 3.x (1990-1991): Khả năng đa nhiệm, kéo thả, làm việc với mạng</div>
+                    <div class="history-item">Windows 95 (1995): Tích hợp nhiều tính năng cơ bản, Start menu, Taskbar</div>
+                    <div class="history-item">Windows XP (2001): Cải tiến giao diện và hiệu suất, hỗ trợ 64 bit</div>
+                    <div class="history-item">Windows 7, 8, 10, 11 (2009-2021): Thế hệ mới với độ an toàn và ổn định cao</div>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Linux và các phiên bản</h3>
+                    <ul>
+                        <li>Nguồn gốc từ UNIX (1969)</li>
+                        <li>LINUX (1991) do Linus Torvalds phát triển</li>
+                        <li>Mã nguồn mở, cho phép tự do sử dụng và phát triển</li>
+                        <li>Nhiều biến thể: RedHat, Suse, Ubuntu</li>
+                        <li>Android được xây dựng trên nền tảng Linux</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phan2">
+                <h2>2. Hệ điều hành cho thiết bị di động</h2>
+                
+                <div class="feature-box">
+                    <h3>Đặc điểm</h3>
+                    <ul>
+                        <li>Chú trọng kết nối không dây (Wi-Fi, 3G/4G/5G, Bluetooth, NFC)</li>
+                        <li>Giao diện thân thiện với cảm ứng đa điểm</li>
+                        <li>Nhiều tiện ích hỗ trợ cá nhân</li>
+                        <li>Thiết kế cho thiết bị nhỏ gọn, màn hình cảm ứng</li>
+                    </ul>
+                </div>
+
+                <h3>Hệ điều hành di động phổ biến</h3>
+                <ul>
+                    <li><span class="highlight">iOS</span> của Apple (iPhone, iPad)</li>
+                    <li><span class="highlight">Android</span> của Google (đa số điện thoại khác)</li>
+                </ul>
+            </section>
+
+            <section id="phan3">
+                <h2>3. Quan hệ giữa hệ điều hành, phần cứng và phần mềm ứng dụng</h2>
+                
+                <div class="feature-box">
+                    <h3>Sự cần thiết của hệ điều hành</h3>
+                    <ul>
+                        <li>Khắc phục việc can thiệp thủ công vào quá trình hoạt động</li>
+                        <li>Cần thiết cho thiết bị đa năng như máy tính</li>
+                        <li>Điều phối tài nguyên và cung cấp giao diện làm việc</li>
+                    </ul>
+                </div>
+
+                <div class="relationship-diagram">
+                    <h3>Mối quan hệ giữa các thành phần</h3>
+                    <div>Phần mềm ứng dụng ↑</div>
+                    <div>Hệ điều hành ↑</div>
+                    <div>Phần cứng</div>
+                </div>
+
+                <ul>
+                    <li><strong>Phần cứng:</strong> Thiết bị xử lí thông tin</li>
+                    <li><strong>Hệ điều hành:</strong> Môi trường trung gian cung cấp dịch vụ điều khiển</li>
+                    <li><strong>Phần mềm ứng dụng:</strong> Sử dụng dịch vụ của hệ điều hành để thực hiện công việc</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+
+    <script>
+        // Back to top button functionality
+        const backToTop = document.getElementById('backToTop');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+
+        backToTop.onclick = function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        };
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
