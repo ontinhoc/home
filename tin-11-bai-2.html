@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thực hành sử dụng hệ điều hành - trắc nghiệm và đáp án cho giáo viên.">
+    <meta name="keywords" content="thực hành hệ điều hành, trắc nghiệm, tin 11, file explorer, defragment, check disk">
+    <meta name="author" content="Ontinhoc">
+    <title>Thực hành sử dụng hệ điều hành - Tin 11 Bài 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Thực hành sử dụng hệ điều hành (Tin 11 - Bài 2)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audio feedback -->
+    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho tin-11-bai-2 (10 câu, phần đáp án dùng cho giáo viên trong phần giải thích)
+        const questions = [
+            {
+                question: "Hệ điều hành trên máy tính cá nhân như Windows, macOS hoặc Linux cung cấp những chức năng cơ bản nào sau đây?",
+                options: [
+                    "Chỉ cung cấp môi trường giao tiếp với người sử dụng.",
+                    "Chỉ quản lí tệp và thư mục.",
+                    "Cung cấp môi trường giao tiếp với người sử dụng và quản lí tệp, thư mục.",
+                    "Quản lí các thiết bị ngoại vi mà không cần phần mềm."
+                ],
+                answer: 2,
+                explanation: "Các hệ điều hành cung cấp môi trường giao tiếp và quản lí tệp, thư mục."
+            },
+            {
+                question: "Trên màn hình nền của hệ điều hành Windows hoặc Ubuntu, thành phần nào dưới đây không được coi là một biểu tượng có thể tương tác trực tiếp?",
+                options: ["Tệp","Thư mục","Nút lệnh","Thanh trạng thái (Status bar)"],
+                answer: 3,
+                explanation: "Thanh trạng thái hiển thị thông tin nhưng không phải là biểu tượng tương tác như tệp hoặc thư mục."
+            },
+            {
+                question: "Khi làm việc với giao diện đồ họa của hệ điều hành, con trỏ chuột có công dụng chính là gì?",
+                options: ["Điều chỉnh âm lượng của máy tính.","Chọn đối tượng làm việc.","Hiển thị thông tin về kết nối mạng.","Khởi động lại hệ thống."],
+                answer: 1,
+                explanation: "Con trỏ dùng để chọn đối tượng làm việc trên giao diện đồ họa."
+            },
+            {
+                question: "Tiện ích nào của Windows được sử dụng để quản lí tệp và thư mục?",
+                options: ["Start Menu","Taskbar","File Explorer","Control Panel"],
+                answer: 2,
+                explanation: "File Explorer dùng để quản lí tệp và thư mục trên Windows."
+            },
+            {
+                question: "Mục đích chính của tiện ích 'Optimize' hoặc 'Defragment' trên đĩa cứng là gì?",
+                options: ["Kiểm tra và khắc phục các lỗi logic của đĩa.","Xóa bỏ các tệp tin tạm thời và rác.","Sắp xếp lại các liên cung (cluster) của một tệp sao cho liền mạch.","Thay đổi định dạng hệ thống tệp của đĩa."],
+                answer: 2,
+                explanation: "Defragment sắp xếp lại các liên cung để các phần của một tệp được ghi liên tục, giúp tăng tốc truy cập."
+            },
+            {
+                question: "Tiện ích 'Check disk' trên hệ điều hành có chức năng gì?",
+                options: ["Nén các tệp tin trên đĩa để tiết kiệm không gian.","Sao lưu toàn bộ dữ liệu trên đĩa.","Phát hiện và khắc phục các lỗi trên đĩa như bad sector.","Tối ưu hóa hiệu suất đọc/ghi của đĩa."],
+                answer: 2,
+                explanation: "Check disk phát hiện và khắc phục các lỗi trên đĩa như các liên cung 'mồ côi' hoặc bad sector."
+            },
+            {
+                question: "Phát biểu nào sau đây đúng về các tiện ích trong hệ điều hành?",
+                options: [
+                    "Tất cả các tiện ích đều được cài đặt sẵn cùng với hệ điều hành.",
+                    "Một số tiện ích có sẵn, trong khi các tiện ích khác có thể được cài đặt sau.",
+                    "Các tiện ích chỉ là các phần mềm độc lập và không bao giờ được tích hợp.",
+                    "Tiện ích chỉ dùng để giải trí."
+                ],
+                answer: 1,
+                explanation: "Một số tiện ích được cài sẵn, trong khi các tiện ích khác như Unikey có thể được cài thêm sau."
+            },
+            {
+                question: "Đối với các thiết bị di động như điện thoại thông minh, những tiện ích cá nhân cơ bản nào thường được cung cấp?",
+                options: ["Chỉ có chức năng nghe gọi và gửi tin nhắn.","Quản lí danh bạ, tin nhắn, hẹn giờ, lịch, quản lí ảnh và quản lí tệp.","Chỉ có thể cài đặt thêm các ứng dụng bên thứ ba.","Chỉ dùng để truy cập Internet và mạng xã hội."],
+                answer: 1,
+                explanation: "Thiết bị di động cung cấp nhiều tiện ích cá nhân như quản lí danh bạ, tin nhắn, lịch, quản lí ảnh và tệp."
+            },
+            {
+                question: "Chức năng 'hợp mảnh' chỉ có tác dụng đối với loại đĩa nào?",
+                options: ["Đĩa cứng thể rắn (SSD).","Đĩa từ (HDD).","Cả đĩa từ và đĩa thể rắn.","Bộ nhớ USB."],
+                answer: 1,
+                explanation: "Hợp mảnh có tác dụng với đĩa từ (HDD), không có tác dụng (và có thể gây hại) trên SSD."
+            },
+            {
+                question: "Trong quản lí tệp và thư mục trên Ubuntu, thao tác nào dưới đây không được đề cập trực tiếp là một thao tác quản lí tệp?",
+                options: ["Đổi tên tệp.","Xóa tệp.","Di chuyển tệp.","Thay đổi quyền truy cập của tệp."],
+                answer: 3,
+                explanation: "Thay đổi quyền truy cập không được đề cập trong các thao tác quản lí tệp cơ bản này."
+            }
+        ];
+
+        // Khởi tạo quiz
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuiz(questions);
+        });
+    </script>
+</body>
+</html>
