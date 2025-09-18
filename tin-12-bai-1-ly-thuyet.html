@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bài học về Trí tuệ nhân tạo (AI) - Khái niệm, lịch sử, đặc trưng và ứng dụng của AI trong đời sống">
+    <meta name="keywords" content="trí tuệ nhân tạo, AI, machine learning, học máy, robot, MYCIN, Asimo, Google Dịch">
+    <meta name="author" content="Ontinhoc">
+    <title>Trí tuệ nhân tạo (AI) - Khái niệm và Ứng dụng | Tin học 12</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
+        /* Content styling */
+        .content-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .definition-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Example boxes */
+        .example-box {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px solid #bde0f3;
+        }
+
+        .example-box h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        /* Highlight important points */
+        .highlight {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 15px;
+            }
+        }
+
+        /* Back to top button */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #backToTop:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <article class="content-section">
+            <h1>Trí tuệ nhân tạo (AI)</h1>
+            
+            <section id="khai-niem">
+                <h2>1. Khái niệm về AI (Trí tuệ nhân tạo)</h2>
+                
+                <div class="definition-box">
+                    <h3>Định nghĩa sơ lược</h3>
+                    <p>AI thường được hiểu là <span class="highlight">khả năng máy móc thực hiện nhiều công việc một cách tự động</span>. Tuy nhiên, không phải bất kỳ hệ thống tự động hóa nào cũng được coi là AI.</p>
+                </div>
+
+                <h3>Lịch sử và sự ra đời</h3>
+                <ul>
+                    <li>Những hình dung về "thông minh nhân tạo" đã có từ xa xưa.</li>
+                    <li>Ý nghĩa hiện đại của "thông minh nhân tạo" gắn liền với <span class="highlight">khả năng của máy tính thực hiện các nhiệm vụ thông minh mà trước đây chỉ con người mới có thể làm được</span>.</li>
+                    <li>Năm 1950, <span class="highlight">Alan Turing đưa ra "phép thử Turing"</span> để định giá khả năng thể hiện hành vi thông minh của máy tính.</li>
+                    <li>Năm 1956, Hội thảo Dartmouth tại Đại học Dartmouth, Mỹ đánh dấu <span class="highlight">sự ra đời của thuật ngữ AI</span>.</li>
+                </ul>
+
+                <div class="definition-box">
+                    <h3>Định nghĩa thông thường của AI</h3>
+                    <p>AI là <span class="highlight">khả năng của máy tính có thể làm những công việc mang tính trí tuệ của con người</span> như đọc chữ, hiểu tiếng nói, dịch thuật, lái xe hay khả năng học và ra quyết định.</p>
+                </div>
+
+                <h3>Các đặc trưng cơ bản của AI</h3>
+                <ul>
+                    <li><strong>Khả năng học:</strong> Nắm bắt thông tin từ dữ liệu và điều chỉnh hành vi.</li>
+                    <li><strong>Khả năng suy luận:</strong> Vận dụng logic và tri thức để đưa ra quyết định.</li>
+                    <li><strong>Khả năng nhận thức:</strong> Cảm nhận và hiểu biết môi trường xung quanh.</li>
+                    <li><strong>Khả năng hiểu ngôn ngữ:</strong> Hiểu và xử lý ngôn ngữ tự nhiên.</li>
+                    <li><strong>Khả năng giải quyết vấn đề:</strong> Tìm ra cách giải quyết các tình huống phức tạp.</li>
+                </ul>
+
+                <h3>Phân loại AI theo chức năng</h3>
+                <div class="example-box">
+                    <h4>Hai loại AI chính:</h4>
+                    <ul>
+                        <li><strong>Trí tuệ nhân tạo hẹp (hay yếu):</strong> Được thiết kế để thực hiện một nhiệm vụ cụ thể.</li>
+                        <li><strong>Trí tuệ nhân tạo tổng quát (hay mạnh):</strong> Có khả năng tự học, tự thích nghi và thực hiện được nhiều công việc giống như con người.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="ung-dung">
+                <h2>2. Một số ứng dụng của AI</h2>
+
+                <div class="example-box">
+                    <h4>Hệ chuyên gia MYCIN</h4>
+                    <ul>
+                        <li>Chương trình máy tính <span class="highlight">mô phỏng khả năng ra quyết định của chuyên gia</span> trong lĩnh vực y học.</li>
+                        <li>Phát triển tại Đại học Stanford từ năm 1972.</li>
+                        <li>Chứa khoảng 600 luật suy diễn.</li>
+                        <li>Đưa ra danh sách vi khuẩn gây nhiễm trùng máu và đề xuất kháng sinh phù hợp.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Robot Asimo</h4>
+                    <ul>
+                        <li>Robot thông minh của hãng Honda (1986).</li>
+                        <li><span class="highlight">Robot hình người đầu tiên tích hợp nhiều ứng dụng AI</span>.</li>
+                        <li>Có khả năng di chuyển, nhận dạng hình ảnh và tiếng nói.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>Các ứng dụng AI phổ biến khác</h4>
+                    <ul>
+                        <li><strong>Google Dịch:</strong> Dịch thuật đa ngôn ngữ, nhận dạng văn bản trong hình ảnh.</li>
+                        <li><strong>Nhận dạng khuôn mặt:</strong> Sử dụng trong bảo mật và mạng xã hội.</li>
+                        <li><strong>Nhận dạng chữ viết:</strong> Chuyển đổi chữ viết tay thành văn bản số.</li>
+                        <li><strong>Trợ lí ảo:</strong> Google Assistant, Siri, Bixby, Cortana.</li>
+                    </ul>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        backToTopButton.onclick = function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        };
+
+        // Smooth scrolling for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
