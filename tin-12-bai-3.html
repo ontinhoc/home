@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Mạng máy tính và Internet - Thiết bị mạng, modem, router, switch, WAP.">
+    <meta name="keywords" content="mạng máy tính, trắc nghiệm, hub, switch, router, modem, wap, wifi">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Mạng máy tính và Internet | Tin 12 - Bài 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trắc nghiệm: Mạng máy tính và Internet (Tin 12 - Bài 3)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audio feedback -->
+    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "Chức năng chính của hub là gì?",
+                options: [
+                    "Định tuyến dữ liệu giữa các mạng.",
+                    "Phát tán tín hiệu từ một cổng ra tất cả các cổng khác.",
+                    "Chuyển đổi tín hiệu số sang tín hiệu tương tự.",
+                    "Kết nối các thiết bị di động bằng sóng vô tuyến."
+                ],
+                answer: 1,
+                explanation: "Hub phát tín hiệu từ một cổng ra tất cả các cổng khác."
+            },
+            {
+                question: "Thiết bị nào giúp giảm hiện tượng xung đột tín hiệu trong LAN so với hub?",
+                options: ["Switch","Modem","Router","WAP"],
+                answer: 0,
+                explanation: "Switch chỉ truyền đúng cổng cần thiết giúp giảm xung đột."
+            },
+            {
+                question: "Wireless Access Point (WAP) có chức năng chính là gì?",
+                options: ["Định tuyến dữ liệu giữa các LAN.","Kết nối thiết bị đầu cuối qua sóng Wi-Fi.","Chuyển đổi tín hiệu số ↔ tương tự.","Phát tán tín hiệu ra tất cả các cổng."],
+                answer: 1,
+                explanation: "WAP kết nối thiết bị qua sóng Wi-Fi."
+            },
+            {
+                question: "Thiết bị nào được dùng để kết nối mạng LAN với Internet và thực hiện chọn đường đi cho gói tin?",
+                options: ["Hub","Switch","Router","WAP"],
+                answer: 2,
+                explanation: "Router định tuyến dữ liệu giữa các mạng và kết nối Internet."
+            },
+            {
+                question: "Chức năng chính của modem là gì?",
+                options: ["Chuyển tín hiệu số thành tín hiệu tương tự và ngược lại.","Chọn đường truyền tối ưu cho gói tin.","Giảm xung đột trong mạng LAN.","Tạo ra điểm truy cập Wi-Fi."],
+                answer: 0,
+                explanation: "Modem chuyển đổi tín hiệu số ↔ tương tự để kết nối Internet."
+            },
+            {
+                question: "Khi nào nên dùng hub thay cho switch?",
+                options: ["Khi muốn giảm xung đột tín hiệu.","Khi cần tiết kiệm chi phí trong mạng nhỏ.","Khi kết nối các mạng LAN với nhau.","Khi cần phát Wi-Fi."],
+                answer: 1,
+                explanation: "Hub rẻ hơn, phù hợp cho mạng nhỏ với ít máy."
+            },
+            {
+                question: "Để máy tính để bàn kết nối được Wi-Fi, cần:",
+                options: ["Dùng dây cáp mạng RJ45.","Lắp thêm card/mạch mở rộng hỗ trợ Wi-Fi.","Dùng modem quang.","Cắm trực tiếp vào switch."],
+                answer: 1,
+                explanation: "Máy tính để bàn cần card hoặc mạch mở rộng để hỗ trợ Wi-Fi."
+            },
+            {
+                question: "Loại modem nào thường được dùng để kết nối Internet qua đường dây điện thoại nhưng tách biệt với thoại?",
+                options: ["Modem quay số","Modem ADSL","Modem quang","Modem 3G/4G"],
+                answer: 1,
+                explanation: "Modem ADSL dùng đường dây điện thoại nhưng tách biệt với thoại."
+            },
+            {
+                question: "Trong sơ đồ mạng gia đình hiện nay, thiết bị thường tích hợp router + modem + Wi-Fi trong cùng một hộp gọi là:",
+                options: ["Hub đa năng","Switch Wi-Fi","Router Wi-Fi","Modem quay số"],
+                answer: 2,
+                explanation: "Router Wi-Fi thường tích hợp router, modem và Wi-Fi trong một thiết bị."
+            },
+            {
+                question: "Ưu điểm của kết nối không dây (Wi-Fi) so với kết nối có dây là gì?",
+                options: ["Tốc độ luôn cao hơn.","Không cần nhập mật khẩu.","Thuận tiện, di động, không phải kéo dây mạng.","Không bao giờ bị nhiễu tín hiệu."],
+                answer: 2,
+                explanation: "Wi-Fi thuận tiện và di động, không cần kéo dây mạng."
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuiz(questions);
+        });
+    </script>
+</body>
+</html>
