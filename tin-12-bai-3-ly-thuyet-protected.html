@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tin 12 - Bài 3 (Lý thuyết) — Bản bảo vệ</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="robots" content="noindex, noarchive">
+</head>
+<body>
+  <!-- Khoá trang (mật khẩu) -->
+  <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+    <div style="background:#fff;padding:22px;border-radius:10px;max-width:520px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+      <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+      <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung lý thuyết.</p>
+      <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+        <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+      </div>
+      <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+      <p style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;">Vui lòng nhập mật khẩu do giáo viên cung cấp</p>
+    </div>
+  </div>
+
+  <!-- Nội dung sẽ được giải mã và chèn vào đây -->
+  <main id="protectedContent" class="container" style="display:none"></main>
+
+  <!-- Encrypted payload (điền sau bằng encryptor-plain.html) -->
+  <script>
+    // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], sau đó base64
+    const ENCRYPTED_HTML = '';
+  </script>
+
+  <script>
+    (function(){
+      const lockScreen = document.getElementById('lockScreen');
+      const content = document.getElementById('protectedContent');
+      const unlockBtn = document.getElementById('unlockBtn');
+      const cancelBtn = document.getElementById('cancelUnlock');
+      const input = document.getElementById('pagePassword');
+      const lockMsg = document.getElementById('lockMsg');
+
+      // Rào cản nhẹ (không phải bảo mật thực sự)
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+        if (e.key === 'F12') e.preventDefault();
+      });
+
+      function b64ToBytes(b64){
+        const bin = atob(b64);
+        const out = new Uint8Array(bin.length);
+        for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+        return out;
+      }
+      async function deriveKey(password, salt){
+        const enc = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'}, keyMaterial, {name:'AES-GCM', length:256}, false, ['decrypt']);
+      }
+      async function decryptPayload(password, b64){
+        if (!b64) throw new Error('Thiếu dữ liệu đã mã hóa');
+        const all = b64ToBytes(b64);
+        let pos = 0; const version = all[pos++];
+        if (version !== 1) throw new Error('Gói dữ liệu không hỗ trợ');
+        const salt = all.slice(pos, pos+16); pos += 16;
+        const iv = all.slice(pos, pos+12); pos += 12;
+        const ciphertext = all.slice(pos);
+        const key = await deriveKey(password, salt);
+        const plainBuf = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ciphertext);
+        return new TextDecoder().decode(plainBuf);
+      }
+
+      async function tryUnlock(){
+        lockMsg.style.display = 'none';
+        try{
+          const html = await decryptPayload(input.value || '', ENCRYPTED_HTML);
+          content.innerHTML = html;
+          lockScreen.style.display = 'none';
+          content.style.display = 'block';
+        }catch(e){
+          lockMsg.style.display = 'block';
+        }
+      }
+
+      unlockBtn.addEventListener('click', tryUnlock);
+      cancelBtn.addEventListener('click', ()=>{ input.value=''; lockMsg.style.display='none'; });
+      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') tryUnlock(); });
+    })();
+  </script>
+</body>
+</html>
+
