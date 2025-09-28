@@ -61,6 +61,7 @@
       const cancelBtn = document.getElementById('cancelUnlock');
       const input = document.getElementById('pagePassword');
       const lockMsg = document.getElementById('lockMsg');
+      const notice = document.getElementById('classUnlockNotice');
 
       // Rào cản nhẹ
       document.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -68,6 +69,12 @@
         const k = (e.key || '').toLowerCase();
         if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
         if (e.key === 'F12') e.preventDefault();
+      });
+      // Phím tắt giáo viên: Alt+Shift+O để hiện thông báo mật khẩu sau giờ học
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+          if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+        }
       });
 
       function b64ToBytes(b64){
@@ -105,6 +112,11 @@
       unlockBtn.addEventListener('click', tryUnlock);
       cancelBtn.addEventListener('click', ()=>{ input.value=''; lockMsg.style.display='none'; });
       input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') tryUnlock(); });
+
+      // Tuỳ chọn (giấu trước, hiện sau): gọi hàm này sau giờ học để hiển thị thông báo mật khẩu
+      window.showAfterClassNotice = function(){
+        if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: <pV7';
+      };
       if (sessionStorage.getItem(LOCK_KEY) === '1') { input.focus(); }
     })();
   </script>

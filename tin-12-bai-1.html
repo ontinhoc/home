@@ -1,154 +1,117 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trí tuệ nhân tạo (AI) - Ôn tập Tin học 12 Bài 1</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trí tuệ nhân tạo (AI) — Ôn tập Tin học 12 | Bài 1</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Trí tuệ nhân tạo (AI) - Ôn tập Tin học 12</h1>
-            <div class="controls">
-                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
-                <button id="retry-btn" class="btn">Làm lại bài</button>
-            </div>
-        </header>
-
-        <main>
-            <div id="quiz-box"></div>
-            <div id="summary" class="hidden"></div>
-            <div class="navigation-controls">
-                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
-            </div>
-        </main>
+  <!-- Khoá trang (yêu cầu mật khẩu) -->
+  <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+    <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+      <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+      <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung bài học.</p>
+      <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+        <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+      </div>
+      <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+      <p id="classUnlockNotice" style="margin-top:12px;color:#dc2626;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
     </div>
-    
-    <!-- Audio elements for feedback -->
-    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
-    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+  </div>
 
-    <script src="script.js"></script>
-    <script>
-        // Dữ liệu câu hỏi cho bài 1
-        const questions = [
-            {
-                question: "Trí tuệ nhân tạo (AI) là gì?",
-                options: [
-                    "Khả năng của máy tính thực hiện các phép tính số học.",
-                    "Khả năng của máy tính thực hiện các công việc mang tính trí tuệ của con người.",
-                    "Khả năng của máy tính lưu trữ dữ liệu lớn.",
-                    "Khả năng của máy tính kết nối mạng Internet."
-                ],
-                answer: 1,
-                explanation: "AI giúp máy tính thực hiện công việc trí tuệ như đọc, hiểu, dịch, lái xe…"
-            },
-            {
-                question: "Một trong những đặc trưng cơ bản của AI là:",
-                options: [
-                    "Tự động tăng tốc độ xử lý phần cứng.",
-                    "Khả năng học hỏi từ dữ liệu và kinh nghiệm.",
-                    "Khả năng lưu trữ vô hạn dữ liệu.",
-                    "Tự sửa chữa phần cứng khi hỏng hóc."
-                ],
-                answer: 1,
-                explanation: "Khả năng học từ dữ liệu và kinh nghiệm là đặc trưng của AI."
-            },
-            {
-                question: "AI có thể được chia thành mấy loại chính theo chức năng?",
-                options: [
-                    "2 loại",
-                    "3 loại",
-                    "4 loại",
-                    "5 loại"
-                ],
-                answer: 0,
-                explanation: "Gồm AI hẹp (yếu) và AI tổng quát (mạnh)."
-            },
-            {
-                question: "Phần mềm Google Dịch là ví dụ điển hình cho loại AI nào?",
-                options: [
-                    "AI tổng quát",
-                    "AI hẹp",
-                    "AI mạnh",
-                    "AI tự động hóa phần cứng"
-                ],
-                answer: 1,
-                explanation: "Google Dịch là AI hẹp, chỉ chuyên dịch ngôn ngữ."
-            },
-            {
-                question: "Ứng dụng nào sau đây KHÔNG phải là ví dụ của AI?",
-                options: [
-                    "Nhận dạng khuôn mặt trên điện thoại.",
-                    "Tự động kiểm tra chính tả.",
-                    "Máy tính bỏ túi thực hiện phép cộng.",
-                    "Trợ lí ảo Siri."
-                ],
-                answer: 2,
-                explanation: "Máy tính bỏ túi chỉ tính toán, không có trí tuệ nhân tạo."
-            },
-            {
-                question: "Hệ chuyên gia MYCIN trong y học sử dụng tri thức dưới dạng:",
-                options: [
-                    "Luật suy diễn.",
-                    "Mạng xã hội.",
-                    "Cơ sở dữ liệu hình ảnh.",
-                    "Bộ nhớ điện toán đám mây."
-                ],
-                answer: 0,
-                explanation: "MYCIN dựa trên khoảng 600 luật suy diễn để chẩn đoán."
-            },
-            {
-                question: "Robot Asimo là ví dụ về AI vì có khả năng:",
-                options: [
-                    "Tự tính toán tài chính.",
-                    "Điều khiển từ xa bằng sóng radio.",
-                    "Di chuyển bằng hai chân, nhận dạng hình ảnh và tiếng nói.",
-                    "Tự động sao lưu dữ liệu."
-                ],
-                answer: 2,
-                explanation: "Asimo có thể đi bằng 2 chân, nhận diện hình ảnh và tiếng nói."
-            },
-            {
-                question: "Đặc trưng nào của AI giúp trợ lí ảo như Siri hiểu được yêu cầu của người dùng?",
-                options: [
-                    "Khả năng học",
-                    "Khả năng nhận thức",
-                    "Khả năng hiểu ngôn ngữ",
-                    "Khả năng lưu trữ"
-                ],
-                answer: 2,
-                explanation: "Trợ lí ảo sử dụng xử lí ngôn ngữ tự nhiên (NLP)."
-            },
-            {
-                question: "Ứng dụng nhận dạng chữ viết tay thường được sử dụng trong lĩnh vực nào?",
-                options: [
-                    "Trò chơi điện tử",
-                    "Xử lí hóa đơn và tài liệu thương mại điện tử",
-                    "Tìm kiếm trên mạng xã hội",
-                    "Điều khiển robot công nghiệp"
-                ],
-                answer: 1,
-                explanation: "Nhận dạng chữ viết tay dùng trong xử lí hóa đơn, nhập liệu tự động."
-            },
-            {
-                question: "Mục tiêu chính của việc phát triển AI là gì?",
-                options: [
-                    "Giúp con người không cần học tập.",
-                    "Xây dựng phần mềm có đặc trưng trí tuệ giống con người.",
-                    "Thay thế hoàn toàn con người trong mọi lĩnh vực.",
-                    "Chỉ tập trung vào trò chơi điện tử."
-                ],
-                answer: 1,
-                explanation: "Mục tiêu là xây dựng phần mềm có khả năng trí tuệ giống con người."
-            }
-        ];
+  <div id="content" class="container" style="display:none">
+    <header>
+      <h1>Trí tuệ nhân tạo (AI) — Ôn tập Tin học 12 (Bài 1)</h1>
+      <div class="controls">
+        <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+        <button id="retry-btn" class="btn">Làm lại bài</button>
+      </div>
+    </header>
+    <main>
+      <div id="quiz-box"></div>
+      <div id="summary" class="hidden"></div>
+      <div class="navigation-controls">
+        <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+      </div>
+    </main>
+  </div>
 
-        // Khởi tạo quiz khi trang web load xong
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeQuiz(questions);
-        });
-    </script>
+  <!-- Âm thanh phản hồi (tùy chọn) -->
+  <audio id="audio-correct" preload="auto"></audio>
+  <audio id="audio-wrong" preload="auto"></audio>
+
+  <script src="script.js"></script>
+  <script>
+    // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+    // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+    // Mật khẩu: nT9{
+    const ENCRYPTED_QUESTIONS = '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';
+  </script>
+
+  <script>
+    (function(){
+      const LOCK_KEY = 'tin12_bai1_unlocked';
+      const lockScreen = document.getElementById('lockScreen');
+      const content = document.getElementById('content');
+      const unlockBtn = document.getElementById('unlockBtn');
+      const cancelBtn = document.getElementById('cancelUnlock');
+      const input = document.getElementById('pagePassword');
+      const lockMsg = document.getElementById('lockMsg');
+      const notice = document.getElementById('classUnlockNotice');
+
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        const k = (e.key || '').toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+        if (e.key === 'F12') e.preventDefault();
+      });
+      // Phím tắt giáo viên: Alt+Shift+O để hiện thông báo mật khẩu sau giờ học
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+          if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+        }
+      });
+
+      function b64ToBytes(b64){ const bin = atob(b64); const out = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i); return out; }
+      async function deriveKey(password, salt){
+        const enc = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'}, keyMaterial, {name:'AES-GCM', length:256}, false, ['decrypt']);
+      }
+      async function decryptPayload(password, b64){
+        if (!b64) throw new Error('Thiếu dữ liệu đã mã hóa');
+        const all = b64ToBytes(b64); let pos = 0; const version = all[pos++];
+        if (version !== 1) throw new Error('Gói dữ liệu không hỗ trợ');
+        const salt = all.slice(pos, pos+16); pos += 16; const iv = all.slice(pos, pos+12); pos += 12; const ciphertext = all.slice(pos);
+        const key = await deriveKey(password, salt);
+        const plainBuf = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ciphertext);
+        return new TextDecoder().decode(plainBuf);
+      }
+      async function tryUnlock(){
+        const pw = input.value || ''; lockMsg.style.display = 'none';
+        try {
+          const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+          const questions = JSON.parse(json);
+          if (typeof initializeQuiz === 'function') initializeQuiz(questions);
+          sessionStorage.setItem(LOCK_KEY, '1');
+          lockScreen.style.display = 'none';
+          content.style.display = 'block';
+        } catch (err) { lockMsg.style.display = 'block'; }
+      }
+      unlockBtn.addEventListener('click', tryUnlock);
+      cancelBtn.addEventListener('click', ()=>{ input.value=''; lockMsg.style.display='none'; });
+      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') tryUnlock(); });
+
+      // Tuỳ chọn (giấu trước, hiện sau): gọi sau giờ học để hiển thị thông báo mật khẩu
+      window.showAfterClassNotice = function(){
+        notice.textContent = 'Vui lòng nhập mật khẩu: nT9{';
+      };
+
+      if (sessionStorage.getItem(LOCK_KEY) === '1') { input.focus(); }
+    })();
+  </script>
 </body>
 </html>
