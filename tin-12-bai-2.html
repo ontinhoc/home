@@ -1,154 +1,112 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng dụng Trí tuệ nhân tạo - Ôn tập Tin học 12 Bài 2</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ứng dụng Trí tuệ nhân tạo — Ôn tập Tin học 12 | Bài 2</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Ứng dụng Trí tuệ nhân tạo - Ôn tập Tin học 12</h1>
-            <div class="controls">
-                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
-                <button id="retry-btn" class="btn">Làm lại bài</button>
-            </div>
-        </header>
-
-        <main>
-            <div id="quiz-box"></div>
-            <div id="summary" class="hidden"></div>
-            <div class="navigation-controls">
-                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
-            </div>
-        </main>
+  <!-- Khoá trang (yêu cầu mật khẩu) -->
+  <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+    <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+      <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+      <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung bài học.</p>
+      <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+        <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+      </div>
+      <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+      <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;">Vui lòng nhập mật khẩu: <pV7</p>
     </div>
-    
-    <!-- Audio elements for feedback -->
-    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
-    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+  </div>
 
-    <script src="script.js"></script>
-    <script>
-        // Dữ liệu câu hỏi cho bài 2
-        const questions = [
-            {
-                question: "Lĩnh vực nào sau đây được các tài liệu chỉ ra là đã và đang phát triển mạnh mẽ dựa trên những thành tựu của Trí tuệ nhân tạo (AI)?",
-                options: [
-                    "Nấu ăn truyền thống",
-                    "Kiến trúc cổ điển",
-                    "Y học và chăm sóc sức khỏe",
-                    "Thể thao nghiệp dư"
-                ],
-                answer: 2,
-                explanation: "Các tài liệu đã chỉ ra nhiều lĩnh vực khoa học, công nghệ và đời sống đã và đang nhận được rất nhiều lợi ích từ sự phát triển của AI, trong đó có Y học và chăm sóc sức khỏe."
-            },
-            {
-                question: "Theo các tài liệu, loại Trí tuệ nhân tạo nào chỉ giới hạn trong phạm vi một nhiệm vụ cụ thể?",
-                options: [
-                    "Trí tuệ nhân tạo tổng quát (General AI)",
-                    "Trí tuệ nhân tạo mạnh (Strong AI)",
-                    "Trí tuệ nhân tạo hẹp (Narrow AI)",
-                    "Trí tuệ nhân tạo sáng tạo (Creative AI)"
-                ],
-                answer: 2,
-                explanation: "Các thành tựu hiện tại của AI vẫn chủ yếu chỉ hạn chế trong phạm vi Trí tuệ nhân tạo hẹp/yếu (Narrow AI/Weak AI), có nghĩa là chúng chỉ có khả năng thực hiện một nhiệm vụ chuyên biệt."
-            },
-            {
-                question: "Mục tiêu dài hạn và hết sức phức tạp trong nghiên cứu và phát triển AI là thành công loại Trí tuệ nhân tạo nào, có năng lực trí tuệ như con người và khả năng áp dụng tri thức từ lĩnh vực này sang lĩnh vực khác?",
-                options: [
-                    "Trí tuệ nhân tạo hẹp (Narrow AI)",
-                    "Trí tuệ nhân tạo yếu (Weak AI)",
-                    "Trí tuệ nhân tạo tạo sinh (Generative AI)",
-                    "Trí tuệ nhân tạo tổng quát (General AI)"
-                ],
-                answer: 3,
-                explanation: "Trong tương lai, nhiều chuyên gia kỳ vọng sẽ phát triển thành công Trí tuệ nhân tạo tổng quát/mạnh (General AI/Strong AI), có năng lực trí tuệ như con người, bao gồm cả khả năng áp dụng tri thức từ lĩnh vực này sang lĩnh vực khác."
-            },
-            {
-                question: "Trí tuệ nhân tạo tạo sinh (Generative AI) tập trung vào việc xây dựng các thuật toán và mô hình có khả năng tạo ra loại nội dung nào một cách tự động và sáng tạo?",
-                options: [
-                    "Chỉ dữ liệu số",
-                    "Chỉ thuật toán và mã nguồn",
-                    "Hình ảnh, âm thanh, văn bản",
-                    "Các thiết bị phần cứng"
-                ],
-                answer: 2,
-                explanation: "AI tạo sinh (Generative AI) tập trung vào việc xây dựng các thuật toán và mô hình có thể tạo nội dung (như hình ảnh, âm thanh, văn bản) một cách tự động."
-            },
-            {
-                question: "Hệ thống AI nào được các tài liệu nêu là một ví dụ điển hình của AI tạo sinh, do OpenAI phát triển, với khả năng xử lý ngôn ngữ tiên tiến?",
-                options: [
-                    "Siri",
-                    "Google Search",
-                    "ChatGPT",
-                    "DeepMind AlphaGo"
-                ],
-                answer: 2,
-                explanation: "Một ví dụ điển hình được nêu là ChatGPT, một hệ thống xử lý ngôn ngữ tiên tiến do OpenAI phát triển."
-            },
-            {
-                question: "Một trong những cảnh báo về sự phát triển của Trí tuệ nhân tạo (AI) đã được tài liệu đề cập là gì, liên quan đến việc AI có khả năng tự động hóa nhiều công việc?",
-                options: [
-                    "Tăng cường khả năng sáng tạo của con người",
-                    "Áp lực thất nghiệp",
-                    "Cải thiện chất lượng dịch vụ",
-                    "Giảm chi phí sản xuất"
-                ],
-                answer: 1,
-                explanation: "Tài liệu cảnh báo về \"Áp lực thất nghiệp\" do AI có khả năng tự động hóa nhiều công việc, dẫn đến tình trạng thất nghiệp và tạo nên nhiều nguy cơ cho sự phát triển xã hội."
-            },
-            {
-                question: "Tài liệu đã cảnh báo về mối lo ngại nào liên quan đến việc nhiều ứng dụng AI hoạt động dựa vào việc thu thập một lượng lớn dữ liệu cá nhân?",
-                options: [
-                    "Giảm hiệu suất hệ thống",
-                    "Ảnh hưởng quyền riêng tư",
-                    "Tăng chi phí phát triển",
-                    "Khó khăn trong việc tích hợp"
-                ],
-                answer: 1,
-                explanation: "\"Nhiều ứng dụng AI hoạt động dựa vào việc thu thập một lượng lớn dữ liệu cá nhân, điều này làm tăng mối lo ngại về quyền riêng tư có khả năng bị lạm dụng\"."
-            },
-            {
-                question: "Theo tài liệu, phần lớn các ứng dụng AI hiện nay được coi là \"hộp đen\" gây ra khó khăn trong việc hiểu các quyết định được đưa ra như thế nào. Vấn đề này được gọi là gì?",
-                options: [
-                    "Thiếu khả năng học hỏi",
-                    "Khả năng thiếu minh bạch",
-                    "Vấn đề về hiệu suất",
-                    "Rủi ro bảo mật"
-                ],
-                answer: 1,
-                explanation: "Tài liệu nêu rõ rằng \"Phần lớn các ứng dụng AI hiện nay đều là các \"hộp đen\", gây khó khăn cho việc hiểu các quyết định được đưa ra như thế nào, dẫn đến việc thiếu trách nhiệm giải trình để đảm bảo tính minh bạch\". Đây là cảnh báo về \"Khả năng thiếu minh bạch\"."
-            },
-            {
-                question: "Việc dữ liệu và mô hình AI bị tấn công có thể dẫn đến những quyết định không chính xác do AI đưa ra, gây nguy hại trực tiếp cho con người. Vấn đề này thuộc loại cảnh báo nào về sự phát triển của AI?",
-                options: [
-                    "Áp lực thất nghiệp",
-                    "Ảnh hưởng quyền riêng tư",
-                    "Khả năng thiếu minh bạch",
-                    "Rủi ro về an ninh, an toàn"
-                ],
-                answer: 3,
-                explanation: "Các tài liệu cảnh báo về \"Rủi ro về an ninh, an toàn\" khi dữ liệu và mô hình AI bị tấn công có thể dẫn đến những quyết định không chính xác do AI đưa ra, gây nguy hại trực tiếp cho con người."
-            },
-            {
-                question: "Trong lĩnh vực y học và chăm sóc sức khỏe, AI được sử dụng để cải thiện chất lượng hình ảnh y tế, làm nổi bật cấu trúc bất thường, và hỗ trợ đưa ra chẩn đoán và hướng điều trị. Phần mềm AI nào được tài liệu đề cập là đã góp phần nâng cao hiệu quả điều trị ung thư?",
-                options: [
-                    "Google Translate",
-                    "Adobe Photoshop",
-                    "IBM Watson for Oncology",
-                    "Microsoft Word"
-                ],
-                answer: 2,
-                explanation: "Trong lĩnh vực y học và chăm sóc sức khỏe, các tài liệu đã chỉ ra rằng các chuyên gia y tế khẳng định phần mềm IBM Watson for Oncology đã góp phần nâng cao hiệu quả điều trị ung thư"
-            }
-        ];
+  <div id="content" class="container" style="display:none">
+    <header>
+      <h1>Ứng dụng Trí tuệ nhân tạo — Ôn tập Tin học 12 (Bài 2)</h1>
+      <div class="controls">
+        <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+        <button id="retry-btn" class="btn">Làm lại bài</button>
+      </div>
+    </header>
+    <main>
+      <div id="quiz-box"></div>
+      <div id="summary" class="hidden"></div>
+      <div class="navigation-controls">
+        <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+      </div>
+    </main>
+  </div>
 
-        // Khởi tạo quiz khi trang web load xong
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeQuiz(questions);
-        });
-    </script>
+  <!-- Âm thanh phản hồi (tùy chọn) -->
+  <audio id="audio-correct" preload="auto"></audio>
+  <audio id="audio-wrong" preload="auto"></audio>
+
+  <script src="script.js"></script>
+  <script>
+    // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+    // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+    // Mật khẩu yêu cầu: <pV7
+    const ENCRYPTED_QUESTIONS = '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';
+  </script>
+
+  <script>
+    // Cửa khoá + Giải mã bằng Web Crypto (giống trang tin-12-bai-3.html)
+    (function(){
+      const LOCK_KEY = 'tin12_bai2_unlocked';
+      const lockScreen = document.getElementById('lockScreen');
+      const content = document.getElementById('content');
+      const unlockBtn = document.getElementById('unlockBtn');
+      const cancelBtn = document.getElementById('cancelUnlock');
+      const input = document.getElementById('pagePassword');
+      const lockMsg = document.getElementById('lockMsg');
+
+      // Rào cản nhẹ
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        const k = (e.key || '').toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+        if (e.key === 'F12') e.preventDefault();
+      });
+
+      function b64ToBytes(b64){
+        const bin = atob(b64); const out = new Uint8Array(bin.length);
+        for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i); return out;
+      }
+      async function deriveKey(password, salt){
+        const enc = new TextEncoder();
+        const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey({ name:'PBKDF2', salt, iterations:200000, hash:'SHA-256' }, keyMaterial, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+      }
+      async function decryptPayload(password, b64){
+        if (!b64) throw new Error('Thiếu dữ liệu đã mã hóa');
+        const all = b64ToBytes(b64);
+        let pos = 0; const version = all[pos++];
+        if (version !== 1) throw new Error('Gói dữ liệu không hỗ trợ');
+        const salt = all.slice(pos, pos+16); pos += 16;
+        const iv = all.slice(pos, pos+12); pos += 12;
+        const ciphertext = all.slice(pos);
+        const key = await deriveKey(password, salt);
+        const plainBuf = await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ciphertext);
+        return new TextDecoder().decode(plainBuf);
+      }
+      async function tryUnlock(){
+        const pw = input.value || ''; lockMsg.style.display='none';
+        try{
+          const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+          const questions = JSON.parse(json);
+          if (typeof initializeQuiz === 'function') initializeQuiz(questions);
+          sessionStorage.setItem(LOCK_KEY, '1');
+          lockScreen.style.display = 'none';
+          content.style.display = 'block';
+        }catch(err){ lockMsg.style.display = 'block'; }
+      }
+      unlockBtn.addEventListener('click', tryUnlock);
+      cancelBtn.addEventListener('click', ()=>{ input.value=''; lockMsg.style.display='none'; });
+      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') tryUnlock(); });
+      if (sessionStorage.getItem(LOCK_KEY) === '1') { input.focus(); }
+    })();
+  </script>
 </body>
 </html>
