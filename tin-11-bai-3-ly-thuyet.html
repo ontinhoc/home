@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 3: Phần mềm nguồn mở & phần mềm chạy trên Internet - khái niệm, vai trò, giấy phép và ví dụ.">
+    <meta name="keywords" content="phần mềm nguồn mở, open source, phần mềm thương mại, google docs, cloud software, tin 11">
+    <meta name="author" content="Ontinhoc">
+    <title>Phần mềm nguồn mở & Phần mềm chạy trên Internet | Tin 11 - Bài 3</title>
+    <style>
+        :root{
+            --bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px;
+            --content-max:1100px;
+        }
+        *{box-sizing:border-box}
+        body{font-family:Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial; background:var(--bg); color:#0f172a; margin:0; padding:24px; display:flex; justify-content:center}
+        .wrap{width:100%; max-width:var(--content-max)}
+        header{background:linear-gradient(90deg,var(--primary),var(--accent)); color:white; padding:28px; border-radius:var(--radius)}
+        header h1{margin:0; font-size:1.6rem}
+        header p{margin:8px 0 0; opacity:0.95}
+        nav{display:flex; gap:12px; margin:18px 0}
+        nav a{background:var(--card); padding:8px 12px; border-radius:8px; color:var(--accent); text-decoration:none; box-shadow:0 1px 3px rgba(2,6,23,0.06)}
+        main{margin-top:16px}
+        .card{background:var(--card); padding:20px; border-radius:12px; box-shadow:0 4px 18px rgba(2,6,23,0.06); margin-bottom:16px}
+        h2{color:var(--accent); margin-top:0}
+        h3{color:#064e3b}
+        ul{margin:8px 0 8px 20px}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff; border-left:4px solid var(--primary); padding:12px; border-radius:6px}
+        .compare{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+        .compare .box{padding:12px; background:#f8fafc; border-radius:8px}
+        footer{margin-top:20px; text-align:center; color:var(--muted)}
+        #backToTop{position:fixed; right:18px; bottom:18px; background:var(--accent); color:#fff; border:none; width:44px; height:44px; border-radius:8px; display:none; cursor:pointer}
+        @media(max-width:700px){.compare{grid-template-columns:1fr} nav{flex-wrap:wrap}}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Bài 3: Phần mềm nguồn mở & Phần mềm chạy trên Internet</h1>
+            <p>Tóm tắt kiến thức trọng tâm: khái niệm, vai trò, giấy phép và ví dụ điển hình.</p>
+        </header>
+
+        <nav>
+            <a href="#open-source">1. Phần mềm nguồn mở</a>
+            <a href="#roles">2. Vai trò</a>
+            <a href="#cloud-software">3. Phần mềm chạy trên Internet</a>
+        </nav>
+
+        <main>
+            <section id="open-source" class="card">
+                <h2>1. Phần mềm nguồn mở</h2>
+                <p><strong>Khái niệm:</strong> Phần mềm kèm mã nguồn, cho phép người dùng tự do sử dụng, sửa đổi, phát triển, và phân phối lại.</p>
+
+                <h3>Phân loại theo cách chuyển giao</h3>
+                <ul>
+                    <li><strong>Phần mềm thương mại (Commercial software):</strong> bán và thường là nguồn đóng (ví dụ: MS Word, Photoshop).</li>
+                    <li><strong>Phần mềm tự do (Free software):</strong> miễn phí hoặc trả phí nhưng cho phép tự do sử dụng, không cần xin phép.</li>
+                    <li><strong>Phần mềm nguồn mở (Open-source software):</strong> cung cấp mã nguồn; người dùng có thể sửa đổi và phân phối lại theo giấy phép.</li>
+                </ul>
+
+                <h3>Giấy phép phần mềm nguồn mở</h3>
+                <p>Giấy phép đảm bảo quyền sử dụng, sửa đổi và phân phối. Ví dụ:</p>
+                <div class="note">
+                    <strong>GNU GPL</strong> — yêu cầu công khai mã nguồn khi sửa đổi; phần mềm phái sinh cũng phải tuân theo GPL (copyleft).
+                </div>
+            </section>
+
+            <section id="roles" class="card">
+                <h2>2. Vai trò của phần mềm thương mại và phần mềm nguồn mở</h2>
+
+                <div class="compare">
+                    <div class="box">
+                        <h3>Phần mềm thương mại</h3>
+                        <ul>
+                            <li>Hình thức: đặt hàng (may đo) & đóng gói.</li>
+                            <li>Ưu điểm: đáp ứng nhu cầu riêng, hoàn chỉnh, hỗ trợ kỹ thuật chính thức.</li>
+                            <li>Vai trò: nguồn thu cho nhà phát triển; đáp ứng nhu cầu doanh nghiệp và cá nhân.</li>
+                        </ul>
+                    </div>
+
+                    <div class="box">
+                        <h3>Phần mềm nguồn mở</h3>
+                        <ul>
+                            <li>Ưu điểm: chi phí thấp, minh bạch, không phụ thuộc nhà cung cấp.</li>
+                            <li>Vai trò: giúp cộng đồng tiếp cận phần mềm chất lượng, ổn định với chi phí thấp.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>So sánh nhanh</h3>
+                <ul>
+                    <li><strong>Thương mại:</strong> tốn phí, hỗ trợ kỹ thuật chính thức, phụ thuộc nhà cung cấp.</li>
+                    <li><strong>Nguồn mở:</strong> miễn phí/ít phí, hỗ trợ cộng đồng, mã nguồn công khai.</li>
+                </ul>
+            </section>
+
+            <section id="cloud-software" class="card">
+                <h2>3. Phần mềm chạy trên Internet</h2>
+                <p><strong>Khái niệm:</strong> Phần mềm sử dụng trực tiếp qua Internet, không cần cài đặt trên máy cá nhân.</p>
+
+                <h3>Ví dụ điển hình</h3>
+                <ul>
+                    <li>Google Docs, Google Sheets, Google Slides</li>
+                    <li>Mạng xã hội (Facebook, Twitter...), dịch vụ email, trang mua sắm trực tuyến</li>
+                </ul>
+
+                <h3>Ưu điểm</h3>
+                <ul>
+                    <li>Sử dụng mọi lúc, mọi nơi có Internet</li>
+                    <li>Tiết kiệm chi phí (rẻ hoặc miễn phí)</li>
+                    <li>Không cần cài đặt, lưu trữ tự động trên đám mây</li>
+                </ul>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>Giáo viên: sử dụng trang này để tóm tắt nội dung và ôn tập cho học sinh.</p>
+            <p>&copy; 2025 Ontinhoc</p>
+        </footer>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = a.getAttribute('href').slice(1);
+            const el = document.getElementById(id);
+            el.scrollIntoView({behavior:'smooth', block:'start'});
+        }));
+
+        // Back to top button
+        const back = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) back.style.display = 'block'; else back.style.display = 'none';
+        });
+        back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    </script>
+</body>
+</html>

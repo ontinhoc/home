@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Trí tuệ nhân tạo - Ôn tập Tin học 12 Bài 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ứng dụng Trí tuệ nhân tạo - Ôn tập Tin học 12</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Audio elements for feedback -->
+    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho bài 2
+        const questions = [
+            {
+                question: "Lĩnh vực nào sau đây được các tài liệu chỉ ra là đã và đang phát triển mạnh mẽ dựa trên những thành tựu của Trí tuệ nhân tạo (AI)?",
+                options: [
+                    "Nấu ăn truyền thống",
+                    "Kiến trúc cổ điển",
+                    "Y học và chăm sóc sức khỏe",
+                    "Thể thao nghiệp dư"
+                ],
+                answer: 2,
+                explanation: "Các tài liệu đã chỉ ra nhiều lĩnh vực khoa học, công nghệ và đời sống đã và đang nhận được rất nhiều lợi ích từ sự phát triển của AI, trong đó có Y học và chăm sóc sức khỏe."
+            },
+            {
+                question: "Theo các tài liệu, loại Trí tuệ nhân tạo nào chỉ giới hạn trong phạm vi một nhiệm vụ cụ thể?",
+                options: [
+                    "Trí tuệ nhân tạo tổng quát (General AI)",
+                    "Trí tuệ nhân tạo mạnh (Strong AI)",
+                    "Trí tuệ nhân tạo hẹp (Narrow AI)",
+                    "Trí tuệ nhân tạo sáng tạo (Creative AI)"
+                ],
+                answer: 2,
+                explanation: "Các thành tựu hiện tại của AI vẫn chủ yếu chỉ hạn chế trong phạm vi Trí tuệ nhân tạo hẹp/yếu (Narrow AI/Weak AI), có nghĩa là chúng chỉ có khả năng thực hiện một nhiệm vụ chuyên biệt."
+            },
+            {
+                question: "Mục tiêu dài hạn và hết sức phức tạp trong nghiên cứu và phát triển AI là thành công loại Trí tuệ nhân tạo nào, có năng lực trí tuệ như con người và khả năng áp dụng tri thức từ lĩnh vực này sang lĩnh vực khác?",
+                options: [
+                    "Trí tuệ nhân tạo hẹp (Narrow AI)",
+                    "Trí tuệ nhân tạo yếu (Weak AI)",
+                    "Trí tuệ nhân tạo tạo sinh (Generative AI)",
+                    "Trí tuệ nhân tạo tổng quát (General AI)"
+                ],
+                answer: 3,
+                explanation: "Trong tương lai, nhiều chuyên gia kỳ vọng sẽ phát triển thành công Trí tuệ nhân tạo tổng quát/mạnh (General AI/Strong AI), có năng lực trí tuệ như con người, bao gồm cả khả năng áp dụng tri thức từ lĩnh vực này sang lĩnh vực khác."
+            },
+            {
+                question: "Trí tuệ nhân tạo tạo sinh (Generative AI) tập trung vào việc xây dựng các thuật toán và mô hình có khả năng tạo ra loại nội dung nào một cách tự động và sáng tạo?",
+                options: [
+                    "Chỉ dữ liệu số",
+                    "Chỉ thuật toán và mã nguồn",
+                    "Hình ảnh, âm thanh, văn bản",
+                    "Các thiết bị phần cứng"
+                ],
+                answer: 2,
+                explanation: "AI tạo sinh (Generative AI) tập trung vào việc xây dựng các thuật toán và mô hình có thể tạo nội dung (như hình ảnh, âm thanh, văn bản) một cách tự động."
+            },
+            {
+                question: "Hệ thống AI nào được các tài liệu nêu là một ví dụ điển hình của AI tạo sinh, do OpenAI phát triển, với khả năng xử lý ngôn ngữ tiên tiến?",
+                options: [
+                    "Siri",
+                    "Google Search",
+                    "ChatGPT",
+                    "DeepMind AlphaGo"
+                ],
+                answer: 2,
+                explanation: "Một ví dụ điển hình được nêu là ChatGPT, một hệ thống xử lý ngôn ngữ tiên tiến do OpenAI phát triển."
+            },
+            {
+                question: "Một trong những cảnh báo về sự phát triển của Trí tuệ nhân tạo (AI) đã được tài liệu đề cập là gì, liên quan đến việc AI có khả năng tự động hóa nhiều công việc?",
+                options: [
+                    "Tăng cường khả năng sáng tạo của con người",
+                    "Áp lực thất nghiệp",
+                    "Cải thiện chất lượng dịch vụ",
+                    "Giảm chi phí sản xuất"
+                ],
+                answer: 1,
+                explanation: "Tài liệu cảnh báo về \"Áp lực thất nghiệp\" do AI có khả năng tự động hóa nhiều công việc, dẫn đến tình trạng thất nghiệp và tạo nên nhiều nguy cơ cho sự phát triển xã hội."
+            },
+            {
+                question: "Tài liệu đã cảnh báo về mối lo ngại nào liên quan đến việc nhiều ứng dụng AI hoạt động dựa vào việc thu thập một lượng lớn dữ liệu cá nhân?",
+                options: [
+                    "Giảm hiệu suất hệ thống",
+                    "Ảnh hưởng quyền riêng tư",
+                    "Tăng chi phí phát triển",
+                    "Khó khăn trong việc tích hợp"
+                ],
+                answer: 1,
+                explanation: "\"Nhiều ứng dụng AI hoạt động dựa vào việc thu thập một lượng lớn dữ liệu cá nhân, điều này làm tăng mối lo ngại về quyền riêng tư có khả năng bị lạm dụng\"."
+            },
+            {
+                question: "Theo tài liệu, phần lớn các ứng dụng AI hiện nay được coi là \"hộp đen\" gây ra khó khăn trong việc hiểu các quyết định được đưa ra như thế nào. Vấn đề này được gọi là gì?",
+                options: [
+                    "Thiếu khả năng học hỏi",
+                    "Khả năng thiếu minh bạch",
+                    "Vấn đề về hiệu suất",
+                    "Rủi ro bảo mật"
+                ],
+                answer: 1,
+                explanation: "Tài liệu nêu rõ rằng \"Phần lớn các ứng dụng AI hiện nay đều là các \"hộp đen\", gây khó khăn cho việc hiểu các quyết định được đưa ra như thế nào, dẫn đến việc thiếu trách nhiệm giải trình để đảm bảo tính minh bạch\". Đây là cảnh báo về \"Khả năng thiếu minh bạch\"."
+            },
+            {
+                question: "Việc dữ liệu và mô hình AI bị tấn công có thể dẫn đến những quyết định không chính xác do AI đưa ra, gây nguy hại trực tiếp cho con người. Vấn đề này thuộc loại cảnh báo nào về sự phát triển của AI?",
+                options: [
+                    "Áp lực thất nghiệp",
+                    "Ảnh hưởng quyền riêng tư",
+                    "Khả năng thiếu minh bạch",
+                    "Rủi ro về an ninh, an toàn"
+                ],
+                answer: 3,
+                explanation: "Các tài liệu cảnh báo về \"Rủi ro về an ninh, an toàn\" khi dữ liệu và mô hình AI bị tấn công có thể dẫn đến những quyết định không chính xác do AI đưa ra, gây nguy hại trực tiếp cho con người."
+            },
+            {
+                question: "Trong lĩnh vực y học và chăm sóc sức khỏe, AI được sử dụng để cải thiện chất lượng hình ảnh y tế, làm nổi bật cấu trúc bất thường, và hỗ trợ đưa ra chẩn đoán và hướng điều trị. Phần mềm AI nào được tài liệu đề cập là đã góp phần nâng cao hiệu quả điều trị ung thư?",
+                options: [
+                    "Google Translate",
+                    "Adobe Photoshop",
+                    "IBM Watson for Oncology",
+                    "Microsoft Word"
+                ],
+                answer: 2,
+                explanation: "Trong lĩnh vực y học và chăm sóc sức khỏe, các tài liệu đã chỉ ra rằng các chuyên gia y tế khẳng định phần mềm IBM Watson for Oncology đã góp phần nâng cao hiệu quả điều trị ung thư"
+            }
+        ];
+
+        // Khởi tạo quiz khi trang web load xong
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuiz(questions);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gọi tên ngẫu nhiên - Random Name Picker</title>
+    <meta name="description" content="Công cụ gọi tên ngẫu nhiên từ danh sách — dán danh sách, chọn 1 hoặc nhiều, hỗ trợ gọi không trùng, lưu lịch sử và xuất file.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Simple page-specific styles (keeps look consistent with site) */
+        .picker-wrap{max-width:1000px;margin:2rem auto;padding:1rem}
+        .panel{background:white;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.08);padding:1rem}
+        label{display:block;margin:0.5rem 0 0.25rem;font-weight:600}
+        textarea{width:100%;min-height:180px;padding:0.8rem;border:1px solid #e6eef2;border-radius:6px;font-size:1rem}
+        .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.75rem}
+        .btn{padding:0.6rem 0.9rem;border-radius:6px;border:none;cursor:pointer;background:#0369a1;color:#fff}
+        .btn.secondary{background:#94a3b8}
+        .btn.ghost{background:transparent;color:#0369a1;border:1px solid #cbd5e1}
+        .output{margin-top:1rem;display:flex;gap:1rem;align-items:flex-start}
+        .wheel{flex:1;min-height:150px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:linear-gradient(180deg,#f8fafc,#eef2f7);font-size:1.4rem;font-weight:700;color:#044e7c}
+        .sidebar{width:320px}
+        .history{max-height:260px;overflow:auto;padding:0.5rem;border:1px dashed #e2e8f0;border-radius:6px;background:#fff}
+        .meta{font-size:0.9rem;color:#475569;margin-top:0.5rem}
+        input[type=number]{width:80px;padding:6px;border-radius:6px;border:1px solid #e6eef2}
+        .notice{margin-top:0.5rem;color:#065f46;font-weight:600}
+        @media (max-width:920px){.output{flex-direction:column}.sidebar{width:100%}}
+        /* animation for cycling */
+        .spin-name{transition:transform 0.3s ease}
+        #called-students-section{margin-top:1rem}
+        #called-students-table{width:100%;border-collapse:collapse;margin-bottom:0.5rem}
+        #called-students-table th,#called-students-table td{border:1px solid #e2e8f0;padding:0.25rem;text-align:left}
+        #called-students-table th{background:#f8fafc;font-weight:600}
+        #called-students-table textarea{width:100%;min-height:40px;border:none;resize:vertical}
+        #called-students-table input[type="number"]{width:50px;border:none}
+    </style>
+</head>
+<body>
+    <div class="picker-wrap container">
+        <div class="panel">
+            <h1>Gọi tên ngẫu nhiên</h1>
+            <p class="meta">Dán danh sách tên (mỗi tên một dòng) vào ô bên dưới, sau đó bấm "Gọi 1" hoặc "Gọi N".
+            Chọn "Không trùng" nếu không muốn gọi lại tên đã được chọn trong phiên làm việc.</p>
+
+            <label for="names">Danh sách tên</label>
+            <textarea id="names" placeholder="Dán tên tại đây, mỗi tên một dòng">Đỗ Văn Minh Anh
+Ngân Thị Ngọc Ánh
+Siu H' Bră
+Siu Ding
+Nguyễn Long Điệp
+Đàm Thị Thu Hạ
+Võ Ngọc Hà
+Võ Thị Ngọc Thu Hà
+Nguyễn Thị Ngọc Hân
+Trần Thị Thu Hoài
+Trương Gia Huy
+Nguyễn Thị Ngọc Hương
+Nguyễn Viết Hùng
+Nguyễn Trần Phi Hùng
+Nguyễn Minh Khang
+Nguyễn Cảnh Khang
+Nguyễn Thị Hương
+Nguyễn Văn Việt
+Phạm Hoàng Vinh</textarea>
+
+            <div class="controls">
+                <button id="loadSample" class="btn secondary">Tải mẫu</button>
+                <button id="shuffleBtn" class="btn ghost">Xáo trộn</button>
+                <button id="pickOne" class="btn">Gọi 1</button>
+                <label style="display:flex;align-items:center;gap:8px;margin-left:6px"><input type="checkbox" id="debugCheck">Debug</label>
+                <label style="display:flex;align-items:center;gap:8px;margin-left:6px"><input type="checkbox" id="uniqueCheck">Không trùng</label>
+                <label style="display:flex;align-items:center;gap:8px;margin-left:8px">Gọi N: <input id="pickCount" type="number" min="1" value="3"></label>
+                <button id="pickN" class="btn">Gọi N</button>
+                <button id="resetPool" class="btn secondary">Reset Pool</button>
+                <button id="clearCalledBtn" class="btn secondary">Đóng danh sách</button>
+                <button id="exportBtn" class="btn ghost">Xuất CSV</button>
+                <button id="exportExcelBtn" class="btn ghost">Xuất Excel</button>
+                <label class="btn ghost" style="padding:6px 10px;cursor:pointer"><input id="importFile" type="file" accept=".txt,.csv" style="display:none">Nhập file</label>
+            </div>
+
+            <div class="output">
+                <div class="wheel-panel" style="flex:1;display:flex;align-items:center;justify-content:center;position:relative">
+                    <div id="wheelContainer" style="width:420px;height:420px;position:relative">
+                        <svg id="wheelSvg" viewBox="0 0 420 420" width="100%" height="100%" style="transform-origin:50% 50%;transition:transform 4s cubic-bezier(.2,.9,.2,1);"></svg>
+                        <!-- pointer (SVG arrow fixed at top center). pointer-events:none so hit-testing finds wheel paths beneath -->
+                        <svg id="pointer" width="48" height="48" viewBox="0 0 48 48" style="position:absolute;left:50%;top:-20px;transform:translateX(-50%);pointer-events:none;overflow:visible" aria-hidden="true">
+                            <rect x="22" y="6" width="4" height="12" fill="#ef4444"></rect>
+                            <polygon points="18,18 30,18 24,30" fill="#ef4444"></polygon>
+                        </svg>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div>
+                        <div class="meta">Còn lại: <span id="remaining">0</span> | Tổng: <span id="total">0</span></div>
+                        <div class="notice" id="noticeArea" style="display:none">Đã hết tên trong pool.</div>
+                    </div>
+                    <div id="called-students-section">
+                        <h4>Học sinh đã gọi</h4>
+                        <table id="called-students-table">
+                            <thead>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>Nhận xét</th>
+                                    <th>Điểm</th>
+                                </tr>
+                            </thead>
+                            <tbody id="called-students-body">
+                            </tbody>
+                        </table>
+                        <button id="save-data-btn" class="btn secondary">Lưu dữ liệu</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result modal (appears after spin) -->
+            <div id="resultModal" style="display:none;position:fixed;inset:0;background:rgba(2,6,23,0.6);align-items:center;justify-content:center;z-index:9999">
+                <div style="background:#fff;padding:20px;border-radius:10px;max-width:420px;width:90%;text-align:center;box-shadow:0 10px 30px rgba(2,6,23,0.4)">
+                    <h3 id="resultTitle" style="margin:0 0 12px">Tên được gọi</h3>
+                    <div id="resultName" style="font-size:1.3rem;font-weight:700;color:#044e7c;margin-bottom:14px"></div>
+                    <div style="display:flex;gap:10px;justify-content:center">
+                        <button id="closeResult" class="btn secondary">Close</button>
+                        <button id="removeResult" class="btn" style="background:#dc2626">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        // Utility functions
+        const namesEl = document.getElementById('names');
+    // wheel element removed; we use SVG wheelSvg instead
+    const remainingEl = document.getElementById('remaining');
+    const totalEl = document.getElementById('total');
+    const noticeArea = document.getElementById('noticeArea');
+    const wheelSvg = document.getElementById('wheelSvg');
+    const resultModal = document.getElementById('resultModal');
+    const resultNameEl = document.getElementById('resultName');
+    const closeResult = document.getElementById('closeResult');
+    const removeResult = document.getElementById('removeResult');
+
+        const loadSample = document.getElementById('loadSample');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const pickOne = document.getElementById('pickOne');
+        const pickN = document.getElementById('pickN');
+    const pickCount = document.getElementById('pickCount');
+    const debugCheck = document.getElementById('debugCheck');
+    const uniqueCheck = document.getElementById('uniqueCheck');
+        const resetPool = document.getElementById('resetPool');
+        const clearCalledBtn = document.getElementById('clearCalledBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const exportExcelBtn = document.getElementById('exportExcelBtn');
+        const importFile = document.getElementById('importFile');
+        const saveDataBtn = document.getElementById('save-data-btn');
+
+        let masterList = []; // full list from textarea
+        let pool = []; // working pool for unique picks
+    let history = []; // kept for possible future use but not displayed
+    let cumulativeRotation = 0; // keep track of total rotation to compute smooth spins
+    let currentNames = []; // order of names currently drawn on the wheel
+    let lastSvgPoint = null; // last mapped SVG point for debug (x,y)
+    let lastHighlightedIdx = null;
+        let currentPicked = []; // current picked names for modal
+        let calledStudents = {}; // key: name, value: {comment: '', score: 0}
+
+        function loadCalledStudents() {
+            const data = localStorage.getItem('calledStudents');
+            if (data) {
+                calledStudents = JSON.parse(data);
+            }
+        }
+
+        function saveCalledStudents() {
+            localStorage.setItem('calledStudents', JSON.stringify(calledStudents));
+        }
+
+        function updateCalledStudentsTable() {
+            const tbody = document.getElementById('called-students-body');
+            tbody.innerHTML = '';
+            for (const name in calledStudents) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${escapeHtml(name)}</td>
+                    <td><textarea placeholder="Nhập nhận xét">${escapeHtml(calledStudents[name].comment || '')}</textarea></td>
+                    <td><input type="number" min="0" max="10" value="${calledStudents[name].score || 0}"></td>
+                `;
+                // Add event listeners to update on change
+                const textarea = row.querySelector('textarea');
+                const input = row.querySelector('input');
+                textarea.addEventListener('input', () => {
+                    calledStudents[name].comment = textarea.value;
+                    saveCalledStudents(); // Auto-save on change
+                });
+                input.addEventListener('input', () => {
+                    calledStudents[name].score = parseInt(input.value) || 0;
+                    saveCalledStudents(); // Auto-save on change
+                });
+                tbody.appendChild(row);
+            }
+        }
+
+        function parseNames(text){
+            return text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+        }
+
+        function refreshCounts(){
+            totalEl.textContent = masterList.length;
+            remainingEl.textContent = pool.length;
+            noticeArea.style.display = pool.length === 0 && masterList.length>0 ? 'block' : 'none';
+        }
+
+        function syncFromTextarea(){
+            masterList = parseNames(namesEl.value);
+            // copy into pool if empty (preserve existing pool if user manually reset)
+            if(pool.length === 0) pool = masterList.slice();
+            refreshCounts();
+        }
+
+        function shuffle(arr){
+            for(let i=arr.length-1;i>0;i--){
+                const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];
+            }
+        }
+
+        // no visible history per user request
+
+        function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+        // Draw wheel as SVG segments
+        function drawWheel(names){
+            const cx = 210, cy = 210, r = 200;
+            // use a slightly larger outer radius to create a tiny overlap between segments
+            const rOut = r + 1.6;
+            wheelSvg.innerHTML = '';
+            // clear any debug overlays
+            clearDebug();
+            currentNames = names.slice();
+            if(!names.length) return;
+            // temporarily disable transition so re-draw doesn't animate
+            wheelSvg.style.transition = 'none';
+            const slice = 360 / names.length;
+            // compute font size based on longest name to help fit radially
+            const maxLen = names.reduce((m,n)=>Math.max(m, n.length), 0);
+            // inner available width approx = r*0.6; choose font size so characters fit roughly
+            const fontSize = Math.max(9, Math.min(16, Math.floor((r*0.6) / Math.max(8, maxLen))));
+            for(let i=0;i<names.length;i++){
+                const start = (i*slice - 90) * Math.PI/180; // offset so 0deg is top
+                const end = ((i+1)*slice - 90) * Math.PI/180;
+                const x1 = cx + rOut*Math.cos(start), y1 = cy + rOut*Math.sin(start);
+                const x2 = cx + rOut*Math.cos(end), y2 = cy + rOut*Math.sin(end);
+                const large = slice>180?1:0;
+                const d = `M ${cx} ${cy} L ${x1} ${y1} A ${rOut} ${rOut} 0 ${large} 1 ${x2} ${y2} Z`;
+                const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+                path.setAttribute('d',d);
+                const colors = ['#ef4444','#f59e0b','#10b981','#06b6d4','#3b82f6','#8b5cf6'];
+                path.setAttribute('fill', colors[i % colors.length]);
+                // remove per-segment stroke; we'll draw explicit separator wedges to avoid anti-alias seams
+                path.setAttribute('stroke','none');
+                path.setAttribute('shape-rendering','geometricPrecision');
+                wheelSvg.appendChild(path);
+                // label placed radially from center outward
+                const mid = ((i+0.5)*slice - 90);
+                const midRad = mid * Math.PI/180;
+                const innerR = r * 0.28; // distance from center where text starts
+                const lx = cx + innerR * Math.cos(midRad);
+                const ly = cy + innerR * Math.sin(midRad);
+                const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+                text.setAttribute('x', lx);
+                text.setAttribute('y', ly);
+                text.setAttribute('fill', '#fff');
+                text.setAttribute('font-size', fontSize);
+                text.setAttribute('text-anchor', 'start');
+                text.setAttribute('dominant-baseline', 'middle');
+                // rotate so the text baseline points outward from center
+                const rotateDeg = (i*slice + slice/2) - 90;
+                // If the rotation would make text upside-down, flip 180 and adjust anchor to 'end' so it still reads outward
+                if(rotateDeg > 90 && rotateDeg < 270){
+                    // flip and anchor at end so text extends outward
+                    text.setAttribute('text-anchor', 'end');
+                    text.setAttribute('transform', `rotate(${rotateDeg + 180} ${lx} ${ly})`);
+                } else {
+                    text.setAttribute('transform', `rotate(${rotateDeg} ${lx} ${ly})`);
+                }
+                text.textContent = names[i];
+                wheelSvg.appendChild(text);
+            }
+            // draw narrow white separator wedges to ensure continuous dividers (reduce anti-alias seams)
+            try{
+                const separatorsGroup = document.createElementNS('http://www.w3.org/2000/svg','g');
+                separatorsGroup.setAttribute('pointer-events','none');
+                // make separators wide enough to cover seams even at HiDPI; base on slice angle
+                const sepDeltaDeg = 0.5;
+                // start relatively close to center so wedges cover entire radius, but avoid center overlap with labels
+                const innerSepR = Math.max(r * 0.08, r * 0.12);
+                // extend further beyond rim to mask anti-aliasing gaps
+                const outerSepR = rOut + 4;
+                for(let i=0;i<names.length;i++){
+                    const angle = (i*slice - 90) * Math.PI/180;
+                    const half = (sepDeltaDeg/2) * Math.PI/180;
+                    const ax = cx + innerSepR * Math.cos(angle - half);
+                    const ay = cy + innerSepR * Math.sin(angle - half);
+                    const bx = cx + innerSepR * Math.cos(angle + half);
+                    const by = cy + innerSepR * Math.sin(angle + half);
+                    const cx1 = cx + outerSepR * Math.cos(angle + half);
+                    const cy1 = cy + outerSepR * Math.sin(angle + half);
+                    const cx2 = cx + outerSepR * Math.cos(angle - half);
+                    const cy2 = cy + outerSepR * Math.sin(angle - half);
+                    const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+                    poly.setAttribute('points', `${ax},${ay} ${bx},${by} ${cx1},${cy1} ${cx2},${cy2}`);
+                    poly.setAttribute('fill','#fff');
+                    poly.setAttribute('class','wheel-sep');
+                    separatorsGroup.appendChild(poly);
+                }
+                wheelSvg.appendChild(separatorsGroup);
+            }catch(e){/* ignore on older browsers */}
+            // restore transform to cumulativeRotation so wheel doesn't jump
+            wheelSvg.style.transform = `rotate(${cumulativeRotation}deg)`;
+            // add a continuous outer ring to mask any tiny seam gaps between arc strokes
+            try{
+                const outer = document.createElementNS('http://www.w3.org/2000/svg','circle');
+                outer.setAttribute('cx', cx);
+                outer.setAttribute('cy', cy);
+                // slightly bigger outer ring to fully cover any overlaps/gaps
+                outer.setAttribute('r', r + 1);
+                outer.setAttribute('fill','none');
+                outer.setAttribute('stroke','#fff');
+                outer.setAttribute('stroke-width','1');
+                outer.setAttribute('pointer-events','none');
+                outer.setAttribute('class','wheel-outer-ring');
+                wheelSvg.appendChild(outer);
+            }catch(e){/* ignore if SVG not available */}
+            // small timeout to allow next transition assignment
+            setTimeout(()=>{ wheelSvg.style.transition = ''; }, 0);
+        }
+
+        // Debug helpers: draw a small circle at svg point and highlight segment
+        function clearDebug(){
+            // remove existing debug marks
+            const old = wheelSvg.querySelectorAll('.debug-dot, .debug-highlight');
+            old.forEach(n=>n.remove());
+            lastSvgPoint = null; lastHighlightedIdx = null;
+        }
+
+        function drawDebug(idx, svgPt){
+            clearDebug();
+            if(!svgPt || typeof svgPt.x === 'undefined') return;
+            // draw dot
+            const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+            dot.setAttribute('cx', svgPt.x);
+            dot.setAttribute('cy', svgPt.y);
+            dot.setAttribute('r', 6);
+            dot.setAttribute('fill', 'yellow');
+            dot.setAttribute('stroke','black');
+            dot.setAttribute('class','debug-dot');
+            wheelSvg.appendChild(dot);
+            // highlight path
+            const paths = Array.from(wheelSvg.querySelectorAll('path'));
+            if(idx!=null && paths[idx]){
+                const clone = paths[idx].cloneNode(true);
+                clone.setAttribute('fill','rgba(255,255,0,0.25)');
+                clone.setAttribute('class','debug-highlight');
+                clone.setAttribute('stroke','black');
+                clone.setAttribute('stroke-width','2');
+                wheelSvg.appendChild(clone);
+                lastHighlightedIdx = idx;
+            }
+        }
+
+        // Spin wheel to a chosen name (safer: works when pool/masterList ordering differ)
+        function spinToName(name){
+            if(!name) return;
+            // ensure masterList is current
+            const names = masterList.slice();
+            drawWheel(names);
+            const namesCount = currentNames.length;
+            if(namesCount === 0) return;
+            let index = currentNames.indexOf(name);
+            if(index === -1) index = 0;
+            const slice = 360 / namesCount;
+            const segAngle = (index*slice + slice/2 - 90); // mid angle for this segment
+            const pointerAngle = 270; // top pointer corresponds to -90deg -> 270 in 0..360
+            let current = ((cumulativeRotation % 360) + 360) % 360;
+            const spins = 6;
+            // required rotation so that segAngle - rotation === pointerAngle (mod360)
+            // so rotation === segAngle - pointerAngle (mod360)
+            const required = ((segAngle - pointerAngle) % 360 + 360) % 360;
+            const extraMod = (required - current + 360) % 360;
+            const extra = extraMod + 360 * spins;
+            cumulativeRotation += extra;
+            wheelSvg.style.transition = 'transform 4s cubic-bezier(.17,.9,.32,1)';
+            wheelSvg.style.transform = `rotate(${cumulativeRotation}deg)`;
+            // after the transition ends, determine the segment under the pointer and snap precisely
+            wheelSvg.addEventListener('transitionend', function handler(){
+                wheelSvg.removeEventListener('transitionend', handler);
+                // determine which segment is visually under the pointer
+                const idx = getSegmentUnderPointer();
+                // compute the exact rotation that centers that segment under the pointer
+                const namesCount = currentNames.length;
+                const slice = 360 / Math.max(1, namesCount);
+                const segMid = (idx * slice + slice/2 - 90); // drawing mid-angle
+                // finalRotation should make segMid - finalRotation === pointerAngle (mod 360)
+                const crect = document.getElementById('wheelContainer').getBoundingClientRect();
+                const pointerEl = document.getElementById('pointer');
+            const prect = pointerEl.getBoundingClientRect();
+            const px = prect.left + prect.width/2;
+            const tipY = 30; // y position of tip in viewBox (polygon at 30)
+            const viewBoxHeight = 48;
+            const py = prect.top + (tipY / viewBoxHeight) * prect.height;
+                const cx = crect.left + crect.width/2;
+                const cy = crect.top + crect.height/2;
+                let pointerAngle = Math.atan2(py - cy, px - cx) * 180 / Math.PI;
+                pointerAngle = (pointerAngle + 360) % 360;
+                // solve for finalRotation: (segMid - finalRotation) mod360 == pointerAngle
+                // => finalRotation = segMid - pointerAngle (mod360)
+                let finalRotation = ((segMid - pointerAngle) % 360 + 360) % 360;
+                // pick the value nearest to cumulativeRotation to avoid huge jumps
+                const candidates = [finalRotation, finalRotation + 360, finalRotation - 360];
+                let best = candidates[0];
+                let bestDiff = Math.abs(best - cumulativeRotation);
+                for(const c of candidates){
+                    const d = Math.abs(c - cumulativeRotation);
+                    if(d < bestDiff){ bestDiff = d; best = c; }
+                }
+                cumulativeRotation = best;
+                // apply snap without transition to avoid visual jump
+                wheelSvg.style.transition = 'none';
+                wheelSvg.style.transform = `rotate(${cumulativeRotation}deg)`;
+                // force reflow then show modal in next frame
+                void wheelSvg.offsetWidth;
+                const chosen = currentNames[idx];
+            // small timeout to ensure DOM paints
+            setTimeout(()=> showResultModal(name, idx), 20);
+            });
+
+    }
+
+        // Return index of segment whose mid angle is closest to the actual pointer position
+        function getSegmentUnderPointer(){
+            const container = document.getElementById('wheelContainer');
+            const pointerEl = document.getElementById('pointer');
+            const crect = container.getBoundingClientRect();
+            const prect = pointerEl.getBoundingClientRect();
+            const px = prect.left + prect.width/2;
+            const tipY = 30; // y position of tip in viewBox (polygon at 30)
+            const viewBoxHeight = 48;
+            const py = prect.top + (tipY / viewBoxHeight) * prect.height;
+
+            // 1) Preferred: map screen point to SVG coordinates and test with isPointInFill
+            try{
+                if(typeof wheelSvg.createSVGPoint === 'function'){
+                    const pt = wheelSvg.createSVGPoint();
+                    pt.x = px; pt.y = py;
+                    const ctm = wheelSvg.getScreenCTM();
+                    let svgPt;
+                    if(ctm){
+                        svgPt = pt.matrixTransform(ctm.inverse());
+                    } else {
+                        // fallback compute relative to svg bounding box and viewBox 0..420
+                        const srect = wheelSvg.getBoundingClientRect();
+                        const x = (px - srect.left) / srect.width * 420;
+                        const y = (py - srect.top) / srect.height * 420;
+                        svgPt = { x, y };
+                    }
+                    // save for debug display
+                    lastSvgPoint = svgPt;
+                    const paths = Array.from(wheelSvg.querySelectorAll('path'));
+                    for(let i=0;i<paths.length;i++){
+                        const p = paths[i];
+                        if(typeof p.isPointInFill === 'function'){
+                            // p.isPointInFill expects an SVGPoint; if we constructed svgPt as plain object use pt
+                            const testPt = (svgPt.x !== undefined && svgPt.y !== undefined && typeof svgPt.matrixTransform !== 'function') ? (function(){ const q = wheelSvg.createSVGPoint(); q.x=svgPt.x; q.y=svgPt.y; return q; })() : svgPt;
+                            try{
+                                if(p.isPointInFill(testPt)){
+                                    lastHighlightedIdx = i;
+                                    return i;
+                                }
+                            }catch(e){ /* ignore and fallback */ }
+                        }
+                    }
+                }
+            }catch(e){ /* ignore and continue to other methods */ }
+
+            // 2) Fallback: elementFromPoint (works if pointer has pointer-events:none)
+            try{
+                let el = document.elementFromPoint(px, py);
+                if(el){
+                    let node = el;
+                    while(node && node !== wheelSvg){
+                        if(node.tagName && node.tagName.toLowerCase() === 'path'){
+                            const paths = Array.from(wheelSvg.querySelectorAll('path'));
+                            const idx = paths.indexOf(node);
+                            if(idx !== -1){ lastHighlightedIdx = idx; return idx; }
+                            break;
+                        }
+                        node = node.parentNode;
+                    }
+                }
+            }catch(e){ /* ignore */ }
+
+            // 3) Last resort: angle-based math (deterministic)
+            const namesCount = currentNames.length;
+            if(namesCount === 0) return 0;
+            const slice = 360 / namesCount;
+            const cx = crect.left + crect.width/2;
+            const cy = crect.top + crect.height/2;
+            let pointerAngle = Math.atan2(py - cy, px - cx) * 180 / Math.PI;
+            pointerAngle = (pointerAngle + 360) % 360;
+            let bestIdx = 0;
+            let bestDist = 1e9;
+            for(let i=0;i<namesCount;i++){
+                const segAngle = (i*slice + slice/2 - 90);
+                const rotated = ((segAngle - cumulativeRotation) % 360 + 360) % 360;
+                let diff = Math.abs(rotated - pointerAngle) % 360;
+                if(diff > 180) diff = 360 - diff;
+                if(diff < bestDist){ bestDist = diff; bestIdx = i; }
+            }
+            lastHighlightedIdx = bestIdx;
+            return bestIdx;
+        }
+
+        function showResultModal(name, index){
+            // Add to called students after spin result
+            currentPicked.forEach(pickedName => {
+                if (!calledStudents[pickedName]) {
+                    calledStudents[pickedName] = {comment: '', score: 0};
+                }
+            });
+            updateCalledStudentsTable();
+            saveCalledStudents();
+
+            const resultTitle = document.getElementById('resultTitle');
+            if(currentPicked.length > 1){
+                resultTitle.textContent = 'Các tên được gọi';
+                resultNameEl.innerHTML = currentPicked.join('<br>');
+            } else {
+                resultTitle.textContent = 'Tên được gọi';
+                resultNameEl.textContent = name;
+            }
+            resultModal.style.display = 'flex';
+            // wire remove action to remove all in currentPicked from pool and masterList
+            removeResult.onclick = function(){
+                currentPicked.forEach(pickedName => {
+                    masterList = masterList.filter(n=>n!==pickedName);
+                    pool = pool.filter(n=>n!==pickedName);
+                    delete calledStudents[pickedName];
+                });
+                namesEl.value = masterList.join('\n');
+                updateCalledStudentsTable();
+                saveCalledStudents(); // Save after removal
+                refreshCounts();
+                resultModal.style.display='none';
+                // re-draw wheel
+                drawWheel(masterList);
+            };
+            closeResult.onclick = function(){ resultModal.style.display='none'; };
+        }
+
+        function pickOneAction(){
+            syncFromTextarea();
+            if(masterList.length===0){alert('Vui lòng nhập danh sách tên.');return}
+            if(uniqueCheck.checked && pool.length===0){alert('Pool đã hết. Nhấn Reset Pool để nạp lại.');return}
+            const source = uniqueCheck.checked ? pool : masterList;
+            const idx = Math.floor(Math.random()*source.length);
+            const pickedName = source[idx];
+            currentPicked = [pickedName];
+            // spin to that name so it matches the drawn segments
+            spinToName(pickedName);
+            // if unique, remove after modal remove button pressed (we don't auto-remove here)
+            if(uniqueCheck.checked){
+                // tentatively remove from pool (so it won't be picked again until removed from master if requested)
+                const poolIdx = pool.indexOf(pickedName);
+                if(poolIdx!==-1) pool.splice(poolIdx,1);
+                refreshCounts();
+            }
+        }
+
+        function pickNAction(){
+            syncFromTextarea();
+            let n = parseInt(pickCount.value,10) || 1;
+            if(n<1) n=1;
+            if(masterList.length===0){alert('Vui lòng nhập danh sách tên.');return}
+            const results=[];
+            if(uniqueCheck.checked){
+                if(n>pool.length){n=pool.length;}
+                for(let i=0;i<n;i++){
+                    const idx=Math.floor(Math.random()*pool.length);
+                    results.push(pool.splice(idx,1)[0]);
+                }
+            } else {
+                for(let i=0;i<n;i++){
+                    const idx=Math.floor(Math.random()*masterList.length);
+                    results.push(masterList[idx]);
+                }
+            }
+            results.forEach(r=>history.unshift(r));
+            refreshCounts();
+            currentPicked = results.slice();
+            // spin to last picked
+            const lastName = results[results.length-1];
+            if(lastName) spinToName(lastName);
+        }
+
+        // Controls
+        loadSample.addEventListener('click',()=>{
+            // sample is already present by default; re-load to reset
+            namesEl.value = namesEl.value.trim();
+            masterList = parseNames(namesEl.value);
+            pool = masterList.slice();
+            history = [];
+            drawWheel(masterList);
+            refreshCounts();
+        });
+
+        saveDataBtn.addEventListener('click', saveCalledStudents);
+
+    shuffleBtn.addEventListener('click',()=>{ syncFromTextarea(); shuffle(masterList); namesEl.value = masterList.join('\n'); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); });
+        pickOne.addEventListener('click', pickOneAction);
+        pickN.addEventListener('click', pickNAction);
+    resetPool.addEventListener('click', ()=>{ syncFromTextarea(); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); alert('Pool đã được nạp lại.'); });
+
+        clearCalledBtn.addEventListener('click', () => {
+            calledStudents = {};
+            updateCalledStudentsTable();
+            saveCalledStudents();
+            alert('Danh sách học sinh đã gọi đã được xóa.');
+        });
+
+        exportBtn.addEventListener('click',()=>{
+            syncFromTextarea();
+            if(masterList.length===0){alert('Không có tên để xuất.');return}
+            const csv = masterList.map(n => {
+                const data = calledStudents[n] || { comment: '', score: 0 };
+                return `"${n.replace(/"/g,'""')}","${data.comment.replace(/"/g,'""')}","${data.score}"`;
+            }).join('\n');
+            const header = '"Tên","Nhận xét","Điểm"\n';
+            const fullCsv = '\uFEFF' + header + csv;
+            const blob = new Blob([fullCsv],{type:'text/csv;charset=utf-8;'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href=url; a.download='names.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        });
+
+        exportExcelBtn.addEventListener('click', () => {
+            if (Object.keys(calledStudents).length === 0) {
+                alert('Không có dữ liệu để xuất.');
+                return;
+            }
+            const wb = XLSX.utils.book_new();
+            const ws_data = [["Tên", "Nhận xét", "Điểm"]];
+            for (const name in calledStudents) {
+                ws_data.push([name, calledStudents[name].comment, calledStudents[name].score]);
+            }
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, "Học sinh đã gọi");
+            XLSX.writeFile(wb, "hoc_sinh_da_goi.xlsx");
+        });
+
+        importFile.addEventListener('change', (e)=>{
+            const f = e.target.files[0]; if(!f) return;
+            const reader = new FileReader();
+            reader.onload = function(ev){ namesEl.value = ev.target.result.replace(/\r/g,'').trim(); syncFromTextarea(); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); };
+            reader.readAsText(f,'UTF-8');
+        });
+
+        // Initialize
+        (function init(){
+            masterList = parseNames(namesEl.value);
+            pool = masterList.slice();
+            history = [];
+            drawWheel(masterList);
+            refreshCounts();
+            loadCalledStudents();
+            updateCalledStudentsTable();
+        })();
+
+        // Accessibility: keyboard shortcuts
+        document.addEventListener('keydown',(e)=>{
+            if(e.key===' ' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+                e.preventDefault(); pickOneAction();
+            }
+        });
+    </script>
+</body>
+</html>

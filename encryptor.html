@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Encryptor | Mã hóa câu hỏi trắc nghiệm</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; }
+    .row { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 960px; }
+    textarea { width: 100%; min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; padding: 10px; }
+    input[type=password], input[type=text] { width: 100%; padding: 10px; font-size: 14px; }
+    button { padding: 10px 16px; background:#0369a1; color:#fff; border:0; border-radius:6px; cursor:pointer; }
+    .muted { color:#475569; font-size: 13px; }
+    .out { min-height: 120px; }
+    .grid2 { display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; }
+  </style>
+</head>
+<body>
+  <h1>Mã hóa câu hỏi trắc nghiệm (client-side)</h1>
+  <p class="muted">Dán JSON câu hỏi vào ô bên dưới, nhập mật khẩu và bấm Mã hóa. Kết quả (base64) dán vào hằng <code>ENCRYPTED_QUESTIONS</code> trong <code>tin-12-bai-3.html</code>.</p>
+
+  <div class="row">
+    <label>JSON câu hỏi (ví dụ: [{"question":"...","options":["A","B"],"answer":1}])</label>
+    <textarea id="plain"></textarea>
+
+    <div class="grid2">
+      <input id="pw" type="password" placeholder="Mật khẩu" />
+      <button id="encBtn">Mã hóa</button>
+    </div>
+
+    <label>Kết quả (base64)</label>
+    <textarea id="out" class="out" readonly></textarea>
+    <div>
+      <button id="copyBtn" style="background:#0d9488">Sao chép</button>
+      <span id="msg" class="muted"></span>
+    </div>
+  </div>
+
+  <script>
+    function bytesToB64(bytes){
+      let bin = '';
+      for (let i=0;i<bytes.length;i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin);
+    }
+    function b64ToBytes(b64){
+      const bin = atob(b64);
+      const out = new Uint8Array(bin.length);
+      for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+      return out;
+    }
+    function randomBytes(n){
+      const a = new Uint8Array(n); crypto.getRandomValues(a); return a;
+    }
+    async function deriveKey(password, salt){
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+      return crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'}, keyMaterial, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+    }
+    async function encrypt(password, text){
+      const salt = randomBytes(16);
+      const iv = randomBytes(12);
+      const key = await deriveKey(password, salt);
+      const enc = new TextEncoder();
+      const ct = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(text));
+      const ctBytes = new Uint8Array(ct);
+      const out = new Uint8Array(1 + salt.length + iv.length + ctBytes.length);
+      let p = 0; out[p++] = 1; // version
+      out.set(salt, p); p += salt.length;
+      out.set(iv, p); p += iv.length;
+      out.set(ctBytes, p);
+      return bytesToB64(out);
+    }
+
+    const plain = document.getElementById('plain');
+    const pw = document.getElementById('pw');
+    const out = document.getElementById('out');
+    const msg = document.getElementById('msg');
+    document.getElementById('encBtn').addEventListener('click', async () => {
+      msg.textContent = '';
+      try {
+        // Validate JSON first
+        const parsed = JSON.parse(plain.value);
+        if (!Array.isArray(parsed)) throw new Error('JSON phải là mảng câu hỏi');
+        const b64 = await encrypt(pw.value || '', JSON.stringify(parsed));
+        out.value = b64;
+        msg.textContent = 'Đã mã hóa xong.';
+      } catch (e){
+        msg.textContent = 'Lỗi: ' + (e && e.message ? e.message : e);
+      }
+    });
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      try { await navigator.clipboard.writeText(out.value); msg.textContent = 'Đã sao chép.'; } catch {}
+    });
+  </script>
+</body>
+</html>
+

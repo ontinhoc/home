@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bài 2: Thực hành sử dụng hệ điều hành - Hướng dẫn sử dụng các chức năng và tiện ích cơ bản của hệ điều hành trên máy tính và thiết bị di động">
+    <meta name="keywords" content="thực hành hệ điều hành, windows, file explorer, tiện ích máy tính, quản lý file, tối ưu hóa ổ đĩa, thiết bị di động">
+    <meta name="author" content="Ontinhoc">
+    <title>Bài 2: Thực hành sử dụng hệ điều hành | Tin học 11</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            margin: 20px 0 10px;
+        }
+
+        .objective-box {
+            background: #e0f2fe;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .objective-box h2 {
+            color: var(--secondary-color);
+            border: none;
+            margin-top: 0;
+        }
+
+        .instruction-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .instruction-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+
+        .steps li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            counter-increment: step-counter;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            font-size: 14px;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .tip {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip::before {
+            content: '💡 Lưu ý:';
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #b45309;
+        }
+
+        #tableOfContents {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #tableOfContents h2 {
+            margin-top: 0;
+            border: none;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>THỰC HÀNH SỬ DỤNG HỆ ĐIỀU HÀNH</h1>
+
+            <div class="objective-box">
+                <h2>Mục tiêu bài học</h2>
+                <ul>
+                    <li>Sử dụng được một số chức năng cơ bản của hệ điều hành cho máy tính cá nhân.</li>
+                    <li>Sử dụng được một vài tiện ích của hệ điều hành nhằm nâng cao hiệu quả của máy tính cá nhân.</li>
+                    <li>Sử dụng được một vài tiện ích cơ bản của hệ điều hành trên thiết bị di động.</li>
+                </ul>
+            </div>
+
+            <div id="tableOfContents">
+                <h2>Mục lục</h2>
+                <ol>
+                    <li><a href="#phan1">Sử dụng chức năng cơ bản của hệ điều hành cho máy tính cá nhân</a></li>
+                    <li><a href="#phan2">Sử dụng tiện ích trên hệ điều hành máy tính cá nhân</a></li>
+                    <li><a href="#phan3">Sử dụng tiện ích của hệ điều hành cho thiết bị di động</a></li>
+                </ol>
+            </div>
+
+            <section id="phan1">
+                <h2>I. Sử dụng chức năng cơ bản của hệ điều hành cho máy tính cá nhân</h2>
+                
+                <div class="instruction-box">
+                    <h3>1. Giao tiếp với người sử dụng</h3>
+                    <ul>
+                        <li>Giao diện đồ họa: Cửa sổ, biểu tượng, con trỏ</li>
+                        <li>Nhận biết các thành phần:
+                            <ul>
+                                <li>Tệp và thư mục</li>
+                                <li>Nút lệnh</li>
+                                <li>Thanh công việc (Taskbar)</li>
+                                <li>Thanh trạng thái (Status bar)</li>
+                            </ul>
+                        </li>
+                        <li>Thao tác cơ bản:
+                            <ul>
+                                <li>Truy cập phần mềm ứng dụng</li>
+                                <li>Nháy chuột, nháy đúp</li>
+                                <li>Nháy nút phải</li>
+                                <li>Kéo thả</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="instruction-box">
+                    <h3>2. Quản lí tệp và thư mục</h3>
+                    <h4>Sử dụng File Explorer (Windows) hoặc File Manager (Ubuntu)</h4>
+                    <ul class="steps">
+                        <li>Xem nội dung thư mục (tệp và thư mục con)</li>
+                        <li>Tạo mới, đổi tên, xóa, di chuyển thư mục</li>
+                        <li>Đổi tên, xóa, di chuyển tệp</li>
+                        <li>Chạy ứng dụng với tệp chương trình</li>
+                        <li>Sử dụng menu ngữ cảnh (chuột phải)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="phan2">
+                <h2>II. Sử dụng tiện ích trên hệ điều hành máy tính cá nhân</h2>
+                
+                <div class="instruction-box">
+                    <h3>1. Khái niệm Tiện ích</h3>
+                    <ul>
+                        <li>Là phần mềm công cụ hỗ trợ nhiều công việc:
+                            <ul>
+                                <li>Tính toán</li>
+                                <li>Chụp màn hình</li>
+                                <li>Gõ tiếng Việt</li>
+                                <li>Nén tệp</li>
+                                <li>Quét virus</li>
+                            </ul>
+                        </li>
+                        <li>Có thể được cài đặt sẵn hoặc cài đặt bổ sung</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-box">
+                    <h3>2. Tối ưu hóa/Hợp mảnh đĩa (Optimize/Defragment)</h3>
+                    <h4>Các bước thực hiện trên Windows:</h4>
+                    <ol class="steps">
+                        <li>Mở File Explorer</li>
+                        <li>Nháy phải chuột vào ổ đĩa</li>
+                        <li>Chọn Properties</li>
+                        <li>Chọn tab Tools</li>
+                        <li>Nhấn Optimize</li>
+                    </ol>
+                    <div class="tip">
+                        Chỉ có tác dụng với đĩa từ và có thể mất nhiều thời gian thực hiện
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <h3>3. Kiểm tra đĩa (Check disk)</h3>
+                    <h4>Các bước thực hiện trên Windows:</h4>
+                    <ol class="steps">
+                        <li>Mở File Explorer</li>
+                        <li>Nháy phải chuột vào ổ đĩa</li>
+                        <li>Chọn Properties</li>
+                        <li>Chọn tab Tools</li>
+                        <li>Nhấn Check</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="phan3">
+                <h2>III. Sử dụng tiện ích của hệ điều hành cho thiết bị di động</h2>
+
+                <div class="instruction-box">
+                    <h3>1. Quản lí danh bạ</h3>
+                    <ul class="steps">
+                        <li>Hiển thị danh bạ</li>
+                        <li>Thêm người mới vào danh bạ</li>
+                        <li>Sửa thông tin liên hệ</li>
+                        <li>Chia sẻ thông tin liên hệ</li>
+                        <li>Xóa người khỏi danh bạ</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-box">
+                    <h3>2. Đặt lịch và hẹn giờ</h3>
+                    <ul class="steps">
+                        <li>Mở ứng dụng Đồng hồ/Lịch</li>
+                        <li>Chọn chức năng đặt hẹn giờ</li>
+                        <li>Thiết lập thời gian nhắc nhở</li>
+                        <li>Cài đặt lặp lại (nếu cần)</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-box">
+                    <h3>3. Quản lí ứng dụng</h3>
+                    <ul class="steps">
+                        <li>Xem danh sách ứng dụng đã cài đặt</li>
+                        <li>Kiểm tra dung lượng ứng dụng</li>
+                        <li>Gỡ cài đặt ứng dụng không cần thiết</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+
+    <script>
+        // Back to top button functionality
+        const backToTop = document.getElementById('backToTop');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+
+        backToTop.onclick = function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        };
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

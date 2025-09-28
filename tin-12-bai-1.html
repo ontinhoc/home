@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trí tuệ nhân tạo (AI) - Ôn tập Tin học 12 Bài 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trí tuệ nhân tạo (AI) - Ôn tập Tin học 12</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Audio elements for feedback -->
+    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho bài 1
+        const questions = [
+            {
+                question: "Trí tuệ nhân tạo (AI) là gì?",
+                options: [
+                    "Khả năng của máy tính thực hiện các phép tính số học.",
+                    "Khả năng của máy tính thực hiện các công việc mang tính trí tuệ của con người.",
+                    "Khả năng của máy tính lưu trữ dữ liệu lớn.",
+                    "Khả năng của máy tính kết nối mạng Internet."
+                ],
+                answer: 1,
+                explanation: "AI giúp máy tính thực hiện công việc trí tuệ như đọc, hiểu, dịch, lái xe…"
+            },
+            {
+                question: "Một trong những đặc trưng cơ bản của AI là:",
+                options: [
+                    "Tự động tăng tốc độ xử lý phần cứng.",
+                    "Khả năng học hỏi từ dữ liệu và kinh nghiệm.",
+                    "Khả năng lưu trữ vô hạn dữ liệu.",
+                    "Tự sửa chữa phần cứng khi hỏng hóc."
+                ],
+                answer: 1,
+                explanation: "Khả năng học từ dữ liệu và kinh nghiệm là đặc trưng của AI."
+            },
+            {
+                question: "AI có thể được chia thành mấy loại chính theo chức năng?",
+                options: [
+                    "2 loại",
+                    "3 loại",
+                    "4 loại",
+                    "5 loại"
+                ],
+                answer: 0,
+                explanation: "Gồm AI hẹp (yếu) và AI tổng quát (mạnh)."
+            },
+            {
+                question: "Phần mềm Google Dịch là ví dụ điển hình cho loại AI nào?",
+                options: [
+                    "AI tổng quát",
+                    "AI hẹp",
+                    "AI mạnh",
+                    "AI tự động hóa phần cứng"
+                ],
+                answer: 1,
+                explanation: "Google Dịch là AI hẹp, chỉ chuyên dịch ngôn ngữ."
+            },
+            {
+                question: "Ứng dụng nào sau đây KHÔNG phải là ví dụ của AI?",
+                options: [
+                    "Nhận dạng khuôn mặt trên điện thoại.",
+                    "Tự động kiểm tra chính tả.",
+                    "Máy tính bỏ túi thực hiện phép cộng.",
+                    "Trợ lí ảo Siri."
+                ],
+                answer: 2,
+                explanation: "Máy tính bỏ túi chỉ tính toán, không có trí tuệ nhân tạo."
+            },
+            {
+                question: "Hệ chuyên gia MYCIN trong y học sử dụng tri thức dưới dạng:",
+                options: [
+                    "Luật suy diễn.",
+                    "Mạng xã hội.",
+                    "Cơ sở dữ liệu hình ảnh.",
+                    "Bộ nhớ điện toán đám mây."
+                ],
+                answer: 0,
+                explanation: "MYCIN dựa trên khoảng 600 luật suy diễn để chẩn đoán."
+            },
+            {
+                question: "Robot Asimo là ví dụ về AI vì có khả năng:",
+                options: [
+                    "Tự tính toán tài chính.",
+                    "Điều khiển từ xa bằng sóng radio.",
+                    "Di chuyển bằng hai chân, nhận dạng hình ảnh và tiếng nói.",
+                    "Tự động sao lưu dữ liệu."
+                ],
+                answer: 2,
+                explanation: "Asimo có thể đi bằng 2 chân, nhận diện hình ảnh và tiếng nói."
+            },
+            {
+                question: "Đặc trưng nào của AI giúp trợ lí ảo như Siri hiểu được yêu cầu của người dùng?",
+                options: [
+                    "Khả năng học",
+                    "Khả năng nhận thức",
+                    "Khả năng hiểu ngôn ngữ",
+                    "Khả năng lưu trữ"
+                ],
+                answer: 2,
+                explanation: "Trợ lí ảo sử dụng xử lí ngôn ngữ tự nhiên (NLP)."
+            },
+            {
+                question: "Ứng dụng nhận dạng chữ viết tay thường được sử dụng trong lĩnh vực nào?",
+                options: [
+                    "Trò chơi điện tử",
+                    "Xử lí hóa đơn và tài liệu thương mại điện tử",
+                    "Tìm kiếm trên mạng xã hội",
+                    "Điều khiển robot công nghiệp"
+                ],
+                answer: 1,
+                explanation: "Nhận dạng chữ viết tay dùng trong xử lí hóa đơn, nhập liệu tự động."
+            },
+            {
+                question: "Mục tiêu chính của việc phát triển AI là gì?",
+                options: [
+                    "Giúp con người không cần học tập.",
+                    "Xây dựng phần mềm có đặc trưng trí tuệ giống con người.",
+                    "Thay thế hoàn toàn con người trong mọi lĩnh vực.",
+                    "Chỉ tập trung vào trò chơi điện tử."
+                ],
+                answer: 1,
+                explanation: "Mục tiêu là xây dựng phần mềm có khả năng trí tuệ giống con người."
+            }
+        ];
+
+        // Khởi tạo quiz khi trang web load xong
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuiz(questions);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 3: Mạng máy tính và Internet - thiết bị mạng thông dụng, kết nối có dây và không dây.">
+    <meta name="keywords" content="mạng máy tính, hub, switch, router, modem, WAP, wifi, kết nối RJ45, UTP">
+    <meta name="author" content="Ontinhoc">
+    <title>Mạng máy tính và Internet | Tin 12 - Bài 3</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1100px}
+        *{box-sizing:border-box}
+        body{font-family:Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial; background:var(--bg); color:#0f172a; margin:0; padding:24px; display:flex; justify-content:center}
+        .wrap{width:100%; max-width:var(--content-max)}
+        header{background:linear-gradient(90deg,var(--primary),var(--accent)); color:white; padding:28px; border-radius:var(--radius)}
+        header h1{margin:0; font-size:1.6rem}
+        header p{margin:8px 0 0; opacity:0.95}
+        nav{display:flex; gap:12px; margin:18px 0}
+        nav a{background:var(--card); padding:8px 12px; border-radius:8px; color:var(--accent); text-decoration:none; box-shadow:0 1px 3px rgba(2,6,23,0.06)}
+        main{margin-top:16px}
+        .card{background:var(--card); padding:20px; border-radius:12px; box-shadow:0 4px 18px rgba(2,6,23,0.06); margin-bottom:16px}
+        h2{color:var(--accent); margin-top:0}
+        h3{color:#064e3b}
+        ul{margin:8px 0 8px 20px}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff; border-left:4px solid var(--primary); padding:12px; border-radius:6px}
+        .steps{background:#fff7ed; border-left:4px solid #f97316; padding:12px; border-radius:6px}
+        footer{margin-top:20px; text-align:center; color:var(--muted)}
+        #backToTop{position:fixed; right:18px; bottom:18px; background:var(--accent); color:#fff; border:none; width:44px; height:44px; border-radius:8px; display:none; cursor:pointer}
+        @media(max-width:700px){ nav{flex-wrap:wrap} }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Bài 3: Một số thiết bị mạng thông dụng</h1>
+            <p>Tổng quan về thiết bị mạng thông dụng và cách kết nối máy tính vào mạng.</p>
+        </header>
+
+        <nav>
+            <a href="#devices">1. Thiết bị mạng thông dụng</a>
+            <a href="#connect">2. Kết nối máy tính với thiết bị mạng</a>
+        </nav>
+
+        <main>
+            <section id="devices" class="card">
+                <h2>1. Thiết bị mạng thông dụng</h2>
+                <ul>
+                    <li><strong>Hub:</strong> phát tín hiệu đến tất cả các cổng → dễ gây xung đột tín hiệu.</li>
+                    <li><strong>Switch:</strong> chỉ truyền dữ liệu đến đúng cổng cần thiết → giảm xung đột, hiệu quả hơn hub.</li>
+                    <li><strong>Wireless Access Point (WAP / Điểm truy cập Wi‑Fi):</strong> kết nối các thiết bị đầu cuối qua sóng vô tuyến, giúp mở rộng phạm vi LAN, giảm chi phí dây cáp.</li>
+                    <li><strong>Router (Bộ định tuyến):</strong> định tuyến (chọn đường truyền) dữ liệu giữa các mạng, đặc biệt khi kết nối Internet.</li>
+                    <li><strong>Modem:</strong> chuyển đổi tín hiệu số ↔ tương tự (digital ↔ analog), dùng để kết nối LAN với Internet.</li>
+                </ul>
+                <div class="note">
+                    Ghi chú: Trong hầu hết mạng hiện đại, <strong>switch</strong> và <strong>router</strong> là thiết bị phổ biến; hub hiện ít dùng vì hiệu quả kém.
+                </div>
+            </section>
+
+            <section id="connect" class="card">
+                <h2>2. Kết nối máy tính với thiết bị mạng</h2>
+                <h3>Kết nối có dây</h3>
+                <p>Sử dụng cáp mạng UTP với giắc cắm RJ45 → cắm vào cổng LAN của máy tính, hub, switch hoặc router.</p>
+
+                <h3>Kết nối không dây (Wi‑Fi)</h3>
+                <p>Kết nối thông qua điểm truy cập WAP hoặc router Wi‑Fi.</p>
+
+                <div class="steps">
+                    <strong>Các bước kết nối Wi‑Fi:</strong>
+                    <ol>
+                        <li>Tìm và chọn tên mạng Wi‑Fi.</li>
+                        <li>Nhập mật khẩu (nếu có bảo mật).</li>
+                        <li>Kết nối và bật chế độ tự động kết nối nếu muốn.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <footer>
+                <p>Giáo viên: sử dụng trang này để tóm tắt nội dung và hướng dẫn thực hành cho học sinh.</p>
+                <p>&copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = a.getAttribute('href').slice(1);
+            const el = document.getElementById(id);
+            el.scrollIntoView({behavior:'smooth', block:'start'});
+        }));
+
+        // Back to top button
+        const back = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) back.style.display = 'block'; else back.style.display = 'none';
+        });
+        back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Mạng máy tính và Internet - Thiết bị mạng, modem, router, switch, WAP.">
+    <meta name="keywords" content="mạng máy tính, trắc nghiệm, hub, switch, router, modem, wap, wifi">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Mạng máy tính và Internet | Tin 12 - Bài 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Khoá trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;">Pass mở khóa: j>5G</p>
+        </div>
+    </div>
+
+    <div id="content" style="display:none">
+        <div class="container">
+            <header>
+                <h1>Trắc nghiệm: Mạng máy tính và Internet (Tin 12 - Bài 3)</h1>
+                <div class="controls">
+                    <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                    <button id="retry-btn" class="btn">Làm lại bài</button>
+                </div>
+            </header>
+
+            <main>
+                <div id="quiz-box"></div>
+                <div id="summary" class="hidden"></div>
+                <div class="navigation-controls">
+                    <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        // Thay giá trị bằng chuỗi base64 do encryptor.html tạo
+        const ENCRYPTED_QUESTIONS = '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';
+    </script>
+
+    <!-- Cửa khoá + Giải mã bằng Web Crypto -->
+    <script>
+        (function(){
+            const LOCK_KEY = 'tin12_bai3_unlocked';
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const input = document.getElementById('pagePassword');
+            const lockMsg = document.getElementById('lockMsg');
+
+            // Rào cản nhẹ: chặn menu chuột phải và vài phím tắt phổ biến
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            document.addEventListener('keydown', (e) => {
+                const k = e.key.toLowerCase();
+                if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+                if (e.key === 'F12') e.preventDefault();
+            });
+
+            function b64ToBytes(b64) {
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+
+            async function deriveKey(password, salt) {
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['decrypt']
+                );
+            }
+
+            async function decryptPayload(password, b64) {
+                if (!b64) throw new Error('Thiếu dữ liệu đã mã hóa');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Gói dữ liệu không hỗ trợ');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                    const questions = JSON.parse(json);
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+</body>
+</html>
+

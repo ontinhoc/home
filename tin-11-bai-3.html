@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Phần mềm nguồn mở & phần mềm chạy trên Internet - Tin 11 Bài 3.">
+    <meta name="keywords" content="phần mềm nguồn mở, open source, google docs, trắc nghiệm, tin 11">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Phần mềm nguồn mở & Phần mềm chạy trên Internet | Tin 11 - Bài 3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Trắc nghiệm: Phần mềm nguồn mở & Phần mềm chạy trên Internet (Tin 11 - Bài 3)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Audio feedback -->
+    <audio id="audio-correct" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+    <audio id="audio-wrong" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "Phần mềm nguồn mở là gì?",
+                options: [
+                    "Phần mềm miễn phí, không cần giấy phép.",
+                    "Phần mềm có mã nguồn công khai, được phép sử dụng, sửa đổi, phân phối.",
+                    "Phần mềm thương mại, bán kèm theo mã nguồn.",
+                    "Phần mềm chạy trực tiếp trên Internet."
+                ],
+                answer: 1,
+                explanation: "PM nguồn mở có mã nguồn công khai, được phép sử dụng, sửa đổi và phân phối."
+            },
+            {
+                question: "Ví dụ nào sau đây thuộc phần mềm thương mại nguồn đóng?",
+                options: ["GIMP","Inkscape","Microsoft Word","MySQL"],
+                answer: 2,
+                explanation: "Microsoft Word là phần mềm thương mại và nguồn đóng."
+            },
+            {
+                question: "Điểm khác biệt giữa phần mềm thương mại và phần mềm nguồn mở là gì?",
+                options: [
+                    "Thương mại thường đóng gói, nguồn mở thường miễn phí.",
+                    "Thương mại cần trả phí bản quyền, nguồn mở có mã nguồn công khai.",
+                    "Thương mại không được sửa đổi, nguồn mở không cần giấy phép.",
+                    "Thương mại không sử dụng được, nguồn mở mới có thể cài đặt."
+                ],
+                answer: 1,
+                explanation: "Thương mại: trả phí; Nguồn mở: mã nguồn công khai."
+            },
+            {
+                question: "Giấy phép GNU GPL yêu cầu gì khi sửa đổi phần mềm nguồn mở?",
+                options: ["Chỉ người tạo ra mới được dùng bản sửa đổi.","Phải giữ kín mã nguồn sửa đổi.","Bản sửa đổi cũng phải công khai mã nguồn và theo GPL.","Không được phép phân phối lại."],
+                answer: 2,
+                explanation: "GPL yêu cầu công khai mã nguồn sửa đổi; phần mềm phái sinh phải tuân theo GPL."
+            },
+            {
+                question: "Phần mềm thương mại dạng “đặt hàng” có đặc điểm nào?",
+                options: ["Phát triển dựa trên nhu cầu chung.","Có tính hoàn chỉnh cao, đóng gói tiện lợi.","Thiết kế riêng theo yêu cầu khách hàng.","Thường miễn phí cho cộng đồng."],
+                answer: 2,
+                explanation: "Phần mềm đặt hàng được thiết kế riêng theo yêu cầu khách hàng."
+            },
+            {
+                question: "Ưu điểm nổi bật của phần mềm nguồn mở là gì?",
+                options: ["Luôn có bảo hành chính thức.","Không bao giờ có lỗi kỹ thuật.","Chi phí thấp, minh bạch, ít phụ thuộc nhà cung cấp.","Được phát triển bởi Microsoft và Apple."],
+                answer: 2,
+                explanation: "Ưu điểm: chi phí thấp, minh bạch, không phụ thuộc nhà cung cấp."
+            },
+            {
+                question: "Ví dụ nào là phần mềm chạy trên Internet?",
+                options: ["Photoshop","Google Docs","Microsoft Word","Inkscape"],
+                answer: 1,
+                explanation: "Google Docs là phần mềm trực tuyến chạy trên Internet."
+            },
+            {
+                question: "Ưu điểm của phần mềm chạy trên Internet là:",
+                options: ["Phải cài đặt vào máy mới dùng được.","Chỉ dùng được khi không có Internet.","Có thể dùng ở bất cứ đâu có kết nối mạng, lưu trữ trên đám mây.","Luôn mất phí khi sử dụng."],
+                answer: 2,
+                explanation: "Phần mềm chạy trên Internet có thể dùng mọi nơi có mạng và lưu trữ trên đám mây."
+            },
+            {
+                question: "Hệ điều hành nguồn mở phổ biến hiện nay là:",
+                options: ["Windows","iOS","Linux (Ubuntu, Red Hat, …)","macOS"],
+                answer: 2,
+                explanation: "Linux và các bản phân phối là hệ điều hành nguồn mở phổ biến."
+            },
+            {
+                question: "Yếu tố nào là hạn chế của phần mềm thương mại so với phần mềm nguồn mở?",
+                options: ["Minh bạch hơn về mã nguồn.","Người dùng phụ thuộc vào nhà cung cấp.","Chi phí thấp hơn.","Dễ dàng sửa đổi, phân phối lại."],
+                answer: 1,
+                explanation: "Phần mềm thương mại thường khiến người dùng phụ thuộc vào nhà cung cấp."
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeQuiz(questions);
+        });
+    </script>
+</body>
+</html>

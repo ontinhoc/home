@@ -1,0 +1,1 @@
+- [x] Edit random-names.html to add UTF-8 BOM to CSV export for proper Vietnamese character encoding
