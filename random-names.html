@@ -679,5 +679,14 @@ Phạm Hoàng Vinh</textarea>
             }
         });
     </script>
+<script>
+  // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', (e) => {
+    const k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
 </body>
 </html>
