@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 4 Tin 12: Giao thức mạng – khái niệm, ví dụ, bộ giao thức TCP/IP (IP, TCP), các giao thức HTTP, DNS, ICMP và ý nghĩa.">
+    <meta name="keywords" content="Tin 12, giao thức mạng, TCP/IP, IP, TCP, HTTP, DNS, ICMP, SMTP, POP3, IMAP, Ethernet">
+    <meta name="author" content="Ontinhoc">
+    <title>Giao Thức Mạng | Tin 12 - Bài 4 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1100px}
+        *{box-sizing:border-box}
+        body{font-family:Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial; background:var(--bg); color:#0f172a; margin:0; padding:24px; display:flex; justify-content:center}
+        .wrap{width:100%; max-width:var(--content-max)}
+        header{background:linear-gradient(90deg,var(--primary),var(--accent)); color:white; padding:28px; border-radius:var(--radius)}
+        header h1{margin:0; font-size:1.6rem}
+        header p{margin:8px 0 0; opacity:0.95}
+        nav{display:flex; gap:12px; margin:18px 0}
+        nav a{background:var(--card); padding:8px 12px; border-radius:8px; color:var(--accent); text-decoration:none; box-shadow:0 1px 3px rgba(2,6,23,0.06)}
+        main{margin-top:16px}
+        .card{background:var(--card); padding:20px; border-radius:12px; box-shadow:0 4px 18px rgba(2,6,23,0.06); margin-bottom:16px}
+        h2{color:var(--accent); margin-top:0}
+        h3{color:#064e3b}
+        ul{margin:8px 0 8px 20px}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff; border-left:4px solid var(--primary); padding:12px; border-radius:6px}
+        .steps{background:#fff7ed; border-left:4px solid #f97316; padding:12px; border-radius:6px}
+        footer{margin-top:20px; text-align:center; color:var(--muted)}
+        #backToTop{position:fixed; right:18px; bottom:18px; background:var(--accent); color:#fff; border:none; width:44px; height:44px; border-radius:8px; display:none; cursor:pointer}
+        @media(max-width:700px){ nav{flex-wrap:wrap} }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Giao Thức Mạng (Tin 12 - Bài 4)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "about": ["TCP/IP", "IP", "TCP", "HTTP", "DNS", "ICMP", "SMTP", "POP3", "IMAP", "Ethernet"]
+    }
+    </script>
+    
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Bài 4: Giao Thức Mạng (Lý thuyết)</h1>
+            <p>Tóm tắt kiến thức trọng tâm: khái niệm, ví dụ, TCP/IP, các giao thức khác và ý nghĩa.</p>
+        </header>
+
+        <nav>
+            <a href="#khai-niem">1. Khái niệm</a>
+            <a href="#vi-du">2. Ví dụ về giao thức</a>
+            <a href="#tcp-ip">3. Bộ giao thức TCP/IP</a>
+            <a href="#khac">4. Giao thức khác</a>
+            <a href="#y-nghia">5. Ý nghĩa</a>
+        </nav>
+
+        <main>
+            <section id="khai-niem" class="card">
+                <h2>1. Khái niệm</h2>
+                <ul>
+                    <li><strong>Giao thức mạng</strong>: tập hợp các quy tắc quy định cách các thiết bị trên mạng giao tiếp, truyền và nhận dữ liệu.</li>
+                    <li>Đảm bảo dữ liệu được truyền <strong>chính xác</strong>, <strong>tin cậy</strong> và <strong>hiệu quả</strong>.</li>
+                </ul>
+            </section>
+
+            <section id="vi-du" class="card">
+                <h2>2. Ví dụ về giao thức</h2>
+                <ul>
+                    <li><strong>SMTP</strong>: gửi thư điện tử.</li>
+                    <li><strong>POP3/IMAP</strong>: nhận thư điện tử.</li>
+                    <li><strong>Ethernet</strong>: truyền dữ liệu trong mạng LAN (địa chỉ MAC, kiểm tra lỗi, đóng gói dữ liệu, xử lý xung đột).</li>
+                </ul>
+                <div class="note">
+                    Ghi chú: Ethernet thường được dùng trong mạng LAN có dây; kết hợp với IP để chuyển tiếp gói dữ liệu giữa các mạng.
+                </div>
+            </section>
+
+            <section id="tcp-ip" class="card">
+                <h2>3. Bộ giao thức TCP/IP</h2>
+                <p>Internet hoạt động dựa trên bộ giao thức TCP/IP gồm 2 giao thức quan trọng:</p>
+                <h3>a. IP (Internet Protocol)</h3>
+                <ul>
+                    <li>Quy định <strong>địa chỉ IP</strong> cho mỗi thiết bị (IPv4: 32 bit, IPv6: 128 bit).</li>
+                    <li>Thực hiện <strong>định tuyến</strong> để gói dữ liệu đi qua nhiều mạng trung gian tới đúng đích.</li>
+                    <li><strong>Router</strong> đóng vai trò “bưu cục” hướng dẫn đường đi của gói dữ liệu.</li>
+                </ul>
+                <h3>b. TCP (Transmission Control Protocol)</h3>
+                <ul>
+                    <li>Đảm bảo dữ liệu được truyền <strong>tin cậy</strong>, <strong>không sai sót</strong>.</li>
+                    <li>Chia dữ liệu thành nhiều gói nhỏ, <strong>đánh số thứ tự</strong>, ghép lại đúng khi đến nơi.</li>
+                    <li>Mỗi ứng dụng dùng một <strong>cổng (port)</strong> để tránh nhầm lẫn dữ liệu giữa các ứng dụng.</li>
+                    <li>Có cơ chế <strong>xác nhận</strong> và <strong>gửi lại</strong> khi dữ liệu bị mất.</li>
+                </ul>
+            </section>
+
+            <section id="khac" class="card">
+                <h2>4. Một số giao thức khác</h2>
+                <ul>
+                    <li><strong>HTTP</strong>: truyền tải trang web.</li>
+                    <li><strong>DNS</strong>: phân giải tên miền (ví dụ: moet.edu.vn → địa chỉ IP).</li>
+                    <li><strong>ICMP</strong>: gửi thông báo, kiểm tra kết nối (lệnh ping).</li>
+                </ul>
+            </section>
+
+            <section id="y-nghia" class="card">
+                <h2>5. Ý nghĩa</h2>
+                <ul>
+                    <li><strong>TCP/IP</strong> là nền tảng hoạt động của Internet.</li>
+                    <li><strong>IP</strong>: định danh, địa chỉ, định tuyến.</li>
+                    <li><strong>TCP</strong>: truyền dữ liệu chính xác, tin cậy.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for nav links (tương tự trang bài 3 lý thuyết)
+        document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
+            const href = a.getAttribute('href') || '';
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const id = href.slice(1);
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        }));
+
+        // Back to top button (giống chức năng trang bài 3)
+        const back = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            back.style.display = window.scrollY > 200 ? 'block' : 'none';
+        });
+        back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    </script>
+</body>
+</html>
+
