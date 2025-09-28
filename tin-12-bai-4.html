@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Giao thức mạng - Bài 4 Tin 12. Khoá trang và giải mã dữ liệu câu hỏi bằng Web Crypto.">
+    <meta name="keywords" content="Tin 12, giao thức mạng, TCP/IP, IP, TCP, HTTP, DNS, ICMP, SMTP, POP3, IMAP, trắc nghiệm">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Giao thức mạng | Tin 12 - Bài 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Khoá trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#f20707;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display:none">
+        <header>
+            <h1>Trắc nghiệm: Giao thức mạng (Bài 4)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        // Mật khẩu yêu cầu: -6Ej
+        // Thay giá trị bằng chuỗi base64 do encryptor.html tạo ra
+        const ENCRYPTED_QUESTIONS = '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';
+
+        // (Tuỳ chọn) JSON gốc để đưa vào encryptor.html — giữ lại làm tài liệu
+        /*
+        [
+          {"question":"Giao thức mạng là gì?","options":["Phần mềm gửi mail","Tập hợp quy tắc truyền nhận dữ liệu","Một loại phần cứng mạng","Một loại dịch vụ Internet"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"SMTP dùng để:","options":["Nhận thư điện tử","Gửi thư điện tử","Truy cập trang web","Phân giải tên miền"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"POP3/IMAP có chức năng:","options":["Gửi mail","Nhận mail","Truyền tải web","Định tuyến gói tin"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"Địa chỉ IP thuộc loại:","options":["2 byte","4 byte (IPv4)","6 byte","8 byte"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"Địa chỉ MAC có độ dài:","options":["2 byte","4 byte","6 byte","8 byte"],"answer":2,"explanation":"Địa chỉ MAC có độ dài 6 byte."},
+          {"question":"Chức năng chính của IP là:","options":["Truyền tải web","Định địa chỉ và định tuyến","Xác nhận dữ liệu","Gửi lại gói tin"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"Chức năng chính của TCP là:","options":["Định địa chỉ","Phân giải tên miền","Truyền tin cậy, đúng thứ tự","Kiểm tra kết nối"],"answer":2,"explanation":"Địa chỉ MAC có độ dài 6 byte."},
+          {"question":"Giao thức nào dùng để phân giải tên miền?","options":["HTTP","DNS","ICMP","POP3"],"answer":1,"explanation":"Vì giao thức mạng là tập hợp quy tắc truyền dữ liệu."},
+          {"question":"Lệnh ping sử dụng giao thức nào?","options":["HTTP","SMTP","ICMP","TCP"],"answer":2,"explanation":"Địa chỉ MAC có độ dài 6 byte."},
+          {"question":"Giao thức nào quy định cách truyền tải trang web?","options":["HTTP","DNS","TCP","IP"],"answer":0,"explanation":"HTTP là giao thức truyền tải trang web."}
+        ]
+        */
+
+        // Cửa khoá + Giải mã bằng Web Crypto (y như Bài 3)
+        (function(){
+            const LOCK_KEY = 'tin12_bai4_unlocked';
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const input = document.getElementById('pagePassword');
+            const lockMsg = document.getElementById('lockMsg');
+
+            // Rào cản nhỏ: chặn menu chuột phải và một số phím tắt phổ biến
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            document.addEventListener('keydown', (e) => {
+                const k = (e.key || '').toLowerCase();
+                if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+                if (e.key === 'F12') e.preventDefault();
+            });
+
+            // Phím tắt giáo viên: Alt+Shift+O để hiện thông báo mật khẩu sau giờ học
+            window.showAfterClassNotice = function(){
+                const notice = document.getElementById('classUnlockNotice');
+                if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: -6Ej';
+            };
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+                }
+            });
+
+            function b64ToBytes(b64) {
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+
+            async function deriveKey(password, salt) {
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['decrypt']
+                );
+            }
+
+            async function decryptPayload(password, b64) {
+                if (!b64) throw new Error('Thiếu dữ liệu đã mã hoá');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Gói dữ liệu không hỗ trợ');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                    const questions = JSON.parse(json);
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+</body>
+</html>
