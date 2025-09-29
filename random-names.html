@@ -106,6 +106,11 @@ Phạm Hoàng Vinh</textarea>
                             <tbody id="called-students-body">
                             </tbody>
                         </table>
+                        <div id="volunteer-add" style="margin-top:10px;display:flex;gap:8px;align-items:center">
+                            <input id="volunteerName" list="nameSuggestions" placeholder="Nhập tên xung phong..." style="flex:1;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px">
+                            <datalist id="nameSuggestions"></datalist>
+                            <button id="addVolunteerBtn" class="btn">Thêm vào đã gọi</button>
+                        </div>
                         <button id="save-data-btn" class="btn secondary">Lưu dữ liệu</button>
                     </div>
                 </div>
@@ -125,6 +130,10 @@ Phạm Hoàng Vinh</textarea>
         </div>
     </div>
 
+    <!-- Audio effects: spin (loop) and win (one-shot) -->
+    <audio id="audio-spin" preload="auto" loop src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ=="></audio>
+    <audio id="audio-win" preload="auto" src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAFhpbmcAAAAPAAAAAwAABPEAVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/+MYxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/jGMQAAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ=="></audio>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
         // Utility functions
@@ -138,6 +147,70 @@ Phạm Hoàng Vinh</textarea>
     const resultNameEl = document.getElementById('resultName');
     const closeResult = document.getElementById('closeResult');
     const removeResult = document.getElementById('removeResult');
+    const audioSpin = document.getElementById('audio-spin');
+    const audioWin = document.getElementById('audio-win');
+    const volunteerNameInput = document.getElementById('volunteerName');
+    const addVolunteerBtn = document.getElementById('addVolunteerBtn');
+    const nameSuggestions = document.getElementById('nameSuggestions');
+    // Sound control helpers (WebAudio-based with fallback UI toggle)
+    let soundEnabled = true;
+    function updateSoundUI(){ if(window.toggleSoundBtn){ window.toggleSoundBtn.textContent = 'Âm thanh: ' + (soundEnabled ? 'Bật' : 'Tắt'); } }
+    // Simple WebAudio engine
+    let audioCtx = null;
+    function getCtx(){
+        if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(AC) audioCtx = new AC(); }
+        return audioCtx;
+    }
+    async function ensureCtx(){ try{ const c = getCtx(); if(c && c.state === 'suspended'){ await c.resume(); } }catch(e){} }
+    function playTick(){
+        const c = getCtx(); if(!c) return;
+        const osc = c.createOscillator();
+        const gain = c.createGain();
+        osc.type = 'square';
+        osc.frequency.value = 1400;
+        const t = c.currentTime;
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(0.35, t + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
+        osc.connect(gain).connect(c.destination);
+        osc.start(t);
+        osc.stop(t + 0.09);
+    }
+    let spinTimer = null;
+    async function startSpinSound(){
+        if(!soundEnabled) return;
+        await ensureCtx();
+        const c = getCtx();
+        stopSpinSound();
+        if(c){
+            spinTimer = setInterval(playTick, 90);
+        } else if(audioSpin){
+            try{ audioSpin.loop = true; audioSpin.currentTime = 0; audioSpin.play().catch(()=>{}); }catch(e){}
+        }
+    }
+    function stopSpinSound(){
+        if(spinTimer){ clearInterval(spinTimer); spinTimer = null; }
+        try{ if(audioSpin){ audioSpin.pause(); audioSpin.currentTime = 0; } }catch(e){}
+    }
+    async function playWin(){
+        if(!soundEnabled) return;
+        await ensureCtx();
+        const c = getCtx();
+        if(!c){ try{ if(audioWin){ audioWin.currentTime = 0; audioWin.play().catch(()=>{}); } }catch(e){} return; }
+        const g = c.createGain(); const t = c.currentTime;
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.5,t+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+0.9);
+        g.connect(c.destination);
+        const freqs=[523.25,659.25,783.99];
+        freqs.forEach((f,i)=>{ const o=c.createOscillator(); o.type='sine'; o.frequency.value=f; o.connect(g); o.start(t + i*0.03); o.stop(t + 0.95); });
+    }
+
+    // Proactively unlock audio on first user interaction
+    let audioUnlocked = false;
+    function unlockAudio(){ if(audioUnlocked) return; audioUnlocked = true; ensureCtx(); }
+    document.addEventListener('pointerdown', unlockAudio, { once: true });
+    document.addEventListener('keydown', unlockAudio, { once: true });
 
         const loadSample = document.getElementById('loadSample');
         const shuffleBtn = document.getElementById('shuffleBtn');
@@ -152,6 +225,30 @@ Phạm Hoàng Vinh</textarea>
         const exportExcelBtn = document.getElementById('exportExcelBtn');
         const importFile = document.getElementById('importFile');
         const saveDataBtn = document.getElementById('save-data-btn');
+        const controlsEl = document.querySelector('.controls');
+        // Add sound controls buttons to the toolbar
+        window.toggleSoundBtn = (function(){
+            try{
+                const btn = document.createElement('button');
+                btn.id = 'toggleSound';
+                btn.className = 'btn ghost';
+                btn.title = 'Bật/Tắt âm thanh';
+                btn.textContent = 'Âm thanh: Bật';
+                if(controlsEl) controlsEl.appendChild(btn);
+                return btn;
+            }catch(e){ return null; }
+        })();
+        window.testSoundBtn = (function(){
+            try{
+                const btn = document.createElement('button');
+                btn.id = 'testSound';
+                btn.className = 'btn ghost';
+                btn.title = 'Thử âm thanh';
+                btn.textContent = 'Test âm thanh';
+                if(controlsEl) controlsEl.appendChild(btn);
+                return btn;
+            }catch(e){ return null; }
+        })();
 
         let masterList = []; // full list from textarea
         let pool = []; // working pool for unique picks
@@ -207,6 +304,13 @@ Phạm Hoàng Vinh</textarea>
             totalEl.textContent = masterList.length;
             remainingEl.textContent = pool.length;
             noticeArea.style.display = pool.length === 0 && masterList.length>0 ? 'block' : 'none';
+        }
+
+        function updateNameSuggestions(){
+            if(!nameSuggestions) return;
+            try{
+                nameSuggestions.innerHTML = masterList.map(n => `<option value="${escapeHtml(n)}"></option>`).join('');
+            }catch(e){}
         }
 
         function syncFromTextarea(){
@@ -387,11 +491,15 @@ Phạm Hoàng Vinh</textarea>
             const extraMod = (required - current + 360) % 360;
             const extra = extraMod + 360 * spins;
             cumulativeRotation += extra;
+            // start spin sound (loop)
+            startSpinSound();
             wheelSvg.style.transition = 'transform 4s cubic-bezier(.17,.9,.32,1)';
             wheelSvg.style.transform = `rotate(${cumulativeRotation}deg)`;
             // after the transition ends, determine the segment under the pointer and snap precisely
             wheelSvg.addEventListener('transitionend', function handler(){
                 wheelSvg.removeEventListener('transitionend', handler);
+                // stop spin sound
+                stopSpinSound();
                 // determine which segment is visually under the pointer
                 const idx = getSegmentUnderPointer();
                 // compute the exact rotation that centers that segment under the pointer
@@ -537,6 +645,8 @@ Phạm Hoàng Vinh</textarea>
                 resultNameEl.textContent = name;
             }
             resultModal.style.display = 'flex';
+            // play celebration sound
+            playWin();
             // wire remove action to remove all in currentPicked from pool and masterList
             removeResult.onclick = function(){
                 currentPicked.forEach(pickedName => {
@@ -551,6 +661,7 @@ Phạm Hoàng Vinh</textarea>
                 resultModal.style.display='none';
                 // re-draw wheel
                 drawWheel(masterList);
+                updateNameSuggestions();
             };
             closeResult.onclick = function(){ resultModal.style.display='none'; };
         }
@@ -609,14 +720,68 @@ Phạm Hoàng Vinh</textarea>
             history = [];
             drawWheel(masterList);
             refreshCounts();
+            updateNameSuggestions();
         });
 
         saveDataBtn.addEventListener('click', saveCalledStudents);
+
+        // Add volunteer to called list without spinning
+        if(addVolunteerBtn){
+            addVolunteerBtn.addEventListener('click', ()=>{
+                const name = (volunteerNameInput?.value || '').trim();
+                if(!name){ alert('Vui lòng nhập tên.'); return; }
+                if(!calledStudents[name]){
+                    calledStudents[name] = { comment: '', score: 0 };
+                }
+                // If unique mode, remove from pool so không bị gọi lại
+                if(uniqueCheck && uniqueCheck.checked){
+                    const pi = pool.indexOf(name);
+                    if(pi !== -1){ pool.splice(pi,1); }
+                }
+                updateCalledStudentsTable();
+                saveCalledStudents();
+                refreshCounts();
+                if(volunteerNameInput) volunteerNameInput.value = '';
+            });
+        }
+        if(volunteerNameInput){
+            volunteerNameInput.addEventListener('keydown', (e)=>{
+                if(e.key === 'Enter'){
+                    e.preventDefault();
+                    addVolunteerBtn?.click();
+                }
+            });
+        }
 
     shuffleBtn.addEventListener('click',()=>{ syncFromTextarea(); shuffle(masterList); namesEl.value = masterList.join('\n'); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); });
         pickOne.addEventListener('click', pickOneAction);
         pickN.addEventListener('click', pickNAction);
     resetPool.addEventListener('click', ()=>{ syncFromTextarea(); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); alert('Pool đã được nạp lại.'); });
+
+        // Sound toggle init and handler
+        (function initSound(){
+            try{
+                const saved = localStorage.getItem('soundEnabled');
+                if(saved !== null) soundEnabled = (saved === 'true');
+            }catch(e){}
+            updateSoundUI();
+        })();
+        if(window.toggleSoundBtn){
+            window.toggleSoundBtn.addEventListener('click', ()=>{
+                soundEnabled = !soundEnabled;
+                try{ localStorage.setItem('soundEnabled', String(soundEnabled)); }catch(e){}
+                updateSoundUI();
+                if(!soundEnabled){ stopSound(audioSpin); }
+            });
+        }
+        if(window.testSoundBtn){
+            window.testSoundBtn.addEventListener('click', async ()=>{
+                soundEnabled = true; try{ localStorage.setItem('soundEnabled','true'); }catch(e){}
+                updateSoundUI();
+                await ensureCtx();
+                await playWin();
+            });
+        }
 
         clearCalledBtn.addEventListener('click', () => {
             calledStudents = {};
@@ -657,7 +822,7 @@ Phạm Hoàng Vinh</textarea>
         importFile.addEventListener('change', (e)=>{
             const f = e.target.files[0]; if(!f) return;
             const reader = new FileReader();
-            reader.onload = function(ev){ namesEl.value = ev.target.result.replace(/\r/g,'').trim(); syncFromTextarea(); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); };
+            reader.onload = function(ev){ namesEl.value = ev.target.result.replace(/\r/g,'').trim(); syncFromTextarea(); pool = masterList.slice(); drawWheel(masterList); refreshCounts(); updateNameSuggestions(); };
             reader.readAsText(f,'UTF-8');
         });
 
@@ -670,6 +835,7 @@ Phạm Hoàng Vinh</textarea>
             refreshCounts();
             loadCalledStudents();
             updateCalledStudentsTable();
+            updateNameSuggestions();
         })();
 
         // Accessibility: keyboard shortcuts
