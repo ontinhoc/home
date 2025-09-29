@@ -189,6 +189,9 @@ Phạm Hoàng Vinh</textarea>
         osc.stop(t + 0.09);
     }
     let spinTimer = null;
+    // Trạng thái quay và timeout dự phòng khi không nhận được transitionend
+    let isSpinning = false;
+    let spinTimeoutId = null;
     async function startSpinSound(){
         if(!soundEnabled) return;
         await ensureCtx();
@@ -446,7 +449,7 @@ Phạm Hoàng Vinh</textarea>
                 wheelSvg.appendChild(outer);
             }catch(e){/* ignore if SVG not available */}
             // small timeout to allow next transition assignment
-            setTimeout(()=>{ wheelSvg.style.transition = ''; }, 0);
+            // keep transition disabled after redraw; spinToName will set it explicitly
         }
 
         // Debug helpers: draw a small circle at svg point and highlight segment
@@ -505,13 +508,26 @@ Phạm Hoàng Vinh</textarea>
             cumulativeRotation += extra;
             // start spin sound (loop)
             startSpinSound();
+            // đánh dấu đang quay và thiết lập timeout dự phòng
+            isSpinning = true;
+            if(spinTimeoutId){ clearTimeout(spinTimeoutId); spinTimeoutId = null; }
             wheelSvg.style.transition = 'transform 4s cubic-bezier(.17,.9,.32,1)';
             wheelSvg.style.transform = `rotate(${cumulativeRotation}deg)`;
+            // dự phòng: nếu vì lý do nào đó không nhận được transitionend, dừng âm thanh và hiển thị kết quả
+            spinTimeoutId = setTimeout(()=>{
+                if(!isSpinning) return;
+                try{ stopSpinSound(); }catch(e){}
+                const idx = getSegmentUnderPointer();
+                isSpinning = false;
+                try{ showResultModal(currentNames[idx] || name, idx); }catch(e){}
+            }, 5000);
             // after the transition ends, determine the segment under the pointer and snap precisely
             wheelSvg.addEventListener('transitionend', function handler(){
                 wheelSvg.removeEventListener('transitionend', handler);
+                if(!isSpinning) return;
                 // stop spin sound
                 stopSpinSound();
+                if(spinTimeoutId){ clearTimeout(spinTimeoutId); spinTimeoutId = null; }
                 // determine which segment is visually under the pointer
                 const idx = getSegmentUnderPointer();
                 // compute the exact rotation that centers that segment under the pointer
@@ -549,6 +565,7 @@ Phạm Hoàng Vinh</textarea>
                 void wheelSvg.offsetWidth;
                 const chosen = currentNames[idx];
             // small timeout to ensure DOM paints
+            isSpinning = false;
             setTimeout(()=> showResultModal(name, idx), 20);
             });
 
@@ -783,7 +800,7 @@ Phạm Hoàng Vinh</textarea>
                 soundEnabled = !soundEnabled;
                 try{ localStorage.setItem('soundEnabled', String(soundEnabled)); }catch(e){}
                 updateSoundUI();
-                if(!soundEnabled){ stopSound(audioSpin); }
+                if(!soundEnabled){ stopSpinSound(); }
             });
         }
         if(window.testSoundBtn){
