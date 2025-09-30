@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nộp Bài Tập</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-card { background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    .field { margin-bottom:1rem; }
+    .field label { display:block; font-weight:600; margin-bottom:0.35rem; }
+    .req { color:#e11d48; margin-left:4px; }
+    .hint { color:#475569; font-size:0.9rem; }
+    .field input[type="text"], .field input[type="email"], .field input[type="date"], .field textarea { width:100%; padding:0.6rem 0.7rem; border:1px solid #e2e8f0; border-radius:6px; font-size:1rem; }
+    .field input[type="file"]{ width:100%; }
+    .actions { display:flex; gap:10px; justify-content:flex-start; margin-top:1rem; }
+    .error { color:#b91c1c; background:#fee2e2; border:1px solid #fecaca; padding:0.5rem 0.75rem; border-radius:6px; margin-top:0.5rem; }
+    .success { color:#065f46; background:#d1fae5; border:1px solid #a7f3d0; padding:0.75rem 1rem; border-radius:6px; margin-top:1rem; }
+    .preview { margin-top:0.75rem; }
+    .preview img { max-width:100%; height:auto; border:1px solid #e2e8f0; border-radius:6px; }
+    .back { margin-bottom:1rem; display:inline-block; }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('assignmentForm');
+      const fileInput = document.getElementById('assignmentImage');
+      const imageError = document.getElementById('imageError');
+      const successBox = document.getElementById('successBox');
+      const previewBox = document.getElementById('previewBox');
+
+      // Show live preview when selecting PNG
+      fileInput.addEventListener('change', () => {
+        imageError.textContent = '';
+        previewBox.innerHTML = '';
+        const f = fileInput.files && fileInput.files[0];
+        if (!f) return;
+        const isPng = (f.type === 'image/png') || (/\.png$/i.test(f.name));
+        if (!isPng) {
+          imageError.textContent = 'Vui lòng chọn đúng tệp PNG (.png).';
+          fileInput.value = '';
+          return;
+        }
+        const url = URL.createObjectURL(f);
+        const img = document.createElement('img');
+        img.alt = 'Xem trước ảnh bài làm';
+        img.src = url;
+        previewBox.appendChild(img);
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        successBox.textContent = '';
+        imageError.textContent = '';
+
+        // Basic HTML5 validity first
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // Extra PNG validation
+        const f = fileInput.files && fileInput.files[0];
+        if (!f) {
+          imageError.textContent = 'Ảnh bài làm (PNG) là bắt buộc.';
+          return;
+        }
+        const isPng = (f.type === 'image/png') || (/\.png$/i.test(f.name));
+        if (!isPng) {
+          imageError.textContent = 'Vui lòng tải lên đúng định dạng PNG (.png).';
+          return;
+        }
+
+        // Simulate successful submit (no backend wired here)
+        successBox.textContent = 'Đã ghi nhận thông tin. Cảm ơn bạn đã nộp bài!';
+        // If you later add a backend/Google Form endpoint, remove preventDefault and set form.action.
+      });
+    });
+  </script>
+  <meta name="description" content="Biểu mẫu nộp bài tập: họ tên, lớp, ngày sinh, email, câu trả lời, tải ảnh PNG, tuần nộp và thông tin khác.">
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="index.html">← Về trang chính</a>
+    <header>
+      <h1>Nộp Bài Tập</h1>
+      <p>Vui lòng điền đầy đủ thông tin và tải ảnh bài làm (PNG).</p>
+    </header>
+
+    <div class="form-card">
+      <form id="assignmentForm" method="post" enctype="multipart/form-data" novalidate>
+        <div class="field">
+          <label for="fullName">Họ và tên<span class="req">*</span></label>
+          <input type="text" id="fullName" name="fullName" placeholder="Nguyễn Văn A" required autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="className">Lớp<span class="req">*</span></label>
+          <input type="text" id="className" name="className" placeholder="12A1" required>
+        </div>
+
+        <div class="field">
+          <label for="dob">Ngày sinh<span class="req">*</span></label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email<span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="ten@truong.edu.vn" required autocomplete="email">
+          <div class="hint">Thu thập email để liên hệ khi cần.</div>
+        </div>
+
+        <div class="field">
+          <label for="answer">Câu trả lời (không bắt buộc)</label>
+          <textarea id="answer" name="answer" rows="4" placeholder="Nhập đoạn văn bản trả lời (nếu có)"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="assignmentImage">Ảnh bài làm (PNG) <span class="req">*</span></label>
+          <input type="file" id="assignmentImage" name="assignmentImage" accept=".png,image/png" required>
+          <div id="imageError" class="error" aria-live="polite"></div>
+          <div id="previewBox" class="preview" aria-live="polite"></div>
+          <div class="hint">Chỉ chấp nhận tệp định dạng .PNG.</div>
+        </div>
+
+        <div class="field">
+          <label for="week">Tuần nộp bài tập<span class="req">*</span></label>
+          <input type="text" id="week" name="week" placeholder="Tuần 1" required>
+        </div>
+
+        <div class="field">
+          <label for="other">Thông tin khác (không bắt buộc)</label>
+          <input type="text" id="other" name="other" placeholder="Ghi chú thêm (nếu có)">
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn">NỘP BÀI</button>
+          <button type="reset" class="btn" style="background:#94a3b8">Làm lại</button>
+        </div>
+
+        <div id="successBox" class="success" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
