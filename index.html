@@ -714,6 +714,7 @@
                                     role="menuitem" target="_blank">Teams</a></li>
                             <li role="none"><a href="https://edoc.smas.edu.vn/" class="dropdown-item" role="menuitem"
                                     target="_blank">Edoc</a></li>
+                            <li role="none"><a href="nop-bai.html" class="dropdown-item" role="menuitem">Nộp bài</a></li>
                             <li role="none"><a href="random-names.html" class="dropdown-item" role="menuitem"
                                     target="_blank">Gọi tên</a></li>
                         </ul>
@@ -765,6 +766,9 @@
             </div>
             <div class="mobile-nav-item">
                 <a href="#" class="mobile-nav-link">AI</a>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="nop-bai.html" class="mobile-nav-link">Nộp bài</a>
             </div>
             <div class="mobile-nav-item">
                 <a href="#" class="mobile-nav-link" id="mobile-contact-link">Liên hệ</a>
@@ -1085,6 +1089,41 @@
                 }
             }
         });
+    </script>
+    <script>
+        // Ensure 'Nộp bài' opens in a new tab on all devices
+        (function(){
+            try{
+
+                // Ensure all items in the desktop 'Links' dropdown open in new tab
+                var navLinks = document.querySelectorAll('.nav-item > .nav-link');
+                var linksDropdown = null;
+                navLinks.forEach(function(a){
+                    var txt = (a.textContent || '').trim().toLowerCase();
+                    if (txt === 'links') {
+                        var parent = a.parentElement;
+                        if (parent) linksDropdown = parent.querySelector('.dropdown');
+                    }
+                });
+                if (linksDropdown) {
+                    linksDropdown.querySelectorAll('a.dropdown-item').forEach(function(a){
+                        a.setAttribute('target','_blank');
+                        a.setAttribute('rel','noopener');
+                    });
+                }
+            }catch(e){}
+        })();
+    </script>
+    <script>
+      (function(){
+        try {
+          var as = document.querySelectorAll('a[href$="nop-bai.html"]');
+          as.forEach(function(a){
+            var p = a.closest('li, .mobile-nav-item');
+            if (p) { p.remove(); } else { a.remove(); }
+          });
+        } catch(e){}
+      })();
     </script>
 </body>
 </html>
