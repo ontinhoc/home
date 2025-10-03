@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Bài 4 Tin học 11: Bên trong máy tính — thiết bị phần cứng, mạch logic và phép cộng nhị phân. Tóm tắt trọng tâm, trực quan, dễ học.">
+  <meta name="keywords" content="Tin 11, Bài 4, bên trong máy tính, CPU, ALU, CU, RAM, ROM, bộ nhớ, mạch logic, cổng logic, phép cộng nhị phân">
+  <meta name="author" content="Ontinhoc">
+  <title>Bên Trong Máy Tính | Tin 11 - Bài 4</title>
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial; background:var(--bg); color:#0f172a; margin:0; padding:24px; display:flex; justify-content:center}
+    .wrap{width:100%; max-width:var(--content-max)}
+    header{background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff; padding:28px; border-radius:var(--radius)}
+    header h1{margin:0; font-size:1.6rem}
+    header p{margin:8px 0 0; opacity:0.95}
+    nav{display:flex; gap:12px; margin:18px 0; flex-wrap:wrap}
+    nav a{background:var(--card); padding:8px 12px; border-radius:8px; color:var(--accent); text-decoration:none; box-shadow:0 1px 3px rgba(2,6,23,0.06)}
+    main{margin-top:16px}
+    .card{background:var(--card); padding:20px; border-radius:12px; box-shadow:0 4px 18px rgba(2,6,23,0.06); margin-bottom:16px}
+    h2{color:var(--accent); margin-top:0}
+    h3{color:#064e3b}
+    ul{margin:8px 0 8px 20px}
+    li{margin-bottom:8px}
+    .note{background:#ecfeff; border-left:4px solid var(--primary); padding:12px; border-radius:6px}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .grid-2 .box{padding:12px; background:#f8fafc; border-radius:8px}
+    table{width:100%; border-collapse:collapse; background:#fff; border-radius:8px; overflow:hidden}
+    th,td{border:1px solid #e2e8f0; padding:8px; text-align:center}
+    th{background:#f1f5f9}
+    footer{margin-top:20px; text-align:center; color:var(--muted)}
+    #backToTop{position:fixed; right:18px; bottom:18px; background:var(--accent); color:#fff; border:none; width:44px; height:44px; border-radius:8px; display:none; cursor:pointer}
+    @media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+  </style>
+  <link rel="preload" href="#" as="fetch" crossorigin>
+  <meta property="og:title" content="Tin 11 - Bài 4: Bên trong máy tính">
+  <meta property="og:description" content="Thiết bị phần cứng, mạch logic, phép cộng nhị phân. Tóm tắt trọng tâm, dễ hiểu.">
+  <meta property="og:type" content="article">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Bài 4: Bên Trong Máy Tính</h1>
+      <p>Tóm tắt kiến thức trọng tâm: thiết bị phần cứng, mạch logic, phép cộng nhị phân.</p>
+    </header>
+
+    <nav aria-label="Mục lục bài học">
+      <a href="#devices">1. Thiết bị bên trong máy tính</a>
+      <a href="#logic">2. Mạch logic và vai trò</a>
+      <a href="#binary-add">3. Phép cộng nhị phân</a>
+      <a href="#summary">Ghi nhớ</a>
+    </nav>
+
+    <main>
+      <section id="devices" class="card">
+        <h2>1. Các thiết bị bên trong máy tính</h2>
+        <div class="grid-2">
+          <div class="box">
+            <h3>Bo mạch chính (Mainboard)</h3>
+            <ul>
+              <li>Là bảng mạch nơi gắn và kết nối các thiết bị (CPU, RAM, ổ cứng, card mở rộng…).</li>
+              <li>Quyết định khả năng nâng cấp, số khe RAM, chuẩn ổ đĩa, cổng giao tiếp.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Bộ xử lí trung tâm (CPU)</h3>
+            <ul>
+              <li>Thành phần: <strong>ALU</strong> (phép toán số học, logic), <strong>CU</strong> (điều khiển), <strong>thanh ghi</strong>, <strong>bộ nhớ đệm (cache)</strong>.</li>
+              <li>Thông số: <strong>tần số xung nhịp</strong> (GHz), <strong>số lõi</strong> (core).</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Bộ nhớ trong</h3>
+            <ul>
+              <li><strong>RAM</strong>: lưu tạm, mất dữ liệu khi tắt máy.</li>
+              <li><strong>ROM</strong>: chỉ đọc, lưu lâu dài dữ liệu hệ thống.</li>
+              <li>Thông số: dung lượng (MB, GB), thời gian truy cập.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Bộ nhớ ngoài</h3>
+            <ul>
+              <li>HDD, SSD, đĩa quang… lưu trữ lâu dài.</li>
+              <li>Dung lượng: GB, TB; Thời gian truy cập: SSD &gt; HDD &gt; đĩa quang.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note" role="note" aria-label="Lưu ý">
+          CPU = ALU + CU + thanh ghi + cache. RAM (tạm), ROM (lâu dài), ngoài (HDD, SSD...).
+        </div>
+      </section>
+
+      <section id="logic" class="card">
+        <h2>2. Mạch logic và vai trò</h2>
+        <p><strong>Đại lượng logic</strong> chỉ có hai giá trị: 1 (Đúng) và 0 (Sai).</p>
+        <h3>Phép toán logic cơ bản</h3>
+        <ul>
+          <li><strong>AND (∧)</strong>, <strong>OR (∨)</strong>, <strong>NOT (¬)</strong>, <strong>XOR (⊕)</strong>.</li>
+          <li><strong>Cổng logic</strong>: phần tử điện tử thực hiện các phép toán logic; mọi mạch logic đều có thể xây dựng từ AND, OR, NOT.</li>
+        </ul>
+        <h3>Ý nghĩa</h3>
+        <ul>
+          <li>CPU thực chất là tập hợp các mạch logic.</li>
+          <li>Thiết bị số (máy tính, điện thoại, thiết bị điện tử…) đều dựa trên mạch logic.</li>
+        </ul>
+      </section>
+
+      <section id="binary-add" class="card">
+        <h2>3. Phép cộng trên hệ nhị phân</h2>
+        <p><strong>Hệ nhị phân</strong> chỉ gồm 0 và 1. Nguyên tắc: cộng từng cột, nhớ sang trái khi cần.</p>
+        <h3>Bảng cộng nhị phân cơ bản</h3>
+        <table aria-label="Bảng cộng nhị phân">
+          <thead>
+            <tr><th>x</th><th>y</th><th>kết quả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>10 (kết quả 0, nhớ 1)</td></tr>
+          </tbody>
+        </table>
+        <h3>Mạch cộng 2 bit (half-adder)</h3>
+        <ul>
+          <li>Đầu vào: x, y</li>
+          <li>Đầu ra: <code>t = x ⊕ y</code> (kết quả), <code>z = x ∧ y</code> (số nhớ)</li>
+          <li>Ứng dụng: ghép nhiều mạch 1 bit để cộng nhiều bit.</li>
+        </ul>
+      </section>
+
+      <section id="summary" class="card">
+        <h2>Ghi nhớ chính</h2>
+        <ul>
+          <li>Thiết bị chính: CPU, bộ nhớ trong, bộ nhớ ngoài.</li>
+          <li>CPU = ALU + CU + thanh ghi + cache.</li>
+          <li>Bộ nhớ: RAM (tạm), ROM (lâu dài), ngoài (HDD, SSD...).</li>
+          <li>Mạch logic: nền tảng của CPU và mọi thiết bị số.</li>
+          <li>Phép cộng nhị phân: cơ sở của tính toán trong máy tính.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Giáo viên: sử dụng trang này để tóm tắt nội dung và ấn tệp cho học sinh.</p>
+      <p>&copy; 2025 Ontinhoc</p>
+    </footer>
+  </div>
+
+  <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }));
+
+    // Back to top button
+    const back = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      back.style.display = (window.scrollY > 200) ? 'block' : 'none';
+    });
+    back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  </script>
+</body>
+</html>
+<script>
+  // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', (e) => {
+    const k = (e.key || '').toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
+    if (e.key === 'F12') e.preventDefault();
+  });
+</script>
+</html>
+
