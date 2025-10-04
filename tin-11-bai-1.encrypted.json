@@ -1,0 +1,72 @@
+[
+    {
+        "question": "Nhóm chức năng nào của hệ điều hành thể hiện rõ nhất đặc thù của hệ điều hành máy tính cá nhân?",
+        "options": [
+            "Quản lí thiết bị (CPU, bộ nhớ, thiết bị ngoại vi).",
+            "Quản lí việc lưu trữ dữ liệu (quản lí tệp và thư mục).",
+            "Cung cấp môi trường giao tiếp với người sử dụng.",
+            "Cung cấp một số tiện ích giúp nâng cao hiệu quả sử dụng máy tính."
+        ],
+        "answer": 2,
+        "explanation": "Máy tính cá nhân dành cho người dùng phổ thông; tiêu chí quan trọng là sự thân thiện và dễ sử dụng; hệ điều hành cung cấp môi trường giao tiếp."
+    },
+    {
+        "question": "Tính năng nào giúp hệ điều hành tự động nhận biết thiết bị ngoại vi khi khởi động máy tính?",
+        "options": [
+            "Giao diện dòng lệnh.",
+            "Cơ chế 'plug & play'.",
+            "Khả năng đa nhiệm.",
+            "Cấu hình mạng."
+        ],
+        "answer": 1,
+        "explanation": "'Plug & play' là cơ chế giúp tự động nhận biết và cài đặt trình điều khiển cho thiết bị ngoại vi."
+    },
+    {
+        "question": "Phiên bản Windows nào lần đầu tiên tích hợp nhiều tính năng cơ bản của hệ điều hành trực tiếp vào Windows?",
+        "options": ["Windows 1","Windows 3","Windows 95","Windows XP"],
+        "answer": 2,
+        "explanation": "Windows 95 là phiên bản đánh dấu tích hợp nhiều tính năng vào Windows, không chỉ là vỏ bọc của DOS."
+    },
+    {
+        "question": "Hệ điều hành nào sau đây có nguồn gốc từ UNIX và được phát triển dưới dạng mã nguồn mở?",
+        "options": ["Windows","macOS","Android","Linux"],
+        "answer": 3,
+        "explanation": "Linux có nguồn gốc từ UNIX và được phát triển dưới dạng mã nguồn mở."
+    },
+    {
+        "question": "Đâu là một đặc điểm của hệ điều hành cho thiết bị di động so với hệ điều hành máy tính cá nhân?",
+        "options": ["Ưu tiên giao diện dòng lệnh.","Chú trọng khả năng kết nối mạng không dây.","Phần lớn sử dụng chuột và bàn phím.","Chỉ có thể chạy một chương trình cùng lúc."],
+        "answer": 1,
+        "explanation": "Hệ điều hành di động chú trọng kết nối không dây như Wi-Fi, 3G/4G/5G, Bluetooth."
+    },
+    {
+        "question": "Vai trò của hệ điều hành trong mối quan hệ với phần cứng và phần mềm ứng dụng là gì?",
+        "options": ["Là một phần mềm ứng dụng để điều khiển phần cứng.","Là một môi trường trung gian giúp phần mềm ứng dụng khai thác phần cứng.","Phần cứng có thể hoạt động độc lập mà không cần hệ điều hành.","Phần mềm ứng dụng có thể điều khiển trực tiếp phần cứng."],
+        "answer": 1,
+        "explanation": "Hệ điều hành là môi trường trung gian, cung cấp dịch vụ để phần mềm ứng dụng khai thác phần cứng."
+    },
+    {
+        "question": "Tính năng nào sau đây được nhắc đến là một trong những điểm nổi bật của Windows 3 so với các phiên bản trước?",
+        "options": ["Cơ chế 'plug & play'.","Hỗ trợ chạy nhiều chương trình đồng thời.","Thanh trạng thái Taskbar.","Giao diện được thiết kế lại hoàn toàn."],
+        "answer": 1,
+        "explanation": "Windows 3.0 nổi bật với khả năng đa nhiệm, cho phép chạy nhiều chương trình cùng lúc."
+    },
+    {
+        "question": "Giao diện đồ họa của hệ điều hành máy tính cá nhân được hình thành và phát triển để đáp ứng tiêu chí nào sau đây?",
+        "options": ["Độ an toàn cao.","Hiệu suất làm việc cao.","Sự thân thiện và dễ sử dụng.","Khả năng đa người dùng."],
+        "answer": 2,
+        "explanation": "Giao diện đồ họa nhằm mục đích làm cho hệ điều hành thân thiện và dễ sử dụng cho người dùng phổ thông."
+    },
+    {
+        "question": "Lí do chính mà một thiết bị xử lí đa năng như máy tính cá nhân cần phải có hệ điều hành là gì?",
+        "options": ["Để thiết bị có thể bật lên và chạy.","Để người dùng có thể gõ lệnh.","Để quản lí tài nguyên và thực hiện nhiều công việc khác nhau.","Để cung cấp các tiện ích như nén tệp."],
+        "answer": 2,
+        "explanation": "Máy tính đa năng cần hệ điều hành để quản lí tài nguyên và điều phối các tác vụ."
+    },
+    {
+        "question": "Hệ điều hành Android, một hệ điều hành phổ biến cho điện thoại di động, được xây dựng dựa trên lõi của hệ điều hành nào?",
+        "options": ["Windows","macOS","UNIX","Linux"],
+        "answer": 3,
+        "explanation": "Android được xây dựng trên lõi Linux."
+    }
+]
