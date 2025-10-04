@@ -553,103 +553,38 @@
                 text-align: center;
             }
 
-        /* Banner Styles */
-        .banner {
-            background: linear-gradient(90deg, #0a0f1a, #121a2a);
-            color: #4db8ff;
-            padding: 2rem 1rem;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 15px rgba(77, 184, 255, 0.5);
-        }
+    .banner {
+        padding: 2rem 1rem;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(77, 184, 255, 0.5);
+    }
 
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    .banner h2 {
+        font-size: 1.5rem;
+    }
+
+    .banner-lists {
+        gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
         .banner h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #4db8ff;
-            text-shadow: 0 0 8px #4db8ff;
+            font-size: 1.8rem;
         }
 
         .banner h2 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #4db8ff;
-            text-shadow: 0 0 6px #4db8ff;
-        }
-
-        .banner p {
             font-size: 1.2rem;
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .banner-button {
-            background-color: #0a0f1a;
-            border: 2px solid #4db8ff;
-            color: #4db8ff;
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .banner-button:hover {
-            background-color: #4db8ff;
-            color: #0a0f1a;
         }
 
         .banner-lists {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            color: white;
-            font-size: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
+            flex-direction: column;
+            gap: 1rem;
         }
-
-        .banner-lists ul {
-            list-style: none;
-            padding-left: 0;
-            text-align: left;
-        }
-
-        .banner-lists li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.8rem;
-        }
-
-        .banner-lists li::before {
-            content: "✔";
-            position: absolute;
-            left: 0;
-            color: #ffdd57;
-            font-weight: bold;
-        }
-
-        @media (max-width: 480px) {
-            .banner h1 {
-                font-size: 1.8rem;
-            }
-
-            .banner h2 {
-                font-size: 1.2rem;
-            }
-
-            .banner-lists {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
+    }
 
             .search-bar {
                 max-width: 100%;
@@ -727,6 +662,92 @@
         .btn:focus {
             outline: 2px solid var(--primary-color);
             outline-offset: 2px;
+        }
+
+        /* Banner Styles */
+        .banner {
+            background: linear-gradient(90deg, #0a0f1a, #121a2a);
+            color: #4db8ff;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 30px rgba(77, 184, 255, 0.6), 0 0 60px rgba(77, 184, 255, 0.3);
+        }
+
+        .banner h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 0 10px #4db8ff, 0 0 20px #4db8ff;
+        }
+
+        .banner h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 0 8px #4db8ff;
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .banner-button {
+            background-color: #0a0f1a;
+            border: 2px solid #4db8ff;
+            color: #4db8ff;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .banner-button:hover {
+            background-color: #4db8ff;
+            color: #0a0f1a;
+        }
+
+        .banner-lists {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            color: white;
+            font-size: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .banner-lists ul {
+            list-style: none;
+            padding-left: 0;
+            text-align: left;
+        }
+
+        .banner-lists li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .banner-lists li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #ffd700;
         }
     </style>
 </head>
@@ -877,6 +898,23 @@
     <!-- Main Content -->
     <main class="main" role="main">
         <div class="container">
+            <div class="banner" role="region" aria-label="Banner quảng cáo bản quyền phần mềm chính hãng">
+                <h1>HỖ TRỢ KEY BẢN QUYỀN CHÍNH HÃNG</h1>
+                <h2>MUA MỘT LẦN - DÙNG CẢ ĐỜI - GIÁ SỈ</h2>
+                <p>Chi tiền một lần duy nhất để máy tính hoạt động bền bỉ</p>
+                <a href="KeyBanQuyenGiaSi.html" class="banner-button" role="button">👉MUA NGAY KẺO HẾT HÀNG👈</a>
+                <div class="banner-lists" aria-label="Các lợi ích của bản quyền phần mềm">
+                    <ul>
+                        <li>Sử dụng vĩnh viễn, có hóa đơn VAT</li>
+                        <li>Cam kết bảo hành trọn đời</li>
+                    </ul>
+                    <ul>
+                        <li>Đổi mới, hoàn tiền 100% nếu Key không hoạt động</li>
+                        <li>Đảm bảo Laptop, máy tính sử dụng ổn định</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Hero Section -->
             <section class="hero" id="home">
                 <h2>Chào mừng đến với Blog Học Tập Tin Học</h2>
