@@ -96,63 +96,63 @@
                         <span class="text-5xl mb-3">🤖</span>
                         <h3 class="text-xl font-bold">ChatGPT Plus</h3>
                         <p class="text-gray-400 mb-4">Chính chủ 3 tháng</p>
-                        <div class="price-tag text-lg">160k</div>
+                        <div class="price-tag text-lg">175k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">📧</span>
                         <h3 class="text-xl font-bold">ChatGPT Vĩnh Viễn</h3>
                         <p class="text-gray-400 mb-4">Email chính chủ (Giá sỉ)</p>
-                        <div class="price-tag text-lg">30k</div>
+                        <div class="price-tag text-lg">45k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">⚡</span>
                         <h3 class="text-xl font-bold">Gemini Advanced</h3>
                         <p class="text-gray-400 mb-4">15 tháng + 2TB Google Drive</p>
-                        <div class="price-tag text-lg">150k</div>
+                        <div class="price-tag text-lg">165k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">🌐</span>
                         <h3 class="text-xl font-bold">Gemini Pro AI</h3>
                         <p class="text-gray-400 mb-4">12 tháng + 2TB Google Drive</p>
-                        <div class="price-tag text-lg">150k</div>
+                        <div class="price-tag text-lg">165k</div>
                     </div>
                     
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">🎨</span>
                         <h3 class="text-xl font-bold">Canva Pro</h3>
                         <p class="text-gray-400 mb-4">Bản quyền chính chủ 1 năm</p>
-                        <div class="price-tag text-lg">90k</div>
+                        <div class="price-tag text-lg">105k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">🎬</span>
                         <h3 class="text-xl font-bold">AI VEO 3</h3>
                         <p class="text-gray-400 mb-4">Nhiều gói (Thường/25k/45k Credit)</p>
-                        <div class="price-tag text-lg">120k - 280k</div>
+                        <div class="price-tag text-lg">135k - 295k</div>
                     </div>
                     
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">☁️</span>
                         <h3 class="text-xl font-bold">OneDrive 1TB</h3>
                         <p class="text-gray-400 mb-4">Nâng cấp từ email chính chủ</p>
-                        <div class="price-tag text-lg">230k</div>
+                        <div class="price-tag text-lg">245k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">💼</span>
                         <h3 class="text-xl font-bold">Key Office Pro Plus</h3>
                         <p class="text-gray-400 mb-4">Bản quyền 2016/2019/2021</p>
-                        <div class="price-tag text-lg">180k - 250k</div>
+                        <div class="price-tag text-lg">195k - 265k</div>
                     </div>
 
                     <div class="card rounded-xl p-6 flex flex-col items-center text-center">
                         <span class="text-5xl mb-3">🪟</span>
                         <h3 class="text-xl font-bold">Key Windows 10/11</h3>
                         <p class="text-gray-400 mb-4">Bản quyền chính chủ</p>
-                        <div class="price-tag text-lg">120k - 180k</div>
+                        <div class="price-tag text-lg">135k - 195k</div>
                     </div>
                 </div>
             </section>
@@ -247,8 +247,9 @@
             'OneDrive 1TB': 230,
         };
 
-        const labels = Object.keys(chartData).map(label => wrapLabel(label, 16));
-        const dataPoints = Object.values(chartData);
+        const adjustedChartData = Object.fromEntries(Object.entries(chartData).map(([k, v]) => [k, v + 15]));
+        const labels = Object.keys(adjustedChartData).map(label => wrapLabel(label, 16));
+        const dataPoints = Object.values(adjustedChartData);
 
         const ctx = document.getElementById('priceChart').getContext('2d');
         const priceChart = new Chart(ctx, {
