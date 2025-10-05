@@ -902,7 +902,7 @@
                 <h1>HỖ TRỢ KEY BẢN QUYỀN CHÍNH HÃNG</h1>
                 <h2>MUA MỘT LẦN - DÙNG CẢ ĐỜI - GIÁ SỈ</h2>
                 <p>Chi tiền một lần duy nhất để máy tính hoạt động bền bỉ</p>
-                <a href="KeyBanQuyenGiaSi.html" class="banner-button" role="button">👉MUA NGAY KẺO HẾT HÀNG👈</a>
+                <a href="KeyBanQuyenGiaSi.html" class="banner-button" role="button">👉XEM NGAY CÁC KHUYẾN MÃI👈</a>
                 <div class="banner-lists" aria-label="Các lợi ích của bản quyền phần mềm">
                     <ul>
                         <li>Sử dụng vĩnh viễn, có hóa đơn VAT</li>
@@ -1260,6 +1260,17 @@
           });
         } catch(e){}
       })();
+    </script>
+    <script>
+        // Force red color and bold text for the banner CTA
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var btn = document.querySelector('.banner .banner-button');
+                if (btn) {
+                    btn.innerHTML = '<strong style="color:#22c55e;">&#128073; XEM NGAY CÁC KHUYẾN MÃI &#128072;</strong>';
+                }
+            } catch (e) {}
+        });
     </script>
 </body>
 </html>
