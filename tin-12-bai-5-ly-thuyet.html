@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 5 Tin học 12: Hướng dẫn thực hành chia sẻ tài nguyên trên mạng LAN, thiết lập quyền truy cập và bảo mật khi chia sẻ tệp, thư mục, máy in.">
+    <meta name="keywords" content="Tin học 12, chia sẻ tài nguyên, LAN, chia sẻ thư mục, chia sẻ máy in, bảo mật mạng, thực hành tin học 12">
+    <meta name="author" content="Ontinhoc">
+    <title>Chia Sẻ Tài Nguyên Trên Mạng | Tin 12 - Bài 5 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:720px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 140px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 5: Thực hành chia sẻ tài nguyên trên mạng (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["chia sẻ tài nguyên", "LAN", "chia sẻ thư mục", "chia sẻ máy in", "bảo mật mạng"],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ontinhoc"
+      },
+      "description": "Hướng dẫn chi tiết các bước chia sẻ tệp, thư mục, máy in trên mạng LAN cùng lưu ý bảo mật cho học sinh Tin học 12."
+    }
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Bài 5: Thực Hành Chia Sẻ Tài Nguyên Trên Mạng</h1>
+            <p>Ôn tập mục tiêu, điều kiện và các bước thao tác chia sẻ tệp, thư mục, máy in trong mạng LAN; nắm chắc lưu ý bảo mật và luyện tập vận dụng cho bài học Tin học 12.</p>
+        </header>
+
+        <nav aria-label="Mục lục bài học">
+            <a href="#muc-tieu">Mục tiêu bài học</a>
+            <a href="#khai-niem-y-nghia">Khái niệm &amp; ý nghĩa</a>
+            <a href="#chia-se-tep">Chia sẻ tệp &amp; thư mục</a>
+            <a href="#chia-se-may-in">Chia sẻ máy in</a>
+            <a href="#luyen-tap">Luyện tập - vận dụng</a>
+            <a href="#tu-khoa">Từ khóa ghi nhớ</a>
+        </nav>
+
+        <main>
+            <section id="muc-tieu" class="card">
+                <h2>I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết cách chia sẻ <strong>tệp</strong>, <strong>thư mục</strong> và <strong>máy in</strong> trong mạng cục bộ (LAN).</li>
+                    <li>Nắm được điều kiện, quy trình thao tác và quyền truy cập khi chia sẻ tài nguyên.</li>
+                    <li>Nhận diện nguy cơ mất an toàn, đề xuất biện pháp bảo mật khi chia sẻ.</li>
+                </ul>
+            </section>
+
+            <section id="khai-niem-y-nghia" class="card">
+                <h2>II. Kiến thức trọng tâm: Khái niệm &amp; ý nghĩa</h2>
+                <ul>
+                    <li><strong>Chia sẻ tài nguyên</strong> là cho phép các máy trong LAN nhìn thấy, truy cập và sử dụng dữ liệu, phần mềm hoặc thiết bị (máy in, ổ đĩa, thư mục...).</li>
+                    <li>Giúp tiết kiệm thiết bị, đồng thời hỗ trợ học tập và làm việc nhóm hiệu quả.</li>
+                </ul>
+                <div class="note">
+                    <strong>Lưu ý bảo mật:</strong> Luôn cấp quyền truy cập phù hợp, bật mật khẩu cho tài khoản chia sẻ và theo dõi nhật ký truy cập để tránh truy cập trái phép hoặc phá hoại dữ liệu.
+                </div>
+            </section>
+
+            <section id="chia-se-tep" class="card">
+                <h2>III. Chia sẻ tệp và thư mục</h2>
+                <h3>1. Điều kiện cần</h3>
+                <ul>
+                    <li>Các máy phải kết nối cùng một mạng LAN và được đặt chế độ <strong>Private network</strong>.</li>
+                    <li>Bật <strong>Network discovery</strong> để máy khác nhìn thấy thiết bị.</li>
+                    <li>Bật <strong>File and printer sharing</strong> để chia sẻ tệp, máy in.</li>
+                    <li>Tạm thời tắt <strong>Firewall</strong> nếu tường lửa chặn kết nối.</li>
+                </ul>
+                <h3>2. Các bước thực hành</h3>
+                <div class="steps">
+                    <ol>
+                        <li><strong>Mở Advanced Sharing Settings:</strong> Bật Network discovery và File &amp; printer sharing.</li>
+                        <li><strong>Bật Public folder sharing:</strong> Cho phép truy cập thư mục Public từ các máy khác.</li>
+                        <li><strong>Tạm tắt Firewall (nếu cần):</strong> Privacy &amp; Security → Windows Security → Firewall → Private Network → Off.</li>
+                        <li><strong>Chia sẻ thư mục cụ thể:</strong> Chuột phải thư mục → Properties → Sharing → Share… → chọn người dùng (ví dụ: Everyone).</li>
+                        <li><strong>Cấp quyền truy cập:</strong> Chọn <em>Read</em> để chỉ xem, hoặc <em>Read/Write</em> để xem và sửa.</li>
+                        <li><strong>Truy cập từ máy khác:</strong> Mở File Explorer → Network → chọn máy chia sẻ → truy cập thư mục.</li>
+                    </ol>
+                </div>
+                <h3>3. Hủy chia sẻ</h3>
+                <p>Chuột phải thư mục → Properties → Advanced Sharing → bỏ chọn “Share this folder” → Apply để dừng chia sẻ.</p>
+            </section>
+
+            <section id="chia-se-may-in" class="card">
+                <h2>IV. Chia sẻ máy in trong mạng</h2>
+                <h3>1. Ý nghĩa</h3>
+                <ul>
+                    <li>Cho phép nhiều máy sử dụng chung một máy in qua mạng LAN.</li>
+                    <li>Tiết kiệm thiết bị, giảm chi phí và tăng hiệu quả làm việc.</li>
+                </ul>
+                <h3>2. Điều kiện</h3>
+                <ul>
+                    <li>Một máy kết nối trực tiếp với máy in đóng vai trò <strong>Print Server</strong>.</li>
+                    <li>Các máy còn lại cùng mạng chỉ cần kết nối đến máy in chia sẻ.</li>
+                </ul>
+                <h3>3. Các bước thực hành</h3>
+                <div class="steps">
+                    <ol>
+                        <li>Mở Control Panel → Hardware and Sound → Printers &amp; Scanners.</li>
+                        <li>Chọn máy in → Printer Properties → thẻ Sharing.</li>
+                        <li>Đặt tên dễ nhớ, ví dụ: “Máy in mạng Canon”.</li>
+                        <li>Tại máy khác: chọn Add Device → Browse → tìm máy in mạng → Select → Next.</li>
+                        <li>Hoàn tất thêm máy in để in tài liệu từ xa.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card">
+                <h2>V. Luyện tập – vận dụng</h2>
+                <ul>
+                    <li>Thực hành chia sẻ giữa hai máy A và B: thử quyền <strong>Read</strong> (chỉ đọc) và <strong>Read/Write</strong> (đọc, sửa).</li>
+                    <li>Hủy chia sẻ để kiểm tra việc truy cập bị khóa.</li>
+                    <li>Nghiên cứu thêm cách chia sẻ toàn bộ ổ đĩa khi cần chia sẻ dữ liệu lớn.</li>
+                </ul>
+            </section>
+
+            <section id="tu-khoa" class="card">
+                <h2>Từ khóa ghi nhớ</h2>
+                <div class="keywords">
+                    <span class="badge">Chia sẻ tài nguyên</span>
+                    <span class="badge">Network Discovery</span>
+                    <span class="badge">File &amp; Printer Sharing</span>
+                    <span class="badge">Private Network</span>
+                    <span class="badge">Permissions (Read/Write)</span>
+                    <span class="badge">Print Server</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
