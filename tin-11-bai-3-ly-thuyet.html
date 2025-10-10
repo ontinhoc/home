@@ -34,7 +34,7 @@
         @media(max-width:700px){.compare{grid-template-columns:1fr} nav{flex-wrap:wrap}}
     </style>
 </head>
-<body>
+<body oncontextmenu="return false">
     <div class="wrap">
         <header>
             <h1>Bài 3: Phần mềm nguồn mở & Phần mềm chạy trên Internet</h1>
@@ -138,6 +138,7 @@
         });
         back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
     </script>
+  <script src="protect.js"></script>
 </body>
 </html>
 <script>

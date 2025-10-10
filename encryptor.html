@@ -15,7 +15,7 @@
     .grid2 { display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:center; }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false">
   <h1>Mã hóa câu hỏi trắc nghiệm (client-side)</h1>
   <p class="muted">Dán JSON câu hỏi vào ô bên dưới, nhập mật khẩu và bấm Mã hóa. Kết quả (base64) dán vào hằng <code>ENCRYPTED_QUESTIONS</code> trong <code>tin-12-bai-3.html</code>.</p>
 
@@ -92,6 +92,6 @@
       try { await navigator.clipboard.writeText(out.value); msg.textContent = 'Đã sao chép.'; } catch {}
     });
   </script>
+  <script src="protect.js"></script>
 </body>
 </html>
-

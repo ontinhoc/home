@@ -54,7 +54,7 @@
     </script>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
 </head>
-<body>
+<body oncontextmenu="return false">
     <div class="wrap">
         <header>
             <h1>Bài 5: Kết Nối Máy Tính Với Các Thiết Bị Số</h1>
@@ -167,6 +167,17 @@
 
     <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
     <script>
+        // Harden: block context menu and common DevTools/View‑source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
         // Smooth scroll for in-page navigation
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', event => {
@@ -188,6 +199,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
+    <script src="protect.js"></script>
 </body>
 </html>
-

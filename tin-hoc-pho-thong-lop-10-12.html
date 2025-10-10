@@ -459,7 +459,7 @@
     </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
     <!-- Header -->
     <header class="header" role="banner">
         <div class="container">
@@ -800,13 +800,17 @@
     </footer>
 <script>
   // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+  const blockCombos = (e) => {
     const k = (e.key || '').toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
+    const ctrlLike = e.ctrlKey || e.metaKey;
+    if (e.key === 'F12') return e.preventDefault();
+    if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+    if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+  };
+  document.addEventListener('keydown', blockCombos, {capture:true});
 </script>
+  <script src="protect.js"></script>
 </body>
 
 </html>

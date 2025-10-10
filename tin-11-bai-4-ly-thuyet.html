@@ -40,7 +40,7 @@
   <meta property="og:description" content="Thiết bị phần cứng, mạch logic, phép cộng nhị phân. Tóm tắt trọng tâm, dễ hiểu.">
   <meta property="og:type" content="article">
 </head>
-<body>
+<body oncontextmenu="return false">
   <div class="wrap">
     <header>
       <h1>Bài 4: Bên Trong Máy Tính</h1>
@@ -166,7 +166,8 @@
     });
     back.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
   </script>
-</body>
+  <script src="protect.js"></script>
+  </body>
 </html>
 <script>
   // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
@@ -178,4 +179,3 @@
   });
 </script>
 </html>
-

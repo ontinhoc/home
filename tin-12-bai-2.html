@@ -6,7 +6,7 @@
   <title>Ứng dụng Trí tuệ nhân tạo — Ôn tập Tin học 12 | Bài 2</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body oncontextmenu="return false">
   <!-- Khoá trang (yêu cầu mật khẩu) -->
   <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
     <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
@@ -120,5 +120,6 @@
       if (sessionStorage.getItem(LOCK_KEY) === '1') { input.focus(); }
     })();
   </script>
+  <script src="protect.js"></script>
 </body>
 </html>
