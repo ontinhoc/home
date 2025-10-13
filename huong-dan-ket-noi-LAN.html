@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng dẫn kết nối chia sẻ giữa 2 máy trong mạng LAN</title>
+  <meta name="description" content="Hướng dẫn từng bước kết nối và chia sẻ thư mục/ổ đĩa giữa 2 máy tính trong cùng mạng LAN, bật Network Discovery, File & Printer Sharing, cách truy cập và khắc phục lỗi.">
+  <style>
+    :root {
+      --primary: #1e88e5;
+      --accent: #1565c0;
+      --text: #263238;
+      --muted: #546e7a;
+      --bg: #fafafa;
+      --card: #ffffff;
+      --border: #e0e0e0;
+      --code-bg: #f5f7fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0; font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.6;
+    }
+    .container { max-width: 920px; margin: 0 auto; padding: 24px; }
+    header { text-align: center; margin-bottom: 24px; }
+    h1 { color: var(--primary); font-size: 1.8rem; margin: 0 0 8px; }
+    .subtitle { color: var(--muted); font-size: 1rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 16px 0; }
+    h2 { font-size: 1.2rem; margin: 0 0 12px; color: var(--accent); }
+    ul { margin: 8px 0 0 1.2rem; }
+    li { margin: 6px 0; }
+    .step-title { display: flex; align-items: center; gap: 10px; }
+    .step-title .emoji { font-size: 1.2rem; }
+    .note { background: #e3f2fd; border-left: 4px solid var(--primary); padding: 10px 12px; border-radius: 6px; color: var(--muted); }
+    code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    kbd { background: #fff; border: 1px solid var(--border); border-bottom-width: 2px; padding: 2px 6px; border-radius: 6px; }
+    pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; overflow: auto; }
+    .path { font-weight: 600; }
+    .split { height: 1px; background: var(--border); margin: 16px 0; }
+    .muted { color: var(--muted); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media (max-width: 640px) { .container { padding: 16px; } }
+  </style>
+  <script>
+    // Optional: smooth scroll for internal anchors if added later
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) { e.preventDefault(); el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
+    });
+  </script>
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HƯỚNG DẪN KẾT NỐI CHIA SẺ GIỮA 2 MÁY TRONG MẠNG LAN</h1>
+      <p class="subtitle">Thiết lập nhanh, truy cập ổn định và cách xử lý sự cố cơ bản</p>
+    </header>
+
+    <section class="card">
+      <div class="step-title"><span class="emoji">🧩</span><h2>Bước 1: Đảm bảo 2 máy cùng mạng LAN</h2></div>
+      <ul>
+        <li>Cắm dây mạng hoặc kết nối cùng Wi‑Fi/LAN nội bộ.</li>
+        <li>Kiểm tra IP:</li>
+      </ul>
+      <ul>
+        <li>Nhấn <kbd>Windows</kbd> + <kbd>R</kbd>, gõ <span class="mono">cmd</span>, sau đó nhập lệnh:</li>
+      </ul>
+      <pre><code>ipconfig</code></pre>
+      <ul>
+        <li>Xem địa chỉ IP của mỗi máy, ví dụ:</li>
+      </ul>
+      <ul>
+        <li>Máy A: <code>192.168.1.10</code></li>
+        <li>Máy B: <code>192.168.1.11</code></li>
+      </ul>
+      <p class="note">👉 Nếu cùng dải (ví dụ <code>192.168.1.xxx</code>) là OK.</p>
+    </section>
+
+    <section class="card">
+      <div class="step-title"><span class="emoji">⚙️</span><h2>Bước 2: Bật chia sẻ mạng</h2></div>
+      <p>Thực hiện trên cả hai máy:</p>
+      <ol>
+        <li>Vào <span class="path">Control Panel → Network and Sharing Center</span></li>
+        <li>Chọn <span class="path">Change advanced sharing settings</span></li>
+        <li>Mở rộng mục <strong>Private</strong> (hoặc <strong>Domain</strong> nếu có):
+          <ul>
+            <li>✅ Turn on network discovery</li>
+            <li>✅ Turn on file and printer sharing</li>
+          </ul>
+        </li>
+        <li>Ở mục <strong>All Networks</strong>:
+          <ul>
+            <li>✅ Turn off password protected sharing (nếu bạn không muốn phải nhập mật khẩu)</li>
+            <li>Chọn <strong>Save changes</strong></li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <div class="step-title"><span class="emoji">🗂️</span><h2>Bước 3: Chia sẻ thư mục hoặc ổ đĩa</h2></div>
+      <p><strong>Trên máy chủ</strong> (máy chia sẻ dữ liệu):</p>
+      <ol>
+        <li>Chọn thư mục cần chia sẻ → Right‑click → Properties</li>
+        <li>Tab <strong>Sharing</strong> → <strong>Advanced Sharing</strong> → tick “Share this folder”</li>
+        <li>Nhấn <strong>Permissions</strong> → chọn:
+          <ul>
+            <li><strong>Everyone</strong> → tick <em>Read</em> (chỉ xem) hoặc <em>Full Control</em> (chỉnh sửa)</li>
+          </ul>
+        </li>
+        <li>Nhấn <strong>OK</strong> để lưu.</li>
+      </ol>
+      <p><strong>Chia sẻ nhanh:</strong></p>
+      <ul>
+        <li>Copy đường dẫn: <code>\\TênMáy</code> hoặc <code>\\ĐịaChỉIP</code></li>
+        <li>Ví dụ: <code>\\192.168.1.10</code></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="step-title"><span class="emoji">💻</span><h2>Bước 4: Truy cập từ máy kia</h2></div>
+      <p><strong>Trên máy cần truy cập:</strong></p>
+      <ol>
+        <li>Nhấn <kbd>Windows</kbd> + <kbd>R</kbd>, gõ:</li>
+        <li><code>\\192.168.1.10</code> <span class="muted">(địa chỉ IP của máy chia sẻ)</span></li>
+        <li>Enter → Sẽ thấy thư mục đã chia sẻ.</li>
+        <li>Có thể <strong>Map Network Drive</strong> để gắn cố định:
+          <ul>
+            <li>Trong File Explorer → This PC → <strong>Map network drive</strong></li>
+            <li>Chọn ổ đĩa (VD: <code>Z:</code>) và nhập đường dẫn: <code>\\192.168.1.10\TenThuMucChiaSe</code></li>
+            <li>Tick “Reconnect at sign‑in” → Done.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <div class="step-title"><span class="emoji">🧰</span><h2>Kiểm tra nếu không truy cập được</h2></div>
+      <ul>
+        <li>Đảm bảo 2 máy cùng <strong>Workgroup</strong>:
+          <div class="muted">Control Panel → System → Rename this PC → Change → cả hai cùng tên <strong>WORKGROUP</strong></div>
+        </li>
+        <li>Tắt tạm Firewall/Antivirus để thử.</li>
+        <li>Kiểm tra lại IP bằng <code>ping</code>:
+          <pre><code>ping 192.168.1.10</code></pre>
+          <div class="muted">Nếu không trả lời → có thể lỗi dây mạng hoặc tường lửa.</div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="split"></div>
+    <p class="muted">Mẹo: Sau khi thiết lập xong, nên bật lại bảo vệ mật khẩu và tường lửa, đồng thời chỉ chia sẻ những thư mục cần thiết.</p>
+  </div>
+</body>
+</html>
