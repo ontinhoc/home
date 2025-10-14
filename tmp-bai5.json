@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Mục đích của việc chia sẻ tài nguyên trong mạng cục bộ (LAN) là gì?",
+    "options": [
+      "Tăng tốc độ Internet",
+      "Cho phép máy tính khác sử dụng chung dữ liệu hoặc thiết bị",
+      "Ngăn chặn truy cập trái phép",
+      "Kết nối với Internet"
+    ],
+    "answer": 1,
+    "explanation": "Chia sẻ tài nguyên giúp các máy trong LAN sử dụng chung dữ liệu, phần mềm, thiết bị như máy in."
+  },
+  {
+    "question": "Để hai máy tính có thể chia sẻ tài nguyên qua mạng LAN, điều kiện đầu tiên là gì?",
+    "options": [
+      "Cài cùng hệ điều hành",
+      "Kết nối cùng mạng cục bộ",
+      "Có cùng tài khoản người dùng",
+      "Dùng cùng phần mềm chia sẻ"
+    ],
+    "answer": 1,
+    "explanation": "Các máy phải được kết nối cùng mạng LAN để nhận diện và truy cập tài nguyên lẫn nhau."
+  },
+  {
+    "question": "Chức năng Network Discovery trong Windows có tác dụng gì?",
+    "options": [
+      "Cho phép hiển thị các tệp ẩn",
+      "Giúp máy tính khác 'nhìn thấy' máy của mình trong mạng",
+      "Tự động tắt tường lửa",
+      "Chia sẻ tệp tin qua Internet"
+    ],
+    "answer": 1,
+    "explanation": "Network Discovery cho phép máy tính khác 'nhìn thấy' máy của mình trong mạng."
+  },
+  {
+    "question": "Khi chia sẻ thư mục, quyền Read cho phép người khác làm gì?",
+    "options": [
+      "Xem và chỉnh sửa nội dung",
+      "Chỉ được xem, không được sửa",
+      "Xóa tệp tin",
+      "Thay đổi quyền truy cập"
+    ],
+    "answer": 1,
+    "explanation": "Quyền Read chỉ cho phép xem nội dung, không được chỉnh sửa hoặc xóa."
+  },
+  {
+    "question": "Trong chia sẻ tệp và máy in, việc tạm tắt tường lửa (Firewall) có ý nghĩa gì?",
+    "options": [
+      "Giúp kết nối Internet nhanh hơn",
+      "Cho phép chia sẻ thuận lợi giữa các máy tin cậy",
+      "Tăng độ bảo mật khi chia sẻ",
+      "Xóa quyền truy cập"
+    ],
+    "answer": 1,
+    "explanation": "Tạm tắt tường lửa giúp quá trình chia sẻ giữa các máy tin cậy diễn ra thuận lợi."
+  },
+  {
+    "question": "Thư mục nào trong Windows có thể chia sẻ công khai cho các máy khác trong mạng LAN?",
+    "options": [
+      "Documents",
+      "Downloads",
+      "Public",
+      "System32"
+    ],
+    "answer": 2,
+    "explanation": "Thư mục Public là nơi chứa dữ liệu được chia sẻ công khai cho các máy khác trong LAN."
+  },
+  {
+    "question": "Khi nào nên hủy chia sẻ một thư mục?",
+    "options": [
+      "Khi muốn tiết kiệm dung lượng ổ cứng",
+      "Khi không còn cần dùng chung thư mục đó nữa",
+      "Khi muốn tăng tốc mạng",
+      "Khi có lỗi hiển thị tệp"
+    ],
+    "answer": 1,
+    "explanation": "Khi không còn nhu cầu dùng chung hoặc cần đảm bảo an toàn dữ liệu thì nên hủy chia sẻ."
+  },
+  {
+    "question": "Máy tính có kết nối trực tiếp với máy in và cung cấp dịch vụ in cho các máy khác gọi là gì?",
+    "options": [
+      "Client",
+      "Print Server",
+      "File Server",
+      "Main Host"
+    ],
+    "answer": 1,
+    "explanation": "Print Server là máy cung cấp dịch vụ in, quản lý hàng đợi in cho các máy khác trong mạng."
+  },
+  {
+    "question": "Lợi ích chính của việc chia sẻ máy in trong mạng là gì?",
+    "options": [
+      "Giúp tất cả máy đều có máy in riêng",
+      "Giảm chi phí, tiện lợi cho công việc in ấn",
+      "Tăng dung lượng lưu trữ",
+      "Bảo mật tuyệt đối thông tin"
+    ],
+    "answer": 1,
+    "explanation": "Chia sẻ máy in giúp tiết kiệm thiết bị, giảm chi phí, in thuận tiện hơn."
+  },
+  {
+    "question": "Khi chia sẻ tài nguyên, cần chú ý điều gì để đảm bảo an toàn?",
+    "options": [
+      "Không cần đặt mật khẩu",
+      "Chia sẻ công khai tất cả dữ liệu",
+      "Cấp quyền và kiểm soát truy cập phù hợp",
+      "Tắt toàn bộ bảo mật mạng"
+    ],
+    "answer": 2,
+    "explanation": "Cần cấp quyền, kiểm soát truy cập (Read/Write) để tránh mất an toàn và truy cập trái phép."
+  }
+]

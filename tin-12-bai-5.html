@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Thực hành chia sẻ tài nguyên trên mạng - Bài 5 Tin 12. Khóa trang và giải mã dữ liệu câu hỏi bằng Web Crypto.">
+    <meta name="keywords" content="Tin 12, chia sẻ tài nguyên, LAN, chia sẻ tệp, chia sẻ máy in, Network Discovery, Firewall, thư mục Public, print server, trắc nghiệm">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Chia sẻ tài nguyên | Tin 12 - Bài 5</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Gợi ý cho giáo viên: dùng encryptor.html để mã hóa JSON dưới đây bằng mật khẩu lớp. Sau đó dán chuỗi base64 vào hằng ENCRYPTED_QUESTIONS. -->
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ / HOME</a>
+    <!-- Khóa trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung Bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display:none">
+        <header>
+            <h1>Trắc nghiệm: Thực hành chia sẻ tài nguyên (Bài 5)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // Dữ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        // Gợi ý: dùng encryptor.html trong thư mục này, nhập JSON câu hỏi và mật khẩu, rồi dán kết quả vào dưới đây.
+        const ENCRYPTED_QUESTIONS = '';
+
+        // JSON câu hỏi gốc (KHÔNG để lại trong bản phát hành nếu cần bảo mật).
+        // Cấu trúc mỗi phần tử: { question, options: [A,B,C,D], answer: idx, explanation }
+        // Dữ liệu theo đề bài:
+        const QUESTIONS_FOR_ENCRYPTOR = [
+          {
+            question: "Mục đích của việc chia sẻ tài nguyên trong mạng cục bộ (LAN) là gì?",
+            options: [
+              "Tăng tốc độ Internet",
+              "Cho phép máy tính khác sử dụng chung dữ liệu hoặc thiết bị",
+              "Ngăn chặn truy cập trái phép",
+              "Kết nối với Internet"
+            ],
+            answer: 1,
+            explanation: "Chia sẻ tài nguyên giúp các máy trong LAN sử dụng chung dữ liệu, phần mềm, thiết bị như máy in."
+          },
+          {
+            question: "Để hai máy tính có thể chia sẻ tài nguyên qua mạng LAN, điều kiện đầu tiên là gì?",
+            options: [
+              "Cài cùng hệ điều hành",
+              "Kết nối cùng mạng cục bộ",
+              "Có cùng tài khoản người dùng",
+              "Dùng cùng phần mềm chia sẻ"
+            ],
+            answer: 1,
+            explanation: "Các máy phải được kết nối cùng mạng LAN để nhận diện và truy cập tài nguyên lẫn nhau."
+          },
+          {
+            question: "Chức năng Network Discovery trong Windows có tác dụng gì?",
+            options: [
+              "Cho phép hiển thị các tệp ẩn",
+              "Giúp máy tính khác 'nhìn thấy' máy của mình trong mạng",
+              "Tự động tắt tường lửa",
+              "Chia sẻ tệp tin qua Internet"
+            ],
+            answer: 1,
+            explanation: "Network Discovery cho phép máy tính khác 'nhìn thấy' máy của mình trong mạng."
+          },
+          {
+            question: "Khi chia sẻ thư mục, quyền Read cho phép người khác làm gì?",
+            options: [
+              "Xem và chỉnh sửa nội dung",
+              "Chỉ được xem, không được sửa",
+              "Xóa tệp tin",
+              "Thay đổi quyền truy cập"
+            ],
+            answer: 1,
+            explanation: "Quyền Read chỉ cho phép xem nội dung, không được chỉnh sửa hoặc xóa."
+          },
+          {
+            question: "Trong chia sẻ tệp và máy in, việc tạm tắt tường lửa (Firewall) có ý nghĩa gì?",
+            options: [
+              "Giúp kết nối Internet nhanh hơn",
+              "Cho phép chia sẻ thuận lợi giữa các máy tin cậy",
+              "Tăng độ bảo mật khi chia sẻ",
+              "Xóa quyền truy cập"
+            ],
+            answer: 1,
+            explanation: "Tạm tắt tường lửa giúp quá trình chia sẻ giữa các máy tin cậy diễn ra thuận lợi."
+          },
+          {
+            question: "Thư mục nào trong Windows có thể chia sẻ công khai cho các máy khác trong mạng LAN?",
+            options: [
+              "Documents",
+              "Downloads",
+              "Public",
+              "System32"
+            ],
+            answer: 2,
+            explanation: "Thư mục Public là nơi chứa dữ liệu được chia sẻ công khai cho các máy khác trong LAN."
+          },
+          {
+            question: "Khi nào nên hủy chia sẻ một thư mục?",
+            options: [
+              "Khi muốn tiết kiệm dung lượng ổ cứng",
+              "Khi không còn cần dùng chung thư mục đó nữa",
+              "Khi muốn tăng tốc mạng",
+              "Khi có lỗi hiển thị tệp"
+            ],
+            answer: 1,
+            explanation: "Khi không còn nhu cầu dùng chung hoặc cần đảm bảo an toàn dữ liệu thì nên hủy chia sẻ."
+          },
+          {
+            question: "Máy tính có kết nối trực tiếp với máy in và cung cấp dịch vụ in cho các máy khác gọi là gì?",
+            options: [
+              "Client",
+              "Print Server",
+              "File Server",
+              "Main Host"
+            ],
+            answer: 1,
+            explanation: "Print Server là máy cung cấp dịch vụ in, quản lý hàng đợi in cho các máy khác trong mạng."
+          },
+          {
+            question: "Lợi ích chính của việc chia sẻ máy in trong mạng là gì?",
+            options: [
+              "Giúp tất cả máy đều có máy in riêng",
+              "Giảm chi phí, tiện lợi cho công việc in ấn",
+              "Tăng dung lượng lưu trữ",
+              "Bảo mật tuyệt đối thông tin"
+            ],
+            answer: 1,
+            explanation: "Chia sẻ máy in giúp tiết kiệm thiết bị, giảm chi phí, in thuận tiện hơn."
+          },
+          {
+            question: "Khi chia sẻ tài nguyên, cần chú ý điều gì để đảm bảo an toàn?",
+            options: [
+              "Không cần đặt mật khẩu",
+              "Chia sẻ công khai tất cả dữ liệu",
+              "Cấp quyền và kiểm soát truy cập phù hợp",
+              "Tắt toàn bộ bảo mật mạng"
+            ],
+            answer: 2,
+            explanation: "Cần cấp quyền, kiểm soát truy cập (Read/Write) để tránh mất an toàn và truy cập trái phép."
+          }
+        ];
+
+        (function(){
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const input = document.getElementById('pagePassword');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const lockMsg = document.getElementById('lockMsg');
+
+            const LOCK_KEY = 'tin12_bai5_unlocked';
+
+            // Phím tắt giáo viên: Alt+Shift+O để hiện thông báo mật khẩu sau giờ học
+            window.showAfterClassNotice = function(){
+                const notice = document.getElementById('classUnlockNotice');
+                if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: .0vZ';
+            };
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+                }
+            });
+
+            function b64ToBytes(b64){
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+            async function deriveKey(password, salt){
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt','decrypt']
+                );
+            }
+            async function decryptPayload(password, b64){
+                if (!b64) throw new Error('No encrypted payload');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Bad version');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    let questions;
+                    if (ENCRYPTED_QUESTIONS && ENCRYPTED_QUESTIONS.length > 0) {
+                        const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                        questions = JSON.parse(json);
+                    } else {
+                        // Fallback: allow using plaintext if password matches exactly
+                        if (pw !== '.0vZ') throw new Error('Invalid password');
+                        questions = QUESTIONS_FOR_ENCRYPTOR;
+                    }
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
