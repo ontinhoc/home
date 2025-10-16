@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin 11 – Bài 5: Kết nối máy tính với các thiết bị số. Trắc nghiệm ôn tập củng cố, bảo vệ nội dung bằng mật khẩu và Web Crypto.">
+    <meta name="keywords" content="Tin 11, Bài 5, Kết nối thiết bị số, chuột, bàn phím, màn hình, VGA, HDMI, máy in, Bluetooth, USB, Mass Storage, trắc nghiệm">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Kết nối thiết bị số | Tin 11 - Bài 5</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Gợi ý cho giáo viên: dùng encryptor.html để mã hóa JSON dưới đây bằng mật khẩu lớp. Sau đó dán chuỗi base64 vào hằng ENCRYPTED_QUESTIONS. -->
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+
+    <!-- Khóa trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung Bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display:none">
+        <header>
+            <h1>Tin 11 – Bài 5: Kết nối máy tính với các thiết bị số</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        const ENCRYPTED_QUESTIONS = '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';
+
+        // JSON gốc dành cho giáo viên để mã hóa (KHÔNG dùng khi phát hành nếu cần bảo mật)
+        // Mỗi phần tử: { question, options:[A,B,C,D], answer: idx, explanation }
+        /* const QUESTIONS_FOR_ENCRYPTOR = [
+          {
+            question: "Thiết bị nào sau đây thuộc thiết bị vào?",
+            options: ["Màn hình","Bàn phím","Máy in","Máy chiếu"],
+            answer: 1,
+            explanation: "Bàn phím là thiết bị vào; màn hình, máy in, máy chiếu là thiết bị ra."
+          },
+          {
+            question: "Phát biểu đúng về chuột máy tính là:",
+            options: [
+              "DPI càng cao thì con trỏ luôn đi chậm hơn",
+              "Chỉ có chuột có dây, không có chuột không dây",
+              "Hai thông số quan trọng: cách kết nối và độ phân giải (dpi)",
+              "Không nên điều chỉnh tốc độ chuột trong Settings"
+            ],
+            answer: 2,
+            explanation: "Chuột quan trọng ở cách kết nối (có dây/không dây) và độ phân giải (dpi); nên điều chỉnh tốc độ con trỏ phù hợp."
+          },
+          {
+            question: "Trong phần Mouse của Settings, thao tác nào sau đây có thể thực hiện?",
+            options: [
+              "Thay đổi độ phân giải màn hình",
+              "Chọn nút chính của chuột (trái/phải)",
+              "Cài đặt driver máy in",
+              "Bật/tắt Wi‑Fi"
+            ],
+            answer: 1,
+            explanation: "Trong Settings → Mouse có thể chọn nút chính, chỉnh Cursor speed, v.v."
+          },
+          {
+            question: "‘Full HD 1920×1080’ là thông số thuộc về:",
+            options: [
+              "Kích thước màn hình",
+              "Độ phân giải màn hình",
+              "Tần số quét màn hình",
+              "Thời gian đáp ứng màn hình"
+            ],
+            answer: 1,
+            explanation: "‘1920×1080’ là độ phân giải (số điểm ảnh ngang × dọc)."
+          },
+          {
+            question: "Màn hình có tần số quét cao hơn sẽ giúp:",
+            options: [
+              "Hình ảnh ít giật, đỡ mỏi mắt",
+              "Tăng kích thước điểm ảnh",
+              "Tự động giảm độ sáng",
+              "Phát âm thanh to hơn"
+            ],
+            answer: 0,
+            explanation: "Tần số quét cao giúp hình ít giật, đỡ mỏi mắt (ví dụ 60/75/100 Hz…)."
+          },
+          {
+            question: "Loại máy in nào thường dùng in hoá đơn bán hàng vì in lên giấy cảm nhiệt?",
+            options: ["Máy in kim","Máy in laser","Máy in phun","Máy in nhiệt"],
+            answer: 3,
+            explanation: "Máy in nhiệt in trên giấy cảm nhiệt, hay dùng in hoá đơn."
+          },
+          {
+            question: "Phát biểu đúng về độ phân giải in (dpi):",
+            options: [
+              "Chỉ áp dụng cho màn hình, không áp dụng cho máy in",
+              "Laser/phun thường đạt 300–600 dpi hoặc hơn",
+              "Máy in kim luôn đạt trên 1200 dpi",
+              "Dpi càng thấp thì bản in càng nét"
+            ],
+            answer: 1,
+            explanation: "Máy in laser/phun thường đạt 300–600 dpi hoặc hơn; dpi càng cao thì bản in càng nét."
+          },
+          {
+            question: "Cổng nào chỉ truyền hình ảnh (không âm thanh) theo tín hiệu tương tự?",
+            options: ["USB","HDMI","VGA","Cổng mạng (LAN)"],
+            answer: 2,
+            explanation: "VGA truyền tín hiệu tương tự, chỉ hình ảnh; HDMI truyền số kèm âm thanh."
+          },
+          {
+            question: "Khi nối máy ảnh với máy tính qua USB ở chế độ Mass Storage, ta có thể:",
+            options: [
+              "Duyệt thư mục DCIM như một bộ nhớ ngoài",
+              "Phát trực tiếp âm thanh từ máy ảnh",
+              "Chỉ sạc pin, không truy cập tệp",
+              "Kết nối được với nhiều máy tính cùng lúc"
+            ],
+            answer: 0,
+            explanation: "USB Mass Storage cho phép truy cập DCIM như ổ lưu trữ ngoài để xem/sao chép ảnh."
+          },
+          {
+            question: "Với Bluetooth, thao tác nào là bắt buộc trước khi truyền dữ liệu?",
+            options: [
+              "Cài driver màn hình",
+              "Ghép đôi (pairing) hai thiết bị trong Settings",
+              "Đổi cổng từ HDMI sang VGA",
+              "Tắt Plug & Play"
+            ],
+            answer: 1,
+            explanation: "Bluetooth cần ghép đôi (pairing) trong Settings trước khi gửi/nhận dữ liệu."
+          }
+        ]; */
+
+        (function(){
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const input = document.getElementById('pagePassword');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const lockMsg = document.getElementById('lockMsg');
+
+            const LOCK_KEY = 'tin11_bai5_unlocked';
+
+            // Phím tắt giáo viên: Alt+Shift+O để hiện mật khẩu sau giờ học
+            window.showAfterClassNotice = function(){
+                const notice = document.getElementById('classUnlockNotice');
+                if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: {k9I';
+            };
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+                }
+            });
+
+            function b64ToBytes(b64){
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+            async function deriveKey(password, salt){
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt','decrypt']
+                );
+            }
+            async function decryptPayload(password, b64){
+                if (!b64) throw new Error('No encrypted payload');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Bad version');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    if (!ENCRYPTED_QUESTIONS || ENCRYPTED_QUESTIONS.length === 0) throw new Error('No encrypted payload');
+                    const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                    const questions = JSON.parse(json);
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+    <script src="protect.js"></script>
+</body>
+<!--
+Hướng dẫn mã hóa nhanh (giống tin-11-bai-4.html):
+1) Mở encryptor.html, dán mảng QUESTIONS_FOR_ENCRYPTOR, nhập mật khẩu lớp, bấm Mã hóa.
+2) Dán kết quả base64 vào hằng ENCRYPTED_QUESTIONS bên trên.
+3) (Khuyến nghị) Xóa hoặc comment QUESTIONS_FOR_ENCRYPTOR khi phát hành.
+-->
+</html>

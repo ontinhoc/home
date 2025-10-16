@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm củng cố bài Bên trong máy tính - Bài 4 Tin 11. Khóa trang và giải mã dữ liệu câu hỏi bằng Web Crypto.">
+    <meta name="keywords" content="Tin 11, Bên trong máy tính, phần cứng, CPU, ALU, RAM, ROM, Cache, logic, trắc nghiệm">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Bên trong máy tính | Tin 11 - Bài 4</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Gợi ý cho giáo viên: dùng encryptor.html để mã hóa JSON dưới đây bằng mật khẩu lớp. Sau đó dán chuỗi base64 vào hằng ENCRYPTED_QUESTIONS. -->
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <!-- Khóa trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung Bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">Mở khóa</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">Hủy</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display:none">
+        <header>
+            <h1>Trắc nghiệm củng cố: Bên trong máy tính (Bài 4 – Tin 11)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        const ENCRYPTED_QUESTIONS = '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';
+
+        // JSON câu hỏi gốc (KHÔNG để lại trong bản phát hành nếu cần bảo mật).
+        // Cấu trúc mỗi phần tử: { question, options: [A,B,C,D], answer: idx, explanation }
+        // Dữ liệu theo đề bài:
+        /* const QUESTIONS_FOR_ENCRYPTOR = [
+          {
+            question: "Bộ phận nào được xem là ‘bộ não’ của máy tính?",
+            options: ["RAM","CPU","Ổ cứng (HDD)","ROM"],
+            answer: 1,
+            explanation: "CPU là bộ não, điều khiển mọi hoạt động của máy tính."
+          },
+          {
+            question: "Thành phần nào trong CPU thực hiện phép toán số học và logic?",
+            options: ["Control Unit (CU)","Bộ nhớ đệm (Cache)","Arithmetic & Logic Unit (ALU)","Thanh ghi (Register)"],
+            answer: 2,
+            explanation: "ALU thực hiện phép tính số học và logic."
+          },
+          {
+            question: "Bộ nhớ trong nào có khả năng lưu giữ dữ liệu lâu dài mà không cần nguồn điện?",
+            options: ["RAM","ROM","Cache","Thanh ghi"],
+            answer: 1,
+            explanation: "ROM lưu dữ liệu lâu dài, không cần điện."
+          },
+          {
+            question: "Bộ nhớ nào mất toàn bộ dữ liệu khi tắt máy tính?",
+            options: ["ROM","RAM","SSD","HDD"],
+            answer: 1,
+            explanation: "RAM chỉ lưu tạm, mất dữ liệu khi tắt máy."
+          },
+          {
+            question: "Đơn vị thường dùng để đo tốc độ xung nhịp của CPU là gì?",
+            options: ["MB","TB","GHz","KB"],
+            answer: 2,
+            explanation: "Tần số xung nhịp CPU được tính bằng GHz."
+          },
+          {
+            question: "Trong các bộ nhớ sau, bộ nhớ nào có tốc độ truy cập nhanh nhất?",
+            options: ["RAM","ROM","Ổ cứng HDD","Cache"],
+            answer: 3,
+            explanation: "Cache nhanh nhất, rồi đến RAM, HDD chậm nhất."
+          },
+          {
+            question: "Phép toán logic nào cho kết quả = 1 chỉ khi cả hai đầu vào đều bằng 1?",
+            options: ["OR","NOT","XOR","AND"],
+            answer: 3,
+            explanation: "AND = 1 chỉ khi cả hai đầu vào = 1."
+          },
+          {
+            question: "Kết quả của phép tính nhị phân 1 + 1 là gì?",
+            options: ["0 (không nhớ)","1 (không nhớ)","10 (có nhớ 1)","11"],
+            answer: 2,
+            explanation: "1 + 1 = 10 (kết quả 0, nhớ 1)."
+          },
+          {
+            question: "Trong mạch cộng 2 bit, phần tử nào cho ra kết quả ‘số nhớ’?",
+            options: ["OR","AND","XOR","NOT"],
+            answer: 1,
+            explanation: "Mạch AND cho ra số nhớ trong cộng nhị phân."
+          },
+          {
+            question: "Tại sao mạch logic được coi là nền tảng của máy tính điện tử?",
+            options: ["Vì giúp tăng dung lượng bộ nhớ","Vì là cơ sở để xây dựng và xử lí dữ liệu nhị phân","Vì tạo hình ảnh hiển thị trên màn hình","Vì lưu trữ phần mềm ứng dụng"],
+            answer: 1,
+            explanation: "Mạch logic xử lí dữ liệu nhị phân, nền tảng của CPU & thiết bị số."
+          }
+        ]; */
+
+        (function(){
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const input = document.getElementById('pagePassword');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const lockMsg = document.getElementById('lockMsg');
+
+            const LOCK_KEY = 'tin11_bai4_unlocked';
+
+            // Phím tắt giáo viên: Alt+Shift+O để hiện thông báo mật khẩu sau giờ học
+            window.showAfterClassNotice = function(){
+                const notice = document.getElementById('classUnlockNotice');
+                if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: O!c1';
+            };
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+                }
+            });
+
+            function b64ToBytes(b64){
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+            async function deriveKey(password, salt){
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt','decrypt']
+                );
+            }
+            async function decryptPayload(password, b64){
+                if (!b64) throw new Error('No encrypted payload');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Bad version');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    if (!ENCRYPTED_QUESTIONS || ENCRYPTED_QUESTIONS.length === 0) throw new Error('No encrypted payload');
+                    const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                    const questions = JSON.parse(json);
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
