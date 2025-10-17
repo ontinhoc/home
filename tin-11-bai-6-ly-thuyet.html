@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 6: Lưu trữ và chia sẻ tệp tin trên Internet (đĩa trực tuyến). Mục tiêu, kiến thức chính, thực hành với Google Drive và phần luyện tập - vận dụng.">
+    <meta name="keywords" content="Tin học 11, đĩa trực tuyến, cloud storage, Google Drive, OneDrive, Dropbox, iCloud, chia sẻ tệp, quyền truy cập, lưu trữ trực tuyến">
+    <meta name="author" content="Ontinhoc">
+    <title>Lưu Trữ & Chia Sẻ Trực Tuyến | Tin 11 - Bài 6 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 6: Lưu trữ và chia sẻ tệp tin trên Internet (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["đĩa trực tuyến", "cloud storage", "Google Drive", "OneDrive", "iCloud", "Dropbox", "chia sẻ tệp", "quyền truy cập"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hiểu khái niệm đĩa trực tuyến, cách lưu trữ và chia sẻ tệp tin, cùng thực hành minh họa với Google Drive."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 6: Lưu Trữ Và Chia Sẻ Tệp Tin Trên Internet (Đĩa Trực Tuyến)</h1>
+            <p>Tin học 11 – Kết nối tri thức. Tìm hiểu đĩa trực tuyến (cloud storage), các tính năng cơ bản và thực hành với Google Drive để lưu trữ và chia sẻ tệp an toàn, hiệu quả.</p>
+        </header>
+
+        <nav aria-label="Mục lục bài học">
+            <a href="#muc-tieu">Mục tiêu bài học</a>
+            <a href="#kien-thuc-chinh">Kiến thức chính</a>
+            <a href="#thuc-hanh">Thực hành (Google Drive)</a>
+            <a href="#luyen-tap">Luyện tập – Vận dụng</a>
+            <a href="#tu-khoa">Từ khóa</a>
+        </nav>
+
+        <main>
+            <section id="muc-tieu" class="card">
+                <h2>I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết sử dụng một số công cụ trực tuyến (Google Drive, Dropbox, OneDrive, iCloud) để lưu trữ và chia sẻ tệp tin.</li>
+                    <li>Hiểu khái niệm đĩa trực tuyến (cloud storage) và nhu cầu lưu trữ/chia sẻ dữ liệu qua Internet.</li>
+                </ul>
+            </section>
+
+            <section id="kien-thuc-chinh" class="card">
+                <h2>II. Kiến thức chính</h2>
+                <h3>2.1. Lưu trữ & chia sẻ trên Internet = “đĩa trực tuyến”</h3>
+                <ul>
+                    <li>Internet giúp khắc phục giới hạn dung lượng thiết bị nhờ các dịch vụ lưu trữ – chia sẻ trực tuyến (cloud).</li>
+                    <li>Nhà cung cấp phổ biến: Google Drive, OneDrive, iCloud, Dropbox; cấp cho người dùng một không gian lưu trữ trực tuyến (đĩa trực tuyến).</li>
+                </ul>
+
+                <h3>2.2. Tính năng cơ bản trên đĩa trực tuyến</h3>
+                <ul>
+                    <li>Tải tệp/thư mục lên từ máy tính để lưu và sử dụng.</li>
+                    <li>Tạo mới & quản lí thư mục/tệp; một số dịch vụ cho mở/chỉnh sửa trực tuyến tệp văn phòng.</li>
+                    <li>Chia sẻ thư mục/tệp cho người khác với 3 mức quyền:</li>
+                </ul>
+                <ol>
+                    <li>Chỉ xem.</li>
+                    <li>Nhận xét (xem + nhận xét).</li>
+                    <li>Chỉnh sửa (cao nhất: xem/nhận xét/sửa/xóa/đổi tên…).</li>
+                </ol>
+                <div class="note" role="note">
+                    <strong>Lưu ý:</strong> Có thể hủy chia sẻ hoặc đổi chế độ quyền bất cứ lúc nào. Nên kiểm tra lại quyền trước khi gửi liên kết để đảm bảo an toàn dữ liệu.
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card">
+                <h2>III. Thực hành minh họa với Google Drive</h2>
+
+                <h3>Nhiệm vụ 1: Lưu trữ tệp lên đĩa trực tuyến</h3>
+                <ol class="steps">
+                    <li>Truy cập <strong>drive.google.com</strong> → đăng nhập tài khoản Google.</li>
+                    <li>Chọn <strong>+ Mới</strong> → <strong>Tải tệp lên</strong>.</li>
+                    <li>Chọn tệp → <strong>Open</strong> → tệp xuất hiện trên đĩa trực tuyến.</li>
+                </ol>
+
+                <h3>Nhiệm vụ 2: Chia sẻ tệp cho các thành viên</h3>
+                <ol class="steps">
+                    <li>Nhấp chuột phải vào tệp → <strong>Chia sẻ</strong>.</li>
+                    <li>Nhập email người nhận → chọn quyền (<em>Xem/Nhận xét/Chỉnh sửa</em>).</li>
+                    <li>Viết lời nhắn (nếu cần) → <strong>Gửi/Chia sẻ</strong>.</li>
+                    <li>Kiểm tra thông tin chia sẻ ở khung chi tiết (có thể đổi/hủy chia sẻ).</li>
+                </ol>
+            </section>
+
+            <section id="luyen-tap" class="card">
+                <h2>IV. Luyện tập – Vận dụng</h2>
+                <h3>1) Luyện tập</h3>
+                <ul>
+                    <li>Tải thêm tệp, chia sẻ cùng một tệp với các chế độ khác nhau để thấy sự khác biệt quyền hạn.</li>
+                </ul>
+                <h3>2) Vận dụng</h3>
+                <ul>
+                    <li>Dùng ít nhất hai dịch vụ khác nhau, lập bảng so sánh (tên, dung lượng miễn phí, tải lên/tải xuống, chia sẻ, mức độ thân thiện, số người dùng…) và khám phá thêm chức năng.</li>
+                </ul>
+            </section>
+
+            <section id="tu-khoa" class="card">
+                <h2>Từ khóa ghi nhớ</h2>
+                <div class="keywords">
+                    <span class="badge">Cloud storage</span>
+                    <span class="badge">Đĩa trực tuyến</span>
+                    <span class="badge">Google Drive</span>
+                    <span class="badge">OneDrive</span>
+                    <span class="badge">iCloud</span>
+                    <span class="badge">Dropbox</span>
+                    <span class="badge">Chia sẻ</span>
+                    <span class="badge">Quyền truy cập</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
+    <script>
+        // Harden: block context menu and common DevTools/View‑source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+
