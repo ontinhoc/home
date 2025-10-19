@@ -1262,6 +1262,20 @@
       })();
     </script>
     <script>
+        // Handle inactive "Tìm hiểu thêm" buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var learnMoreButtons = document.querySelectorAll('.card-button');
+                learnMoreButtons.forEach(function (btn) {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        alert('Nội dung đang cập nhật - Vui lòng quay lại sau');
+                    });
+                });
+            } catch (e) {}
+        });
+    </script>
+    <script>
         // Force red color and bold text for the banner CTA
         document.addEventListener('DOMContentLoaded', function () {
             try {
