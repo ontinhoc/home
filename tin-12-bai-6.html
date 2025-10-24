@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Trắc nghiệm: Giao tiếp và ứng xử nhân văn trong không gian mạng - Bài 6 Tin 12. Khóa trang và hỗ trợ mã hóa dữ liệu câu hỏi bằng Web Crypto.">
+    <meta name="keywords" content="Tin 12, không gian mạng, giao tiếp trực tuyến, ứng xử nhân văn, an toàn thông tin, trắc nghiệm">
+    <meta name="author" content="Ontinhoc">
+    <title>Trắc nghiệm Giao tiếp & Ứng xử trong KG Mạng | Tin 12 - Bài 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <!-- Khóa trang (yêu cầu mật khẩu) -->
+    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
+        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
+            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang được bảo vệ bằng mật khẩu</h2>
+            <p style="margin:0 0 12px;color:#475569;">Nhập mật khẩu để xem nội dung Bài học.</p>
+            <input id="pagePassword" type="password" placeholder="Nhập mật khẩu" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
+            <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button id="unlockBtn" class="btn" style="background:#0369a1;">MỞ KHÓA</button>
+                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">HỦY</button>
+            </div>
+            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">Mật khẩu không đúng. Vui lòng thử lại.</p>
+            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
+        </div>
+    </div>
+
+    <div id="content" class="container" style="display:none">
+        <header>
+            <h1>Trắc nghiệm: Giao tiếp & Ứng xử trong không gian mạng (Bài 6)</h1>
+            <div class="controls">
+                <button id="shuffle-btn" class="btn">Xáo trộn câu hỏi</button>
+                <button id="retry-btn" class="btn">Làm lại bài</button>
+            </div>
+        </header>
+        <main>
+            <div id="quiz-box"></div>
+            <div id="summary" class="hidden"></div>
+            <div class="navigation-controls">
+                <button id="next-btn" class="btn hidden">Câu tiếp theo</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Âm thanh phản hồi (tùy chọn) -->
+    <audio id="audio-correct" preload="auto"></audio>
+    <audio id="audio-wrong" preload="auto"></audio>
+
+    <!-- Logic câu hỏi/bài thi -->
+    <script src="script.js"></script>
+    <script>
+        // DỮ LIỆU ĐÃ MÃ HÓA (điền sau bằng encryptor.html)
+        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], rồi base64
+        const ENCRYPTED_QUESTIONS = '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';
+
+        // JSON câu hỏi gốc (KHÔNG để lại trong bản phát hành nếu cần bảo mật).
+        // Cấu trúc mỗi phần tử: { question, options: [A,B,C,D], answer: idx, explanation }
+        // Dữ liệu theo đề bài:
+        const QUESTIONS_FOR_ENCRYPTOR = [
+          {
+            question: "Không gian mạng là gì?",
+            options: [
+              "Môi trường thực tế",
+              "Môi trường ảo tạo bởi mạng máy tính",
+              "Phòng chat",
+              "Ứng dụng học trực tuyến"
+            ],
+            answer: 1,
+            explanation: "Không gian mạng là môi trường ảo được tạo ra bởi hệ thống máy tính và Internet."
+          },
+          {
+            question: "Ưu điểm lớn nhất của giao tiếp trong không gian mạng là gì?",
+            options: [
+              "Gặp gỡ trực tiếp",
+              "Tiện lợi, tiết kiệm thời gian",
+              "Dễ bị lừa",
+              "Mất an toàn"
+            ],
+            answer: 1,
+            explanation: "Giao tiếp trực tuyến giúp tiết kiệm thời gian, linh hoạt, tiện lợi."
+          },
+          {
+            question: "Hành vi nào không phù hợp khi giao tiếp trực tuyến?",
+            options: [
+              "Lắng nghe ý kiến",
+              "Chia sẻ dữ liệu cá nhân người khác",
+              "Thấu hiểu",
+              "Tôn trọng"
+            ],
+            answer: 1,
+            explanation: "Chia sẻ thông tin cá nhân của người khác là vi phạm quyền riêng tư."
+          },
+          {
+            question: "Nguyên tắc nào sau đây thuộc ứng xử nhân văn?",
+            options: [
+              "Im lặng",
+              "Tôn trọng",
+              "Xúc phạm",
+              "Đe dọa"
+            ],
+            answer: 1,
+            explanation: "Tôn trọng là nguyên tắc ứng xử nhân văn trong giao tiếp."
+          },
+          {
+            question: "Khi bị xúc phạm trên mạng, em nên:",
+            options: [
+              "Phản ứng gay gắt",
+              "Báo cáo hoặc chụp lại, tìm người giúp",
+              "Trả đũa",
+              "Đăng lại lên nhóm khác"
+            ],
+            answer: 1,
+            explanation: "Cần bình tĩnh, lưu bằng chứng (chụp màn hình) và nhờ người có trách nhiệm hỗ trợ."
+          },
+          {
+            question: "Giao tiếp trực tuyến thiếu yếu tố gì so với trực tiếp?",
+            options: [
+              "Tốc độ",
+              "Cảm xúc phi ngôn ngữ",
+              "Dữ liệu",
+              "Kết nối"
+            ],
+            answer: 1,
+            explanation: "Giao tiếp trực tuyến thiếu cảm xúc, nét mặt, giọng nói – tức là yếu tố phi ngôn ngữ."
+          },
+          {
+            question: "Ứng xử nhân văn giúp gì?",
+            options: [
+              "Tạo môi trường mạng tích cực",
+              "Làm người khác sợ",
+              "Tăng lượt thích",
+              "Gây tranh cãi"
+            ],
+            answer: 0,
+            explanation: "Ứng xử nhân văn giúp tạo không gian mạng an toàn, tích cực và thân thiện."
+          },
+          {
+            question: "Khi nhận tin giả, nên:",
+            options: [
+              "Chia sẻ nhanh",
+              "Không quan tâm",
+              "Kiểm chứng nguồn",
+              "Bình luận tiêu cực"
+            ],
+            answer: 2,
+            explanation: "Cần kiểm chứng nguồn tin trước khi chia sẻ để tránh phát tán tin giả."
+          },
+          {
+            question: "Một ví dụ về ‘hỗ trợ người khác’ là:",
+            options: [
+              "Chê bai",
+              "Gửi tin nhắn động viên",
+              "Bỏ qua",
+              "Gửi spam"
+            ],
+            answer: 1,
+            explanation: "Gửi lời động viên là biểu hiện của sự quan tâm, hỗ trợ người khác."
+          },
+          {
+            question: "Khi viết thư điện tử, cần:",
+            options: [
+              "Dùng từ lịch sự",
+              "Viết tắt",
+              "Viết hoa toàn bộ",
+              "Không chào hỏi"
+            ],
+            answer: 0,
+            explanation: "Khi viết email, cần dùng từ ngữ lịch sự, rõ ràng và có lời chào phù hợp."
+          }
+        ];
+
+        (function(){
+            const lockScreen = document.getElementById('lockScreen');
+            const content = document.getElementById('content');
+            const input = document.getElementById('pagePassword');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const cancelBtn = document.getElementById('cancelUnlock');
+            const lockMsg = document.getElementById('lockMsg');
+
+            const LOCK_KEY = 'tin12_bai6_unlocked';
+
+            // Phím tắt giáo viên: Alt+Shift+O để hiện mật khẩu sau giờ học
+            window.showAfterClassNotice = function(){
+                const notice = document.getElementById('classUnlockNotice');
+                if (notice) notice.textContent = 'Vui lòng nhập mật khẩu: +p7F';
+            };
+            document.addEventListener('keydown', (e) => {
+                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
+                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
+                }
+            });
+
+            function b64ToBytes(b64){
+                const bin = atob(b64);
+                const out = new Uint8Array(bin.length);
+                for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
+                return out;
+            }
+            async function deriveKey(password, salt){
+                const enc = new TextEncoder();
+                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+                return await crypto.subtle.deriveKey(
+                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt','decrypt']
+                );
+            }
+            async function decryptPayload(password, b64){
+                if (!b64) throw new Error('No encrypted payload');
+                const all = b64ToBytes(b64);
+                let pos = 0;
+                const version = all[pos++];
+                if (version !== 1) throw new Error('Bad version');
+                const salt = all.slice(pos, pos+16); pos += 16;
+                const iv = all.slice(pos, pos+12); pos += 12;
+                const ciphertext = all.slice(pos);
+                const key = await deriveKey(password, salt);
+                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
+                return new TextDecoder().decode(plainBuf);
+            }
+
+            async function tryUnlock() {
+                const pw = input.value || '';
+                lockMsg.style.display = 'none';
+                try {
+                    let questions;
+                    if (ENCRYPTED_QUESTIONS && ENCRYPTED_QUESTIONS.length > 0) {
+                        const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
+                        questions = JSON.parse(json);
+                    } else {
+                        // Fallback: dùng plaintext nếu mật khẩu trùng khớp
+                        if (pw !== '+p7F') throw new Error('Invalid password');
+                        questions = QUESTIONS_FOR_ENCRYPTOR;
+                    }
+                    if (typeof initializeQuiz === 'function') {
+                        initializeQuiz(questions);
+                    }
+                    sessionStorage.setItem(LOCK_KEY, '1');
+                    lockScreen.style.display = 'none';
+                    content.style.display = 'block';
+                } catch (err) {
+                    lockMsg.style.display = 'block';
+                }
+            }
+
+            unlockBtn.addEventListener('click', tryUnlock);
+            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+            if (sessionStorage.getItem(LOCK_KEY) === '1') {
+                input.focus();
+            }
+        })();
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+

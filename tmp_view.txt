@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Tin học phổ thông lớp 10-12 - Các bài học nâng cao về lập trình, cơ sở dữ liệu và công nghệ thông tin cho học sinh THPT">
+        content="Tin há»c phá»• thÃ´ng lá»›p 10-12 - CÃ¡c bÃ i há»c nÃ¢ng cao vá» láº­p trÃ¬nh, cÆ¡ sá»Ÿ dá»¯ liá»‡u vÃ  cÃ´ng nghá»‡ thÃ´ng tin cho há»c sinh THPT">
     <meta name="keywords"
-        content="tin học lớp 10, tin học lớp 11, tin học lớp 12, THPT, lập trình, cơ sở dữ liệu, công nghệ thông tin">
-    <meta name="author" content="Blog Học Tập">
+        content="tin há»c lá»›p 10, tin há»c lá»›p 11, tin há»c lá»›p 12, THPT, láº­p trÃ¬nh, cÆ¡ sá»Ÿ dá»¯ liá»‡u, cÃ´ng nghá»‡ thÃ´ng tin">
+    <meta name="author" content="Blog Há»c Táº­p">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Tin học phổ thông lớp 10-12 - Blog Học Tập">
+    <meta property="og:title" content="Tin há»c phá»• thÃ´ng lá»›p 10-12 - Blog Há»c Táº­p">
     <meta property="og:description"
-        content="Các bài học tin học nâng cao cho học sinh lớp 10-12, bao gồm lập trình, cơ sở dữ liệu và công nghệ thông tin">
+        content="CÃ¡c bÃ i há»c tin há»c nÃ¢ng cao cho há»c sinh lá»›p 10-12, bao gá»“m láº­p trÃ¬nh, cÆ¡ sá»Ÿ dá»¯ liá»‡u vÃ  cÃ´ng nghá»‡ thÃ´ng tin">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bloghoctap.com/tin-hoc-pho-thong/lop-10-12">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://bloghoctap.com/tin-hoc-pho-thong/lop-10-12">
 
-    <title>Tin học phổ thông lớp 10-12 - Blog Học Tập</title>
+    <title>Tin há»c phá»• thÃ´ng lá»›p 10-12 - Blog Há»c Táº­p</title>
 
     <style>
         * {
@@ -186,7 +186,7 @@
         }
 
         .breadcrumb-item:not(:last-child)::after {
-            content: "›";
+            content: "â€º";
             margin-left: 0.5rem;
             color: var(--primary-color);
         }
@@ -465,45 +465,45 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon" aria-hidden="true">📚</div>
+                    <div class="logo-icon" aria-hidden="true">ðŸ“š</div>
                     <div class="logo-text">
-                        <h1>Blog Học Tập</h1>
-                        <p>Nơi chia sẻ kiến thức và kinh nghiệm</p>
+                        <h1>Blog Há»c Táº­p</h1>
+                        <p>NÆ¡i chia sáº» kiáº¿n thá»©c vÃ  kinh nghiá»‡m</p>
                     </div>
                 </div>
                 <div class="search-bar">
-                    <input type="search" placeholder="Tìm kiếm bài học..." aria-label="Tìm kiếm bài học">
-                    <button type="button" aria-label="Tìm kiếm">🔍</button>
+                    <input type="search" placeholder="TÃ¬m kiáº¿m bÃ i há»c..." aria-label="TÃ¬m kiáº¿m bÃ i há»c">
+                    <button type="button" aria-label="TÃ¬m kiáº¿m">ðŸ”</button>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav class="nav" role="navigation" aria-label="Menu chính">
+    <nav class="nav" role="navigation" aria-label="Menu chÃ­nh">
         <div class="container">
             <div class="nav-container">
                 <ul class="nav-menu" role="menubar">
                     <li class="nav-item" role="none">
-                        <a href="index.html" class="nav-link" role="menuitem">Trang chủ</a>
+                        <a href="index.html" class="nav-link" role="menuitem">Trang chá»§</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link active" role="menuitem">Tin học phổ thông</a>
+                        <a href="#" class="nav-link active" role="menuitem">Tin há»c phá»• thÃ´ng</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link" role="menuitem">Tin học văn phòng</a>
+                        <a href="#" class="nav-link" role="menuitem">Tin há»c vÄƒn phÃ²ng</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link" role="menuitem">Lập trình</a>
+                        <a href="#" class="nav-link" role="menuitem">Láº­p trÃ¬nh</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link" role="menuitem">Ôn thi THPT</a>
+                        <a href="#" class="nav-link" role="menuitem">Ã”n thi THPT</a>
                     </li>
                     <li class="nav-item" role="none">
                         <a href="#" class="nav-link" role="menuitem">AI</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link" role="menuitem">Liên hệ</a>
+                        <a href="#" class="nav-link" role="menuitem">LiÃªn há»‡</a>
                     </li>
                 </ul>
             </div>
@@ -515,12 +515,12 @@
         <div class="container">
             <ol class="breadcrumb-list">
                 <li class="breadcrumb-item">
-                    <a href="index.html" class="breadcrumb-link">Trang chủ</a>
+                    <a href="index.html" class="breadcrumb-link">Trang chá»§</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#" class="breadcrumb-link">Tin học phổ thông</a>
+                    <a href="#" class="breadcrumb-link">Tin há»c phá»• thÃ´ng</a>
                 </li>
-                <li class="breadcrumb-item">Lớp 10-12</li>
+                <li class="breadcrumb-item">Lá»›p 10-12</li>
             </ol>
         </div>
     </nav>
@@ -530,52 +530,52 @@
         <div class="container">
             <!-- Page Header -->
             <header class="page-header">
-                <h1 class="page-title">Tin học phổ thông lớp 10-12</h1>
-                <p class="page-subtitle">Các bài học nâng cao về lập trình, cơ sở dữ liệu và công nghệ thông tin dành
-                    cho học sinh THPT</p>
+                <h1 class="page-title">Tin há»c phá»• thÃ´ng lá»›p 10-12</h1>
+                <p class="page-subtitle">CÃ¡c bÃ i há»c nÃ¢ng cao vá» láº­p trÃ¬nh, cÆ¡ sá»Ÿ dá»¯ liá»‡u vÃ  cÃ´ng nghá»‡ thÃ´ng tin dÃ nh
+                    cho há»c sinh THPT</p>
             </header>
 
             <!-- Lessons Section (accordion) -->
             <div class="accordion">
                 <div class="accordion-header" tabindex="0">
-                    Chương trình Lớp 10 <span class="arrow">▶</span>
+                    ChÆ°Æ¡ng trÃ¬nh Lá»›p 10 <span class="arrow">â–¶</span>
                 </div>
                 <div class="accordion-content">
                     <ul class="objectives-list">
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 1: Tổng quan Tin học và CNTT</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 1: Tá»•ng quan Tin há»c vÃ  CNTT</div>
                             <div class="lesson-detail">
                                 <a href="kien-thuc-trong-tam-bai1-lop10.html" class="lesson-detail-link"
-                                    target="_blank">1. Kiến thức trọng tâm</a><br>
+                                    target="_blank">1. Kiáº¿n thá»©c trá»ng tÃ¢m</a><br>
                                 <a href="https://ontinhoc.github.io/Tin12_Bai1/" class="lesson-detail-link"
-                                    target="_blank">2. Ôn tập, củng cố</a>
+                                    target="_blank">2. Ã”n táº­p, cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 2: Hệ điều hành và phần mềm</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 2: Há»‡ Ä‘iá»u hÃ nh vÃ  pháº§n má»m</div>
                             <div class="lesson-detail">
                                 <a href="kien-thuc-trong-tam-bai2-lop10.html" class="lesson-detail-link"
-                                    target="_blank">1. Kiến thức trọng tâm</a><br>
-                                <a href="on-tap-bai2-lop10.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                    target="_blank">1. Kiáº¿n thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="on-tap-bai2-lop10.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 3: Lập trình Pascal cơ bản</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 3: Láº­p trÃ¬nh Pascal cÆ¡ báº£n</div>
                             <div class="lesson-detail">
                                 <a href="kien-thuc-trong-tam-bai3-lop10.html" class="lesson-detail-link"
-                                    target="_blank">1. Kiến thức trọng tâm</a><br>
-                                <a href="on-tap-bai3-lop10.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                    target="_blank">1. Kiáº¿n thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="on-tap-bai3-lop10.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 4: Cơ sở dữ liệu Access</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 4: CÆ¡ sá»Ÿ dá»¯ liá»‡u Access</div>
                             <div class="lesson-detail">
                                 <a href="kien-thuc-trong-tam-bai4-lop10.html" class="lesson-detail-link"
-                                    target="_blank">1. Kiến thức trọng tâm</a><br>
-                                <a href="on-tap-bai4-lop10.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                    target="_blank">1. Kiáº¿n thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="on-tap-bai4-lop10.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                     </ul>
@@ -583,72 +583,72 @@
             </div>
             <div class="accordion">
                 <div class="accordion-header" tabindex="0">
-                    Chương trình Lớp 11 <span class="arrow">▶</span>
+                    ChÆ°Æ¡ng trÃ¬nh Lá»›p 11 <span class="arrow">â–¶</span>
                 </div>
                 <div class="accordion-content">
                     <ul class="objectives-list">
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 1. Hệ điều hành</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 1. Há»‡ Ä‘iá»u hÃ nh</div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-1-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-1.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-1-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-1.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 2. Thực hành sử dụng HĐH</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 2. Thá»±c hÃ nh sá»­ dá»¥ng HÄH</div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-2-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-2.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-2-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-2.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 3. Phần mềm nguồn mở & phần mềm chạy trên internet
+                            <div class="lesson-link" tabindex="0">BÃ i 3. Pháº§n má»m nguá»“n má»Ÿ & pháº§n má»m cháº¡y trÃªn internet
                             </div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-3-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-3.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
-                            </div>
-                        </li>
-                        <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 4. Bên trong máy tính</div>
-                            <div class="lesson-detail">
-                                <a href="tin-11-bai-4-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-4.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-3-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-3.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 5. Kết nối máy tính với các thiết bị số</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 4. BÃªn trong mÃ¡y tÃ­nh</div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-5-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-5.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-4-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-4.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 6. Lưu trữ và chia sẻ tệp tin trên Internet</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 5. Káº¿t ná»‘i mÃ¡y tÃ­nh vá»›i cÃ¡c thiáº¿t bá»‹ sá»‘</div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-6-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-6.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-5-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-5.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
+                            </div>
+                        </li>
+                        <li class="lesson-item">
+                            <div class="lesson-link" tabindex="0">BÃ i 6. LÆ°u trá»¯ vÃ  chia sáº» tá»‡p tin trÃªn Internet</div>
+                            <div class="lesson-detail">
+                                <a href="tin-11-bai-6-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-6.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                          <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 7. Thực hành tìm kiếm thông tin trên Internet</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 7. Thá»±c hÃ nh tÃ¬m kiáº¿m thÃ´ng tin trÃªn Internet</div>
                             <div class="lesson-detail">
-                                <a href="tin-11-bai-7-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-11-bai-7.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-11-bai-7-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-11-bai-7.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                     </ul>
@@ -656,95 +656,95 @@
             </div>
             <div class="accordion">
                 <div class="accordion-header" tabindex="0">
-                    Chương trình Lớp 12 <span class="arrow">▶</span>
+                    ChÆ°Æ¡ng trÃ¬nh Lá»›p 12 <span class="arrow">â–¶</span>
                 </div>
                 <div class="accordion-content">
                     <ul class="objectives-list">
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 1. Làm quen với Trí tuệ nhân tạo</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 1. LÃ m quen vá»›i TrÃ­ tuá»‡ nhÃ¢n táº¡o</div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-1-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-1.html" class="lesson-detail-link" target="_blank">2. Ôn tập, củng
-                                    cố</a>
+                                <a href="tin-12-bai-1-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-1.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p, cá»§ng
+                                    cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 2. Trí tuệ nhân tạo trong khoa học và đời sống
+                            <div class="lesson-link" tabindex="0">BÃ i 2. TrÃ­ tuá»‡ nhÃ¢n táº¡o trong khoa há»c vÃ  Ä‘á»i sá»‘ng
                             </div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-2-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-2.html" class="lesson-detail-link" target="_blank">2. Ôn tập, củng
-                                    cố</a>
-                            </div>
-                        </li>
-                        <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 3. Một số thiết bị mạng thông dụng</div>
-                            <div class="lesson-detail">
-                                <a href="tin-12-bai-3-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-3.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-12-bai-2-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-2.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p, cá»§ng
+                                    cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 4. Giao thức mạng</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 3. Má»™t sá»‘ thiáº¿t bá»‹ máº¡ng thÃ´ng dá»¥ng</div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-4-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-4.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-12-bai-3-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-3.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 5. Thực hành chia sẻ tài nguyên trên mạng</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 4. Giao thá»©c máº¡ng</div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-5-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-5.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a> <br>
-                                <a href="huong-dan-ket-noi-LAN.html" class="lesson-detail-link" target="_blank">3. HƯỚNG
-                                    DẪN KẾT NỐI 2 MÁY TRONG MẠNG LAN</a>
+                                <a href="tin-12-bai-4-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-4.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                         <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 6. GIAO TIẾP VÀ ỨNG XỬ TRONG KHÔNG GIAN MẠNG</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 5. Thá»±c hÃ nh chia sáº» tÃ i nguyÃªn trÃªn máº¡ng</div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-6-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-6.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-12-bai-5-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-5.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a> <br>
+                                <a href="huong-dan-ket-noi-LAN.html" class="lesson-detail-link" target="_blank">3. HÆ¯á»šNG
+                                    DáºªN Káº¾T Ná»I 2 MÃY TRONG Máº NG LAN</a>
+                            </div>
+                        </li>
+                        <li class="lesson-item">
+                            <div class="lesson-link" tabindex="0">BÃ i 6. GIAO TIáº¾P VÃ€ á»¨NG Xá»¬ TRONG KHÃ”NG GIAN Máº NG</div>
+                            <div class="lesson-detail">
+                                <a href="tin-12-bai-6-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-6.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                          <li class="lesson-item">
-                            <div class="lesson-link" tabindex="0">Bài 7. HTML VÀ CẤU TRÚC TRANG WEB</div>
+                            <div class="lesson-link" tabindex="0">BÃ i 7. HTML VÃ€ Cáº¤U TRÃšC TRANG WEB</div>
                             <div class="lesson-detail">
-                                <a href="tin-12-bai-7-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiến
-                                    thức trọng tâm</a><br>
-                                <a href="tin-12-bai-7.html" class="lesson-detail-link" target="_blank">2. Ôn tập,
-                                    củng cố</a>
+                                <a href="tin-12-bai-7-ly-thuyet.html" class="lesson-detail-link" target="_blank">1. Kiáº¿n
+                                    thá»©c trá»ng tÃ¢m</a><br>
+                                <a href="tin-12-bai-7.html" class="lesson-detail-link" target="_blank">2. Ã”n táº­p,
+                                    cá»§ng cá»‘</a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
             <script>
-                // Bổ sung logic cho lesson-link (bài học)
+                // Bá»• sung logic cho lesson-link (bÃ i há»c)
                 document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.lesson-link').forEach(function (link) {
                         link.addEventListener('click', function (e) {
                             var item = link.parentElement;
                             var isActive = item.classList.contains('active');
-                            // Đóng tất cả bài khác trong cùng danh sách
+                            // ÄÃ³ng táº¥t cáº£ bÃ i khÃ¡c trong cÃ¹ng danh sÃ¡ch
                             var allItems = item.parentElement.querySelectorAll('.lesson-item');
                             allItems.forEach(function (i) { i.classList.remove('active'); });
-                            // Nếu chưa mở thì mở
+                            // Náº¿u chÆ°a má»Ÿ thÃ¬ má»Ÿ
                             if (!isActive) {
                                 item.classList.add('active');
                             }
                         });
-                        // Hỗ trợ mở bằng phím Enter/Space
+                        // Há»— trá»£ má»Ÿ báº±ng phÃ­m Enter/Space
                         link.addEventListener('keydown', function (e) {
                             if (e.key === 'Enter' || e.key === ' ') {
                                 link.click();
@@ -760,7 +760,7 @@
                             var content = header.nextElementSibling;
                             var arrow = header.querySelector('.arrow');
                             var isOpen = content.classList.contains('open');
-                            // Đóng tất cả accordion khác
+                            // ÄÃ³ng táº¥t cáº£ accordion khÃ¡c
                             document.querySelectorAll('.accordion-content').forEach(function (c) {
                                 c.classList.remove('open');
                                 c.previousElementSibling.classList.remove('active');
@@ -773,7 +773,7 @@
                                 if (arrow) arrow.style.transform = 'rotate(90deg)';
                             }
                         });
-                        // Hỗ trợ mở bằng phím Enter/Space
+                        // Há»— trá»£ má»Ÿ báº±ng phÃ­m Enter/Space
                         header.addEventListener('keydown', function (e) {
                             if (e.key === 'Enter' || e.key === ' ') {
                                 header.click();
@@ -790,20 +790,20 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Về Blog Học Tập Tin Học</h3>
-                    <p>Nơi chia sẻ kiến thức và kinh nghiệm học tập. Chúng tôi cam kết mang đến những bài học chất lượng
-                        và dễ hiểu nhất.</p>
+                    <h3>Vá» Blog Há»c Táº­p Tin Há»c</h3>
+                    <p>NÆ¡i chia sáº» kiáº¿n thá»©c vÃ  kinh nghiá»‡m há»c táº­p. ChÃºng tÃ´i cam káº¿t mang Ä‘áº¿n nhá»¯ng bÃ i há»c cháº¥t lÆ°á»£ng
+                        vÃ  dá»… hiá»ƒu nháº¥t.</p>
                 </div>
 
                 <div class="footer-section">
-                    <h3>Thông tin liên hệ</h3>
-                    <p><strong>Tên:</strong> Trần Công Sự</p>
+                    <h3>ThÃ´ng tin liÃªn há»‡</h3>
+                    <p><strong>TÃªn:</strong> Tráº§n CÃ´ng Sá»±</p>
                     <p><strong>Email:</strong> congsu2406@bgmail.com</p>
-                    <p><strong>Số điện thoại:</strong> +84 973 089 747</p>
+                    <p><strong>Sá»‘ Ä‘iá»‡n thoáº¡i:</strong> +84 973 089 747</p>
                 </div>
 
                 <div class="footer-section">
-                    <h3>Liên kết mạng xã hội</h3>
+                    <h3>LiÃªn káº¿t máº¡ng xÃ£ há»™i</h3>
                     <div class="social-links">
                         <a href="#" class="social-link" aria-label="Facebook">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -834,12 +834,12 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Blog Học Tập Tin Học. Tất cả quyền được bảo lưu.</p>
+                <p>&copy; 2024 Blog Há»c Táº­p Tin Há»c. Táº¥t cáº£ quyá»n Ä‘Æ°á»£c báº£o lÆ°u.</p>
             </div>
         </div>
     </footer>
     <script>
-        // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
+        // RÃ o cáº£n nháº¹: cháº·n menu chuá»™t pháº£i vÃ  má»™t sá»‘ phÃ­m táº¯t phá»• biáº¿n
         document.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
         const blockCombos = (e) => {
             const k = (e.key || '').toLowerCase();

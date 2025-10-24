@@ -1,0 +1,264 @@
+*** Begin Patch
+*** Add File: tin-12-bai-6.html
++<!DOCTYPE html>
++<html lang="vi">
++<head>
++    <meta charset="utf-8">
++    <meta name="viewport" content="width=device-width,initial-scale=1">
++    <meta name="description" content="Tr?c nghi?m: Giao ti?p và ?ng x? nhân van trong không gian m?ng - Bài 6 Tin 12. Khóa trang và h? tr? mã hóa d? li?u câu h?i b?ng Web Crypto.">
++    <meta name="keywords" content="Tin 12, không gian m?ng, giao ti?p tr?c tuy?n, ?ng x? nhân van, an toàn thông tin, tr?c nghi?m">
++    <meta name="author" content="Ontinhoc">
++    <title>Tr?c nghi?m Giao ti?p & ?ng x? trong KG M?ng | Tin 12 - Bài 6</title>
++    <link rel="stylesheet" href="style.css">
++</head>
++<body oncontextmenu="return false">
++    <a href="index.html" aria-label="V? trang ch?" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CH?</a>
++    <!-- Khóa trang (yêu c?u m?t kh?u) -->
++    <div id="lockScreen" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,0.85);z-index:9999;">
++        <div style="background:#fff;padding:22px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:left;">
++            <h2 style="margin:0 0 8px;color:#0f172a;font-size:1.1rem;">Trang du?c b?o v? b?ng m?t kh?u</h2>
++            <p style="margin:0 0 12px;color:#475569;">Nh?p m?t kh?u d? xem n?i dung Bài h?c.</p>
++            <input id="pagePassword" type="password" placeholder="Nh?p m?t kh?u" style="width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:6px;margin-bottom:10px;font-size:1rem;">
++            <div style="display:flex;gap:8px;justify-content:flex-end;">
++                <button id="unlockBtn" class="btn" style="background:#0369a1;">M? KHÓA</button>
++                <button id="cancelUnlock" class="btn" style="background:#94a3b8;">H?Y</button>
++            </div>
++            <p id="lockMsg" style="color:#dc2626;margin-top:10px;display:none;font-size:0.95rem;">M?t kh?u không dúng. Vui lòng th? l?i.</p>
++            <p id="classUnlockNotice" style="margin-top:12px;color:#075985;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;"></p>
++        </div>
++    </div>
++
++    <div id="content" class="container" style="display:none">
++        <header>
++            <h1>Tr?c nghi?m: Giao ti?p & ?ng x? trong không gian m?ng (Bài 6)</h1>
++            <div class="controls">
++                <button id="shuffle-btn" class="btn">Xáo tr?n câu h?i</button>
++                <button id="retry-btn" class="btn">Làm l?i bài</button>
++            </div>
++        </header>
++        <main>
++            <div id="quiz-box"></div>
++            <div id="summary" class="hidden"></div>
++            <div class="navigation-controls">
++                <button id="next-btn" class="btn hidden">Câu ti?p theo</button>
++            </div>
++        </main>
++    </div>
++
++    <!-- Âm thanh ph?n h?i (tùy ch?n) -->
++    <audio id="audio-correct" preload="auto"></audio>
++    <audio id="audio-wrong" preload="auto"></audio>
++
++    <!-- Logic câu h?i/bài thi -->
++    <script src="script.js"></script>
++    <script>
++        // D? LI?U ÐÃ MÃ HÓA (di?n sau b?ng encryptor.html)
++        // Gói: [version=1][salt(16B)][iv(12B)][ciphertext], r?i base64
++        const ENCRYPTED_QUESTIONS = '';
++
++        // JSON câu h?i g?c (KHÔNG d? l?i trong b?n phát hành n?u c?n b?o m?t).
++        // C?u trúc m?i ph?n t?: { question, options: [A,B,C,D], answer: idx, explanation }
++        // D? li?u theo d? bài:
++        const QUESTIONS_FOR_ENCRYPTOR = [
++          {
++            question: "Không gian m?ng là gì?",
++            options: [
++              "Môi tru?ng th?c t?",
++              "Môi tru?ng ?o t?o b?i m?ng máy tính",
++              "Phòng chat",
++              "?ng d?ng h?c tr?c tuy?n"
++            ],
++            answer: 1,
++            explanation: "Không gian m?ng là môi tru?ng ?o du?c t?o ra b?i h? th?ng máy tính và Internet."
++          },
++          {
++            question: "Uu di?m l?n nh?t c?a giao ti?p trong không gian m?ng là gì?",
++            options: [
++              "G?p g? tr?c ti?p",
++              "Ti?n l?i, ti?t ki?m th?i gian",
++              "D? b? l?a",
++              "M?t an toàn"
++            ],
++            answer: 1,
++            explanation: "Giao ti?p tr?c tuy?n giúp ti?t ki?m th?i gian, linh ho?t, ti?n l?i."
++          },
++          {
++            question: "Hành vi nào không phù h?p khi giao ti?p tr?c tuy?n?",
++            options: [
++              "L?ng nghe ý ki?n",
++              "Chia s? d? li?u cá nhân ngu?i khác",
++              "Th?u hi?u",
++              "Tôn tr?ng"
++            ],
++            answer: 1,
++            explanation: "Chia s? thông tin cá nhân c?a ngu?i khác là vi ph?m quy?n riêng tu."
++          },
++          {
++            question: "Nguyên t?c nào sau dây thu?c ?ng x? nhân van?",
++            options: [
++              "Im l?ng",
++              "Tôn tr?ng",
++              "Xúc ph?m",
++              "Ðe d?a"
++            ],
++            answer: 1,
++            explanation: "Tôn tr?ng là nguyên t?c ?ng x? nhân van trong giao ti?p."
++          },
++          {
++            question: "Khi b? xúc ph?m trên m?ng, em nên:",
++            options: [
++              "Ph?n ?ng gay g?t",
++              "Báo cáo ho?c ch?p l?i, tìm ngu?i giúp",
++              "Tr? dua",
++              "Ðang l?i lên nhóm khác"
++            ],
++            answer: 1,
++            explanation: "C?n bình tinh, luu b?ng ch?ng (ch?p màn hình) và nh? ngu?i có trách nhi?m h? tr?."
++          },
++          {
++            question: "Giao ti?p tr?c tuy?n thi?u y?u t? gì so v?i tr?c ti?p?",
++            options: [
++              "T?c d?",
++              "C?m xúc phi ngôn ng?",
++              "D? li?u",
++              "K?t n?i"
++            ],
++            answer: 1,
++            explanation: "Giao ti?p tr?c tuy?n thi?u c?m xúc, nét m?t, gi?ng nói – t?c là y?u t? phi ngôn ng?."
++          },
++          {
++            question: "?ng x? nhân van giúp gì?",
++            options: [
++              "T?o môi tru?ng m?ng tích c?c",
++              "Làm ngu?i khác s?",
++              "Tang lu?t thích",
++              "Gây tranh cãi"
++            ],
++            answer: 0,
++            explanation: "?ng x? nhân van giúp t?o không gian m?ng an toàn, tích c?c và thân thi?n."
++          },
++          {
++            question: "Khi nh?n tin gi?, nên:",
++            options: [
++              "Chia s? nhanh",
++              "Không quan tâm",
++              "Ki?m ch?ng ngu?n",
++              "Bình lu?n tiêu c?c"
++            ],
++            answer: 2,
++            explanation: "C?n ki?m ch?ng ngu?n tin tru?c khi chia s? d? tránh phát tán tin gi?."
++          },
++          {
++            question: "M?t ví d? v? ‘h? tr? ngu?i khác’ là:",
++            options: [
++              "Chê bai",
++              "G?i tin nh?n d?ng viên",
++              "B? qua",
++              "G?i spam"
++            ],
++            answer: 1,
++            explanation: "G?i l?i d?ng viên là bi?u hi?n c?a s? quan tâm, h? tr? ngu?i khác."
++          },
++          {
++            question: "Khi vi?t thu di?n t?, c?n:",
++            options: [
++              "Dùng t? l?ch s?",
++              "Vi?t t?t",
++              "Vi?t hoa toàn b?",
++              "Không chào h?i"
++            ],
++            answer: 0,
++            explanation: "Khi vi?t email, c?n dùng t? ng? l?ch s?, rõ ràng và có l?i chào phù h?p."
++          }
++        ];
++
++        (function(){
++            const lockScreen = document.getElementById('lockScreen');
++            const content = document.getElementById('content');
++            const input = document.getElementById('pagePassword');
++            const unlockBtn = document.getElementById('unlockBtn');
++            const cancelBtn = document.getElementById('cancelUnlock');
++            const lockMsg = document.getElementById('lockMsg');
++
++            const LOCK_KEY = 'tin12_bai6_unlocked';
++
++            // Phím t?t giáo viên: Alt+Shift+O d? hi?n m?t kh?u sau gi? h?c
++            window.showAfterClassNotice = function(){
++                const notice = document.getElementById('classUnlockNotice');
++                if (notice) notice.textContent = 'Vui lòng nh?p m?t kh?u: .0vZ';
++            };
++            document.addEventListener('keydown', (e) => {
++                if (e.altKey && e.shiftKey && (e.key || '').toLowerCase() === 'o') {
++                    if (typeof window.showAfterClassNotice === 'function') window.showAfterClassNotice();
++                }
++            });
++
++            function b64ToBytes(b64){
++                const bin = atob(b64);
++                const out = new Uint8Array(bin.length);
++                for (let i=0;i<bin.length;i++) out[i] = bin.charCodeAt(i);
++                return out;
++            }
++            async function deriveKey(password, salt){
++                const enc = new TextEncoder();
++                const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
++                return await crypto.subtle.deriveKey(
++                    { name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' },
++                    keyMaterial,
++                    { name: 'AES-GCM', length: 256 },
++                    false,
++                    ['encrypt','decrypt']
++                );
++            }
++            async function decryptPayload(password, b64){
++                if (!b64) throw new Error('No encrypted payload');
++                const all = b64ToBytes(b64);
++                let pos = 0;
++                const version = all[pos++];
++                if (version !== 1) throw new Error('Bad version');
++                const salt = all.slice(pos, pos+16); pos += 16;
++                const iv = all.slice(pos, pos+12); pos += 12;
++                const ciphertext = all.slice(pos);
++                const key = await deriveKey(password, salt);
++                const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext);
++                return new TextDecoder().decode(plainBuf);
++            }
++
++            async function tryUnlock() {
++                const pw = input.value || '';
++                lockMsg.style.display = 'none';
++                try {
++                    let questions;
++                    if (ENCRYPTED_QUESTIONS && ENCRYPTED_QUESTIONS.length > 0) {
++                        const json = await decryptPayload(pw, ENCRYPTED_QUESTIONS);
++                        questions = JSON.parse(json);
++                    } else {
++                        // Fallback: dùng plaintext n?u m?t kh?u trùng kh?p
++                        if (pw !== '.0vZ') throw new Error('Invalid password');
++                        questions = QUESTIONS_FOR_ENCRYPTOR;
++                    }
++                    if (typeof initializeQuiz === 'function') {
++                        initializeQuiz(questions);
++                    }
++                    sessionStorage.setItem(LOCK_KEY, '1');
++                    lockScreen.style.display = 'none';
++                    content.style.display = 'block';
++                } catch (err) {
++                    lockMsg.style.display = 'block';
++                }
++            }
++
++            unlockBtn.addEventListener('click', tryUnlock);
++            cancelBtn.addEventListener('click', () => { input.value = ''; lockMsg.style.display = 'none'; });
++            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
++
++            if (sessionStorage.getItem(LOCK_KEY) === '1') {
++                input.focus();
++            }
++        })();
++    </script>
++    <script src="protect.js"></script>
++</body>
++</html>
++
+*** End Patch
