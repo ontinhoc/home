@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 7 Tin học 12: HTML và cấu trúc trang web — khái niệm, thẻ và phần tử HTML, cấu trúc tối thiểu tệp HTML, công cụ soạn thảo, luyện tập và lược sử HTML.">
+    <meta name="keywords" content="Tin học 12, HTML, thẻ HTML, phần tử HTML, DOCTYPE, head, title, body, meta charset UTF-8, cấu trúc trang web, soạn thảo HTML, HTML5">
+    <meta name="author" content="Ontinhoc">
+    <title>HTML Và Cấu Trúc Trang Web | Tin 12 - Bài 7 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        code{background:#f1f5f9;padding:1px 6px;border-radius:6px}
+        pre{background:#f1f5f9;padding:12px;border-radius:10px;overflow:auto}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 180px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 7: HTML và cấu trúc trang web (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": [
+        "HTML", "thẻ HTML", "phần tử HTML", "DOCTYPE",
+        "head", "title", "body", "meta charset UTF-8", "HTML5"
+      ],
+      "description": "Khái niệm, cấu trúc cơ bản của tệp HTML, thẻ và phần tử HTML, công cụ soạn thảo, bài tập và lược sử HTML."
+    }
+    </script>
+    <!-- Security/UX: basic context-menu disable mirrors lesson 6 -->
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 7: HTML Và Cấu Trúc Trang Web</h1>
+            <p>Tổng hợp khái niệm HTML, thẻ và phần tử, cấu trúc tối thiểu của tệp HTML, công cụ soạn thảo, luyện tập và lược sử HTML.</p>
+        </header>
+
+        <nav aria-label="Mục lục bài học">
+            <a href="#muc-tieu">Mục tiêu</a>
+            <a href="#khai-niem">2. Khái niệm cơ bản</a>
+            <a href="#the-html">2.1. Thẻ HTML</a>
+            <a href="#phan-tu-html">2.2. Phần tử HTML</a>
+            <a href="#cau-truc">3. Cấu trúc cơ bản</a>
+            <a href="#cong-cu">4. Công cụ</a>
+            <a href="#luyen-tap">5. Luyện tập – Vận dụng</a>
+            <a href="#luoc-su">6. Lược sử HTML</a>
+            <a href="#tu-khoa">Từ khóa</a>
+        </nav>
+
+        <main>
+            <section id="muc-tieu" class="card">
+                <h2>1. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Hiểu và giải thích được cấu trúc của một trang web dưới dạng HTML.</li>
+                </ul>
+            </section>
+
+            <section id="khai-niem" class="card">
+                <h2>2. Khái niệm cơ bản</h2>
+                <ul>
+                    <li><strong>HTML</strong> (HyperText Markup Language) là ngôn ngữ đánh dấu siêu văn bản dùng để thiết lập cấu trúc và cách hiển thị nội dung trang web.</li>
+                    <li>Trang web thực chất được tạo từ tệp văn bản có phần mở rộng <code>.html</code>/<code>.htm</code>; nội dung gồm văn bản và các ký tự đánh dấu (thẻ HTML) như <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>.</li>
+                </ul>
+            </section>
+
+            <section id="the-html" class="card">
+                <h2>2.1. Thẻ HTML (tag)</h2>
+                <ul>
+                    <li>Thẻ là thành phần chính của HTML, thường có thẻ mở và thẻ đóng để xác định phạm vi tác dụng, ví dụ: <code>&lt;p&gt; ... &lt;/p&gt;</code>.</li>
+                    <li><strong>Quy tắc/ghi nhớ:</strong> tên thẻ không phân biệt hoa–thường; có thể lồng nhau; thẻ có thể kèm thuộc tính (ví dụ: <code>style="color:red"</code>); có thẻ đơn như <code>&lt;hr /&gt;</code>, <code>&lt;br /&gt;</code>; trình duyệt không nhận nhiều dấu cách/Enter như văn bản thường.</li>
+                </ul>
+            </section>
+
+            <section id="phan-tu-html" class="card">
+                <h2>2.2. Phần tử HTML (element)</h2>
+                <ul>
+                    <li>Phần tử HTML = thẻ mở + nội dung + thẻ đóng; cũng có thể là thẻ đơn.</li>
+                    <li>Mỗi tệp HTML là tập hợp phần tử, có thể độc lập, rời nhau hoặc lồng nhau.</li>
+                </ul>
+            </section>
+
+            <section id="cau-truc" class="card">
+                <h2>3. Cấu trúc cơ bản của tệp HTML</h2>
+                <div class="steps">
+                    <p><strong>Mẫu tối thiểu thường gồm:</strong></p>
+                    <ul>
+                        <li><code>&lt;!DOCTYPE html&gt;</code>: khai báo kiểu tài liệu (không phải phần tử HTML).</li>
+                        <li><code>&lt;html&gt;</code>: gốc (root) chứa toàn bộ phần tử còn lại; thường gồm <code>&lt;head&gt;</code> và <code>&lt;body&gt;</code>.</li>
+                        <li><code>&lt;head&gt;</code>: thông tin chung của trang; thường có <code>&lt;title&gt;</code>, và có thể có <code>&lt;meta&gt;</code>, <code>&lt;style&gt;</code>, <code>&lt;script&gt;</code>.</li>
+                        <li><code>&lt;meta charset="UTF-8"&gt;</code>: mô tả bộ mã hóa văn bản.</li>
+                        <li><code>&lt;title&gt;</code>: tiêu đề trang (hiện trong kết quả tìm kiếm, không chứa phần tử con).</li>
+                        <li><code>&lt;body&gt;</code>: nội dung hiển thị của trang.</li>
+                        <li>Nhóm thẻ định dạng văn bản thường dùng: <code>&lt;h1&gt;…&lt;h6&gt;</code>, <code>&lt;p&gt;</code>.</li>
+                    </ul>
+                </div>
+                <div class="note">
+                    Cấu trúc trang có thể hình dung như cây thông tin với quan hệ cha–con, gốc là <code>&lt;html&gt;</code>.
+                </div>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="vi"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;Tiêu đề trang&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Xin chào HTML&lt;/h1&gt;
+    &lt;p&gt;Đoạn văn đầu tiên.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+
+            <section id="cong-cu" class="card">
+                <h2>4. Công cụ soạn thảo HTML</h2>
+                <ul>
+                    <li><strong>Notepad/TextEdit:</strong> soạn thảo văn bản thuần, chức năng cơ bản.</li>
+                    <li><strong>Notepad++, Sublime Text:</strong> trình soạn thảo chuyên nghiệp, hỗ trợ nhiều ngôn ngữ, có đánh dấu cú pháp HTML.</li>
+                    <li><strong>Công cụ trực tuyến:</strong> soạn và xem kết quả ngay trên trình duyệt; ví dụ w3schools.com, tutorialspoint.com.</li>
+                </ul>
+            </section>
+
+            <section id="luyen-tap" class="card">
+                <h2>5. Luyện tập – Vận dụng (gợi ý từ SGK)</h2>
+                <ul>
+                    <li>Bài tập phân loại phần mềm soạn thảo và trình duyệt; soạn tệp HTML đơn giản; vẽ cây phần tử; thực hành thẻ <code>&lt;img src=&quot;...&quot;&gt;</code> khi chèn ảnh.</li>
+                </ul>
+            </section>
+
+            <section id="luoc-su" class="card">
+                <h2>6. Lược sử HTML</h2>
+                <ul>
+                    <li>Tim Berners-Lee đề xuất chuẩn đầu tiên đầu những năm 1990 tại CERN; bản đầu tiên “Các thẻ HTML” (1991); bản chuẩn hiện đại HTML5 (2014).</li>
+                </ul>
+            </section>
+
+            <section id="tu-khoa" class="card">
+                <h2>Từ khóa ghi nhớ</h2>
+                <div class="keywords">
+                    <span class="badge">HTML</span>
+                    <span class="badge">Thẻ</span>
+                    <span class="badge">Phần tử</span>
+                    <span class="badge">DOCTYPE</span>
+                    <span class="badge">Head</span>
+                    <span class="badge">Title</span>
+                    <span class="badge">Body</span>
+                    <span class="badge">Meta UTF-8</span>
+                    <span class="badge">HTML5</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+
