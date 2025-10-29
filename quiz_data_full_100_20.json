@@ -1,140 +1,3 @@
-﻿﻿<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ôn tập giữa học kỳ 1 - Tin học 12</title>
-  <style>
-    :root{ --bg:#0f172a; --card:#111827cc; --accent:#22c55e; --danger:#ef4444; --muted:#94a3b8; --text:#e5e7eb; --primary:#6366f1; --yellow:#f59e0b }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 10% 10%,#1f2937 0%,var(--bg) 60%);color:var(--text)}
-    .container{max-width:980px;margin:24px auto;padding:16px}
-    header{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .logo{font-weight:800;letter-spacing:.3px;font-size:clamp(18px,3vw,24px)}
-    .pill{padding:6px 10px;border-radius:999px;background:#1f2937;color:var(--muted);font-size:12px}
-
-    .card{background:linear-gradient(180deg,#0b1020 0%,#0a0f1f 100%);border:1px solid #1f2a44;border-radius:16px;box-shadow:0 10px 40px #0008;overflow:hidden}
-    .card-header{padding:16px 20px;border-bottom:1px solid #1f2a44;display:flex;align-items:center;justify-content:space-between}
-    .progress{height:10px;background:#0b1220;border-radius:999px;overflow:hidden}
-    .progress-inner{height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4,#6366f1);width:0%;transition:width .3s ease}
-
-    .question{padding:20px;display:grid;gap:16px}
-    .q-title{font-size:clamp(18px,2.6vw,22px);font-weight:700}
-    .q-meta{color:var(--muted);font-size:13px}
-    .choices{display:grid;gap:12px}
-    .choice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#0c1428;border:1px solid #1f2a44;border-radius:12px;cursor:pointer;transition:transform .06s ease,border-color .2s ease,background .2s ease}
-    .choice:hover{transform:translateY(-1px);border-color:#334a7a}
-    .choice.correct{background:#052814;border-color:#14532d}
-    .choice.incorrect{background:#2a0f12;border-color:#7f1d1d}
-    .choice.disabled{cursor:not-allowed;opacity:.85}
-    .badge{width:26px;height:26px;border-radius:8px;background:#0b1020;display:grid;place-items:center;font-weight:700;color:#cbd5e1;flex-shrink:0}
-
-    .explain{background:#0b1220;border-top:1px dashed #203055;padding:16px 20px;font-size:14px;color:#d1d5db}
-    .announce{padding:10px 14px;border-radius:10px;font-weight:700;display:inline-flex;gap:8px;align-items:center}
-    .announce.good{background:#052814;border:1px solid #14532d;color:#86efac}
-    .announce.bad{background:#2a0f12;border:1px solid #7f1d1d;color:#fecaca}
-
-    .controls{display:flex;flex-wrap:wrap;gap:10px;padding:16px 20px;border-top:1px solid #1f2a44;align-items:center;justify-content:space-between}
-    button{appearance:none;border:none;border-radius:12px;padding:10px 14px;font-weight:700;background:linear-gradient(180deg,#334155,#1f2937);color:#e5e7eb;cursor:pointer;box-shadow:inset 0 0 0 1px #475569;transition:transform .06s ease,opacity .2s ease}
-    button:hover{transform:translateY(-1px)}
-    .btn-primary{background:linear-gradient(180deg,#4f46e5,#4338ca);box-shadow:inset 0 0 0 1px #6366f1}
-    .btn-danger{background:linear-gradient(180deg,#ef4444,#b91c1c);box-shadow:inset 0 0 0 1px #ef4444}
-    .btn-ghost{background:transparent;box-shadow:inset 0 0 0 1px #334155}
-
-    .timer{display:flex;align-items:center;gap:10px;color:#93c5fd}
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
-
-    /* TRUE/FALSE blocks */
-    .tf-block{display:grid;gap:12px;margin-top:8px}
-    .tf-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid #1f2a44;border-radius:10px;background:#0c1428}
-    .tf-actions{display:flex;gap:8px}
-    .tf-btn{padding:8px 10px;border-radius:10px;font-weight:700;box-shadow:inset 0 0 0 1px #334155}
-    .tf-btn.true{background:#064e3b}
-    .tf-btn.false{background:#7f1d1d}
-    .tf-row.correct{outline:2px solid #16a34a}
-    .tf-row.incorrect{outline:2px solid #ef4444}
-    .tf-exp{font-size:13px;margin-top:6px;color:#c7d2fe}
-
-    /* Summary */
-    .summary{padding:24px;text-align:center}
-    .summary h2{margin:0 0 8px 0;font-size:clamp(20px,3vw,28px)}
-    .score{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:.5px;margin:6px 0 14px}
-    .remark{font-size:clamp(14px,2.6vw,18px);color:#cbd5e1}
-
-    @media (max-width:600px){.choices{gap:10px}.tf-row{grid-template-columns:1fr}}
-
-    /* Pause toast (non-blocking) */
-    .toast{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:10px;background:#0b1020;border:1px solid #1f2a44;border-radius:12px;padding:10px 12px;z-index:40;pointer-events:none;box-shadow:0 8px 30px #0006}
-    .toast-dot{width:10px;height:10px;border-radius:999px;background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
-
-    /* Alert */
-    .alert{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#1f2937;border:1px solid #334155;color:#e5e7eb;font-size:12px}
-    .alert.bad{border-color:#7f1d1d;color:#fecaca}
-    .alert.good{border-color:#14532d;color:#86efac}
-    /* Ẩn nút nạp JSON và liên kết tải JSON đầy đủ (không ảnh hưởng logic) */
-    #btn-load-json{display:none}
-    a.pill[href*="quiz_data_full_100_20.json"]{display:none}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">🧠 Ôn tập giữa học kỳ 1 - Tin học 12</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <div class="pill" id="meta-pill">0/0 câu</div>
-        <div class="pill" id="debug-pill">Debug: idle</div>
-      </div>
-    </header>
-
-    <div style="display:flex; gap:8px; align-items:center; margin:8px 0 0 0">
-      <input id="jsonFile" type="file" accept="application/json" style="display:none"/>
-      <button class="btn-ghost" id="btn-load-json">📥 Nạp dữ liệu từ JSON</button>
-      <a href="sandbox:/mnt/data/quiz_data_full_100_20.json" target="_blank" class="pill" style="text-decoration:none">Tải JSON đầy đủ (100 MC + 20 Đ/S)</a>
-    </div>
-    <div id="alert" class="alert" style="display:none"></div>
-
-    <div class="card" id="app">
-      <div class="card-header">
-        <div style="display:flex; gap:12px; align-items:center">
-          <div class="pill" id="mode-pill">Nhiều lựa chọn</div>
-          <div class="timer"><span class="dot"></span> <span id="timer-text">Tạm dừng: 0s</span></div>
-        </div>
-        <div class="progress" style="width:min(360px,50%)">
-          <div class="progress-inner" id="progress"></div>
-        </div>
-      </div>
-
-      <div id="question-area" class="question"><!-- dynamic content --></div>
-
-      <div class="controls">
-        <div style="display:flex; gap:8px; align-items:center">
-          <button class="btn-ghost" id="btn-prev" title="Quay lại (←)">← Trước</button>
-          <button class="btn-primary" id="btn-next" title="Tiếp theo (→)">Tiếp theo →</button>
-        </div>
-        <div style="display:flex; gap:8px; align-items:center">
-          <button class="btn-danger" id="btn-retry">Làm lại</button>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px; color:#9ca3af; font-size:12px">Tip: sau khi trả lời, hệ thống tự dừng 45 giây để bạn xem giải thích. Bạn có thể nhấn <b>Tiếp theo</b> bất cứ lúc nào.</div>
-  </div>
-
-  <!-- Pause toast -->
-  <div class="toast" id="pause-toast" role="status" aria-live="polite" aria-atomic="true">
-    <span class="toast-dot"></span>
-    <span id="toast-text">Tạm dừng: <b id="toast-count">45</b>s — Bạn có thể nhấn <b>Tiếp theo</b> để bỏ qua.</span>
-  </div>
-
-  <!-- DATA SECTION: test case tối thiểu để trang chạy an toàn lần đầu -->
-  <!--
-    👉 CÁCH DÙNG DỮ LIỆU THẬT (120 câu) BẰNG CÁCH DÁN TRỰC TIẾP
-    1) Mở file JSON đầy đủ (quiz_data_full_100_20.json), copy TOÀN BỘ nội dung.
-    2) Dán đè vào thẻ <script id="quiz-data" type="application/json"> … </script> phía dưới.
-       - Bạn có thể dán nguyên văn JSON (không cần thêm export hay biến JS nào).
-       - Nếu để trống thẻ này, trang sẽ tự động chạy bằng dữ liệu DEMO (4 MC + 1 Đ/S) để đảm bảo không lỗi.
-  -->
-  <script id="quiz-data" type="application/json">
 {
   "multiple": [
     {
@@ -274,30 +137,30 @@
     },
     {
       "id": 6,
-      "text": " \"Turing Test\" là gì?",
+      "text": "",
       "choices": [
         {
           "key": "A",
-          "text": "Một bài kiểm tra trí tuệ của máy tính.",
+          "text": "AI có khả năng tạo ra nội dung từ dữ liệu đã có.",
           "correct": true
         },
         {
           "key": "B",
-          "text": "Một phương pháp đánh giá khả năng học của AI.",
+          "text": "AI có khả năng tự học hỏi mà không cần sự can thiệp của con người.",
           "correct": false
         },
         {
           "key": "C",
-          "text": "Một hệ thống AI chuyên gia.",
+          "text": "AI có khả năng giao tiếp với con người bằng ngôn ngữ tự nhiên.",
           "correct": false
         },
         {
           "key": "D",
-          "text": "Một thuật toán học sâu.",
+          "text": "AI có khả năng nhận thức môi trường xung quanh. \n\"Turing Test\" là gì?",
           "correct": false
         }
       ],
-      "explain": "Bài kiểm tra đánh giá khả năng máy mô phỏng trí tuệ con người qua đối thoại."
+      "explain": "Bài kiểm tra đánh giá khả năng máy mô phỏng trí tuệ con người  qua đối thoại."
     },
     {
       "id": 7,
@@ -369,12 +232,12 @@
         },
         {
           "key": "C",
-          "text": "Tăng cường khả năng tự học của con người.",
+          "text": "Tăng cường khả năng tự học của con người. D. Giảm chi phí sản xuất.",
           "correct": false
         },
         {
           "key": "D",
-          "text": "Giảm chi phí sản xuất.",
+          "text": "Thay thế hoàn toàn các bác sĩ.",
           "correct": false
         }
       ],
@@ -386,7 +249,7 @@
       "choices": [
         {
           "key": "A",
-          "text": "Đọc và phân tích ảnh quét một cách chính xác.",
+          "text": "Đọc và phân tích ảnh quét một cách chính xác. \n\n1",
           "correct": true
         },
         {
@@ -401,7 +264,7 @@
         },
         {
           "key": "D",
-          "text": "Thay thế hoàn toàn các bác sĩ.",
+          "text": "Thay thế hoàn toàn các bác sĩ. \n\nTHÔNG HIỂU (10):",
           "correct": false
         }
       ],
@@ -413,7 +276,7 @@
       "choices": [
         {
           "key": "A",
-          "text": "Cobot.",
+          "text": "Cobot. \ngia.",
           "correct": true
         },
         {
@@ -671,7 +534,7 @@
         },
         {
           "key": "D",
-          "text": "Không thể học từ dữ liệu mới.",
+          "text": "Không thể học từ dữ liệu mới. \nBài 2. Trí tuệ nhân tạo trong khoa học và đời sống \nNHẬN BIẾT (10): \n\n2",
           "correct": false
         }
       ],
@@ -941,7 +804,7 @@
         },
         {
           "key": "D",
-          "text": "Không có vai trò trong việc giảm thiểu sai sót y tế.",
+          "text": "Không có vai trò trong việc giảm thiểu sai sót y tế \n\nTHÔNG HIỂU (10):",
           "correct": false
         }
       ],
@@ -1211,7 +1074,7 @@
         },
         {
           "key": "D",
-          "text": "Một chuỗi số 48bit được chia thành 6 cụm 8 bit.",
+          "text": "Một chuỗi số 48bit được chia thành 6 cụm 8 bit. \n\nBài 3. Một số thiết bị mạng thông dụng \nNHẬN BIẾT (10):",
           "correct": false
         }
       ],
@@ -1476,7 +1339,7 @@
         },
         {
           "key": "C",
-          "text": "Mạng LAN.",
+          "text": "Mạng LAN. \nBài 4: Giao thức mạng \nTHÔNG HIỂU (10).",
           "correct": false
         },
         {
@@ -1651,7 +1514,7 @@
     },
     {
       "id": 57,
-      "text": "TCP (Transmission Control Protocol) cung cấp cơ chế nào để đảm bảo dữ liệu được truyền đầy đủ và chính xác?",
+      "text": "TCP (Transmission Control Protocol) cung cấp cơ chế nào để đảm bảo dữ liệu được truyền đầy",
       "choices": [
         {
           "key": "A",
@@ -1751,7 +1614,7 @@
         },
         {
           "key": "D",
-          "text": "SMTP.",
+          "text": "SMTP. \n\nBài 5. Thực hành chia sẻ tài nguyên trên mạng \nNHẬN BIẾT (10).",
           "correct": false
         }
       ],
@@ -1768,7 +1631,7 @@
         },
         {
           "key": "B",
-          "text": "Tạo thư mục chia sẻ.",
+          "text": "Tạo thư mục chia sẻ. \n\n5",
           "correct": false
         },
         {
@@ -2002,7 +1865,7 @@
     },
     {
       "id": 70,
-      "text": "Để truy cập vào một thư mục chia sẻ từ máy tính khác trong mạng LAN, ta có thể sử dụng cú pháp nào?",
+      "text": "Để truy cập vào một thư mục chia sẻ từ máy tính khác trong mạng LAN, ta có thể sử dụng cú",
       "choices": [
         {
           "key": "A",
@@ -2016,7 +1879,7 @@
         },
         {
           "key": "C",
-          "text": "ftp://[IP_address]/[shared_folder].",
+          "text": "ftp://[IP_address]/[shared_folder]. \n\nBài 6. Giao tiếp và ứng xử trong không gian mạng \nNHẬN BIẾT (10):",
           "correct": false
         },
         {
@@ -2025,7 +1888,7 @@
           "correct": false
         }
       ],
-      "explain": "\\\\IP_address\\shared_folder."
+      "explain": "\\\\IP_address\\shared_folder.  Bài 6. Giao tiếp và ứng xử trong không gian mạng"
     },
     {
       "id": 71,
@@ -2124,7 +1987,7 @@
         },
         {
           "key": "C",
-          "text": "Luôn đảm bảo tính chính xác của thông tin.",
+          "text": "Luôn đảm bảo tính chính xác của thông tin. \n\n6",
           "correct": false
         },
         {
@@ -2291,7 +2154,7 @@
         },
         {
           "key": "D",
-          "text": "Không ảnh hưởng đến cuộc sống thực.",
+          "text": "Không ảnh hưởng đến cuộc sống thực \n\nTHÔNG HIỂU (10):",
           "correct": false
         }
       ],
@@ -2380,7 +2243,7 @@
     },
     {
       "id": 84,
-      "text": "Tính nhân văn được thể hiện như thế nào trong việc xử lý các thông tin tiêu cực trên không gian mạng?",
+      "text": "Tính nhân văn được thể hiện như thế nào trong việc xử lý các thông tin tiêu cực trên không gian",
       "choices": [
         {
           "key": "A",
@@ -2416,7 +2279,7 @@
         },
         {
           "key": "B",
-          "text": "Giao tiếp luôn chính xác và không có lỗi.",
+          "text": "Giao tiếp luôn chính xác và không có lỗi. \n\n7",
           "correct": false
         },
         {
@@ -2561,7 +2424,7 @@
         },
         {
           "key": "D",
-          "text": "Giao tiếp qua không gian mạng luôn tạo ra sự gần gũi hơn.",
+          "text": "Giao tiếp qua không gian mạng luôn tạo ra sự gần gũi hơn. \n\nBài 7. HTML và cấu trúc trang web \nNHẬN BIẾT (10):",
           "correct": false
         }
       ],
@@ -2831,11 +2694,11 @@
         },
         {
           "key": "D",
-          "text": "url.",
+          "text": "url \n\nPHẦN II: CÂU HỎI ĐÚNG/SAI (20 CÂU).",
           "correct": false
         }
       ],
-      "explain": "href."
+      "explain": "href.  PHẦN II – CÂU HỎI ĐÚNG/SAI (Câu 101–120)  ĐÁP ÁN & GIẢI THÍCH – PHẦN II: CÂU HỎI ĐÚNG/SAI  Câu  Nhận định  Đúng/Sai Giải thích ngắn gọn  101a  Switch kết nối máy trong LAN để  chia sẻ dữ liệu.       Đúng  Switch là thiết bị trung tâm trong  LAN.  101b Router chỉ dùng để chia sẻ máy in.      Sai  Router định tuyến, không phải để  chia sẻ máy in.    \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  101c  Access Point giúp thiết bị không dây  kết nối mạng.       Đúng  AP cho phép kết nối Wi-Fi vào  mạng LAN.  101d  Modem chuyển tín hiệu số ↔ tương  tự.       Đúng  Đúng chức năng điều chế/giải điều  chế.  102a LAN hoạt động trong phạm vi hẹp.       Đúng  Phạm vi một toà nhà, phòng,  trường.  102b WAN có quy mô toàn cầu.       Đúng WAN kết nối nhiều LAN.  102c  LAN và WAN không thể kết nối.      Sai  Có thể kết nối qua router/gateway.  102d  Mạng nội bộ doanh nghiệp vài trăm  máy là LAN.       Đúng LAN có thể tới hàng trăm máy.  103a Mỗi thiết bị cần IP riêng.       Đúng Mỗi thiết bị phải có IP duy nhất.  103b Hai máy có thể dùng chung IP.      Sai  Trùng IP gây xung đột.  103c  IP có thể cấp tự động bằng DHCP.       Đúng DHCP cấp phát IP động.  103d Router không cần IP.      Sai  Router cần IP để định tuyến.  104a  Mật khẩu mạnh gồm chữ, số, ký tự  đặc biệt.       Đúng Đảm bảo độ khó bị đoán.  104b Không nên chia sẻ mật khẩu.       Đúng Để bảo mật tài khoản.  104c  Wi-Fi công cộng luôn an toàn.      Sai  Nguy cơ nghe lén cao.  104d  Cập nhật phần mềm giúp giảm rủi  ro.       Đúng Vá lỗ hổng bảo mật.  105a Tôn trọng người khác khi bình luận.       Đúng Thể hiện văn hóa mạng.  105b  Đăng thông tin cá nhân người khác  “đùa vui”.      Sai  Vi phạm quyền riêng tư.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  105c  Kiểm tra nguồn tin trước khi chia sẻ.       Đúng Tránh tin giả.  105d Ngôn từ lịch sự là biểu hiện văn hóa.       Đúng Đúng quy tắc ứng xử số.  106a  WLAN kết nối không dây, không  cần cáp.       Đúng “Wireless LAN”.  106b  Access Point là thiết bị chính trong  WLAN.       Đúng Là điểm truy cập trung tâm.  106c  Tất cả thiết bị phải có bộ giao tiếp  không dây.       Đúng Cần Wi-Fi adapter.  106d  WLAN chỉ hiệu quả trong 1 phòng  nhỏ.      Sai  Có thể mở rộng bằng nhiều AP.  107a  Router kết nối các mạng LAN khác  nhau.       Đúng Chức năng định tuyến.  107b Switch chỉ kết nối trong cùng LAN.       Đúng Chỉ hoạt động ở tầng liên kết.  107c  Router và Switch đều xác định  đường đi.      Sai  Chỉ Router định tuyến.  107d  Switch không hoạt động nếu không  có Router.      Sai  Switch vẫn hoạt động trong LAN.  108a  Modem điều chế/giải điều chế tín  hiệu.       Đúng Chức năng cơ bản.  108b Modem luôn cần Router.      Sai  Có thể hoạt động độc lập.  108c  Modem tích hợp Router và AP.       Đúng Phổ biến hiện nay.  108d  Modem chỉ hoạt động với tín hiệu số  hóa.      Sai  Làm việc với tín hiệu số & tương  tự.  109a Internet là mạng WAN toàn cầu.       Đúng WAN lớn nhất.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  109b  Router là thiết bị không thể thiếu để  truy cập Internet.       Đúng Định tuyến gói tin ra/vào Internet.  109c  ISP là nhà cung cấp dịch vụ Internet.       Đúng Cấp kết nối và địa chỉ IP.  109d  Internet chỉ truy cập qua kết nối có  dây.      Sai  Có thể qua Wi-Fi, 4G, 5G.  110a  Giao tiếp mạng giúp người khiếm  khuyết tự tin hơn.       Đúng Giảm rào cản giao tiếp.  110b  Giao tiếp mạng không cho lưu thông  tin.      Sai  Có thể lưu tin nhắn, lịch sử.  110c  Không bị giới hạn bởi số người tham  gia.       Đúng Họp nhóm, diễn đàn, livestream.  110d  Không thể giao tiếp nếu không cùng  thời gian, địa điểm.      Sai  Có thể không đồng bộ (email, tin  nhắn).  111a  Có thể hiểu lầm do thiếu ngôn ngữ  hình thể.       Đúng Thiếu cảm xúc, phi ngôn ngữ.  111b Tin nhắn luôn đúng ngữ pháp.      Sai  Dễ sai chính tả, viết tắt.  111c  Có thể gây lười biếng và lệ thuộc  công nghệ.       Đúng Giảm giao tiếp trực tiếp.  111d  Rủi ro bị rình rập, quấy rối không  liên quan mạng.      Sai  Là rủi ro phổ biến.  112a  Ứng xử nhân văn chỉ là không làm  việc xấu.      Sai  Còn phải chủ động lan tỏa điều tốt.  112b Phê phán tiêu cực cần có văn hóa.       Đúng Thể hiện nhân văn và đạo đức.  112c  Ứng xử nhân văn không cần đồng  cảm.      Sai  Đồng cảm là cốt lõi của nhân văn.  112d Người có văn hóa không mạo danh       Đúng Mạo danh là hành vi sai trái.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  người khác.  113a Kết nối bằng dây qua Switch.       Đúng Cổng LAN của switch.  113b  Kết nối qua Access Point không cần  dây.       Đúng Kết nối không dây (Wi-Fi).  113c  Access Point và Switch cùng mạng.       Đúng Cùng LAN vật lý.  113d  Chia sẻ dữ liệu được dù không có  Internet.       Đúng  LAN hoạt động độc lập với  Internet.  114a  Một số máy cắm sai cổng hoặc dây  lỏng.       Đúng Dây lỗi → không chia sẻ được.  114b  Không có Internet nên không chia sẻ  được.      Sai  LAN không cần Internet.  114c  Chưa bật chức năng chia sẻ thư mục.       Đúng Cần bật “File Sharing”.  114d  Không có Access Point nên không  chia sẻ được.      Sai  LAN có dây không cần AP.  115a Hỏi chủ nhà tên Wi-Fi và mật khẩu.       Đúng Bước đầu tiên.  115b Bật Wi-Fi, nhập đúng mật khẩu.       Đúng Cách kết nối đúng.  115c  Kết nối bằng 4G.      Sai  Không liên quan mạng nội bộ.  115d Dùng cáp UTP để kết nối Wi-Fi.      Sai  Wi-Fi là không dây.  116a  IP là giao thức mọi máy phải tuân  theo.       Đúng Giao thức định danh cơ bản.  116b IP là tên viết tắt của TCP/IP.      Sai  IP là 1 phần của TCP/IP.  116c  Hai máy có thể dùng chung IP.      Sai  Trùng IP gây xung đột.  116d Trạm gửi tìm đường dựa vào IP       Đúng Router dùng IP để định tuyến.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  đích.  117a Cáp quang truyền tín hiệu ánh sáng.       Đúng Đặc trưng cơ bản.  117b  Lõi có độ trong suốt, bọc lưới kim  loại phản xạ ánh sáng.      Sai  Phản xạ do lớp cladding, không  phải lưới kim loại.  117c  Cáp quang bó nhiều sợi, có lớp bảo  vệ/lưới kim loại.       Đúng Đúng về cấu trúc vật lý.  117d Cáp quang biển là loại Single-Mode.       Đúng Truyền xa, suy hao thấp.  118a  Có thể đọc tin tức online thay báo  giấy.       Đúng Tiện lợi và nhanh chóng.  118b  E-commerce giúp mua sắm không  cần ra ngoài.       Đúng Thương mại điện tử.  118c  Gửi thư, nói chuyện, nhìn hình ảnh  qua mạng.       Đúng Email, chat video.  118d Tin tức mạng luôn đáng tin cậy.      Sai  Cần kiểm chứng nguồn.  119a Wi-Fi là mạng cục bộ không dây.       Đúng Wireless LAN.  119b Wi-Fi truyền bằng sóng điện từ.       Đúng Sóng radio.  119c  Access Point và Switch có thể thay  thế nhau.      Sai  Chức năng khác nhau.  119d  Có thể truy cập miễn là trong vùng  phủ sóng.       Đúng Phạm vi AP.  120a MAN nhỏ hơn LAN.      Sai  MAN lớn hơn LAN.  120b LAN còn gọi là mạng cục bộ/nội bộ.       Đúng Tên đầy đủ.  120c  Khi chưa có Wi-Fi, LAN dùng cáp  mạng.       Đúng Mạng có dây truyền thống.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  120d Trường 50 máy thuộc mạng MAN.      Sai  Phạm vi nhỏ → LAN."
     }
   ],
   "truefalse": [
@@ -2961,7 +2824,7 @@
     },
     {
       "id": 105,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về giao tiếp và ứng xử trên không gian mạng:",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về giao tiếp và ứng xử trên không gian",
       "statements": [
         {
           "key": "a",
@@ -3111,17 +2974,17 @@
     },
     {
       "id": 110,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về ưu điểm của giao tiếp qua không gian mạng?",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về ưu điểm của giao tiếp qua không gian",
       "statements": [
         {
           "key": "a",
-          "text": "Giao tiếp qua không gian mạng giúp giảm thiểu mặc cảm và tạo điều kiện cho những người có khiếm khuyết giao tiếp tự nhiên hơn.",
+          "text": "Giao tiếp qua không gian mạng giúp giảm thiểu mặc cảm và tạo điều kiện cho những người có",
           "answer": true,
           "explain": "Giảm rào cản giao tiếp."
         },
         {
           "key": "b",
-          "text": "Giao tiếp qua không gian mạng không cho phép lưu trữ thông tin trò chuyện để tham khảo sau này.",
+          "text": "Giao tiếp qua không gian mạng không cho phép lưu trữ thông tin trò chuyện để tham khảo sau",
           "answer": false,
           "explain": "Có thể lưu tin nhắn, lịch sử."
         },
@@ -3133,7 +2996,7 @@
         },
         {
           "key": "d",
-          "text": "Giao tiếp qua không gian mạng không thể diễn ra nếu hai bên không cùng thời gian và địa điểm.",
+          "text": "Giao tiếp qua không gian mạng không thể diễn ra nếu hai bên không cùng thời gian và địa",
           "answer": false,
           "explain": "Có thể không đồng bộ (email, tin nhắn)."
         }
@@ -3141,11 +3004,11 @@
     },
     {
       "id": 111,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về các vấn đề tiềm ẩn của giao tiếp qua không gian mạng?",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về các vấn đề tiềm ẩn của giao tiếp qua",
       "statements": [
         {
           "key": "a",
-          "text": "Giao tiếp qua không gian mạng có thể gây hiểu lầm do thiếu ngôn ngữ hình thể và tín hiệu cảm xúc.",
+          "text": "Giao tiếp qua không gian mạng có thể gây hiểu lầm do thiếu ngôn ngữ hình thể và tín hiệu cảm",
           "answer": true,
           "explain": "Thiếu cảm xúc, phi ngôn ngữ."
         },
@@ -3163,7 +3026,7 @@
         },
         {
           "key": "d",
-          "text": "Các rủi ro như bị rình rập, quấy rối hoặc lộ thông tin cá nhân không liên quan đến giao tiếp qua không gian mạng.",
+          "text": "Các rủi ro như bị rình rập, quấy rối hoặc lộ thông tin cá nhân không liên quan đến giao tiếp qua",
           "answer": false,
           "explain": "Là rủi ro phổ biến."
         }
@@ -3231,11 +3094,11 @@
     },
     {
       "id": 114,
-      "text": "Trong giờ thực hành kết nối mạng LAN trong phòng tin học. Sau thời gian 25 phút nghiêm túc \n thực hành. Các em học sinh cùng thầy giáo đã kết nối xong dây mạng, modem, Switch. Trên máy tính \n của thầy giáo và các em đều hiển thị tên các máy trạm. Thầy giáo yêu cầu các em học sinh chia sẻ \n dữ liệu trên mạng LAN giữa các máy tính với nhau nhưng có một số máy tính không chia sẻ dữ liệu \n được. Một số em đưa ra ý kiến sau. Theo em ý kiến nào đúng, ý kiến nào sai? \n ",
+      "text": "Trong giờ thực hành kết nối mạng LAN trong phòng tin học. Sau thời gian 25 phút nghiêm túc",
       "statements": [
         {
           "key": "a",
-          "text": "Một số máy có thể chưa được kết nối đúng cổng hoặc dây mạng bị lỏng, hỏng nên \n không chia sẻ được dữ liệu.",
+          "text": "Một số máy có thể chưa được kết nối đúng cổng hoặc dây mạng bị lỏng, hỏng nên",
           "answer": true,
           "explain": "Dây lỗi → không chia sẻ được."
         },
@@ -3254,14 +3117,14 @@
         {
           "key": "d",
           "text": "Trong phòng không có thiết bị kết nối không dây (Access Point).",
-          "answer": true,
-          "explain": "Cần bật “File Sharing”."
+          "answer": null,
+          "explain": ""
         }
       ]
     },
     {
       "id": 115,
-      "text": "Một người có hợp đồng sử dụng Internet tại nhà với một nhà cung cấp dịch vụ Internet (ISP). \n ISP này cử người đến nhà lắp đặt một thiết bị Modem kiêm Access Point, nhờ đó không chỉ máy tính PC \n mà các thiết bị không dây trong nhà cũng có thể truy cập Internet. Thiết bị này có cổng RJ-45 dành cho \n cáp mạng UTP. Một vị khách đến chơi nhà người đó và muốn dùng điện thoại thông minh truy cập \n Internet thông qua mạng Wi-Fi của chủ nhà. Vị khách đã thực hiện các thao tác sau:\n ",
+      "text": "Một người có hợp đồng sử dụng Internet tại nhà với một nhà cung cấp dịch vụ Internet (ISP).",
       "statements": [
         {
           "key": "a",
@@ -3271,7 +3134,7 @@
         },
         {
           "key": "b",
-          "text": "Bật chức năng Wi-Fi trên điện thoại thông minh, chọn đúng mạng Wi-Fi của chủ nhà An và \n nhập đúng mật khẩu.",
+          "text": "Bật chức năng Wi-Fi trên điện thoại thông minh, chọn đúng mạng Wi-Fi của chủ nhà An và",
           "answer": true,
           "explain": "Cách kết nối đúng."
         },
@@ -3291,7 +3154,7 @@
     },
     {
       "id": 116,
-      "text": "IP là giao thức định tuyến trên mạng, giúp tìm ra tuyến đường tốt nhất để truyền gói tin tới đích. \n IP là một phần của TCP/IP, bộ giao thức chính của Internet. Địa chỉ IP giúp định danh các máy trạm, nhờ đó \n các gói tin có thể được vận chuyển tới đúng trạm nhận. Trong mạng LAN, mỗi máy trạm hay Router đều được \n gắn một địa chỉ IP riêng và duy nhất. Trước khi gửi đi một gói tin qua mạng, trạm gửi bắt buộc phải ghi \n rõ địa chỉ IP của trạm gửi và trạm nhận trong phần tiêu đề (Header) của gói tin. Dựa vào địa chỉ này Router \n sẽ tìm ra tuyến đường để chuyển gói tin tới đích. Sau khi đọc nhận xét trên, một số bạn học sinh đưa \n ra các ý kiến sau:\n ",
+      "text": "IP là giao thức định tuyến trên mạng, giúp tìm ra tuyến đường tốt nhất để truyền gói tin tới đích.",
       "statements": [
         {
           "key": "a",
@@ -3313,7 +3176,7 @@
         },
         {
           "key": "d",
-          "text": "Dựa vào địa chỉ IP của trạm nhận, trạm gửi có nhiệm vụ tìm ra tuyến đường để chuyển gói tin \n tới nơi đích.",
+          "text": "Dựa vào địa chỉ IP của trạm nhận, trạm gửi có nhiệm vụ tìm ra tuyến đường để chuyển gói tin",
           "answer": true,
           "explain": "Router dùng IP để định tuyến."
         }
@@ -3321,7 +3184,7 @@
     },
     {
       "id": 117,
-      "text": "Trong cáp quang (Fiber Optic cable) tín hiệu được truyền đi dưới dạng ánh sáng. Lõi sợi quang \n truyền tín hiệu làm bằng thủy tinh hữu cơ hay nhựa tổng hợp có độ trong suốt rất cao, bề mặt được phủ \n một lớp lót phản chiếu ánh sáng để tín hiệu không lọt ra ngoài. Bên ngoài lõi có các lớp vỏ nhựa bảo vệ. \n Giữa lớp lót phản chiếu ánh sáng và vỏ bọc có thể là một lớp nhựa tổng hợp hay một lưới kim loại để tăng \n độ bền cho cáp. Nhờ có kích thước nhỏ, cáp quang thường được bó nhiều sợi với nhau. Cáp quang loại \n Single-Mode có khả năng truyền qua khoảng cách hàng chục ngàn kilomet, vì thế được dùng làm cáp quang \n biển để truyền dữ liệu giữa các quốc gia, châu lục. Sau khi đọc nhận xét trên, một số bạn học sinh đưa \n ra các ý kiến sau: \n",
+      "text": "Trong cáp quang (Fiber Optic cable) tín hiệu được truyền đi dưới dạng ánh sáng. Lõi sợi quang",
       "statements": [
         {
           "key": "a",
@@ -3331,13 +3194,13 @@
         },
         {
           "key": "b",
-          "text": "Lõi cáp quang có độ trong suốt cao, bên ngoài được bọc một lớp lưới kim loại để phản xạ ánh \n sáng",
-          "answer": false,
-          "explain": "Phản xạ do lớp cladding, không phải lưới kim loại."
+          "text": "Lõi cáp quang có độ trong suốt cao, bên ngoài được bọc một lớp lưới kim loại để phản xạ ánh",
+          "answer": null,
+          "explain": ""
         },
         {
           "key": "c",
-          "text": "Cáp quang thường được bó nhiều sợi với nhau vì nó sử dụng các lớp vỏ bảo vệ bên ngoài lõi,\n trong đó có cả lớp lưới kim loại.",
+          "text": "Cáp quang thường được bó nhiều sợi với nhau vì nó sử dụng các lớp vỏ bảo vệ bên ngoài lõi,",
           "answer": true,
           "explain": "Đúng về cấu trúc vật lý."
         },
@@ -3351,13 +3214,13 @@
     },
     {
       "id": 118,
-      "text": "Nhờ có mạng máy tính, ta có thể truy cập các trang web tin tức thời sự, thể thao, học trực tuyến,\n mua sắm hay giao dịch tài chính trực tuyến, các cổng thông tin điện tử, các tiện ích giải trí như xem phim, \n nghe nhạc trực tuyến hay chơi game. Internet là môi trường tiềm năng cho các công ty thương mại điện tử (E-commerce). \n Email, chat qua webcam giúp con người giao lưu nhanh chóng, thuận tiện hơn. Tuy nhiên mạng máy tính cũng \n có những mặt trái, chẳng hạn như những thông tin xấu độc, sai sự thật. Sau khi đọc nhận xét trên, một số \n bạn học sinh đưa ra các ý kiến sau:\n ",
+      "text": "Nhờ có mạng máy tính, ta có thể truy cập các trang web tin tức thời sự, thể thao, học trực tuyến,",
       "statements": [
         {
           "key": "a",
-          "text": "Thay vì phải mua báo giấy, ngày nay chúng ta có thể đọc tin tức từ nhiều nguồn trên mạng một\n cách nhanh chóng và thuận tiện hơn.",
-          "answer": true,
-          "explain": "Tiện lợi và nhanh chóng."
+          "text": "Thay vì phải mua báo giấy, ngày nay chúng ta có thể đọc tin tức từ nhiều nguồn trên mạng một",
+          "answer": null,
+          "explain": ""
         },
         {
           "key": "b",
@@ -3367,13 +3230,13 @@
         },
         {
           "key": "c",
-          "text": "Các tiện ích trên mạng giúp con người gửi thư, nói chuyện và nhìn thấy hình ảnh của nhau khi \n  liên lạc qua mạng.",
+          "text": "Các tiện ích trên mạng giúp con người gửi thư, nói chuyện và nhìn thấy hình ảnh của nhau khi",
           "answer": true,
           "explain": "Email, chat video."
         },
         {
           "key": "d",
-          "text": "Những tin tức từ các nguồn thông tin trên mạng là hoàn toàn đáng tin cậy, hàng hóa mua qua \n  mạng luôn có chất lượng đảm bảo.",
+          "text": "Những tin tức từ các nguồn thông tin trên mạng là hoàn toàn đáng tin cậy, hàng hóa mua qua",
           "answer": false,
           "explain": "Cần kiểm chứng nguồn."
         }
@@ -3381,7 +3244,7 @@
     },
     {
       "id": 119,
-      "text": "Mạng máy tính sử dụng sóng điện từ để truyền thông tin được gọi là mạng không dây. Mạng \n không dây hoạt động trong phạm vi nhỏ được gọi là mạng Wi-Fi (còn gọi là mạng LAN không dây hay \n mạng cục bộ không dây). Wi-Fi sử dụng một thiết bị Access Point (còn được gọi là Điểm truy cập \n không dây) để cung cấp kết nối không dây cho các máy trạm trong mạng cục bộ. Vai trò của Access \n Point trong mạng Wi-Fi tương tự như vai trò của thiết bị Switch trong mạng có dây. Để truy cập \n vào Internet bằng mạng Wi-Fi, không cần dây mạng và cổng cắm cáp mạng. Tuy nhiên, mức độ bảo mật \n và tốc độ truyền của mạng Wi-Fi không bằng mạng có dây. Sau khi đọc nhận xét trên, một số bạn \n học sinh đưa ra các ý kiến sau:\n ",
+      "text": "Mạng máy tính sử dụng sóng điện từ để truyền thông tin được gọi là mạng không dây. Mạng",
       "statements": [
         {
           "key": "a",
@@ -3397,13 +3260,13 @@
         },
         {
           "key": "c",
-          "text": "Vai trò của Access Point tương tự như vai trò của thiết bị Switch, vì vậy hai thiết bị này có thể\n thay thế lẫn nhau.",
+          "text": "Vai trò của Access Point tương tự như vai trò của thiết bị Switch, vì vậy hai thiết bị này có thể",
           "answer": false,
           "explain": "Chức năng khác nhau."
         },
         {
           "key": "d",
-          "text": "Người dùng có thể truy cập mạng Wi-Fi tại bất cứ đâu, miễn là còn trong vùng phủ sóng của\n Access Point thuộc mạng Wi-Fi đó.",
+          "text": "Người dùng có thể truy cập mạng Wi-Fi tại bất cứ đâu, miễn là còn trong vùng phủ sóng của",
           "answer": true,
           "explain": "Phạm vi AP."
         }
@@ -3411,7 +3274,7 @@
     },
     {
       "id": 120,
-      "text": "Thông thường mạng có vài chục hoặc vài trăm máy trạm, hoạt động trong phạm vi một tòa nhà,\n một gia đình hay cơ quan cỡ nhỏ thì được gọi là mạng LAN, còn gọi là Mạng cục bộ hay Mạng nội bộ. \n MAN là loại mạng có số lượng máy trạm và phạm vi hoạt động lớn hơn so với LAN. Ở thời kỳ đầu mạng \n LAN chỉ sử dụng cáp mạng, hiện nay công nghệ truyền không dây của mạng Wi-Fi giúp các máy trạm trao \n đổi dữ liệu thuận tiện và dễ dàng hơn. Sau khi đọc nhận xét trên, một số bạn đưa ra ý kiến như sau:\n ",
+      "text": "Thông thường mạng có vài chục hoặc vài trăm máy trạm, hoạt động trong phạm vi một tòa nhà,",
       "statements": [
         {
           "key": "a",
@@ -3427,13 +3290,13 @@
         },
         {
           "key": "c",
-          "text": "Mạng Wi-Fi ra đời sau, khi chưa có Wi-Fi các máy trạm phải dùng dây cáp mạng để kết nối với\n nhau.",
-          "answer": true,
-          "explain": "Mạng có dây truyền thống."
+          "text": "Mạng Wi-Fi ra đời sau, khi chưa có Wi-Fi các máy trạm phải dùng dây cáp mạng để kết nối với",
+          "answer": null,
+          "explain": ""
         },
         {
           "key": "d",
-          "text": "Một trường THPT có khoảng 50 máy PC kết nối mạng với nhau để học sinh thực hành và giáo \n viên truy cập Internet. Mạng nội bộ của trường đó thuộc loại mạng MAN.",
+          "text": "Một trường THPT có khoảng 50 máy PC kết nối mạng với nhau để học sinh thực hành và giáo",
           "answer": false,
           "explain": "Phạm vi nhỏ → LAN."
         }
@@ -3441,368 +3304,3 @@
     }
   ]
 }
-  </script>
-  <script>
-    // ===== Helpers & Safe parsing =====
-    const $ = (sel, ctx=document) => ctx.querySelector(sel)
-    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel))
-    const shuffle = (arr=[]) => arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])
-
-    function setAlert(msg, kind=''){
-      const a = $('#alert'); a.style.display='block'; a.textContent = msg; a.className = 'alert ' + (kind||'')
-      $('#debug-pill').textContent = 'Debug: ' + msg
-    }
-
-function parseQuizJSON(text) {
-try {
-let t = (text || '').trim()
-// Bỏ BOM nếu có
-if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1)
-// Nếu có rác quanh JSON: cắt từ '{' đầu tới '}' cuối
-    if (!(t.startsWith('{') || t.startsWith('['))) {
-    const first = t.indexOf('{')
-    const last = t.lastIndexOf('}')
-    if (first !== -1 && last !== -1 && last > first) t = t.slice(first, last + 1)
-    }
-    // Sanitize control chars (except \n, \r, \t) that break JSON.parse
-    t = t.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
-    const data = JSON.parse(t || '{}')
-const multiple = Array.isArray(data.multiple) ? data.multiple : []
-const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
-multiple.forEach(q => { q.choices = Array.isArray(q.choices) ? q.choices : [] })
-truefalse.forEach(q => { q.statements = Array.isArray(q.statements) ? q.statements : [] })
-return { multiple, truefalse }
-} catch (err) {
-setAlert('Không đọc được JSON: ' + err.message, 'bad')
-return { multiple: [], truefalse: [] }
-}
-}
-
-<!-- 
-    function parseQuizJSON(text){
-      try{
-        const data = JSON.parse(text || '{}')
-        const multiple = Array.isArray(data.multiple) ? data.multiple : []
-        const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
-        // sanitize shapes
-        multiple.forEach(q=>{ q.choices = Array.isArray(q.choices)? q.choices : [] })
-        truefalse.forEach(q=>{ q.statements = Array.isArray(q.statements)? q.statements : [] })
-        return { multiple, truefalse }
-      }catch(err){
-        setAlert('Không đọc được JSON: ' + err.message, 'bad');
-        return { multiple: [], truefalse: [] }
-      }
-    }
--->
-    async function loadJSONFromFile(file){
-      const text = await file.text();
-      const parsed = parseQuizJSON(text)
-      raw.multiple = parsed.multiple; raw.truefalse = parsed.truefalse
-      dataset = buildDataset(raw)
-      setAlert(`Đã nạp dữ liệu từ file: ${raw.multiple.length} MC + ${raw.truefalse.reduce((s,q)=>s+q.statements.length,0)} mệnh đề Đ/S`, 'good')
-      buildOrder();
-    }
-
-    // WebAudio feedback (no external files)
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-    function playTone(type='sine', freq=880, ms=200){
-      try{
-        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
-        o.type = type; o.frequency.value = freq; o.connect(g); g.connect(audioCtx.destination)
-        const now = audioCtx.currentTime; g.gain.setValueAtTime(0.001, now); g.gain.exponentialRampToValueAtTime(0.2, now+0.01); g.gain.exponentialRampToValueAtTime(0.0001, now + ms/1000)
-        o.start(); o.stop(now + ms/1000 + 0.02)
-      }catch(e){ /* ignore autoplay restrictions */ }
-    }
-    function playCorrect(){ playTone('sine', 1046, 200); setTimeout(()=>playTone('sine', 1318, 220), 120) }
-    function playWrong(){ playTone('sawtooth', 196, 250); setTimeout(()=>playTone('sawtooth', 156, 260), 120) }
-
-    // ===== State (SAFE) =====
-    // DEMO mặc định để chạy an toàn nếu bạn CHƯA dán JSON thật vào thẻ #quiz-data
-    const DEFAULT_DEMO = {
-      multiple: [
-        {id:1,text:"AI là gì?",choices:[
-          {key:"A",text:"Khả năng của máy tính có thể làm những công việc mang tính trí tuệ của con người.",correct:true},
-          {key:"B",text:"Khả năng của máy tính thực hiện các công việc cơ bản.",correct:false},
-          {key:"C",text:"Khả năng của con người trong việc sử dụng máy tính.",correct:false},
-          {key:"D",text:"Một phần mềm điều khiển máy tính.",correct:false}],
-          explain:"AI là khả năng của máy có thể thực hiện các công việc mang tính trí tuệ của con người."},
-        {id:2,text:"Thuật ngữ 'AI' bắt đầu được sử dụng vào năm nào?",choices:[
-          {key:"A",text:"1956.",correct:true},{key:"B",text:"1945.",correct:false},{key:"C",text:"1970.",correct:false},{key:"D",text:"1985.",correct:false}],
-          explain:"Năm 1956 tại Hội nghị Dartmouth."},
-        {id:3,text:"Khái niệm 'AI mạnh' là gì?",choices:[
-          {key:"A",text:"AI có thể giải quyết bất kỳ loại vấn đề phức tạp nào như con người.",correct:true},
-          {key:"B",text:"AI có khả năng học từ dữ liệu.",correct:false},
-          {key:"C",text:"AI có thể thực hiện các tác vụ đơn giản.",correct:false},
-          {key:"D",text:"AI có khả năng xử lý dữ liệu nhanh chóng.",correct:false}],
-          explain:"AI mạnh giả định có khả năng suy nghĩ, lập luận, giải quyết mọi vấn đề như con người (chưa tồn tại thực tế)."},
-        {id:4,text:"Ví dụ nào sau đây là một ứng dụng của trí tuệ nhân tạo yếu (AI yếu) trong thực tế hiện nay?",choices:[
-          {key:"A",text:"ChatGPT – chatbot tạo sinh văn bản.",correct:true},
-          {key:"B",text:"AI có khả năng tư duy và cảm xúc như con người.",correct:false},
-          {key:"C",text:"AI tự nhận thức được bản thân và hành động như con người.",correct:false},
-          {key:"D",text:"AI mạnh có khả năng xử lý mọi loại vấn đề.",correct:false}],
-          explain:"Ví dụ minh họa AI giao tiếp đa ngôn ngữ (>120 ngôn ngữ)."}
-      ],
-      truefalse: [
-        {id:101,text:"Những nhận định dưới đây là Đúng hay Sai khi nói về thiết bị mạng trong phòng máy tính:",statements:[
-          {key:"a",text:"Switch kết nối máy trong LAN để chia sẻ dữ liệu.",answer:true,explain:"Switch là thiết bị trung tâm trong LAN."},
-          {key:"b",text:"Router chỉ dùng để chia sẻ máy in.",answer:false,explain:"Router định tuyến, không phải để chia sẻ máy in."},
-          {key:"c",text:"Access Point giúp thiết bị không dây kết nối mạng.",answer:true,explain:"AP cho phép kết nối Wi‑Fi vào LAN."},
-          {key:"d",text:"Modem chuyển tín hiệu số ↔ tương tự.",answer:true,explain:"Đúng chức năng điều chế/giải điều chế."}
-        ]}
-      ]
-    }
-
-    const rawInline = parseQuizJSON(document.getElementById('quiz-data')?.textContent)
-    // Nếu người dùng chưa dán JSON thật (hai mảng rỗng) thì fallback sang DEMO
-    const raw = rawInline
-
-    function buildDataset(src){
-      return {
-        multiple: (src.multiple||[]).map(q=>({ ...q, originalChoices: Array.isArray(q.choices)? [...q.choices] : [] })),
-        truefalse: (src.truefalse||[]).map(q=>({ ...q, statements: Array.isArray(q.statements)? q.statements : [] }))
-      }
-    }
-    let dataset = buildDataset(raw)
-
-    let order = []
-    let ptr = 0
-    let score = 0
-    let answered = new Map()
-
-    // ===== Self-tests (minimal) =====
-    function runSelfTests(){
-      const tests = []
-      tests.push({name:'multiple is array', pass:Array.isArray(raw.multiple)})
-      tests.push({name:'truefalse is array', pass:Array.isArray(raw.truefalse)})
-      tests.push({name:'choices are arrays', pass: dataset.multiple.every(q=>Array.isArray(q.choices))})
-      tests.push({name:'statements are arrays', pass: dataset.truefalse.every(q=>Array.isArray(q.statements))})
-      // UI presence tests
-      tests.push({name:'has next button', pass: !!document.getElementById('btn-next')})
-      tests.push({name:'has toast counter', pass: !!document.getElementById('toast-count')})
-      const failed = tests.filter(t=>!t.pass)
-      if(failed.length){
-        console.warn('SELF TEST FAILED', failed)
-        setAlert('Kiểm tra dữ liệu/UI: ' + failed.map(f=>f.name).join(', ') + ' ❌', 'bad')
-      }else{
-        setAlert('Dữ liệu & UI hợp lệ ✓', 'good')
-      }
-    }
-function buildOrder(){
-      // Guard: require inline JSON; no DEMO, no file fetch
-      if (!((raw?.multiple||[]).length || (raw?.truefalse||[]).length)) { setAlert('Chưa dán JSON hợp lệ vào script#quiz-data', 'bad'); return }
-      order = []
-      // Shuffle MC choices each session
-      dataset.multiple.forEach(q=>{ q.choices = shuffle((q.originalChoices||[]).map(c=>({ ...c }))) })
-      // Randomize TF statements order for each run
-      dataset.truefalse.forEach(q=>{ q.statements = shuffle((q.statements||[]).map(s=>({ ...s }))) })
-      const pack = [
-        ...dataset.multiple.map((_,i)=>({type:'mc', idx:i})),
-        ...dataset.truefalse.map((_,i)=>({type:'tf', idx:i})),
-      ]
-      order = shuffle(pack)
-      ptr = 0; score = 0; answered.clear()
-      syncMeta(); render();
-    }
-
-    /* Fallback-safe buildOrder (override)
-    buildOrder = function(){
-      if (!((dataset?.multiple||[]).length || (dataset?.truefalse||[]).length)) { setAlert('Chua d�n JSON h?p l? v�o script#quiz-data', 'bad'); return }
-      order = []
-      dataset.multiple.forEach(q=>{ q.choices = shuffle((q.originalChoices||[]).map(c=>({ ...c }))) })
-      dataset.truefalse.forEach(q=>{ q.statements = shuffle((q.statements||[]).map(s=>({ ...s }))) })
-      const pack = [
-        ...dataset.multiple.map((_,i)=>({type:'mc', idx:i})),
-        ...dataset.truefalse.map((_,i)=>({type:'tf', idx:i})),
-      ]
-      order = shuffle(pack)
-      ptr = 0; score = 0; answered.clear()
-      syncMeta(); render();
-    } */
-
-    function syncMeta(){
-      const pill = document.getElementById('meta-pill')
-      pill.textContent = `${Math.min(ptr+1, order.length)}/${order.length} câu`
-      document.getElementById('progress').style.width = (order.length? ((ptr)/order.length*100):0) + '%'
-      document.getElementById('debug-pill').textContent = `MC:${dataset.multiple.length} • TF:${dataset.truefalse.length}`
-    }
-
-    function render(){
-      if (ptr >= order.length) { return renderSummary() }
-      const slot = order[ptr]
-      const area = document.getElementById('question-area')
-      area.innerHTML = ''
-      document.getElementById('mode-pill').textContent = slot.type === 'mc' ? 'Nhiều lựa chọn' : 'Đúng/Sai'
-
-      if (slot.type === 'mc') renderMC(area, dataset.multiple[slot.idx])
-      else renderTF(area, dataset.truefalse[slot.idx])
-
-      syncMeta()
-    }
-
-    // ===== Renderers =====
-    function renderMC(area, q){
-      if(!q || !Array.isArray(q.choices) || q.choices.length===0){
-        const warn = document.createElement('div'); warn.className='alert bad'; warn.textContent='Câu hỏi không hợp lệ hoặc thiếu lựa chọn.'; area.appendChild(warn); return;
-      }
-      const title = document.createElement('div'); title.className = 'q-title'; title.textContent = `Câu hỏi (ID ${q.id}): ${q.text}`; area.appendChild(title)
-      const meta = document.createElement('div'); meta.className = 'q-meta'; meta.textContent = 'Chọn một đáp án duy nhất.'; area.appendChild(meta)
-
-      const choices = document.createElement('div'); choices.className='choices'
-      q.choices.forEach((c, i)=>{
-        const row = document.createElement('div'); row.className='choice'; row.dataset.key = c.key
-        row.innerHTML = `<div class="badge">${String.fromCharCode(65+i)}</div><div>${c.text}</div>`
-        row.addEventListener('click', ()=> handleMCSelect(q, row, c))
-        choices.appendChild(row)
-      })
-      area.appendChild(choices)
-
-      const explain = document.createElement('div'); explain.className='explain'; explain.style.display='none'; explain.id='exp'
-      explain.innerHTML = '<div id="announce"></div><div id="exp-text" style="margin-top:8px"></div>'
-      area.appendChild(explain)
-    }
-
-    function handleMCSelect(q, row, choice){
-      if ($('.choice.disabled')) return
-      $$('.choice').forEach(el=> el.classList.add('disabled'))
-      const isCorrect = !!choice.correct
-      if (isCorrect){ row.classList.add('correct'); playCorrect(); score += 1 }
-      else { row.classList.add('incorrect'); const idx = q.choices.findIndex(c=>c.correct); const el = $$('.choice')[idx]; if (el) el.classList.add('correct'); playWrong() }
-      answered.set(tokenFor(q), {correct:isCorrect})
-      const exp = $('#exp'); exp.style.display='block'
-      const ann = $('#announce'); ann.className = 'announce ' + (isCorrect ? 'good':'bad')
-      ann.textContent = isCorrect ? 'Bạn giỏi lắm, CHÚC MỪNG BẠN!' : 'Rất tiếc, HÃY SUY NGHĨ LẠI!'
-      $('#exp-text').textContent = q.explain || ''
-      startPause()
-    }
-
-    function renderTF(area, q){
-      if(!q || !Array.isArray(q.statements) || q.statements.length===0){
-        const warn = document.createElement('div'); warn.className='alert bad'; warn.textContent='Câu Đúng/Sai không hợp lệ hoặc thiếu mệnh đề.'; area.appendChild(warn); return;
-      }
-      const title = document.createElement('div'); title.className = 'q-title'; title.textContent = `Câu hỏi (ID ${q.id}): ${q.text}`; area.appendChild(title)
-
-      const block = document.createElement('div'); block.className='tf-block'
-      q.statements.forEach((st, idx)=>{
-        const row = document.createElement('div'); row.className='tf-row'; row.dataset.idx = idx
-        row.innerHTML = `<div><b>${st.key})</b> ${st.text}<div class="tf-exp" style="display:none"></div></div>`
-        const act = document.createElement('div'); act.className='tf-actions'
-        const bT = document.createElement('button'); bT.className='tf-btn true'; bT.textContent='ĐÚNG'
-        const bF = document.createElement('button'); bF.className='tf-btn false'; bF.textContent='SAI'
-        bT.addEventListener('click', ()=> handleTFSelect(q, row, st, true))
-        bF.addEventListener('click', ()=> handleTFSelect(q, row, st, false))
-        act.appendChild(bT); act.appendChild(bF)
-        row.appendChild(act)
-        block.appendChild(row)
-      })
-      area.appendChild(block)
-
-      const explain = document.createElement('div'); explain.className='explain'; explain.style.display='none'; explain.id='exp'
-      explain.innerHTML = '<div id="announce"></div><div id="exp-text" style="margin-top:8px"></div>'
-      area.appendChild(explain)
-    }
-
-    function handleTFSelect(q, row, st, val){
-      if (row.classList.contains('correct') || row.classList.contains('incorrect')) return
-      const ok = (val === !!st.answer)
-      if (ok){ row.classList.add('correct'); playCorrect(); score += 1 } else { row.classList.add('incorrect'); playWrong() }
-      const exp = row.querySelector('.tf-exp'); exp.style.display='block'; exp.textContent = st.explain || ''
-      const allDone = $$('.tf-row').every(r => r.classList.contains('correct') || r.classList.contains('incorrect'))
-      if (allDone){
-        const panel = $('#exp'); panel.style.display='block';
-        const correctCount = $$('.tf-row.correct').length
-        const isPerfect = correctCount === q.statements.length
-        const ann = $('#announce'); ann.className = 'announce ' + (isPerfect ? 'good':'bad')
-        ann.textContent = isPerfect ? 'Bạn giỏi lắm, CHÚC MỪNG BẠN!' : 'Rất tiếc, HÃY SUY NGHĨ LẠI!'
-        $('#exp-text').textContent = 'Hãy đọc giải thích dưới mỗi ý.'
-        startPause()
-      }
-    }
-
-    function tokenFor(q){ return `q-${q.id}` }
-
-    // ===== Pause & Navigation =====
-    let pauseLeft = 0
-    let tickHandle = null
-
-    function startPause(){
-      pauseLeft = 45
-      const toast = document.getElementById('pause-toast')
-      if (toast) { toast.style.display = 'flex' }
-      const cnt = document.getElementById('toast-count')
-      if (cnt) cnt.textContent = pauseLeft
-      const timer = document.getElementById('timer-text')
-      if (timer) timer.textContent = `Tạm dừng: ${pauseLeft}s`
-      clearInterval(tickHandle)
-      tickHandle = setInterval(()=>{
-        pauseLeft -= 1
-        if (pauseLeft <= 0){ stopPause(); return }
-        if (cnt) cnt.textContent = pauseLeft
-        if (timer) timer.textContent = `Tạm dừng: ${pauseLeft}s`
-      }, 1000)
-    }
-    function stopPause(){
-      clearInterval(tickHandle); tickHandle = null
-      const toast = document.getElementById('pause-toast')
-      if (toast) toast.style.display = 'none'
-      const timer = document.getElementById('timer-text')
-      if (timer) timer.textContent = `Tạm dừng: 0s`
-    }
-
-    function next(){ stopPause(); ptr = Math.min(ptr+1, order.length); render() }
-    function prev(){ stopPause(); ptr = Math.max(ptr-1, 0); render() }
-
-    // ===== Summary =====
-    function renderSummary(){
-      const total = computeTotalPoints()
-      const area = document.getElementById('question-area')
-      area.innerHTML = ''
-      const box = document.createElement('div'); box.className='summary'
-      const h2 = document.createElement('h2'); h2.textContent = '🎉 Hoàn thành bài trắc nghiệm'
-      const scoreEl = document.createElement('div'); scoreEl.className='score'; scoreEl.textContent = `${score} / ${total} điểm`
-      const remark = document.createElement('div'); remark.className='remark'; remark.textContent = getRemark(score, total)
-      box.appendChild(h2); box.appendChild(scoreEl); box.appendChild(remark)
-      area.appendChild(box)
-      document.getElementById('progress').style.width = '100%'
-      document.getElementById('meta-pill').textContent = `${order.length}/${order.length} câu`
-      document.getElementById('mode-pill').textContent = 'Tổng kết'
-    }
-
-    function computeTotalPoints(){
-      const tfPoints = (dataset.truefalse||[]).reduce((s,q)=> s + (Array.isArray(q.statements)? q.statements.length : 0), 0)
-      const mcPoints = (dataset.multiple||[]).length
-      return tfPoints + mcPoints
-    }
-
-    function getRemark(sc, total){
-      const pct = total>0 ? (sc/total)*100 : 0
-      if (pct >= 90) return 'Xuất sắc! Bạn làm chủ kiến thức – tuyệt vời!'
-      if (pct >= 65) return 'Tốt! Tiếp tục luyện tập để đạt mức xuất sắc nhé!'
-      return 'Bạn cần ôn tập thêm! Đừng nản lòng, hãy làm lại nhé.'
-    }
-
-    // ===== Events =====
-    document.getElementById('btn-load-json').addEventListener('click', ()=> document.getElementById('jsonFile').click())
-    document.getElementById('jsonFile').addEventListener('change', async (e)=>{
-      const f = e.target.files?.[0]; if(!f) return;
-      try{ await loadJSONFromFile(f); }
-      catch(err){ console.error(err); setAlert('Không nạp được tệp JSON: '+ err.message, 'bad') }
-    })
-
-    document.getElementById('btn-next').addEventListener('click', next)
-    document.getElementById('btn-prev').addEventListener('click', prev)
-    document.getElementById('btn-retry').addEventListener('click', ()=>{ stopPause(); buildOrder() })
-    window.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); })
-    // Chặn chuột phải và F12 (giảm thiểu; không tuyệt đối an toàn)
-    document.addEventListener('contextmenu', (e)=>{ e.preventDefault() }, { capture:true })
-    window.addEventListener('keydown', (e)=>{
-      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false }
-    }, { capture:true })
-
-    // ===== Init =====
-    runSelfTests()
-    buildOrder()
-  </script>
-</body>
-</html>
-
-

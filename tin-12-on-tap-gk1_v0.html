@@ -3792,11 +3792,6 @@ function buildOrder(){
     document.getElementById('btn-prev').addEventListener('click', prev)
     document.getElementById('btn-retry').addEventListener('click', ()=>{ stopPause(); buildOrder() })
     window.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); })
-    // Chặn chuột phải và F12 (giảm thiểu; không tuyệt đối an toàn)
-    document.addEventListener('contextmenu', (e)=>{ e.preventDefault() }, { capture:true })
-    window.addEventListener('keydown', (e)=>{
-      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false }
-    }, { capture:true })
 
     // ===== Init =====
     runSelfTests()

@@ -1,0 +1,26 @@
+{
+  "multiple": [
+    {
+      "id": 1,
+      "text": "AI là gì?",
+      "explain": "Khả năng máy thực hiện nhiệm vụ trí tuệ.",
+      "choices": [
+        { "key": "A", "text": "Khả năng máy tính làm việc trí tuệ.", "correct": true },
+        { "key": "B", "text": "Một hệ điều hành.", "correct": false },
+        { "key": "C", "text": "Một ngôn ngữ lập trình.", "correct": false },
+        { "key": "D", "text": "Một thiết bị mạng.", "correct": false }
+      ]
+    }
+  ],
+  "truefalse": [
+    {
+      "id": 101,
+      "text": "Nhận định đúng/sai:",
+      "statements": [
+        { "key": "a", "text": "Router dùng để định tuyến.", "answer": true, "explain": "Đúng: Router định tuyến gói tin." },
+        { "key": "b", "text": "Switch là thiết bị lớp 7.", "answer": false, "explain": "Sai: Switch (thông dụng) ở lớp 2." }
+      ]
+    }
+  ]
+}
+
