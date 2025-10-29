@@ -137,30 +137,30 @@
     },
     {
       "id": 6,
-      "text": "",
+      "text": " \"Turing Test\" là gì?",
       "choices": [
         {
           "key": "A",
-          "text": "AI có khả năng tạo ra nội dung từ dữ liệu đã có.",
+          "text": "Một bài kiểm tra trí tuệ của máy tính.",
           "correct": true
         },
         {
           "key": "B",
-          "text": "AI có khả năng tự học hỏi mà không cần sự can thiệp của con người.",
+          "text": "Một phương pháp đánh giá khả năng học của AI.",
           "correct": false
         },
         {
           "key": "C",
-          "text": "AI có khả năng giao tiếp với con người bằng ngôn ngữ tự nhiên.",
+          "text": "Một hệ thống AI chuyên gia.",
           "correct": false
         },
         {
           "key": "D",
-          "text": "AI có khả năng nhận thức môi trường xung quanh. \n\"Turing Test\" là gì?",
+          "text": "Một thuật toán học sâu.",
           "correct": false
         }
       ],
-      "explain": "Bài kiểm tra đánh giá khả năng máy mô phỏng trí tuệ con người  qua đối thoại."
+      "explain": "Bài kiểm tra đánh giá khả năng máy mô phỏng trí tuệ con người qua đối thoại."
     },
     {
       "id": 7,
@@ -232,12 +232,12 @@
         },
         {
           "key": "C",
-          "text": "Tăng cường khả năng tự học của con người. D. Giảm chi phí sản xuất.",
+          "text": "Tăng cường khả năng tự học của con người.",
           "correct": false
         },
         {
           "key": "D",
-          "text": "Thay thế hoàn toàn các bác sĩ.",
+          "text": "Giảm chi phí sản xuất.",
           "correct": false
         }
       ],
@@ -249,7 +249,7 @@
       "choices": [
         {
           "key": "A",
-          "text": "Đọc và phân tích ảnh quét một cách chính xác. \n\n1",
+          "text": "Đọc và phân tích ảnh quét một cách chính xác.",
           "correct": true
         },
         {
@@ -264,7 +264,7 @@
         },
         {
           "key": "D",
-          "text": "Thay thế hoàn toàn các bác sĩ. \n\nTHÔNG HIỂU (10):",
+          "text": "Thay thế hoàn toàn các bác sĩ.",
           "correct": false
         }
       ],
@@ -276,7 +276,7 @@
       "choices": [
         {
           "key": "A",
-          "text": "Cobot. \ngia.",
+          "text": "Cobot.",
           "correct": true
         },
         {
@@ -534,7 +534,7 @@
         },
         {
           "key": "D",
-          "text": "Không thể học từ dữ liệu mới. \nBài 2. Trí tuệ nhân tạo trong khoa học và đời sống \nNHẬN BIẾT (10): \n\n2",
+          "text": "Không thể học từ dữ liệu mới.",
           "correct": false
         }
       ],
@@ -804,7 +804,7 @@
         },
         {
           "key": "D",
-          "text": "Không có vai trò trong việc giảm thiểu sai sót y tế \n\nTHÔNG HIỂU (10):",
+          "text": "Không có vai trò trong việc giảm thiểu sai sót y tế.",
           "correct": false
         }
       ],
@@ -1074,7 +1074,7 @@
         },
         {
           "key": "D",
-          "text": "Một chuỗi số 48bit được chia thành 6 cụm 8 bit. \n\nBài 3. Một số thiết bị mạng thông dụng \nNHẬN BIẾT (10):",
+          "text": "Một chuỗi số 48bit được chia thành 6 cụm 8 bit.",
           "correct": false
         }
       ],
@@ -1339,7 +1339,7 @@
         },
         {
           "key": "C",
-          "text": "Mạng LAN. \nBài 4: Giao thức mạng \nTHÔNG HIỂU (10).",
+          "text": "Mạng LAN.",
           "correct": false
         },
         {
@@ -1514,7 +1514,7 @@
     },
     {
       "id": 57,
-      "text": "TCP (Transmission Control Protocol) cung cấp cơ chế nào để đảm bảo dữ liệu được truyền đầy",
+      "text": "TCP (Transmission Control Protocol) cung cấp cơ chế nào để đảm bảo dữ liệu được truyền đầy đủ và chính xác?",
       "choices": [
         {
           "key": "A",
@@ -1614,7 +1614,7 @@
         },
         {
           "key": "D",
-          "text": "SMTP. \n\nBài 5. Thực hành chia sẻ tài nguyên trên mạng \nNHẬN BIẾT (10).",
+          "text": "SMTP.",
           "correct": false
         }
       ],
@@ -1631,7 +1631,7 @@
         },
         {
           "key": "B",
-          "text": "Tạo thư mục chia sẻ. \n\n5",
+          "text": "Tạo thư mục chia sẻ.",
           "correct": false
         },
         {
@@ -1865,7 +1865,7 @@
     },
     {
       "id": 70,
-      "text": "Để truy cập vào một thư mục chia sẻ từ máy tính khác trong mạng LAN, ta có thể sử dụng cú",
+      "text": "Để truy cập vào một thư mục chia sẻ từ máy tính khác trong mạng LAN, ta có thể sử dụng cú pháp nào?",
       "choices": [
         {
           "key": "A",
@@ -1879,7 +1879,7 @@
         },
         {
           "key": "C",
-          "text": "ftp://[IP_address]/[shared_folder]. \n\nBài 6. Giao tiếp và ứng xử trong không gian mạng \nNHẬN BIẾT (10):",
+          "text": "ftp://[IP_address]/[shared_folder].",
           "correct": false
         },
         {
@@ -1888,7 +1888,7 @@
           "correct": false
         }
       ],
-      "explain": "\\\\IP_address\\shared_folder.  Bài 6. Giao tiếp và ứng xử trong không gian mạng"
+      "explain": "\\\\IP_address\\shared_folder."
     },
     {
       "id": 71,
@@ -1987,7 +1987,7 @@
         },
         {
           "key": "C",
-          "text": "Luôn đảm bảo tính chính xác của thông tin. \n\n6",
+          "text": "Luôn đảm bảo tính chính xác của thông tin.",
           "correct": false
         },
         {
@@ -2154,7 +2154,7 @@
         },
         {
           "key": "D",
-          "text": "Không ảnh hưởng đến cuộc sống thực \n\nTHÔNG HIỂU (10):",
+          "text": "Không ảnh hưởng đến cuộc sống thực.",
           "correct": false
         }
       ],
@@ -2243,7 +2243,7 @@
     },
     {
       "id": 84,
-      "text": "Tính nhân văn được thể hiện như thế nào trong việc xử lý các thông tin tiêu cực trên không gian",
+      "text": "Tính nhân văn được thể hiện như thế nào trong việc xử lý các thông tin tiêu cực trên không gian mạng?",
       "choices": [
         {
           "key": "A",
@@ -2279,7 +2279,7 @@
         },
         {
           "key": "B",
-          "text": "Giao tiếp luôn chính xác và không có lỗi. \n\n7",
+          "text": "Giao tiếp luôn chính xác và không có lỗi.",
           "correct": false
         },
         {
@@ -2424,7 +2424,7 @@
         },
         {
           "key": "D",
-          "text": "Giao tiếp qua không gian mạng luôn tạo ra sự gần gũi hơn. \n\nBài 7. HTML và cấu trúc trang web \nNHẬN BIẾT (10):",
+          "text": "Giao tiếp qua không gian mạng luôn tạo ra sự gần gũi hơn.",
           "correct": false
         }
       ],
@@ -2694,11 +2694,11 @@
         },
         {
           "key": "D",
-          "text": "url \n\nPHẦN II: CÂU HỎI ĐÚNG/SAI (20 CÂU).",
+          "text": "url.",
           "correct": false
         }
       ],
-      "explain": "href.  PHẦN II – CÂU HỎI ĐÚNG/SAI (Câu 101–120)  ĐÁP ÁN & GIẢI THÍCH – PHẦN II: CÂU HỎI ĐÚNG/SAI  Câu  Nhận định  Đúng/Sai Giải thích ngắn gọn  101a  Switch kết nối máy trong LAN để  chia sẻ dữ liệu.       Đúng  Switch là thiết bị trung tâm trong  LAN.  101b Router chỉ dùng để chia sẻ máy in.      Sai  Router định tuyến, không phải để  chia sẻ máy in.    \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  101c  Access Point giúp thiết bị không dây  kết nối mạng.       Đúng  AP cho phép kết nối Wi-Fi vào  mạng LAN.  101d  Modem chuyển tín hiệu số ↔ tương  tự.       Đúng  Đúng chức năng điều chế/giải điều  chế.  102a LAN hoạt động trong phạm vi hẹp.       Đúng  Phạm vi một toà nhà, phòng,  trường.  102b WAN có quy mô toàn cầu.       Đúng WAN kết nối nhiều LAN.  102c  LAN và WAN không thể kết nối.      Sai  Có thể kết nối qua router/gateway.  102d  Mạng nội bộ doanh nghiệp vài trăm  máy là LAN.       Đúng LAN có thể tới hàng trăm máy.  103a Mỗi thiết bị cần IP riêng.       Đúng Mỗi thiết bị phải có IP duy nhất.  103b Hai máy có thể dùng chung IP.      Sai  Trùng IP gây xung đột.  103c  IP có thể cấp tự động bằng DHCP.       Đúng DHCP cấp phát IP động.  103d Router không cần IP.      Sai  Router cần IP để định tuyến.  104a  Mật khẩu mạnh gồm chữ, số, ký tự  đặc biệt.       Đúng Đảm bảo độ khó bị đoán.  104b Không nên chia sẻ mật khẩu.       Đúng Để bảo mật tài khoản.  104c  Wi-Fi công cộng luôn an toàn.      Sai  Nguy cơ nghe lén cao.  104d  Cập nhật phần mềm giúp giảm rủi  ro.       Đúng Vá lỗ hổng bảo mật.  105a Tôn trọng người khác khi bình luận.       Đúng Thể hiện văn hóa mạng.  105b  Đăng thông tin cá nhân người khác  “đùa vui”.      Sai  Vi phạm quyền riêng tư.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  105c  Kiểm tra nguồn tin trước khi chia sẻ.       Đúng Tránh tin giả.  105d Ngôn từ lịch sự là biểu hiện văn hóa.       Đúng Đúng quy tắc ứng xử số.  106a  WLAN kết nối không dây, không  cần cáp.       Đúng “Wireless LAN”.  106b  Access Point là thiết bị chính trong  WLAN.       Đúng Là điểm truy cập trung tâm.  106c  Tất cả thiết bị phải có bộ giao tiếp  không dây.       Đúng Cần Wi-Fi adapter.  106d  WLAN chỉ hiệu quả trong 1 phòng  nhỏ.      Sai  Có thể mở rộng bằng nhiều AP.  107a  Router kết nối các mạng LAN khác  nhau.       Đúng Chức năng định tuyến.  107b Switch chỉ kết nối trong cùng LAN.       Đúng Chỉ hoạt động ở tầng liên kết.  107c  Router và Switch đều xác định  đường đi.      Sai  Chỉ Router định tuyến.  107d  Switch không hoạt động nếu không  có Router.      Sai  Switch vẫn hoạt động trong LAN.  108a  Modem điều chế/giải điều chế tín  hiệu.       Đúng Chức năng cơ bản.  108b Modem luôn cần Router.      Sai  Có thể hoạt động độc lập.  108c  Modem tích hợp Router và AP.       Đúng Phổ biến hiện nay.  108d  Modem chỉ hoạt động với tín hiệu số  hóa.      Sai  Làm việc với tín hiệu số & tương  tự.  109a Internet là mạng WAN toàn cầu.       Đúng WAN lớn nhất.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  109b  Router là thiết bị không thể thiếu để  truy cập Internet.       Đúng Định tuyến gói tin ra/vào Internet.  109c  ISP là nhà cung cấp dịch vụ Internet.       Đúng Cấp kết nối và địa chỉ IP.  109d  Internet chỉ truy cập qua kết nối có  dây.      Sai  Có thể qua Wi-Fi, 4G, 5G.  110a  Giao tiếp mạng giúp người khiếm  khuyết tự tin hơn.       Đúng Giảm rào cản giao tiếp.  110b  Giao tiếp mạng không cho lưu thông  tin.      Sai  Có thể lưu tin nhắn, lịch sử.  110c  Không bị giới hạn bởi số người tham  gia.       Đúng Họp nhóm, diễn đàn, livestream.  110d  Không thể giao tiếp nếu không cùng  thời gian, địa điểm.      Sai  Có thể không đồng bộ (email, tin  nhắn).  111a  Có thể hiểu lầm do thiếu ngôn ngữ  hình thể.       Đúng Thiếu cảm xúc, phi ngôn ngữ.  111b Tin nhắn luôn đúng ngữ pháp.      Sai  Dễ sai chính tả, viết tắt.  111c  Có thể gây lười biếng và lệ thuộc  công nghệ.       Đúng Giảm giao tiếp trực tiếp.  111d  Rủi ro bị rình rập, quấy rối không  liên quan mạng.      Sai  Là rủi ro phổ biến.  112a  Ứng xử nhân văn chỉ là không làm  việc xấu.      Sai  Còn phải chủ động lan tỏa điều tốt.  112b Phê phán tiêu cực cần có văn hóa.       Đúng Thể hiện nhân văn và đạo đức.  112c  Ứng xử nhân văn không cần đồng  cảm.      Sai  Đồng cảm là cốt lõi của nhân văn.  112d Người có văn hóa không mạo danh       Đúng Mạo danh là hành vi sai trái.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  người khác.  113a Kết nối bằng dây qua Switch.       Đúng Cổng LAN của switch.  113b  Kết nối qua Access Point không cần  dây.       Đúng Kết nối không dây (Wi-Fi).  113c  Access Point và Switch cùng mạng.       Đúng Cùng LAN vật lý.  113d  Chia sẻ dữ liệu được dù không có  Internet.       Đúng  LAN hoạt động độc lập với  Internet.  114a  Một số máy cắm sai cổng hoặc dây  lỏng.       Đúng Dây lỗi → không chia sẻ được.  114b  Không có Internet nên không chia sẻ  được.      Sai  LAN không cần Internet.  114c  Chưa bật chức năng chia sẻ thư mục.       Đúng Cần bật “File Sharing”.  114d  Không có Access Point nên không  chia sẻ được.      Sai  LAN có dây không cần AP.  115a Hỏi chủ nhà tên Wi-Fi và mật khẩu.       Đúng Bước đầu tiên.  115b Bật Wi-Fi, nhập đúng mật khẩu.       Đúng Cách kết nối đúng.  115c  Kết nối bằng 4G.      Sai  Không liên quan mạng nội bộ.  115d Dùng cáp UTP để kết nối Wi-Fi.      Sai  Wi-Fi là không dây.  116a  IP là giao thức mọi máy phải tuân  theo.       Đúng Giao thức định danh cơ bản.  116b IP là tên viết tắt của TCP/IP.      Sai  IP là 1 phần của TCP/IP.  116c  Hai máy có thể dùng chung IP.      Sai  Trùng IP gây xung đột.  116d Trạm gửi tìm đường dựa vào IP       Đúng Router dùng IP để định tuyến.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  đích.  117a Cáp quang truyền tín hiệu ánh sáng.       Đúng Đặc trưng cơ bản.  117b  Lõi có độ trong suốt, bọc lưới kim  loại phản xạ ánh sáng.      Sai  Phản xạ do lớp cladding, không  phải lưới kim loại.  117c  Cáp quang bó nhiều sợi, có lớp bảo  vệ/lưới kim loại.       Đúng Đúng về cấu trúc vật lý.  117d Cáp quang biển là loại Single-Mode.       Đúng Truyền xa, suy hao thấp.  118a  Có thể đọc tin tức online thay báo  giấy.       Đúng Tiện lợi và nhanh chóng.  118b  E-commerce giúp mua sắm không  cần ra ngoài.       Đúng Thương mại điện tử.  118c  Gửi thư, nói chuyện, nhìn hình ảnh  qua mạng.       Đúng Email, chat video.  118d Tin tức mạng luôn đáng tin cậy.      Sai  Cần kiểm chứng nguồn.  119a Wi-Fi là mạng cục bộ không dây.       Đúng Wireless LAN.  119b Wi-Fi truyền bằng sóng điện từ.       Đúng Sóng radio.  119c  Access Point và Switch có thể thay  thế nhau.      Sai  Chức năng khác nhau.  119d  Có thể truy cập miễn là trong vùng  phủ sóng.       Đúng Phạm vi AP.  120a MAN nhỏ hơn LAN.      Sai  MAN lớn hơn LAN.  120b LAN còn gọi là mạng cục bộ/nội bộ.       Đúng Tên đầy đủ.  120c  Khi chưa có Wi-Fi, LAN dùng cáp  mạng.       Đúng Mạng có dây truyền thống.  \fCâu  Nhận định  Đúng/Sai Giải thích ngắn gọn  120d Trường 50 máy thuộc mạng MAN.      Sai  Phạm vi nhỏ → LAN."
+      "explain": "href."
     }
   ],
   "truefalse": [
@@ -2824,7 +2824,7 @@
     },
     {
       "id": 105,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về giao tiếp và ứng xử trên không gian",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về giao tiếp và ứng xử trên không gian mạng:",
       "statements": [
         {
           "key": "a",
@@ -2974,17 +2974,17 @@
     },
     {
       "id": 110,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về ưu điểm của giao tiếp qua không gian",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về ưu điểm của giao tiếp qua không gian mạng?",
       "statements": [
         {
           "key": "a",
-          "text": "Giao tiếp qua không gian mạng giúp giảm thiểu mặc cảm và tạo điều kiện cho những người có",
+          "text": "Giao tiếp qua không gian mạng giúp giảm thiểu mặc cảm và tạo điều kiện cho những người có khiếm khuyết giao tiếp tự nhiên hơn.",
           "answer": true,
           "explain": "Giảm rào cản giao tiếp."
         },
         {
           "key": "b",
-          "text": "Giao tiếp qua không gian mạng không cho phép lưu trữ thông tin trò chuyện để tham khảo sau",
+          "text": "Giao tiếp qua không gian mạng không cho phép lưu trữ thông tin trò chuyện để tham khảo sau này.",
           "answer": false,
           "explain": "Có thể lưu tin nhắn, lịch sử."
         },
@@ -2996,7 +2996,7 @@
         },
         {
           "key": "d",
-          "text": "Giao tiếp qua không gian mạng không thể diễn ra nếu hai bên không cùng thời gian và địa",
+          "text": "Giao tiếp qua không gian mạng không thể diễn ra nếu hai bên không cùng thời gian và địa điểm.",
           "answer": false,
           "explain": "Có thể không đồng bộ (email, tin nhắn)."
         }
@@ -3004,11 +3004,11 @@
     },
     {
       "id": 111,
-      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về các vấn đề tiềm ẩn của giao tiếp qua",
+      "text": "Những nhận định dưới đây là Đúng hay Sai khi nói về các vấn đề tiềm ẩn của giao tiếp qua không gian mạng?",
       "statements": [
         {
           "key": "a",
-          "text": "Giao tiếp qua không gian mạng có thể gây hiểu lầm do thiếu ngôn ngữ hình thể và tín hiệu cảm",
+          "text": "Giao tiếp qua không gian mạng có thể gây hiểu lầm do thiếu ngôn ngữ hình thể và tín hiệu cảm xúc.",
           "answer": true,
           "explain": "Thiếu cảm xúc, phi ngôn ngữ."
         },
@@ -3026,7 +3026,7 @@
         },
         {
           "key": "d",
-          "text": "Các rủi ro như bị rình rập, quấy rối hoặc lộ thông tin cá nhân không liên quan đến giao tiếp qua",
+          "text": "Các rủi ro như bị rình rập, quấy rối hoặc lộ thông tin cá nhân không liên quan đến giao tiếp qua không gian mạng.",
           "answer": false,
           "explain": "Là rủi ro phổ biến."
         }
@@ -3094,11 +3094,11 @@
     },
     {
       "id": 114,
-      "text": "Trong giờ thực hành kết nối mạng LAN trong phòng tin học. Sau thời gian 25 phút nghiêm túc",
+      "text": "Trong giờ thực hành kết nối mạng LAN trong phòng tin học. Sau thời gian 25 phút nghiêm túc \n thực hành. Các em học sinh cùng thầy giáo đã kết nối xong dây mạng, modem, Switch. Trên máy tính \n của thầy giáo và các em đều hiển thị tên các máy trạm. Thầy giáo yêu cầu các em học sinh chia sẻ \n dữ liệu trên mạng LAN giữa các máy tính với nhau nhưng có một số máy tính không chia sẻ dữ liệu \n được. Một số em đưa ra ý kiến sau. Theo em ý kiến nào đúng, ý kiến nào sai? \n ",
       "statements": [
         {
           "key": "a",
-          "text": "Một số máy có thể chưa được kết nối đúng cổng hoặc dây mạng bị lỏng, hỏng nên",
+          "text": "Một số máy có thể chưa được kết nối đúng cổng hoặc dây mạng bị lỏng, hỏng nên \n không chia sẻ được dữ liệu.",
           "answer": true,
           "explain": "Dây lỗi → không chia sẻ được."
         },
@@ -3117,14 +3117,14 @@
         {
           "key": "d",
           "text": "Trong phòng không có thiết bị kết nối không dây (Access Point).",
-          "answer": null,
-          "explain": ""
+          "answer": true,
+          "explain": "Cần bật “File Sharing”."
         }
       ]
     },
     {
       "id": 115,
-      "text": "Một người có hợp đồng sử dụng Internet tại nhà với một nhà cung cấp dịch vụ Internet (ISP).",
+      "text": "Một người có hợp đồng sử dụng Internet tại nhà với một nhà cung cấp dịch vụ Internet (ISP). \n ISP này cử người đến nhà lắp đặt một thiết bị Modem kiêm Access Point, nhờ đó không chỉ máy tính PC \n mà các thiết bị không dây trong nhà cũng có thể truy cập Internet. Thiết bị này có cổng RJ-45 dành cho \n cáp mạng UTP. Một vị khách đến chơi nhà người đó và muốn dùng điện thoại thông minh truy cập \n Internet thông qua mạng Wi-Fi của chủ nhà. Vị khách đã thực hiện các thao tác sau:\n ",
       "statements": [
         {
           "key": "a",
@@ -3134,7 +3134,7 @@
         },
         {
           "key": "b",
-          "text": "Bật chức năng Wi-Fi trên điện thoại thông minh, chọn đúng mạng Wi-Fi của chủ nhà An và",
+          "text": "Bật chức năng Wi-Fi trên điện thoại thông minh, chọn đúng mạng Wi-Fi của chủ nhà An và \n nhập đúng mật khẩu.",
           "answer": true,
           "explain": "Cách kết nối đúng."
         },
@@ -3154,7 +3154,7 @@
     },
     {
       "id": 116,
-      "text": "IP là giao thức định tuyến trên mạng, giúp tìm ra tuyến đường tốt nhất để truyền gói tin tới đích.",
+      "text": "IP là giao thức định tuyến trên mạng, giúp tìm ra tuyến đường tốt nhất để truyền gói tin tới đích. \n IP là một phần của TCP/IP, bộ giao thức chính của Internet. Địa chỉ IP giúp định danh các máy trạm, nhờ đó \n các gói tin có thể được vận chuyển tới đúng trạm nhận. Trong mạng LAN, mỗi máy trạm hay Router đều được \n gắn một địa chỉ IP riêng và duy nhất. Trước khi gửi đi một gói tin qua mạng, trạm gửi bắt buộc phải ghi \n rõ địa chỉ IP của trạm gửi và trạm nhận trong phần tiêu đề (Header) của gói tin. Dựa vào địa chỉ này Router \n sẽ tìm ra tuyến đường để chuyển gói tin tới đích. Sau khi đọc nhận xét trên, một số bạn học sinh đưa \n ra các ý kiến sau:\n ",
       "statements": [
         {
           "key": "a",
@@ -3176,7 +3176,7 @@
         },
         {
           "key": "d",
-          "text": "Dựa vào địa chỉ IP của trạm nhận, trạm gửi có nhiệm vụ tìm ra tuyến đường để chuyển gói tin",
+          "text": "Dựa vào địa chỉ IP của trạm nhận, trạm gửi có nhiệm vụ tìm ra tuyến đường để chuyển gói tin \n tới nơi đích.",
           "answer": true,
           "explain": "Router dùng IP để định tuyến."
         }
@@ -3184,7 +3184,7 @@
     },
     {
       "id": 117,
-      "text": "Trong cáp quang (Fiber Optic cable) tín hiệu được truyền đi dưới dạng ánh sáng. Lõi sợi quang",
+      "text": "Trong cáp quang (Fiber Optic cable) tín hiệu được truyền đi dưới dạng ánh sáng. Lõi sợi quang \n truyền tín hiệu làm bằng thủy tinh hữu cơ hay nhựa tổng hợp có độ trong suốt rất cao, bề mặt được phủ \n một lớp lót phản chiếu ánh sáng để tín hiệu không lọt ra ngoài. Bên ngoài lõi có các lớp vỏ nhựa bảo vệ. \n Giữa lớp lót phản chiếu ánh sáng và vỏ bọc có thể là một lớp nhựa tổng hợp hay một lưới kim loại để tăng \n độ bền cho cáp. Nhờ có kích thước nhỏ, cáp quang thường được bó nhiều sợi với nhau. Cáp quang loại \n Single-Mode có khả năng truyền qua khoảng cách hàng chục ngàn kilomet, vì thế được dùng làm cáp quang \n biển để truyền dữ liệu giữa các quốc gia, châu lục. Sau khi đọc nhận xét trên, một số bạn học sinh đưa \n ra các ý kiến sau: \n",
       "statements": [
         {
           "key": "a",
@@ -3194,13 +3194,13 @@
         },
         {
           "key": "b",
-          "text": "Lõi cáp quang có độ trong suốt cao, bên ngoài được bọc một lớp lưới kim loại để phản xạ ánh",
-          "answer": null,
-          "explain": ""
+          "text": "Lõi cáp quang có độ trong suốt cao, bên ngoài được bọc một lớp lưới kim loại để phản xạ ánh \n sáng",
+          "answer": false,
+          "explain": "Phản xạ do lớp cladding, không phải lưới kim loại."
         },
         {
           "key": "c",
-          "text": "Cáp quang thường được bó nhiều sợi với nhau vì nó sử dụng các lớp vỏ bảo vệ bên ngoài lõi,",
+          "text": "Cáp quang thường được bó nhiều sợi với nhau vì nó sử dụng các lớp vỏ bảo vệ bên ngoài lõi,\n trong đó có cả lớp lưới kim loại.",
           "answer": true,
           "explain": "Đúng về cấu trúc vật lý."
         },
@@ -3214,13 +3214,13 @@
     },
     {
       "id": 118,
-      "text": "Nhờ có mạng máy tính, ta có thể truy cập các trang web tin tức thời sự, thể thao, học trực tuyến,",
+      "text": "Nhờ có mạng máy tính, ta có thể truy cập các trang web tin tức thời sự, thể thao, học trực tuyến,\n mua sắm hay giao dịch tài chính trực tuyến, các cổng thông tin điện tử, các tiện ích giải trí như xem phim, \n nghe nhạc trực tuyến hay chơi game. Internet là môi trường tiềm năng cho các công ty thương mại điện tử (E-commerce). \n Email, chat qua webcam giúp con người giao lưu nhanh chóng, thuận tiện hơn. Tuy nhiên mạng máy tính cũng \n có những mặt trái, chẳng hạn như những thông tin xấu độc, sai sự thật. Sau khi đọc nhận xét trên, một số \n bạn học sinh đưa ra các ý kiến sau:\n ",
       "statements": [
         {
           "key": "a",
-          "text": "Thay vì phải mua báo giấy, ngày nay chúng ta có thể đọc tin tức từ nhiều nguồn trên mạng một",
-          "answer": null,
-          "explain": ""
+          "text": "Thay vì phải mua báo giấy, ngày nay chúng ta có thể đọc tin tức từ nhiều nguồn trên mạng một\n cách nhanh chóng và thuận tiện hơn.",
+          "answer": true,
+          "explain": "Tiện lợi và nhanh chóng."
         },
         {
           "key": "b",
@@ -3230,13 +3230,13 @@
         },
         {
           "key": "c",
-          "text": "Các tiện ích trên mạng giúp con người gửi thư, nói chuyện và nhìn thấy hình ảnh của nhau khi",
+          "text": "Các tiện ích trên mạng giúp con người gửi thư, nói chuyện và nhìn thấy hình ảnh của nhau khi \n  liên lạc qua mạng.",
           "answer": true,
           "explain": "Email, chat video."
         },
         {
           "key": "d",
-          "text": "Những tin tức từ các nguồn thông tin trên mạng là hoàn toàn đáng tin cậy, hàng hóa mua qua",
+          "text": "Những tin tức từ các nguồn thông tin trên mạng là hoàn toàn đáng tin cậy, hàng hóa mua qua \n  mạng luôn có chất lượng đảm bảo.",
           "answer": false,
           "explain": "Cần kiểm chứng nguồn."
         }
@@ -3244,7 +3244,7 @@
     },
     {
       "id": 119,
-      "text": "Mạng máy tính sử dụng sóng điện từ để truyền thông tin được gọi là mạng không dây. Mạng",
+      "text": "Mạng máy tính sử dụng sóng điện từ để truyền thông tin được gọi là mạng không dây. Mạng \n không dây hoạt động trong phạm vi nhỏ được gọi là mạng Wi-Fi (còn gọi là mạng LAN không dây hay \n mạng cục bộ không dây). Wi-Fi sử dụng một thiết bị Access Point (còn được gọi là Điểm truy cập \n không dây) để cung cấp kết nối không dây cho các máy trạm trong mạng cục bộ. Vai trò của Access \n Point trong mạng Wi-Fi tương tự như vai trò của thiết bị Switch trong mạng có dây. Để truy cập \n vào Internet bằng mạng Wi-Fi, không cần dây mạng và cổng cắm cáp mạng. Tuy nhiên, mức độ bảo mật \n và tốc độ truyền của mạng Wi-Fi không bằng mạng có dây. Sau khi đọc nhận xét trên, một số bạn \n học sinh đưa ra các ý kiến sau:\n ",
       "statements": [
         {
           "key": "a",
@@ -3260,13 +3260,13 @@
         },
         {
           "key": "c",
-          "text": "Vai trò của Access Point tương tự như vai trò của thiết bị Switch, vì vậy hai thiết bị này có thể",
+          "text": "Vai trò của Access Point tương tự như vai trò của thiết bị Switch, vì vậy hai thiết bị này có thể\n thay thế lẫn nhau.",
           "answer": false,
           "explain": "Chức năng khác nhau."
         },
         {
           "key": "d",
-          "text": "Người dùng có thể truy cập mạng Wi-Fi tại bất cứ đâu, miễn là còn trong vùng phủ sóng của",
+          "text": "Người dùng có thể truy cập mạng Wi-Fi tại bất cứ đâu, miễn là còn trong vùng phủ sóng của\n Access Point thuộc mạng Wi-Fi đó.",
           "answer": true,
           "explain": "Phạm vi AP."
         }
@@ -3274,7 +3274,7 @@
     },
     {
       "id": 120,
-      "text": "Thông thường mạng có vài chục hoặc vài trăm máy trạm, hoạt động trong phạm vi một tòa nhà,",
+      "text": "Thông thường mạng có vài chục hoặc vài trăm máy trạm, hoạt động trong phạm vi một tòa nhà,\n một gia đình hay cơ quan cỡ nhỏ thì được gọi là mạng LAN, còn gọi là Mạng cục bộ hay Mạng nội bộ. \n MAN là loại mạng có số lượng máy trạm và phạm vi hoạt động lớn hơn so với LAN. Ở thời kỳ đầu mạng \n LAN chỉ sử dụng cáp mạng, hiện nay công nghệ truyền không dây của mạng Wi-Fi giúp các máy trạm trao \n đổi dữ liệu thuận tiện và dễ dàng hơn. Sau khi đọc nhận xét trên, một số bạn đưa ra ý kiến như sau:\n ",
       "statements": [
         {
           "key": "a",
@@ -3290,13 +3290,13 @@
         },
         {
           "key": "c",
-          "text": "Mạng Wi-Fi ra đời sau, khi chưa có Wi-Fi các máy trạm phải dùng dây cáp mạng để kết nối với",
-          "answer": null,
-          "explain": ""
+          "text": "Mạng Wi-Fi ra đời sau, khi chưa có Wi-Fi các máy trạm phải dùng dây cáp mạng để kết nối với\n nhau.",
+          "answer": true,
+          "explain": "Mạng có dây truyền thống."
         },
         {
           "key": "d",
-          "text": "Một trường THPT có khoảng 50 máy PC kết nối mạng với nhau để học sinh thực hành và giáo",
+          "text": "Một trường THPT có khoảng 50 máy PC kết nối mạng với nhau để học sinh thực hành và giáo \n viên truy cập Internet. Mạng nội bộ của trường đó thuộc loại mạng MAN.",
           "answer": false,
           "explain": "Phạm vi nhỏ → LAN."
         }
