@@ -280,7 +280,9 @@
 
         .accordion-content.open {
             padding: 1.2rem 1.5rem;
-            max-height: 500px;
+            /* Cho phép mở rộng theo nội dung thay vì cố định 500px */
+            max-height: 9999px;
+            overflow: visible;
             transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -290,6 +292,8 @@
 
         .lesson-item {
             margin-bottom: 0.5rem;
+            /* Tránh bị che bởi thanh điều hướng sticky khi scrollIntoView */
+            scroll-margin-top: 80px;
         }
 
         .lesson-link {
@@ -731,7 +735,7 @@
                             <div class="lesson-link" tabindex="0">ÔN TẬP GIỮA HỌC KÌ 1, NĂM HỌC 2025-2026</div>
                             <div class="lesson-detail">
                                 <a href="tin-12-on-tap-gk1.html" class="lesson-detail-link" target="_blank">Ôn
-                                    ngay</a><br/><br/><br/>
+                                    ngay</a>
                             </div>
                         </li>
                     </ul>
@@ -750,6 +754,11 @@
                             // Nếu chưa mở thì mở
                             if (!isActive) {
                                 item.classList.add('active');
+                                // Scroll phan chi tiet vao giua man hinh de tranh bi che
+                                var detail = item.querySelector('.lesson-detail');
+                                if (detail) {
+                                    setTimeout(function(){ detail.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 0);
+                                }
                             }
                         });
                         // Hỗ trợ mở bằng phím Enter/Space
