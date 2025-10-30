@@ -81,6 +81,7 @@
     <header>
       <div class="logo">🧠 Ôn tập giữa học kỳ 1 - Tin học 11</div>
       <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn-ghost" id="btn-home" onclick="location.href='index.html'">TRANG CHỦ</button>
         <div class="pill" id="meta-pill">0/0 câu</div>
         <div class="pill" id="debug-pill">Debug: idle</div>
       </div>
@@ -107,11 +108,17 @@
       <div id="question-area" class="question"><!-- dynamic content --></div>
 
       <div class="controls">
-        <div style="display:flex; gap:8px; align-items:center">
+        <div style="display:flex; gap:8px; align-items:center; order:2">
+          <button id="btn-tuluan" class="btn-primary" onclick="location.href='huong-dan-tu-luan-gk1-tin-11.html'"
+            style="font-size:16px;font-weight:900;padding:12px 18px;letter-spacing:.3px; background:linear-gradient(180deg,#22c55e,#16a34a);box-shadow:inset 0 0 0 1px #22c55e">
+            THAM KHẢO PHẦN TỰ LUẬN
+          </button>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; order:1">
           <button class="btn-ghost" id="btn-prev" title="Quay lại (←)">← Trước</button>
           <button class="btn-primary" id="btn-next" title="Tiếp theo (→)">Tiếp theo →</button>
         </div>
-        <div style="display:flex; gap:8px; align-items:center">
+        <div style="display:flex; gap:8px; align-items:center; order:3">
           <button class="btn-danger" id="btn-retry">Làm lại</button>
         </div>
       </div>
