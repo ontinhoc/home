@@ -1,0 +1,2729 @@
+﻿﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ôn tập giữa học kỳ 1 - Tin học 11</title>
+  <style>
+    :root{ --bg:#0f172a; --card:#111827cc; --accent:#22c55e; --danger:#ef4444; --muted:#94a3b8; --text:#e5e7eb; --primary:#6366f1; --yellow:#f59e0b }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 10% 10%,#1f2937 0%,var(--bg) 60%);color:var(--text)}
+    .container{max-width:980px;margin:24px auto;padding:16px}
+    header{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .logo{font-weight:800;letter-spacing:.3px;font-size:clamp(18px,3vw,24px)}
+    .pill{padding:6px 10px;border-radius:999px;background:#1f2937;color:var(--muted);font-size:12px}
+
+    .card{background:linear-gradient(180deg,#0b1020 0%,#0a0f1f 100%);border:1px solid #1f2a44;border-radius:16px;box-shadow:0 10px 40px #0008;overflow:hidden}
+    .card-header{padding:16px 20px;border-bottom:1px solid #1f2a44;display:flex;align-items:center;justify-content:space-between}
+    .progress{height:10px;background:#0b1220;border-radius:999px;overflow:hidden}
+    .progress-inner{height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4,#6366f1);width:0%;transition:width .3s ease}
+
+    .question{padding:20px;display:grid;gap:16px}
+    .q-title{font-size:clamp(18px,2.6vw,22px);font-weight:700}
+    .q-meta{color:var(--muted);font-size:13px}
+    .choices{display:grid;gap:12px}
+    .choice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#0c1428;border:1px solid #1f2a44;border-radius:12px;cursor:pointer;transition:transform .06s ease,border-color .2s ease,background .2s ease}
+    .choice:hover{transform:translateY(-1px);border-color:#334a7a}
+    .choice.correct{background:#052814;border-color:#14532d}
+    .choice.incorrect{background:#2a0f12;border-color:#7f1d1d}
+    .choice.disabled{cursor:not-allowed;opacity:.85}
+    .badge{width:26px;height:26px;border-radius:8px;background:#0b1020;display:grid;place-items:center;font-weight:700;color:#cbd5e1;flex-shrink:0}
+
+    .explain{background:#0b1220;border-top:1px dashed #203055;padding:16px 20px;font-size:14px;color:#d1d5db}
+    .announce{padding:10px 14px;border-radius:10px;font-weight:700;display:inline-flex;gap:8px;align-items:center}
+    .announce.good{background:#052814;border:1px solid #14532d;color:#86efac}
+    .announce.bad{background:#2a0f12;border:1px solid #7f1d1d;color:#fecaca}
+
+    .controls{display:flex;flex-wrap:wrap;gap:10px;padding:16px 20px;border-top:1px solid #1f2a44;align-items:center;justify-content:space-between}
+    button{appearance:none;border:none;border-radius:12px;padding:10px 14px;font-weight:700;background:linear-gradient(180deg,#334155,#1f2937);color:#e5e7eb;cursor:pointer;box-shadow:inset 0 0 0 1px #475569;transition:transform .06s ease,opacity .2s ease}
+    button:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(180deg,#4f46e5,#4338ca);box-shadow:inset 0 0 0 1px #6366f1}
+    .btn-danger{background:linear-gradient(180deg,#ef4444,#b91c1c);box-shadow:inset 0 0 0 1px #ef4444}
+    .btn-ghost{background:transparent;box-shadow:inset 0 0 0 1px #334155}
+
+    .timer{display:flex;align-items:center;gap:10px;color:#93c5fd}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
+
+    /* TRUE/FALSE blocks */
+    .tf-block{display:grid;gap:12px;margin-top:8px}
+    .tf-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid #1f2a44;border-radius:10px;background:#0c1428}
+    .tf-actions{display:flex;gap:8px}
+    .tf-btn{padding:8px 10px;border-radius:10px;font-weight:700;box-shadow:inset 0 0 0 1px #334155}
+    .tf-btn.true{background:#064e3b}
+    .tf-btn.false{background:#7f1d1d}
+    .tf-row.correct{outline:2px solid #16a34a}
+    .tf-row.incorrect{outline:2px solid #ef4444}
+    .tf-exp{font-size:13px;margin-top:6px;color:#c7d2fe}
+
+    /* Summary */
+    .summary{padding:24px;text-align:center}
+    .summary h2{margin:0 0 8px 0;font-size:clamp(20px,3vw,28px)}
+    .score{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:.5px;margin:6px 0 14px}
+    .remark{font-size:clamp(14px,2.6vw,18px);color:#cbd5e1}
+
+    @media (max-width:600px){.choices{gap:10px}.tf-row{grid-template-columns:1fr}}
+
+    /* Pause toast (non-blocking) */
+    .toast{position:fixed;right:16px;bottom:16px;display:none;align-items:center;gap:10px;background:#0b1020;border:1px solid #1f2a44;border-radius:12px;padding:10px 12px;z-index:40;pointer-events:none;box-shadow:0 8px 30px #0006}
+    .toast-dot{width:10px;height:10px;border-radius:999px;background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
+
+    /* Alert */
+    .alert{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#1f2937;border:1px solid #334155;color:#e5e7eb;font-size:12px}
+    .alert.bad{border-color:#7f1d1d;color:#fecaca}
+    .alert.good{border-color:#14532d;color:#86efac}
+    /* Ẩn nút nạp JSON và liên kết tải JSON đầy đủ (không ảnh hưởng logic) */
+    #btn-load-json{display:none}
+    a.pill[href*="quiz_data_full_100_20.json"]{display:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🧠 Ôn tập giữa học kỳ 1 - Tin học 11</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="pill" id="meta-pill">0/0 câu</div>
+        <div class="pill" id="debug-pill">Debug: idle</div>
+      </div>
+    </header>
+
+    <div style="display:flex; gap:8px; align-items:center; margin:8px 0 0 0">
+      <input id="jsonFile" type="file" accept="application/json" style="display:none"/>
+      <button class="btn-ghost" id="btn-load-json">📥 Nạp dữ liệu từ JSON</button>
+      <a href="sandbox:/mnt/data/quiz_data_full_100_20.json" target="_blank" class="pill" style="text-decoration:none">Tải JSON đầy đủ (100 MC + 20 Đ/S)</a>
+    </div>
+    <div id="alert" class="alert" style="display:none"></div>
+
+    <div class="card" id="app">
+      <div class="card-header">
+        <div style="display:flex; gap:12px; align-items:center">
+          <div class="pill" id="mode-pill">Nhiều lựa chọn</div>
+          <div class="timer"><span class="dot"></span> <span id="timer-text">Tạm dừng: 0s</span></div>
+        </div>
+        <div class="progress" style="width:min(360px,50%)">
+          <div class="progress-inner" id="progress"></div>
+        </div>
+      </div>
+
+      <div id="question-area" class="question"><!-- dynamic content --></div>
+
+      <div class="controls">
+        <div style="display:flex; gap:8px; align-items:center">
+          <button class="btn-ghost" id="btn-prev" title="Quay lại (←)">← Trước</button>
+          <button class="btn-primary" id="btn-next" title="Tiếp theo (→)">Tiếp theo →</button>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center">
+          <button class="btn-danger" id="btn-retry">Làm lại</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; color:#9ca3af; font-size:12px">Tip: sau khi trả lời, hệ thống tự dừng 45 giây để bạn xem giải thích. Bạn có thể nhấn <b>Tiếp theo</b> bất cứ lúc nào.</div>
+  </div>
+
+  <!-- Pause toast -->
+  <div class="toast" id="pause-toast" role="status" aria-live="polite" aria-atomic="true">
+    <span class="toast-dot"></span>
+    <span id="toast-text">Tạm dừng: <b id="toast-count">45</b>s — Bạn có thể nhấn <b>Tiếp theo</b> để bỏ qua.</span>
+  </div>
+
+  <!-- DATA SECTION: test case tối thiểu để trang chạy an toàn lần đầu -->
+  <!--
+    👉 CÁCH DÙNG DỮ LIỆU THẬT (120 câu) BẰNG CÁCH DÁN TRỰC TIẾP
+    1) Mở file JSON đầy đủ (quiz_data_full_100_20.json), copy TOÀN BỘ nội dung.
+    2) Dán đè vào thẻ <script id="quiz-data" type="application/json"> … </script> phía dưới.
+       - Bạn có thể dán nguyên văn JSON (không cần thêm export hay biến JS nào).
+       - Nếu để trống thẻ này, trang sẽ tự động chạy bằng dữ liệu DEMO (4 MC + 1 Đ/S) để đảm bảo không lỗi.
+  -->
+  <script id="quiz-data" type="application/json">
+{
+  "multiple": [
+    {
+      "id": 1,
+      "text": "Đâu là chức năng của hệ điều hành các máy tính nói chung?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tổ chức thực hiện các chương trình, điều phối tài nguyên cho các tiến trình xử lý trên máy tính",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Cung cấp môi trường giao tiếp với người sử dụng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Cung cấp một số tiện ích giúp nâng cao hiệu quả sử dụng máy tính",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tổ chức thực hiện các chương trình, điều phối tài nguyên cho các tiến trình xử lý trên máy tính; Cung cấp môi trường giao tiếp với người sử dụng; Cung cấp một số tiện ích giúp nâng cao hiệu quả sử dụng máy tính",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 2,
+      "text": "Hệ điều hành quản lý thiết bị nào?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "CPU",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ nhớ hay thiết bị ngoại vi",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "CPU; Bộ nhớ hay thiết bị ngoại vi",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "CU",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 3,
+      "text": "Hệ điều hành quản lý việc lưu trữ dữ liệu nào?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "CPU",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ nhớ hay thiết bị ngoại vi",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Quản lý tệp và quản lý thư mục",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 4,
+      "text": "Hệ điều hành cung cấp tiện ích nào để nâng cao hiệu quả sử dụng máy tính?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Định dạng đĩa",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Nén tệp",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Kiểm tra lỗi đĩa",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đáp án trên đều đúng",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 5,
+      "text": "Hệ điều hành là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Phần mềm để chạy các ứng dụng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thiết bị trung gian để chạy các ứng dụng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Môi trường để chạy các ứng dụng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 6,
+      "text": "Trên màn hình có các biểu tượng nào?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tệp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thư mục",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Nút lệnh",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tệp; Thư mục; Nút lệnh",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 7,
+      "text": "Em có thể truy cập nhanh các phần mềm ứng dụng nhờ?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thanh công việc",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Nút Start",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thanh công việc; Nút Start",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Hệ điều hành",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 8,
+      "text": "Em có thể sử dụng tiện ích của File Explorer của Window để?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Truy cập nhanh các phần mềm ứng dụng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Quản lý tệp và thư mục",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Quan sát trạng thái hiển thị",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 9,
+      "text": "Em có thể thực hiện thao tác nào khi quản lý tệp trên UBuntu?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Đổi tên tệp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Chạy ứng dụng với tệp chương trình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Xóa, di chuyển tệp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đổi tên tệp; Chạy ứng dụng với tệp chương trình; Xóa, di chuyển tệp",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 10,
+      "text": "Để làm xuất hiện bảng chọn các lệnh có thể thực hiện với tệp thì ta phải?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Nháy nút trái chuột",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Nháy đúp chuột",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Nháy nút phải chuột",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 11,
+      "text": "Tiện ích là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Một phần mềm đa năng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Một tệp chứ nhiều tệp con",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Những công cụ hỗ trợ nhiều công việc khác nhau",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 12,
+      "text": "Tiện ích có thể hỗ trợ công việc nào dưới đây?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Ứng dụng tính toán",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Chụp ảnh màn hình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Gõ tiếng Việt",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Ứng dụng tính toán; Chụp ảnh màn hình; Gõ tiếng Việt",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 13,
+      "text": "Đĩa cứng là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Là đĩa kim loại chứa phần mềm",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Loại đĩa kim loại phủ vật liệu từ tính",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Là đĩa kim loại chứa các tiện ích",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 14,
+      "text": "Dữ liệu được đọc, được ghi bởi?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Các đầu từ theo các đường thẳng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Các đầu từ theo các đường tròn đồng tâm",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Các đầu từ theo các đoạn thẳng nét cong",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 15,
+      "text": "Mỗi cung ghi bao nhiêu dữ liệu?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "512 byte",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "512 mega byte",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "512 gigabyte",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 16,
+      "text": "Với ngôn ngữ lập trình bậc cao thì chương trình được viết dưới dạng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Văn bản khác với ngôn ngữ tự nhiên",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Kí tự gần giống với văn bản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Văn bản gần với ngôn ngữ tự nhiên",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đáp án trên đều đúng",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 17,
+      "text": "Văn bản gần với ngôn ngữ tự nhiên trong ngôn ngữ lập trình bậc cao được gọi là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Lệnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mã code",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mã nguồn",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đáp án trên đều sai",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 18,
+      "text": "Để máy tính có thể chạy trực tiếp thì?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Chương trình được dịch thành ngôn ngữ lập trình",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Chương trình được dịch thành mã nguồn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Chương trình được dịch thành dãy lệnh máy",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 19,
+      "text": "Việc dịch chương trình sang mã máy giúp?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bảo vệ chống đánh cắp ý tưởng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Sửa đổi phần mềm",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bảo vệ chống đánh cắp ý tưởng; Sửa đổi phần mềm",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Sửa đổi bàn phím",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 20,
+      "text": "Vì sao việc dịch sang mã máy giúp chống sửa đối phần mềm và chống đánh cắp ý tưởng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Mã máy dễ đọc",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mã máy có tính bảo mật cao",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Mã máy rất khó đọc",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 21,
+      "text": "Nguyên nhân dẫn đến sự ra đời của phần mềm nguồn mở là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Không chia sẻ mã nguồn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Cùng nhau tạo ra mã nguồn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Chia sẻ mã nguồn để cùng phát triển",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 22,
+      "text": "Cách thước chuyển giao phần mềm cho người sử dụng theo chiều hướng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Ngăn dần",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Đóng dần",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bí mật dần",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Mở dần",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 23,
+      "text": "Phần mềm thương mại là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Phần mềm để bán",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Loại nguồn đóng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Phần mềm để bán; Loại nguồn đóng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Loại nguồn mở",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 24,
+      "text": "Đáp án nào dưới đây là phần mềm thương mại?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Inkscape",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "GIMP",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Microsoft Word",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Môi trường lập trình cho ngôn ngữ Python",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 25,
+      "text": "Phần mềm tự do có đặc điểm?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Là phần mềm miễn phí",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Được tự do sử dụng mà không cần xin phép",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Có thể ở dạng mã máy hoặc mã nguồn",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Là phần mềm miễn phí; Được tự do sử dụng mà không cần xin phép; Có thể ở dạng mã máy hoặc mã nguồn",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 26,
+      "text": "Bộ cấu trúc chung của máy tính gồm?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ xử lý trung tâm",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ nhớ trong, ngoài",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Các thiết bị vào ra",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Bộ xử lý trung tâm; Bộ nhớ trong, ngoài; Các thiết bị vào ra",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 27,
+      "text": "Đâu là các thiết bị bên ngoài máy tính?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Màn hính",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bàn phím",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Chuột",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Màn hính; Bàn phím; Chuột",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 28,
+      "text": "Bộ xử lý trung tâm là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thành phần quan trọng nhất của máy tính",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thực hiện các chương trình máy tính",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thành phần quan trọng nhất của máy tính; Thực hiện các chương trình máy tính",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Quản lí phần cứng máy tính.",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 29,
+      "text": "CPU được cấu tạo từ?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ số học và lôgic",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ điều khiển",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bộ số học và lôgic; Bộ điều khiển",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Chuột",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 30,
+      "text": "Bộ phận nào thực hiện tất cả các phép tính số học và logic trong máy tính?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ điều khiển",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ nhớ trong",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bộ số học và logic",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Bộ nhớ ROM",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 31,
+      "text": "Bộ phận nào phối hợp đồng bộ các thiết bị của máy tính, đảm bảo máy tính thực hiện đúng chương trình?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ điều khiển",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bộ số học và logic",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bộ điều khiển",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Bộ nhớ ROM",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 32,
+      "text": "Đồng hồ xung được dùng để?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Phối hợp đồng bộ các thiết bị của máy tính, đảm bảo máy tính thực hiện đúng chương trình",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thực hiện tất cả các phép tính số học và logic trong máy tính",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Tạo ra các xung điện áp gửi đến mọi thành phần của máy để đồng bộ các hoạt động",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 33,
+      "text": "Tần số đồng hồ xung là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Hz",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "kHz",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "GHz",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 34,
+      "text": "Tần số đồng hồ xung được dùng để?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tạo ra các xung điện áp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Đánh giá tốc độ của CPU",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Phối hợp đồng bộ các thiết bị của máy tính, đảm bảo máy tính thực hiện đúng chương trình",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Thực hiện tất cả các phép tính số học và logic trong máy tính",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 35,
+      "text": "Thanh ghi là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Vùng nhớ đặc biệt dùng để lưu trữ tạm thời các lệnh và dữ liệu đang được xử lý",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Vùng nhớ đặc biệt dùng để lưu trữ các lệnh và dữ liệu đang được xử lý",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Vùng xử lý dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 36,
+      "text": "RAM là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ nhớ có thể ghi được",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Dùng để ghi dữ liệu tạm thời trong khi chạy các chương trình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Không dữ được lâu dài các dữ liệt tạm thời",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Bộ nhớ có thể ghi được; Dùng để ghi dữ liệu tạm thời trong khi chạy các chương trình; Không dữ được lâu dài các dữ liệt tạm thời",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 37,
+      "text": "ROM là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bộ nhớ được ghi bằng phương tiện chuyên dùng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Các chương trình ứng dụng chỉ có thể đọc mà không thể ghi hay xóa",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Không cần nguồn nuôi",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Bộ nhớ được ghi bằng phương tiện chuyên dùng; Các chương trình ứng dụng chỉ có thể đọc mà không thể ghi hay xóa; Không cần nguồn nuôi",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 38,
+      "text": "Bộ nhớ ngoài có thể đặt ở đâu?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bên ngoài thân máy",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Bên trong thân máy",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bên ngoài thân máy; Bên trong thân máy",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Trên mạng.",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 39,
+      "text": "Đâu là bộ nhớ ngoài?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Đĩa từ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Đĩa thể rắn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Đĩa quang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đĩa từ; Đĩa thể rắn; Đĩa quang",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 40,
+      "text": "Bộ nhớ ngoài dùng để?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Lưu trữ dữ liệu lâu dài",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Không cần nguồn nuôi",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Có dung lượng lớn",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Lưu trữ dữ liệu lâu dài; Không cần nguồn nuôi; Có dung lượng lớn",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 41,
+      "text": "Các thiết bị vào ra là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Nhóm thiết bị chứa dữ liệu tạm thời",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Nhóm thiết bị chứa các dữ liệu lâu dài",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Nhóm các thiết bị ngoại vi đa dạng và phong phú nhất của máy tính",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Nhóm các phần mềm",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 42,
+      "text": "Các thiết bị vào cho phép?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Chuyển thông tin từ máy tính ra ngoài",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Nhập dữ liệu vào máy tính",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Trao đổi thông tin hai chiều",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đáp án trên đều sai",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 43,
+      "text": "Các thiết bị ra là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Chuyển thông tin từ máy tính ra ngoài",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Nhập dữ liệu vào máy tính",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Trao đổi thông tin hai chiều",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Cả ba đáp án trên đều sai",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 44,
+      "text": "Đáp án nào dưới đây là thiết bị vào?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Bàn phím",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Chuột",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Máy đọc mã vạch",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Bàn phím; Chuột; Máy đọc mã vạch",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 45,
+      "text": "Đâu là thiết bị ra?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Màn hình",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Máy in",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Máy chiếu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Màn hình; Máy in; Máy chiếu",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 46,
+      "text": "Đâu vừa là thiết bị vào vừa là thiết bị ra?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Máy in",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Máu quét ảnh",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "USB",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Máy chiếu",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 47,
+      "text": "Bàn phím là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thiết bị ra phổ biến",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thiết bị thông dụng nhất để nhập dữ liệu",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Thiết bị chỉ định đối tượng làm việc trên màn hình",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 48,
+      "text": "Chuột là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thiết bị thông dụng nhất để nhập dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Thiết bị ra phổ biến",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thiết bị chỉ định đối tượng làm việc trên màn hình",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 49,
+      "text": "Thông số quan trọng nhất của chuột là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Phương thức kết nối",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Độ phân giải",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Phương thức kết nối; Độ phân giải",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Cả hai đáp án trên đều sai",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 50,
+      "text": "Tốc độ của chuột được thể hiện bằng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tỉ lệ khoảng cách con trỏ màn hình di chuyển được so với khoảng cách di chuyển của chuột trên mặt bàn",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Khoảng cách di chuyển được của chuột trên màn hình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Tốc độ di chuyển trên giây của chuột trên mặt bàn",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 51,
+      "text": "Thiết bị ra phổ biến nhất là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Máy in",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Loa",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Màn hình",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Máy chiếu",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 52,
+      "text": "Loại màn hình nào sử dụng công nghệ đèn chân không?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "LCD",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "LED",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "CRT",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "plasma",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 53,
+      "text": "Độ phân giải màn hình thể hiện bằng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Số điểm ảnh theo chiều ngang và chiều dọc của màn hình",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Độ dài đường chéo trên màn hình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Hình ảnh trên màn hình được tạo liên tục",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Khoảng thời gian cần thiết để có thể đổi màu một điểm ảnh",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 54,
+      "text": "Tần số quét là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Số điểm ảnh theo chiều ngang và chiều dọc của màn hình",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Độ dài đường chéo trên màn hình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Hình ảnh trên màn hình được tạo liên tục",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Khoảng thời gian cần thiết để có thể đổi màu một điểm ảnh",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 55,
+      "text": "Thời gian phản hồi là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Số điểm ảnh theo chiều ngang và chiều dọc của màn hình",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Độ dài đường chéo trên màn hình",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Hình ảnh trên màn hình được tạo liên tục",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Khoảng thời gian cần thiết để có thể đổi màu một điểm ảnh",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 56,
+      "text": "Internet đã khắc phục những rào cản nào của các tài nguyên máy tính?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Dung lượng đĩa cứng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Dung lượng thiết bị nhớ ngoài",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Dữ liệu bị hạn chế",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Dung lượng đĩa cứng; Dung lượng thiết bị nhớ ngoài; Dữ liệu bị hạn chế.",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 57,
+      "text": "Các nhà cung cấp dịch vụ lưu trữ thông tin, dữ liệu ngày nay là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Google",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Microsoft",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Apple",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Google; Microsoft; Apple",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 58,
+      "text": "Khi đăng kí sử dụng dịch vụ lưu trữ thông tin, dữ liêu trực tuyến thì người dùng sẽ được?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Cung cấp các dịch vụ xử lý dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Cung cấp phần mềm chỉnh sửa dữ liệu trực tuyến",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Cung cấp một không gian nhớ trực tuyến",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Đáp án khác",
+          "correct": false
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 59,
+      "text": "Khi sử dụng các dịch vụ lưu trữ và chia sẻ tệp tin trên Internet người dùng có thể?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tải tệp hay thư mục của mình lên ổ đĩa trực tuyến",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Tạo mới và quản lý thư mục, tệp trên ổ đĩa trực tuyến",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Chia sẻ thư mục và tệp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tải tệp hay thư mục của mình lên ổ đĩa trực tuyến; Tạo mới và quản lý thư mục, tệp trên ổ đĩa trực tuyến; Chia sẻ thư mục và tệp",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    },
+    {
+      "id": 60,
+      "text": "Khi chia sẻ thông tin trên Internet, chủ sở hữu của thư mục, tệp có thể quyết định chế độ chia sẻ nào dưới đây?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Quyền chỉ xem",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Quyền được nhận xét",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Quyền chỉnh sửa",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Quyền chỉ xem; Quyền được nhận xét; Quyền chỉnh sửa",
+          "correct": true
+        }
+      ],
+      "explain": ""
+    }
+  ],
+  "truefalse": [
+    {
+      "id": 101,
+      "text": "Khi tìm hiểu về cách chuyển giao phần mềm, Nam nhận thấy rằng có nhiều hình thức khác nhau: từ phần mềm thương mại bán dưới dạng mã máy, đến phần mềm nguồn mở chia sẻ mã nguồn. Em hãy giúp Nam chọn ra những ý đúng về đặc điểm của phần mềm thương mại:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Là phần mềm được bán ra với chi phí cụ thể, thường được cung cấp ở dạng mã máy để tránh bị sửa đổi trái phép.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Người dùng có thể tuỳ ý chia sẻ, chỉnh sửa phần mềm thương mại miễn là không sử dụng vào mục đích kinh doanh.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Một số phần mềm thương mại dạng \"đặt hàng\" được phát triển theo yêu cầu riêng của doanh nghiệp và có bảo hành kỹ thuật.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Tất cả phần mềm thương mại đều bắt buộc phải có tính năng chia sẻ mã nguồn để người dùng sửa lỗi.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "text": "Lan đang sử dụng phần mềm nguồn mở để thiết kế đồ họa cho một dự án trường học. Cô giáo yêu cầu học sinh trình bày lợi ích của phần mềm nguồn mở đối với cá nhân và cộng đồng. Học sinh đã trình bày một số đáp án của mình như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Mọi phần mềm nguồn mở đều đi kèm hỗ trợ kỹ thuật chính thức từ nhà phát hành như phần mềm thương mại.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Phần mềm nguồn mở khuyến khích cộng đồng cùng phát triển và chia sẻ, tạo môi trường học tập và sáng tạo mở.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Người dùng có thể sử dụng phần mềm nguồn mở miễn phí mà không cần tuân thủ bất kỳ điều kiện bản quyền nào.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Người dùng có thể tiếp cận mã nguồn để hiểu cách hoạt động của phần mềm, từ đó có thể tùy chỉnh phù hợp với nhu cầu riêng.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "text": "Trong một buổi học nhóm, Bình thắc mắc: “Nếu sửa đổi một phần mềm nguồn mở thì có phải chia sẻ lại mã nguồn đó không?”. Em hãy giúp Bình xác định những nội dung thể hiện quy định trong giấy phép GNU GPL:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Khi sửa đổi phần mềm nguồn mở theo GPL, người sửa đổi phải công bố mã nguồn đã thay đổi kèm theo giấy phép GPL.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Phần mềm được sửa đổi từ mã nguồn GPL vẫn có thể được phân phối dưới dạng đóng mà không cần chia sẻ mã nguồn.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Các bản sửa đổi phải ghi rõ phần đã thay đổi và vẫn giữ tên tác giả ban đầu, đảm bảo tôn trọng quyền tác giả.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Người dùng có thể sửa đổi phần mềm GPL nhưng không được phép phân phối lại dưới bất kỳ hình thức nào.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "text": "Thầy giáo giao cho nhóm Mai tìm hiểu và so sánh phần mềm nguồn mở với phần mềm thương mại trong các yếu tố như chi phí, kỹ thuật, minh bạch. Sau đây là các nhận định của nhóm:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Phần mềm nguồn mở thường miễn phí và không phụ thuộc vào nhà cung cấp cụ thể, giúp người dùng linh hoạt hơn.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Phần mềm thương mại luôn có chi phí cao, kể cả với phần mềm miễn phí của các nhà cung cấp lớn.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Phần mềm thương mại thường có đội ngũ hỗ trợ kỹ thuật chuyên nghiệp hơn phần mềm nguồn mở.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Một ưu điểm của phần mềm nguồn mở là người dùng có thể kiểm tra mã nguồn để phát hiện các rủi ro bảo mật.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "text": "Minh đang dùng Google Slides để làm bài thuyết trình. Em hãy chọn ra những điểm đặc trưng nổi bật của phần mềm chạy trên Internet như Google Slides:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Người dùng có thể truy cập, sử dụng phần mềm này từ bất kỳ máy tính nào có kết nối mạng mà không cần cài đặt.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Dữ liệu được lưu trên ổ cứng cá nhân, không liên quan gì đến bộ nhớ trên Internet.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Người dùng có thể làm việc nhóm dễ dàng nhờ tính năng chia sẻ và chỉnh sửa thời gian thực.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Để sử dụng phần mềm trực tuyến, người dùng bắt buộc phải mua bản quyền sử dụng vĩnh viễn.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "text": "Windows đã được phát minh và cải tiến qua nhiều giai đoạn khác nhau. Sau đây là một số nhận định về sự phát triển của Windows qua các thời kỳ:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Phiên bản 1 của Windows phatys hành vào năm 1985 với giao diện đồ họa.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Phiên bản 3 của Windows phát hành vào năm 1990 tuy nhiên không có đặc điểm gì khác biệt so với phiên bản 1.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Windows XP phát hành vào năm 2001 bởi Microsoft với nhiều cải tiến đáng kể về giao diện và hiệu suất làm việc.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Vào năm 2018, Windows sa sút và bị thay thế gần như hoàn toàn bởi những hệ điều hành nổi bật khác khiến thị phần của mình chỉ còn chưa chiếm đến 1%.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "text": "“Điện thoại thông minh, máy tính bảng (gọi chung là thiết bị di động) thực chất là các máy tính cá nhân. Sự khác nhau giữa hệ điều hành cho thiết bị di động và hệ điều hành của máy tính có nguồn gốc từ sự khác biệt về tính năng, tác dụng ccuar hai loại thiết bị này”.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Tính đến tháng 1/2025, Androi là hệ điều hành cho thiết bị di động chiếm thị phần cao nhất.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Có một số thiết bị di động có sử dụng hệ điều hành Windows.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Thiết bị di động thường bán với cả bộ bao gồm: bàn phím, màn hình, web cam, loa và người dùng sẽ phải lắp ráp chúng lại với nhau thành thiết bị hoàn chỉnh mới có thể sử dụng được.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Điện thoại thông minh không chỉ dùng để nghe gọi truyền thống mà còn được trang bị nhiều tính năng tiện ích như chụp ảnh, quay phim, định vị, ghi nhận tình trạng sức khỏe.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "text": "Trong một buổi phỏng vấn về hệ điều hành, bạn Nam được phóng viên đặt câu hỏi: “Kể tên các thiết bị có sử dụng hệ điều hành được sử dụng trong nhà của bạn.”. Bạn Nam đã trả lời câu hỏi bằng cách kể tên các thiết bị như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Smart TV.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Ổ cắm điện.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Đèn huỳnh quang.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Loa thông minh.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "text": "“Sau khi hoàn thành giao diện thì bước phát triển tiếp theo của phát triển hệ điều hành là sử dụng giao diện đồ họa với các đối tượng thể hiện bằng hình ảnh”. Một số thành phần cơ bản của giao diện đồ họa có đặc điểm là:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Biểu tượng : dễ gợi nhớ, cho phép quan sát đối tượng dưới dạng đồ họa.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Chuột: là phương tiện chỉ định điểm làm việc trên màn hình thể hiện bởi một con trỏ màn hình.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Cửa sổ: là một vùng hình chữ nhật trên màn hình dành cho một ứng dụng. Cửa sổ đó có thể phóng to, thu nhỏ, ẩn đi hoặc đóng lại.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Bàn phím: là một phần của hệ điều hành, cho phép máy tính tự động nhập và xây dựng hệ điều hành cho bản thân.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "text": "Trong buổi học Tin học bài “Hệ điều hành”. Cô giáo có đặt câu hỏi cho các bạn học sinh là “Kể tên một số hệ điều hành cùng với năm xuất bản của máy tính”. Bạn Hưng đã xung phong phát biểu và đưa ra câu trả lời của mình như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Windows 95 – năm 1995.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "MacOS – năm 1984.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Fedora – năm 2003.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Androi – năm 2008.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 111,
+      "text": "Dưới đây là các nhận định về vai trò và thông số của chuột:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Chuột có thể xác định được 1600 điểm khác nhau khi di chuyển 2,54 cm trên mặt phẳng.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Độ phân giải càng cao thì chuột di chuyển càng chậm trên màn hình.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Tốc độ chuột có thể điều chỉnh để phù hợp với mục đích sử dụng như thiết kế hay chơi game.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Một chuột kết nối qua Bluetooth luôn có tốc độ cao hơn chuột có dây.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "text": "Dưới đây là các nhận định về đặc điểm kỹ thuật của màn hình:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Độ phân giải càng cao thì hình ảnh càng sắc nét do có nhiều điểm ảnh hiển thị.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Tần số quét càng cao giúp hình ảnh mượt mà hơn, giảm tình trạng giật hình.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Tần số quét 60 Hz có nghĩa là mỗi giây hình ảnh được tái hiện 60 lần.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Màn hình có độ phân giải thấp sẽ phản hồi nhanh hơn màn hình độ phân giải cao.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "text": "Một máy in được giới thiệu là in được 30 trang/phút, độ phân giải 600 dpi, hỗ trợ in màu và kết nối qua mạng không dây. Dưới đây là các thông số thể hiện hiệu năng sử dụng của máy in:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Số trang in trong một phút cho thấy tốc độ làm việc của máy.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Độ phân giải 600 dpi giúp in được hình ảnh sắc nét và rõ ràng.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Hỗ trợ in màu không ảnh hưởng tới chất lượng của máy in.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Việc kết nối không dây giúp linh hoạt trong việc đặt vị trí máy in so với máy tính.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 114,
+      "text": "Các loại cổng kết nối trên máy tính và thiết bị có vai trò rất khác nhau. Dưới đây là một số cổng kết nối thông dụng:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Cổng VGA truyền tín hiệu hình ảnh dạng tương tự và không truyền được âm thanh.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Cổng HDMI có thể truyền đồng thời cả hình ảnh và âm thanh kỹ thuật số.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "USB là giao tiếp truyền dữ liệu song song tốc độ cao giữa máy tính và thiết bị.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Cổng mạng cho phép kết nối máy tính với thiết bị số qua hệ thống mạng nội bộ.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 115,
+      "text": "Việc kết nối thiết bị số với máy tính ngày càng thuận tiện nhờ công nghệ plug & play. Dưới đây là các nhận định  liên quan đến việc kết nối thiết bị số:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Nhiều thiết bị chỉ cần cắm đúng cổng là có thể sử dụng ngay mà không cần cài thêm trình điều khiển.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Một số thiết bị vẫn cần cài driver riêng từ nhà sản xuất để hoạt động ổn định.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Mọi thiết bị khi kết nối đều tự động cập nhật phần mềm điều khiển từ internet.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Kết nối bluetooth cần thực hiện bước ghép đôi trước khi truyền dữ liệu.",
+          "answer": true,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 116,
+      "text": "Lan và các bạn trong nhóm học tập vừa hoàn thành một bản kế hoạch dự án bằng Google Docs. Lan muốn các bạn cùng đọc và đóng góp ý kiến trực tiếp vào tài liệu đó mà không cần tải về máy. Các hành động nào sẽ giúp Lan chia sẻ đúng cách:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Lan tải tệp về rồi gửi qua Zalo để mọi người tải về và sửa trên máy cá nhân.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Lan sử dụng Google Drive, nhấn chuột phải vào tài liệu, chọn \"Chia sẻ\" và cấp quyền \"Nhận xét\" cho các thành viên.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Lan gửi đường liên kết của tệp trên Google Drive và thiết lập quyền \"Người chỉnh sửa\" để mọi người có thể trực tiếp chỉnh sửa nội dung.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Lan gửi tệp qua email dưới dạng tệp đính kèm và yêu cầu mọi người phản hồi qua email.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 117,
+      "text": "Bình thường lưu tệp trên máy tính, nhưng giờ đây Minh đã chuyển sang sử dụng ổ đĩa trực tuyến để thuận tiện học nhóm. Những lý do sau đã khiến Minh đưa ra quyết định này:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Vì ổ đĩa trực tuyến có thể truy cập từ mọi thiết bị có kết nối internet mà không phụ thuộc vào một máy cố định.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Vì ổ đĩa trực tuyến luôn cung cấp dung lượng không giới hạn cho mọi người dùng miễn phí.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Vì ổ đĩa trực tuyến cho phép tạo thư mục, sắp xếp và chia sẻ tệp một cách linh hoạt, tiện lợi.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Vì dữ liệu lưu trên ổ đĩa trực tuyến được bảo mật tuyệt đối và không bao giờ bị mất.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 118,
+      "text": "Trong một buổi học tin học, cô giáo yêu cầu học sinh thử sử dụng Google Drive để chia sẻ bài thuyết trình của nhóm với các chế độ khác nhau. Dưới đây là các phát biểu được các bạn đưa ra trong buổi học:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Khi chọn \"Chỉ xem\", người được chia sẻ không thể chỉnh sửa hay thêm nhận xét vào tài liệu.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Chế độ \"Người nhận xét\" cho phép người dùng vừa xem nội dung vừa thay đổi toàn bộ nội dung văn bản.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Chế độ \"Người chỉnh sửa\" cho phép người dùng thêm, xóa hoặc thay đổi nội dung tài liệu, thậm chí cả xóa tệp.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Khi một tệp được chia sẻ, người nhận luôn có thể thay đổi chế độ chia sẻ của tệp.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 119,
+      "text": "Nam muốn lưu các bài tập của mình lên ổ đĩa trực tuyến để không bị mất dữ liệu nếu máy tính gặp sự cố. Các thao tác dưới đây giúp Nam thực hiện việc này đúng cách:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Nam chọn nút “+ Mới” trong giao diện Google Drive và chọn “Tải tệp lên” từ máy tính của mình.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Nam đăng nhập Google Drive và thực hiện kéo thả tệp từ máy tính vào giao diện trình duyệt.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Nam gửi tệp vào group lớp trên mạng xã hội để bạn bè cùng tải về lưu hộ.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Nam sao chép tệp vào USB, sau đó cắm vào một máy tính khác để tải lên Drive.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    },
+    {
+      "id": 120,
+      "text": "Trong quá trình sử dụng ổ đĩa trực tuyến để lưu trữ tài liệu học tập, học sinh có thể nhận thấy những lợi ích rõ rệt. Hãy chọn những lợi ích thiết thực trong các phương án sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Có thể chỉnh sửa văn bản trực tiếp mà không cần cài đặt phần mềm như Word hay Excel.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "b",
+          "text": "Có thể tải tệp về bất kỳ lúc nào, ngay cả khi không có internet.",
+          "answer": false,
+          "explain": ""
+        },
+        {
+          "key": "c",
+          "text": "Có thể chia sẻ nhanh chóng tệp cho nhiều người mà không cần dùng thiết bị lưu trữ ngoài.",
+          "answer": true,
+          "explain": ""
+        },
+        {
+          "key": "d",
+          "text": "Có thể chia sẻ tệp mà không lo giới hạn dung lượng với tài khoản miễn phí.",
+          "answer": false,
+          "explain": ""
+        }
+      ]
+    }
+  ]
+}
+
+  </script>
+  <script>
+    // ===== Helpers & Safe parsing =====
+    const $ = (sel, ctx=document) => ctx.querySelector(sel)
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel))
+    const shuffle = (arr=[]) => arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])
+
+    function setAlert(msg, kind=''){
+      const a = $('#alert'); a.style.display='block'; a.textContent = msg; a.className = 'alert ' + (kind||'')
+      $('#debug-pill').textContent = 'Debug: ' + msg
+    }
+
+function parseQuizJSON(text) {
+try {
+let t = (text || '').trim()
+// Bỏ BOM nếu có
+if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1)
+// Nếu có rác quanh JSON: cắt từ '{' đầu tới '}' cuối
+    if (!(t.startsWith('{') || t.startsWith('['))) {
+    const first = t.indexOf('{')
+    const last = t.lastIndexOf('}')
+    if (first !== -1 && last !== -1 && last > first) t = t.slice(first, last + 1)
+    }
+    // Sanitize control chars (except \n, \r, \t) that break JSON.parse
+    t = t.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+    const data = JSON.parse(t || '{}')
+const multiple = Array.isArray(data.multiple) ? data.multiple : []
+const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
+multiple.forEach(q => { q.choices = Array.isArray(q.choices) ? q.choices : [] })
+truefalse.forEach(q => { q.statements = Array.isArray(q.statements) ? q.statements : [] })
+return { multiple, truefalse }
+} catch (err) {
+setAlert('Không đọc được JSON: ' + err.message, 'bad')
+return { multiple: [], truefalse: [] }
+}
+}
+
+<!-- 
+    function parseQuizJSON(text){
+      try{
+        const data = JSON.parse(text || '{}')
+        const multiple = Array.isArray(data.multiple) ? data.multiple : []
+        const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
+        // sanitize shapes
+        multiple.forEach(q=>{ q.choices = Array.isArray(q.choices)? q.choices : [] })
+        truefalse.forEach(q=>{ q.statements = Array.isArray(q.statements)? q.statements : [] })
+        return { multiple, truefalse }
+      }catch(err){
+        setAlert('Không đọc được JSON: ' + err.message, 'bad');
+        return { multiple: [], truefalse: [] }
+      }
+    }
+-->
+    async function loadJSONFromFile(file){
+      const text = await file.text();
+      const parsed = parseQuizJSON(text)
+      raw.multiple = parsed.multiple; raw.truefalse = parsed.truefalse
+      dataset = buildDataset(raw)
+      setAlert(`Đã nạp dữ liệu từ file: ${raw.multiple.length} MC + ${raw.truefalse.reduce((s,q)=>s+q.statements.length,0)} mệnh đề Đ/S`, 'good')
+      buildOrder();
+    }
+
+    // WebAudio feedback (no external files)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    function playTone(type='sine', freq=880, ms=200){
+      try{
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = type; o.frequency.value = freq; o.connect(g); g.connect(audioCtx.destination)
+        const now = audioCtx.currentTime; g.gain.setValueAtTime(0.001, now); g.gain.exponentialRampToValueAtTime(0.2, now+0.01); g.gain.exponentialRampToValueAtTime(0.0001, now + ms/1000)
+        o.start(); o.stop(now + ms/1000 + 0.02)
+      }catch(e){ /* ignore autoplay restrictions */ }
+    }
+    function playCorrect(){ playTone('sine', 1046, 200); setTimeout(()=>playTone('sine', 1318, 220), 120) }
+    function playWrong(){ playTone('sawtooth', 196, 250); setTimeout(()=>playTone('sawtooth', 156, 260), 120) }
+
+    // ===== State (SAFE) =====
+    // DEMO mặc định để chạy an toàn nếu bạn CHƯA dán JSON thật vào thẻ #quiz-data
+    const DEFAULT_DEMO = {
+      multiple: [
+        {id:1,text:"AI là gì?",choices:[
+          {key:"A",text:"Khả năng của máy tính có thể làm những công việc mang tính trí tuệ của con người.",correct:true},
+          {key:"B",text:"Khả năng của máy tính thực hiện các công việc cơ bản.",correct:false},
+          {key:"C",text:"Khả năng của con người trong việc sử dụng máy tính.",correct:false},
+          {key:"D",text:"Một phần mềm điều khiển máy tính.",correct:false}],
+          explain:"AI là khả năng của máy có thể thực hiện các công việc mang tính trí tuệ của con người."},
+        {id:2,text:"Thuật ngữ 'AI' bắt đầu được sử dụng vào năm nào?",choices:[
+          {key:"A",text:"1956.",correct:true},{key:"B",text:"1945.",correct:false},{key:"C",text:"1970.",correct:false},{key:"D",text:"1985.",correct:false}],
+          explain:"Năm 1956 tại Hội nghị Dartmouth."},
+        {id:3,text:"Khái niệm 'AI mạnh' là gì?",choices:[
+          {key:"A",text:"AI có thể giải quyết bất kỳ loại vấn đề phức tạp nào như con người.",correct:true},
+          {key:"B",text:"AI có khả năng học từ dữ liệu.",correct:false},
+          {key:"C",text:"AI có thể thực hiện các tác vụ đơn giản.",correct:false},
+          {key:"D",text:"AI có khả năng xử lý dữ liệu nhanh chóng.",correct:false}],
+          explain:"AI mạnh giả định có khả năng suy nghĩ, lập luận, giải quyết mọi vấn đề như con người (chưa tồn tại thực tế)."},
+        {id:4,text:"Ví dụ nào sau đây là một ứng dụng của trí tuệ nhân tạo yếu (AI yếu) trong thực tế hiện nay?",choices:[
+          {key:"A",text:"ChatGPT – chatbot tạo sinh văn bản.",correct:true},
+          {key:"B",text:"AI có khả năng tư duy và cảm xúc như con người.",correct:false},
+          {key:"C",text:"AI tự nhận thức được bản thân và hành động như con người.",correct:false},
+          {key:"D",text:"AI mạnh có khả năng xử lý mọi loại vấn đề.",correct:false}],
+          explain:"Ví dụ minh họa AI giao tiếp đa ngôn ngữ (>120 ngôn ngữ)."}
+      ],
+      truefalse: [
+        {id:101,text:"Những nhận định dưới đây là Đúng hay Sai khi nói về thiết bị mạng trong phòng máy tính:",statements:[
+          {key:"a",text:"Switch kết nối máy trong LAN để chia sẻ dữ liệu.",answer:true,explain:"Switch là thiết bị trung tâm trong LAN."},
+          {key:"b",text:"Router chỉ dùng để chia sẻ máy in.",answer:false,explain:"Router định tuyến, không phải để chia sẻ máy in."},
+          {key:"c",text:"Access Point giúp thiết bị không dây kết nối mạng.",answer:true,explain:"AP cho phép kết nối Wi‑Fi vào LAN."},
+          {key:"d",text:"Modem chuyển tín hiệu số ↔ tương tự.",answer:true,explain:"Đúng chức năng điều chế/giải điều chế."}
+        ]}
+      ]
+    }
+
+    const rawInline = parseQuizJSON(document.getElementById('quiz-data')?.textContent)
+    // Nếu người dùng chưa dán JSON thật (hai mảng rỗng) thì fallback sang DEMO
+    const raw = rawInline
+
+    function buildDataset(src){
+      return {
+        multiple: (src.multiple||[]).map(q=>({ ...q, originalChoices: Array.isArray(q.choices)? [...q.choices] : [] })),
+        truefalse: (src.truefalse||[]).map(q=>({ ...q, statements: Array.isArray(q.statements)? q.statements : [] }))
+      }
+    }
+    let dataset = buildDataset(raw)
+
+    let order = []
+    let ptr = 0
+    let score = 0
+    let answered = new Map()
+
+    // ===== Self-tests (minimal) =====
+    function runSelfTests(){
+      const tests = []
+      tests.push({name:'multiple is array', pass:Array.isArray(raw.multiple)})
+      tests.push({name:'truefalse is array', pass:Array.isArray(raw.truefalse)})
+      tests.push({name:'choices are arrays', pass: dataset.multiple.every(q=>Array.isArray(q.choices))})
+      tests.push({name:'statements are arrays', pass: dataset.truefalse.every(q=>Array.isArray(q.statements))})
+      // UI presence tests
+      tests.push({name:'has next button', pass: !!document.getElementById('btn-next')})
+      tests.push({name:'has toast counter', pass: !!document.getElementById('toast-count')})
+      const failed = tests.filter(t=>!t.pass)
+      if(failed.length){
+        console.warn('SELF TEST FAILED', failed)
+        setAlert('Kiểm tra dữ liệu/UI: ' + failed.map(f=>f.name).join(', ') + ' ❌', 'bad')
+      }else{
+        setAlert('Dữ liệu & UI hợp lệ ✓', 'good')
+      }
+    }
+function buildOrder(){
+      // Guard: require inline JSON; no DEMO, no file fetch
+      if (!((raw?.multiple||[]).length || (raw?.truefalse||[]).length)) { setAlert('Chưa dán JSON hợp lệ vào script#quiz-data', 'bad'); return }
+      order = []
+      // Shuffle MC choices each session
+      dataset.multiple.forEach(q=>{ q.choices = shuffle((q.originalChoices||[]).map(c=>({ ...c }))) })
+      // Randomize TF statements order for each run
+      dataset.truefalse.forEach(q=>{ q.statements = shuffle((q.statements||[]).map(s=>({ ...s }))) })
+      const pack = [
+        ...dataset.multiple.map((_,i)=>({type:'mc', idx:i})),
+        ...dataset.truefalse.map((_,i)=>({type:'tf', idx:i})),
+      ]
+      order = shuffle(pack)
+      ptr = 0; score = 0; answered.clear()
+      syncMeta(); render();
+    }
+
+    /* Fallback-safe buildOrder (override)
+    buildOrder = function(){
+      if (!((dataset?.multiple||[]).length || (dataset?.truefalse||[]).length)) { setAlert('Chua d�n JSON h?p l? v�o script#quiz-data', 'bad'); return }
+      order = []
+      dataset.multiple.forEach(q=>{ q.choices = shuffle((q.originalChoices||[]).map(c=>({ ...c }))) })
+      dataset.truefalse.forEach(q=>{ q.statements = shuffle((q.statements||[]).map(s=>({ ...s }))) })
+      const pack = [
+        ...dataset.multiple.map((_,i)=>({type:'mc', idx:i})),
+        ...dataset.truefalse.map((_,i)=>({type:'tf', idx:i})),
+      ]
+      order = shuffle(pack)
+      ptr = 0; score = 0; answered.clear()
+      syncMeta(); render();
+    } */
+
+    function syncMeta(){
+      const pill = document.getElementById('meta-pill')
+      pill.textContent = `${Math.min(ptr+1, order.length)}/${order.length} câu`
+      document.getElementById('progress').style.width = (order.length? ((ptr)/order.length*100):0) + '%'
+      document.getElementById('debug-pill').textContent = `MC:${dataset.multiple.length} • TF:${dataset.truefalse.length}`
+    }
+
+    function render(){
+      if (ptr >= order.length) { return renderSummary() }
+      const slot = order[ptr]
+      const area = document.getElementById('question-area')
+      area.innerHTML = ''
+      document.getElementById('mode-pill').textContent = slot.type === 'mc' ? 'Nhiều lựa chọn' : 'Đúng/Sai'
+
+      if (slot.type === 'mc') renderMC(area, dataset.multiple[slot.idx])
+      else renderTF(area, dataset.truefalse[slot.idx])
+
+      syncMeta()
+    }
+
+    // ===== Renderers =====
+    function renderMC(area, q){
+      if(!q || !Array.isArray(q.choices) || q.choices.length===0){
+        const warn = document.createElement('div'); warn.className='alert bad'; warn.textContent='Câu hỏi không hợp lệ hoặc thiếu lựa chọn.'; area.appendChild(warn); return;
+      }
+      const title = document.createElement('div'); title.className = 'q-title'; title.textContent = `Câu hỏi (ID ${q.id}): ${q.text}`; area.appendChild(title)
+      const meta = document.createElement('div'); meta.className = 'q-meta'; meta.textContent = 'Chọn một đáp án duy nhất.'; area.appendChild(meta)
+
+      const choices = document.createElement('div'); choices.className='choices'
+      q.choices.forEach((c, i)=>{
+        const row = document.createElement('div'); row.className='choice'; row.dataset.key = c.key
+        row.innerHTML = `<div class="badge">${String.fromCharCode(65+i)}</div><div>${c.text}</div>`
+        row.addEventListener('click', ()=> handleMCSelect(q, row, c))
+        choices.appendChild(row)
+      })
+      area.appendChild(choices)
+
+      const explain = document.createElement('div'); explain.className='explain'; explain.style.display='none'; explain.id='exp'
+      explain.innerHTML = '<div id="announce"></div><div id="exp-text" style="margin-top:8px"></div>'
+      area.appendChild(explain)
+    }
+
+    function handleMCSelect(q, row, choice){
+      if ($('.choice.disabled')) return
+      $$('.choice').forEach(el=> el.classList.add('disabled'))
+      const isCorrect = !!choice.correct
+      if (isCorrect){ row.classList.add('correct'); playCorrect(); score += 1 }
+      else { row.classList.add('incorrect'); const idx = q.choices.findIndex(c=>c.correct); const el = $$('.choice')[idx]; if (el) el.classList.add('correct'); playWrong() }
+      answered.set(tokenFor(q), {correct:isCorrect})
+      const exp = $('#exp'); exp.style.display='block'
+      const ann = $('#announce'); ann.className = 'announce ' + (isCorrect ? 'good':'bad')
+      ann.textContent = isCorrect ? 'Bạn giỏi lắm, CHÚC MỪNG BẠN!' : 'Rất tiếc, HÃY SUY NGHĨ LẠI!'
+      $('#exp-text').textContent = q.explain || ''
+      startPause()
+    }
+
+    function renderTF(area, q){
+      if(!q || !Array.isArray(q.statements) || q.statements.length===0){
+        const warn = document.createElement('div'); warn.className='alert bad'; warn.textContent='Câu Đúng/Sai không hợp lệ hoặc thiếu mệnh đề.'; area.appendChild(warn); return;
+      }
+      const title = document.createElement('div'); title.className = 'q-title'; title.textContent = `Câu hỏi (ID ${q.id}): ${q.text}`; area.appendChild(title)
+
+      const block = document.createElement('div'); block.className='tf-block'
+      q.statements.forEach((st, idx)=>{
+        const row = document.createElement('div'); row.className='tf-row'; row.dataset.idx = idx
+        row.innerHTML = `<div><b>${st.key})</b> ${st.text}<div class="tf-exp" style="display:none"></div></div>`
+        const act = document.createElement('div'); act.className='tf-actions'
+        const bT = document.createElement('button'); bT.className='tf-btn true'; bT.textContent='ĐÚNG'
+        const bF = document.createElement('button'); bF.className='tf-btn false'; bF.textContent='SAI'
+        bT.addEventListener('click', ()=> handleTFSelect(q, row, st, true))
+        bF.addEventListener('click', ()=> handleTFSelect(q, row, st, false))
+        act.appendChild(bT); act.appendChild(bF)
+        row.appendChild(act)
+        block.appendChild(row)
+      })
+      area.appendChild(block)
+
+      const explain = document.createElement('div'); explain.className='explain'; explain.style.display='none'; explain.id='exp'
+      explain.innerHTML = '<div id="announce"></div><div id="exp-text" style="margin-top:8px"></div>'
+      area.appendChild(explain)
+    }
+
+    function handleTFSelect(q, row, st, val){
+      if (row.classList.contains('correct') || row.classList.contains('incorrect')) return
+      const ok = (val === !!st.answer)
+      if (ok){ row.classList.add('correct'); playCorrect(); score += 1 } else { row.classList.add('incorrect'); playWrong() }
+      const exp = row.querySelector('.tf-exp'); exp.style.display='block'; exp.textContent = st.explain || ''
+      const allDone = $$('.tf-row').every(r => r.classList.contains('correct') || r.classList.contains('incorrect'))
+      if (allDone){
+        const panel = $('#exp'); panel.style.display='block';
+        const correctCount = $$('.tf-row.correct').length
+        const isPerfect = correctCount === q.statements.length
+        const ann = $('#announce'); ann.className = 'announce ' + (isPerfect ? 'good':'bad')
+        ann.textContent = isPerfect ? 'Bạn giỏi lắm, CHÚC MỪNG BẠN!' : 'Rất tiếc, HÃY SUY NGHĨ LẠI!'
+        $('#exp-text').textContent = 'Hãy đọc giải thích dưới mỗi ý.'
+        startPause()
+      }
+    }
+
+    function tokenFor(q){ return `q-${q.id}` }
+
+    // ===== Pause & Navigation =====
+    let pauseLeft = 0
+    let tickHandle = null
+
+    function startPause(){
+      pauseLeft = 45
+      const toast = document.getElementById('pause-toast')
+      if (toast) { toast.style.display = 'flex' }
+      const cnt = document.getElementById('toast-count')
+      if (cnt) cnt.textContent = pauseLeft
+      const timer = document.getElementById('timer-text')
+      if (timer) timer.textContent = `Tạm dừng: ${pauseLeft}s`
+      clearInterval(tickHandle)
+      tickHandle = setInterval(()=>{
+        pauseLeft -= 1
+        if (pauseLeft <= 0){ stopPause(); return }
+        if (cnt) cnt.textContent = pauseLeft
+        if (timer) timer.textContent = `Tạm dừng: ${pauseLeft}s`
+      }, 1000)
+    }
+    function stopPause(){
+      clearInterval(tickHandle); tickHandle = null
+      const toast = document.getElementById('pause-toast')
+      if (toast) toast.style.display = 'none'
+      const timer = document.getElementById('timer-text')
+      if (timer) timer.textContent = `Tạm dừng: 0s`
+    }
+
+    function next(){ stopPause(); ptr = Math.min(ptr+1, order.length); render() }
+    function prev(){ stopPause(); ptr = Math.max(ptr-1, 0); render() }
+
+    // ===== Summary =====
+    function renderSummary(){
+      const total = computeTotalPoints()
+      const area = document.getElementById('question-area')
+      area.innerHTML = ''
+      const box = document.createElement('div'); box.className='summary'
+      const h2 = document.createElement('h2'); h2.textContent = '🎉 Hoàn thành bài trắc nghiệm'
+      const scoreEl = document.createElement('div'); scoreEl.className='score'; scoreEl.textContent = `${score} / ${total} điểm`
+      const remark = document.createElement('div'); remark.className='remark'; remark.textContent = getRemark(score, total)
+      box.appendChild(h2); box.appendChild(scoreEl); box.appendChild(remark)
+      area.appendChild(box)
+      document.getElementById('progress').style.width = '100%'
+      document.getElementById('meta-pill').textContent = `${order.length}/${order.length} câu`
+      document.getElementById('mode-pill').textContent = 'Tổng kết'
+    }
+
+    function computeTotalPoints(){
+      const tfPoints = (dataset.truefalse||[]).reduce((s,q)=> s + (Array.isArray(q.statements)? q.statements.length : 0), 0)
+      const mcPoints = (dataset.multiple||[]).length
+      return tfPoints + mcPoints
+    }
+
+    function getRemark(sc, total){
+      const pct = total>0 ? (sc/total)*100 : 0
+      if (pct >= 90) return 'Xuất sắc! Bạn làm chủ kiến thức – tuyệt vời!'
+      if (pct >= 65) return 'Tốt! Tiếp tục luyện tập để đạt mức xuất sắc nhé!'
+      return 'Bạn cần ôn tập thêm! Đừng nản lòng, hãy làm lại nhé.'
+    }
+
+    // ===== Events =====
+    document.getElementById('btn-load-json').addEventListener('click', ()=> document.getElementById('jsonFile').click())
+    document.getElementById('jsonFile').addEventListener('change', async (e)=>{
+      const f = e.target.files?.[0]; if(!f) return;
+      try{ await loadJSONFromFile(f); }
+      catch(err){ console.error(err); setAlert('Không nạp được tệp JSON: '+ err.message, 'bad') }
+    })
+
+    document.getElementById('btn-next').addEventListener('click', next)
+    document.getElementById('btn-prev').addEventListener('click', prev)
+    document.getElementById('btn-retry').addEventListener('click', ()=>{ stopPause(); buildOrder() })
+    window.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); })
+    // Chặn chuột phải và F12 (giảm thiểu; không tuyệt đối an toàn)
+    document.addEventListener('contextmenu', (e)=>{ e.preventDefault() }, { capture:true })
+    window.addEventListener('keydown', (e)=>{
+      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false }
+    }, { capture:true })
+
+    // ===== Init =====
+    runSelfTests()
+    buildOrder()
+  </script>
+</body>
+</html>
+
+
