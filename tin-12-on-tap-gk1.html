@@ -6795,6 +6795,9 @@ if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1)
         if (ch === '\n'){ out += '\\n'; continue }
         if (ch === '\r'){ out += '\\r'; continue }
         if (ch === '\t'){ out += '\\t'; continue }
+        // handle Unicode Line/Paragraph separators inside strings
+        if (ch === '\u2028'){ out += '\\u2028'; continue }
+        if (ch === '\u2029'){ out += '\\u2029'; continue }
         if (ch === '"'){ out += ch; inStr = false; continue }
         out += ch
       }
