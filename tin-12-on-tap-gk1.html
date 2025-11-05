@@ -3467,6 +3467,45 @@ if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1)
     }
     // Sanitize control chars (except \n, \r, \t) that break JSON.parse
     t = t.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+    // Fix unescaped CR/LF/TAB inside JSON strings and invalid single backslashes
+    ;(function(){
+      // escape CR/LF/TAB that appear inside quoted strings
+      let out = ''
+      let inStr = false
+      let escaped = false
+      for (let i = 0; i < t.length; i++){
+        const ch = t[i]
+        if (!inStr){
+          if (ch === '"') { out += ch; inStr = true; escaped = false; continue }
+          out += ch; continue
+        }
+        // inside string
+        if (escaped){
+          out += ch; escaped = false; continue
+        }
+        if (ch === '\\'){ out += ch; escaped = true; continue }
+        if (ch === '\n'){ out += '\\n'; continue }
+        if (ch === '\r'){ out += '\\r'; continue }
+        if (ch === '\t'){ out += '\\t'; continue }
+        if (ch === '"'){ out += ch; inStr = false; continue }
+        out += ch
+      }
+      t = out
+      // double single backslashes that are not valid escapes
+      let fixed = ''
+      for (let i = 0; i < t.length; i++){
+        const ch = t[i]
+        if (ch === '\\'){
+          const prev = t[i-1]
+          const next = t[i+1]
+          const escapedByPrev = prev === '\\'
+          const isValidEscape = next && '"\\/bfnrtu'.includes(next)
+          if (!escapedByPrev && !isValidEscape){ fixed += '\\\\'; continue }
+        }
+        fixed += ch
+      }
+      t = fixed
+    })()
     const data = JSON.parse(t || '{}')
 const multiple = Array.isArray(data.multiple) ? data.multiple : []
 const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
