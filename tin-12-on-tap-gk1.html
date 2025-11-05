@@ -6900,8 +6900,17 @@ return { multiple: [], truefalse: [] }
       ]
     }
 
-    const rawInline = parseQuizJSON(document.getElementById('quiz-data')?.textContent)
-    // Nếu người dùng chưa dán JSON thật (hai mảng rỗng) thì fallback sang DEMO
+    // Đọc JSON chính từ script#quiz-data; nếu rỗng, fallback sang script JSON dài nhất
+    const elQuiz = document.getElementById('quiz-data')
+    let rawInline = parseQuizJSON(elQuiz?.textContent)
+    if (!((rawInline?.multiple||[]).length || (rawInline?.truefalse||[]).length)) {
+      try {
+        const candidates = Array.from(document.querySelectorAll('script[type="application/json"]'))
+        const best = candidates.sort((a,b)=> (b.textContent||'').length - (a.textContent||'').length)[0]
+        if (best && best !== elQuiz) rawInline = parseQuizJSON(best.textContent)
+      } catch(_){}
+    }
+    // Nếu vẫn rỗng, dùng DEMO
     const raw = ((rawInline.multiple||[]).length || (rawInline.truefalse||[]).length) ? rawInline : DEFAULT_DEMO
 
     function buildDataset(src){
@@ -6937,7 +6946,7 @@ return { multiple: [], truefalse: [] }
     }
 function buildOrder(){
       // Guard: require inline JSON; no DEMO, no file fetch
-      if (!((raw?.multiple||[]).length || (raw?.truefalse||[]).length)) { setAlert('Chưa dán JSON hợp lệ vào script#quiz-data', 'bad'); return }
+      if (!((dataset?.multiple||[]).length || (dataset?.truefalse||[]).length)) { setAlert('Chưa dán JSON hợp lệ vào script#quiz-data', 'bad'); return }
       order = []
       // Shuffle MC choices each session
       dataset.multiple.forEach(q=>{ q.choices = shuffle((q.originalChoices||[]).map(c=>({ ...c }))) })
