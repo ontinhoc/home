@@ -6762,6 +6762,61 @@ Người có tính nhân văn biết thể hiện sự cảm thông, giúp đỡ
       $('#debug-pill').textContent = 'Debug: ' + msg
     }
 
+    // Robust JSON sanitizer + parser (handles raw CR/LF/TAB and rare separators inside strings)
+    function parseQuizJSON2(text){
+      try{
+        let t = (text || '').trim()
+        if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1)
+        if (!(t.startsWith('{') || t.startsWith('['))){
+          const first = t.indexOf('{'); const last = t.lastIndexOf('}')
+          if (first !== -1 && last !== -1 && last > first) t = t.slice(first, last+1)
+        }
+        // Drop other C0 controls (keep CR/LF/TAB)
+        t = t.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+        // Escape problem chars only inside quoted strings
+        function escapeInStrings(s){
+          let out = ''
+          let inStr = false
+          let i = 0
+          while (i < s.length){
+            const ch = s[i]
+            const code = ch.charCodeAt(0)
+            if (!inStr){
+              if (ch === '"'){ out += ch; inStr = true; i++; continue }
+              out += ch; i++; continue
+            }
+            // in string
+            if (ch === '\\'){
+              const next = s[i+1] || ''
+              const allowed = '"\\/bfnrtu'
+              if (allowed.indexOf(next) !== -1){ out += ch + next; i += 2; continue }
+              out += '\\\\'; i += 1; continue
+            }
+            if (ch === '"'){ out += ch; inStr = false; i++; continue }
+            if (code === 0x0D){ out += '\\r'; i++; continue }
+            if (code === 0x0A){ out += '\\n'; i++; continue }
+            if (code === 0x09){ out += '\\t'; i++; continue }
+            if (code === 0x2028){ out += '\\u2028'; i++; continue }
+            if (code === 0x2029){ out += '\\u2029'; i++; continue }
+            if (code === 0x0085){ out += '\\u0085'; i++; continue }
+            if (code >= 0x00 && code <= 0x1F){ out += '\\u' + code.toString(16).padStart(4,'0'); i++; continue }
+            out += ch; i++
+          }
+          return out
+        }
+        t = escapeInStrings(t)
+        const data = JSON.parse(t || '{}')
+        const multiple = Array.isArray(data.multiple) ? data.multiple : []
+        const truefalse = Array.isArray(data.truefalse) ? data.truefalse : []
+        multiple.forEach(q=>{ q.choices = Array.isArray(q.choices) ? q.choices : [] })
+        truefalse.forEach(q=>{ q.statements = Array.isArray(q.statements) ? q.statements : [] })
+        return { multiple, truefalse }
+      }catch(err){
+        setAlert('Không đọc được JSON: ' + err.message, 'bad')
+        return { multiple: [], truefalse: [] }
+      }
+    }
+
 function parseQuizJSON(text) {
 try {
 let t = (text || '').trim()
@@ -6847,7 +6902,7 @@ return { multiple: [], truefalse: [] }
 -->
     async function loadJSONFromFile(file){
       const text = await file.text();
-      const parsed = parseQuizJSON(text)
+      const parsed = parseQuizJSON2(text)
       raw.multiple = parsed.multiple; raw.truefalse = parsed.truefalse
       dataset = buildDataset(raw)
       setAlert(`Đã nạp dữ liệu từ file: ${raw.multiple.length} MC + ${raw.truefalse.reduce((s,q)=>s+q.statements.length,0)} mệnh đề Đ/S`, 'good')
@@ -6905,12 +6960,12 @@ return { multiple: [], truefalse: [] }
 
     // Đọc JSON chính từ script#quiz-data; nếu rỗng, fallback sang script JSON dài nhất
     const elQuiz = document.getElementById('quiz-data')
-    let rawInline = parseQuizJSON(elQuiz?.textContent)
+    let rawInline = parseQuizJSON2(elQuiz?.textContent)
     if (!((rawInline?.multiple||[]).length || (rawInline?.truefalse||[]).length)) {
       try {
         const candidates = Array.from(document.querySelectorAll('script[type="application/json"]'))
         const best = candidates.sort((a,b)=> (b.textContent||'').length - (a.textContent||'').length)[0]
-        if (best && best !== elQuiz) rawInline = parseQuizJSON(best.textContent)
+        if (best && best !== elQuiz) rawInline = parseQuizJSON2(best.textContent)
       } catch(_){}
     }
     // Nếu vẫn rỗng, dùng DEMO
