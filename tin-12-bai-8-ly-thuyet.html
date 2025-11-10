@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 8 Tin học 12: Định dạng văn bản — thuộc tính, thẻ trình bày, kiểu chữ, phông chữ, style; thực hành theo Hình 8.3.">
+    <meta name="keywords" content="Tin học 12, Định dạng văn bản, HTML, thuộc tính, style, h1, p, div, span, br, hr, strong, em, i, u, mark, small, sup, sub, del, font-family, font-size, color">
+    <meta name="author" content="Ontinhoc">
+    <title>Định Dạng Văn Bản | Tin 12 - Bài 8 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        code{background:#f1f5f9;padding:1px 6px;border-radius:6px}
+        pre{background:#f1f5f9;padding:12px;border-radius:10px;overflow:auto}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 180px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 8: Định dạng văn bản (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": [
+        "thuộc tính", "style", "h1..h6", "p", "div", "span",
+        "br", "hr", "strong", "em", "u", "mark", "small",
+        "sup", "sub", "del", "font-family", "font-size", "color"
+      ],
+      "description": "Định dạng văn bản bằng thuộc tính thẻ và style; thẻ trình bày, kiểu chữ, phông chữ; thực hành theo Hình 8.3."
+    }
+    </script>
+    <!-- Security/UX: disable context menu and include basic protect script -->
+    <!-- rel=noopener on outbound links; smooth in-page scrolling as in bài 7 -->
+    <!-- Consider CSP via server if deployed -->
+  </head>
+  <body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+      <header>
+        <h1>Bài 8: Định Dạng Văn Bản</h1>
+        <p>Tổng hợp cách dùng thuộc tính thẻ và thuộc tính <code>style</code> để định dạng văn bản: tiêu đề, đoạn văn, khối nội dung, kiểu chữ và phông chữ; kèm ví dụ và thực hành theo Hình 8.3.</p>
+      </header>
+
+      <nav aria-label="Mục lục bài học">
+        <a href="#muc-tieu">Mục tiêu</a>
+        <a href="#thuoc-tinh">Thuộc tính của thẻ</a>
+        <a href="#trinh-bay">Trình bày văn bản</a>
+        <a href="#kieu-chu-phong-chu">Kiểu chữ &amp; phông chữ</a>
+        <a href="#thuc-hanh">Thực hành</a>
+        <a href="#tu-khoa">Từ khóa</a>
+      </nav>
+
+      <main>
+        <section id="muc-tieu" class="card">
+          <h2>Mục tiêu</h2>
+          <ul>
+            <li>Biết dùng thẻ HTML để định dạng văn bản, phông chữ (dựa trên thuộc tính thẻ và thuộc tính <code>style</code>).</li>
+          </ul>
+        </section>
+
+        <section id="thuoc-tinh" class="card">
+          <h2>1. Thuộc tính của thẻ (attribute)</h2>
+          <ul>
+            <li>Mọi phần tử HTML có thể có thuộc tính; thuộc tính viết trong thẻ mở, đứng sau tên thẻ. Cú pháp: <code>ten_thuoc_tinh="giatri"</code>; nhiều thuộc tính cách nhau bằng dấu cách.</li>
+            <li>Ví dụ minh họa cách ghi nhiều thuộc tính trong cùng một thẻ.</li>
+            <li><code>style</code> là thuộc tính dùng thường xuyên để thiết lập định dạng (màu, phông, cỡ, kiểu, căn lề, khung…).</li>
+          </ul>
+          <pre><code>&lt;!-- Cú pháp thuộc tính --&gt;
+&lt;tagname attr1="value1" attr2="value2"&gt;...&lt;/tagname&gt;
+
+&lt;!-- Ví dụ nhiều thuộc tính trong &lt;p&gt; --&gt;
+&lt;p id="lead" class="intro" style="color:#e11d48;font-weight:600;"&gt;Xin chào!&lt;/p&gt;
+
+&lt;!-- Liên kết an toàn khi mở tab mới --&gt;
+&lt;a href="https://example.com" target="_blank" rel="noopener" title="Trang ví dụ"&gt;Xem ví dụ&lt;/a&gt;</code></pre>
+          <div class="note">
+            Lưu ý: Khi dùng liên kết mở tab mới, thêm <code>rel="noopener"</code> để tăng bảo mật.
+          </div>
+        </section>
+
+        <section id="trinh-bay" class="card">
+          <h2>2. Thẻ định dạng trình bày văn bản</h2>
+          <h3>a) Tiêu đề</h3>
+          <ul>
+            <li>Dãy thẻ <code>&lt;h1&gt;</code> … <code>&lt;h6&gt;</code> biểu diễn tiêu đề từ quan trọng đến ít quan trọng. Dùng <code>&lt;h1&gt;</code> cho tiêu đề chính, tiếp theo là <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>,…</li>
+            <li>Công cụ tìm kiếm và trình duyệt dựa vào thẻ tiêu đề để hiểu cấu trúc nội dung.</li>
+            <li>Có ví dụ cấu trúc đề mục bằng thẻ <code>&lt;h1&gt;</code>…<code>&lt;h4&gt;</code>.</li>
+          </ul>
+          <pre><code>&lt;h1&gt;Chủ đề chính&lt;/h1&gt;
+&lt;h2&gt;Mục 1&lt;/h2&gt;
+&lt;h3&gt;Tiểu mục 1.1&lt;/h3&gt;
+&lt;h4&gt;Chi tiết 1.1.a&lt;/h4&gt;</code></pre>
+
+          <h3>b) Đoạn văn &amp; khối nội dung</h3>
+          <ul>
+            <li>Đoạn văn: dùng cặp thẻ <code>&lt;p&gt;…&lt;/p&gt;</code>; trình duyệt tự tách dòng và chừa khoảng cách trước/sau đoạn.</li>
+            <li>Khối &amp; nội dung nội dòng: <code>&lt;div&gt;…&lt;/div&gt;</code> tạo khối bắt đầu ở dòng mới; <code>&lt;span&gt;…&lt;/span&gt;</code> đánh dấu nội dung nhỏ nằm cùng dòng.</li>
+            <li>Ngắt dòng &amp; kẻ ngang: <code>&lt;br&gt;</code> để xuống dòng, <code>&lt;hr&gt;</code> để kẻ đường ngang.</li>
+          </ul>
+          <pre><code>&lt;p&gt;Đây là một đoạn văn mẫu.&lt;/p&gt;
+&lt;div style="border:1px solid #cbd5e1;padding:8px;border-radius:8px;"&gt;
+  Khối nội dung &lt;span style="color:#2563eb"&gt;nội dòng&lt;/span&gt; ở cùng dòng.
+&lt;/div&gt;
+&lt;p&gt;Dòng 1&lt;br&gt;Dòng 2 (xuống dòng bằng &lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt;)&lt;/p&gt;
+&lt;hr&gt;</code></pre>
+        </section>
+
+        <section id="kieu-chu-phong-chu" class="card">
+          <h2>3. Thẻ định dạng kiểu chữ &amp; phông chữ</h2>
+          <h3>a) Kiểu chữ (nhấn mạnh ý nghĩa &amp; hình thức)</h3>
+          <ul>
+            <li>Một số kiểu thường dùng: đậm <code>&lt;strong&gt;</code> / <code>&lt;b&gt;</code>, nghiêng <code>&lt;em&gt;</code> / <code>&lt;i&gt;</code>, gạch chân <code>&lt;u&gt;</code>, đánh dấu <code>&lt;mark&gt;</code>, nhỏ chữ <code>&lt;small&gt;</code>, chỉ số trên <code>&lt;sup&gt;</code>, chỉ số dưới <code>&lt;sub&gt;</code>, gạch xoá <code>&lt;del&gt;</code>.</li>
+            <li>Lưu ý HTML5: không khuyến nghị <code>&lt;u&gt;</code> và không hỗ trợ <code>&lt;big&gt;</code>; nên thay bằng <code>text-decoration</code> và <code>font-size</code> trong <code>style</code>.</li>
+            <li><code>&lt;strong&gt;</code> và <code>&lt;em&gt;</code> vừa đổi hình thức vừa nhấn mạnh ngữ nghĩa, được khuyến khích hơn <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>.</li>
+          </ul>
+          <pre><code>&lt;p&gt;Đậm: &lt;strong&gt;quan trọng&lt;/strong&gt; (ngữ nghĩa) / &lt;b&gt;đậm&lt;/b&gt; (trang trí).&lt;/p&gt;
+&lt;p&gt;Nghiêng: &lt;em&gt;nhấn mạnh&lt;/em&gt; / &lt;i&gt;nghiêng&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;Chỉ số: H&lt;sub&gt;2&lt;/sub&gt;O, x&lt;sup&gt;2&lt;/sup&gt; + y&lt;sup&gt;2&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span style="text-decoration:underline"&gt;Gạch chân bằng CSS&lt;/span&gt;, &lt;del&gt;đã xoá&lt;/del&gt;, &lt;mark&gt;đánh dấu&lt;/mark&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;Chữ nhỏ dùng &amp;lt;small&amp;gt;&lt;/small&gt;&lt;/p&gt;</code></pre>
+
+          <h3>b) Phông chữ (màu, họ phông, cỡ chữ)</h3>
+          <ul>
+            <li>Màu: <code>&lt;p style="color:…"&gt;…&lt;/p&gt;</code>; họ phông: <code>font-family</code>; cỡ chữ: <code>font-size</code>.</li>
+            <li>Cỡ chữ có thể dùng đơn vị (<code>px</code>, <code>mm</code>, <code>cm</code>, …) hoặc từ khóa (<code>small</code>, <code>medium</code>, <code>large</code>, …).</li>
+            <li>Tên màu tiếng Anh hoặc mã màu (<code>#RRGGBB</code>, <code>rgb()</code>, <code>hsl()</code>) đều dùng được.</li>
+            <li>Gộp nhiều thuộc tính trong cùng <code>style</code>, ngăn cách bằng dấu <code>;</code>.</li>
+            <li>So sánh hai cách thiết lập cùng màu đỏ nhưng khác cỡ/gạch chân.</li>
+          </ul>
+          <pre><code>&lt;p style="color:red;font-size:18px;font-family:Arial, sans-serif;"&gt;Đoạn chữ đỏ 18px&lt;/p&gt;
+&lt;p style="color:#ff0000;text-decoration:underline;font-size:14px;"&gt;Đoạn chữ đỏ 14px có gạch chân&lt;/p&gt;</code></pre>
+        </section>
+
+        <section id="thuc-hanh" class="card">
+          <h2>4. Thực hành định dạng (theo Hình 8.3)</h2>
+          <div class="steps">
+            <ul>
+              <li>Phân tích văn bản: 3 dòng tiêu đề (dòng 1 mức cao hơn), 3 đoạn nội dung; các dòng điều kiện (7–9) là xuống dòng chứ không phải đoạn.</li>
+              <li>Dùng <code>&lt;h1&gt;</code>/<code>&lt;h2&gt;</code>/<code>&lt;h3&gt;</code> cho tiêu đề; dùng <code>style</code> để đổi màu, <code>&lt;sup&gt;</code> cho số mũ.</li>
+              <li>Viết mỗi bước bằng một <code>&lt;p&gt;</code>; dùng <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code>, <code>&lt;strong&gt;</code>/<code>&lt;em&gt;</code>, <code>&lt;br&gt;</code> khi cần.</li>
+            </ul>
+          </div>
+          <pre><code>&lt;h1 style="color:#0ea5e9"&gt;Phương trình bậc hai&lt;/h1&gt;
+&lt;h2&gt;ax&lt;sup&gt;2&lt;/sup&gt; + bx + c = 0&lt;/h2&gt;
+&lt;h3&gt;Các bước giải&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Bước 1:&lt;/strong&gt; Tính &amp;Delta; = b&lt;sup&gt;2&lt;/sup&gt; − 4ac.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bước 2:&lt;/strong&gt; So sánh &amp;Delta; với 0.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bước 3:&lt;/strong&gt; Kết luận nghiệm.&lt;/p&gt;
+
+&lt;h3&gt;Điều kiện&lt;/h3&gt;
+&lt;p&gt;
+  (7) Nếu &amp;Delta; &gt; 0 &rarr; hai nghiệm phân biệt.&lt;br&gt;
+  (8) Nếu &amp;Delta; = 0 &rarr; nghiệm kép.&lt;br&gt;
+  (9) Nếu &amp;Delta; &lt; 0 &rarr; vô nghiệm.
+&lt;/p&gt;</code></pre>
+        </section>
+
+        <section id="tu-khoa" class="card">
+          <h2>Từ khóa ghi nhớ</h2>
+          <div class="keywords">
+            <span class="badge">Thuộc tính</span>
+            <span class="badge">style</span>
+            <span class="badge">h1–h6</span>
+            <span class="badge">p</span>
+            <span class="badge">div</span>
+            <span class="badge">span</span>
+            <span class="badge">br</span>
+            <span class="badge">hr</span>
+            <span class="badge">strong/em</span>
+            <span class="badge">sup/sub</span>
+            <span class="badge">del/mark</span>
+            <span class="badge">font-family</span>
+            <span class="badge">font-size</span>
+            <span class="badge">color</span>
+          </div>
+        </section>
+
+        <footer>
+          <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+        </footer>
+      </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+      // Smooth scroll for in-page navigation
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', event => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            event.preventDefault();
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Back-to-top button behaviour
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+    <script src="protect.js"></script>
+  </body>
+ </html>
+
