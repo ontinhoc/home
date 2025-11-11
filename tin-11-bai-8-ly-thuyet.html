@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 8: Thực hành nâng cao sử dụng thư điện tử (Gmail) và mạng xã hội (Facebook). Đánh dấu Quan trọng, phân loại bằng Nhãn, tạo Fanpage và thiết lập quyền riêng tư.">
+    <meta name="keywords" content="Tin học 11, Gmail, Quan trọng, Nhãn, Label, Fanpage, Facebook, Quyền riêng tư, Privacy">
+    <meta name="author" content="Ontinhoc">
+    <title>Thực Hành Nâng Cao: Thư Điện Tử & Mạng Xã Hội | Tin 11 - Bài 8</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 8: Thực hành nâng cao sử dụng thư điện tử và mạng xã hội (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Gmail", "Quan trọng", "Nhãn", "Label", "Fanpage", "Facebook", "Quyền riêng tư"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Đánh dấu & Phân loại thư trong Gmail; tạo Fanpage và thiết lập quyền riêng tư trên mạng xã hội."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 8: Thực Hành Nâng Cao — Thư Điện Tử & Mạng Xã Hội</h1>
+            <p>Tin học 11 — Đánh dấu Quan trọng, phân loại bằng Nhãn trong Gmail; tạo Fanpage và thiết lập quyền riêng tư trên mạng xã hội.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#gmail">Gmail: Đánh dấu & Nhãn</a>
+                <a href="#mang-xa-hoi">Mạng xã hội</a>
+                <a href="#luyen-tap">Luyện tập</a>
+                <a href="#van-dung">Vận dụng</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết đánh dấu và phân loại thư điện tử để quản lí hộp thư hiệu quả.</li>
+                    <li>Khai thác một số chức năng nâng cao của mạng xã hội (tạo Fanpage, thiết lập quyền riêng tư).</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Gmail</span>
+                    <span class="badge">Quan trọng</span>
+                    <span class="badge">Nhãn (Label)</span>
+                    <span class="badge">Fanpage</span>
+                    <span class="badge">Quyền riêng tư</span>
+                </div>
+            </section>
+
+            <section id="gmail" class="card" aria-labelledby="gmail-title">
+                <h2 id="gmail-title">1. Gmail: Đánh dấu & Phân loại thư</h2>
+
+                <h3 id="important">a) Nhận biết thư quan trọng (Gmail “Important”)</h3>
+                <ul>
+                    <li>Gmail tự động gắn nhãn <strong>Quan trọng</strong> (biểu tượng màu vàng) dựa trên: người gửi & tần suất, thư đã mở/trả lời, từ khóa hay đọc, thư được gắn sao/lưu trữ/xóa,…</li>
+                    <li>Thao tác cơ bản: di chuột để xem lí do quan trọng → nhấp để chuyển <em>Quan trọng/Không quan trọng</em> → tìm nhanh với từ khóa <code>is:important</code>.</li>
+                </ul>
+
+                <h3 id="label">b) Sắp xếp thư bằng Nhãn (Label)</h3>
+                <ul>
+                    <li><strong>Nhãn ≠ Thư mục</strong>: xóa thư thì thư bị xóa khỏi mọi nhãn kèm theo.</li>
+                    <li>Tác dụng: tiết kiệm thời gian tìm kiếm, tránh thất lạc thông tin, quản lí thư theo địa chỉ/nhóm dễ dàng.</li>
+                </ul>
+                <div class="steps" role="region" aria-label="Quy trình tạo và gắn nhãn">
+                    <strong>Quy trình</strong>
+                    <ol>
+                        <li><strong>Tạo nhãn</strong>: Gmail → danh sách mở rộng trái → Tạo nhãn mới → đặt tên → Save.</li>
+                        <li><strong>Gắn nhãn</strong>: chọn thư → gắn/đổi nhãn theo hướng dẫn hình minh họa.</li>
+                    </ol>
+                </div>
+                <div class="note" role="note">
+                    Mẹo: Có thể kết hợp <code>is:important</code> với tìm theo nhãn (ví dụ: <code>label:hoc_tap is:important</code>) để lọc thư ưu tiên.
+                </div>
+            </section>
+
+            <section id="mang-xa-hoi" class="card" aria-labelledby="mxh-title">
+                <h2 id="mxh-title">2. Mạng xã hội: Tạo Fanpage & Thiết lập quyền riêng tư</h2>
+
+                <h3 id="fanpage">a) Tạo Fanpage trên Facebook</h3>
+                <ul>
+                    <li>Fanpage dùng để quảng bá hình ảnh/thương hiệu/sản phẩm; có thể đăng bài, ảnh, video, sự kiện lớp/trường.</li>
+                </ul>
+                <div class="steps" role="region" aria-label="Các bước tạo Fanpage">
+                    <strong>Các bước</strong>
+                    <ol>
+                        <li>Đăng nhập Facebook → Menu → Tạo → Trang.</li>
+                        <li>Điền <em>Tên</em>, <em>Hạng mục</em>, <em>Mô tả</em> → hoàn tất.</li>
+                        <li>Đăng nội dung đầu tiên & khám phá công cụ quản lí Trang.</li>
+                    </ol>
+                </div>
+
+                <h3 id="privacy">b) Thiết lập quyền riêng tư (Privacy)</h3>
+                <ul>
+                    <li><strong>Đối tượng xem bài viết tương lai</strong>: vào Cài đặt → Quyền riêng tư → đọc hướng dẫn → chọn nhóm người được xem (Công khai, Bạn bè, Chỉ mình tôi, …) và kiểm tra thiết lập.</li>
+                    <li><strong>Trang cá nhân & gắn thẻ</strong>: cài ai được đăng lên trang cá nhân, ai thấy bài viết gắn thẻ bạn, bật duyệt bài có gắn thẻ trước khi hiển thị,…</li>
+                </ul>
+                <div class="note" role="note">
+                    Lưu ý: Thường xuyên rà soát quyền riêng tư và hoạt động đăng nhập; bật xác thực 2 yếu tố (2FA) để tăng bảo mật tài khoản.
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="lt-title">
+                <h2 id="lt-title">3. Luyện tập</h2>
+                <ol>
+                    <li>Tạo vài Nhãn cho thư học tập/giải trí; gắn, tìm theo nhãn; thử sửa, xoá nhãn.</li>
+                    <li>Kiểm tra quyền riêng tư Facebook hiện tại và điều chỉnh để tăng bảo mật.</li>
+                </ol>
+            </section>
+
+            <section id="van-dung" class="card" aria-labelledby="vd-title">
+                <h2 id="vd-title">4. Vận dụng</h2>
+                <ol>
+                    <li>So sánh phân loại thư bằng Sao với Quan trọng (ưu/nhược).</li>
+                    <li>Thực hành các tùy chọn riêng tư: xóa Lịch sử hoạt động, bật/tắt Dịch vụ vị trí.</li>
+                </ol>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+
