@@ -11,11 +11,18 @@
     cfg: {
       mode: 'countapi',
       namespace: 'visit-stats',
-      onlineStrategy: 'local'
+      onlineStrategy: 'local',
+      baseUrl: '' // for 'worker' mode
     },
     els: {},
     init(userCfg) {
       this.cfg = Object.assign({}, this.cfg, userCfg || {});
+      if (!this.cfg.namespace || this.cfg.namespace === 'auto') {
+        try {
+          const base = (location.host + location.pathname).replace(/[^a-z0-9_-]+/gi,'-').replace(/^-+|-+$/g,'').toLowerCase();
+          this.cfg.namespace = base || 'visit-stats';
+        } catch(e){}
+      }
       const box = document.getElementById('visit-stats');
       if (!box) return;
       this.els = {
@@ -28,6 +35,8 @@
       // Update counters
       if (this.cfg.mode === 'countapi') {
         this.updateWithCountAPI();
+      } else if (this.cfg.mode === 'worker') {
+        this.updateWithWorker();
       } else {
         this.updateWithLocal();
       }
@@ -35,6 +44,10 @@
       // Online indicator
       if (this.cfg.onlineStrategy === 'local') {
         this.onlineLocal();
+      } else if (this.cfg.onlineStrategy === 'countapi') {
+        this.onlineCountapi();
+      } else if (this.cfg.onlineStrategy === 'worker') {
+        this.onlineWorker();
       }
     },
 
@@ -52,25 +65,133 @@
       try { localStorage.setItem(key, String(val)); } catch(e) {}
     },
 
+    // ---------- Worker mode (Cloudflare Worker) ----------
+    async workerFetch(path, payload) {
+      const base = (this.cfg.baseUrl || '').replace(/\/$/, '');
+      if (!base) throw new Error('VisitStats: baseUrl not configured for worker mode');
+      const url = base + path;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(Object.assign({ ns: this.cfg.namespace }, payload || {})),
+        cache: 'no-store',
+        keepalive: true,
+        mode: 'cors'
+      });
+      return res.json();
+    },
+    async updateWithWorker() {
+      try {
+        const data = await this.workerFetch('/api/hit');
+        if (data && typeof data.total === 'number') this.setEl('total', data.total);
+        if (data && typeof data.today === 'number') this.setEl('today', data.today);
+        if (data && typeof data.month === 'number') this.setEl('month', data.month);
+      } catch (e) {
+        console && console.warn && console.warn('Worker hit failed; falling back local', e);
+        this.updateWithLocal();
+      }
+    },
+    async onlineWorker() {
+      let token = this.safeGetLS('vs_worker_token_' + this.cfg.namespace, '');
+      try {
+        const data = await this.workerFetch('/api/online/ping', token ? { token } : {});
+        if (data && data.token) { token = data.token; this.safeSetLS('vs_worker_token_' + this.cfg.namespace, token); }
+        if (data && typeof data.online === 'number') this.setEl('online', data.online);
+      } catch (e) {
+        console && console.warn && console.warn('Worker online failed; fallback local', e);
+        return this.onlineLocal();
+      }
+      const ping = async () => {
+        try {
+          const d = await this.workerFetch('/api/online/ping', { token });
+          if (d && typeof d.online === 'number') this.setEl('online', d.online);
+        } catch (e) {}
+      };
+      const leave = async () => { try { await this.workerFetch('/api/online/leave', { token }); } catch (e) {} };
+      const iv = setInterval(ping, 10000);
+      window.addEventListener('pagehide', () => { clearInterval(iv); leave(); }, { once: true });
+      window.addEventListener('beforeunload', () => { clearInterval(iv); leave(); }, { once: true });
+    },
+
     // ---------- CountAPI mode ----------
-    async countapiHit(key) {
+    async countapiEnsure(key) {
       const ns = encodeURIComponent(this.cfg.namespace);
       const k = encodeURIComponent(key);
-      const url = `https://api.countapi.xyz/hit/${ns}/${k}`;
-      const res = await fetch(url, { cache: 'no-store' });
+      const url = `https://api.countapi.xyz/create?namespace=${ns}&key=${k}&value=0`;
+      try { await fetch(url, { cache: 'no-store' }); } catch (e) {}
+    },
+    async countapiUpdate(key, amount = 1) {
+      const ns = encodeURIComponent(this.cfg.namespace);
+      const k = encodeURIComponent(key);
+      const url = `https://api.countapi.xyz/update/${ns}/${k}?amount=${amount}`;
+      const res = await fetch(url, { cache: 'no-store', mode: 'cors' });
       const data = await res.json();
       if (typeof data.value === 'number') return data.value;
       throw new Error('Invalid CountAPI response');
+    },
+    async countapiGet(key) {
+      const ns = encodeURIComponent(this.cfg.namespace);
+      const k = encodeURIComponent(key);
+      const url = `https://api.countapi.xyz/get/${ns}/${k}`;
+      const res = await fetch(url, { cache: 'no-store', mode: 'cors' });
+      const data = await res.json();
+      return typeof data.value === 'number' ? data.value : 0;
     },
     async updateWithCountAPI() {
       const now = new Date();
       const dayKey = `day-${now.getFullYear()}${('0'+(now.getMonth()+1)).slice(-2)}${('0'+now.getDate()).slice(-2)}`;
       const monthKey = `month-${now.getFullYear()}${('0'+(now.getMonth()+1)).slice(-2)}`;
 
-      try { this.setEl('total', await this.countapiHit('total')); } catch(e) {}
-      try { this.setEl('today', await this.countapiHit(dayKey)); } catch(e) {}
-      try { this.setEl('month', await this.countapiHit(monthKey)); } catch(e) {}
+      // Ensure keys exist, then update by +1 and show values
+      try {
+        await this.countapiEnsure('total');
+        const total = await this.countapiUpdate('total', 1);
+        this.setEl('total', total);
+      } catch (e) { console && console.warn && console.warn('CountAPI total failed', e); }
+      try {
+        await this.countapiEnsure(dayKey);
+        const today = await this.countapiUpdate(dayKey, 1);
+        this.setEl('today', today);
+      } catch (e) { console && console.warn && console.warn('CountAPI today failed', e); }
+      try {
+        await this.countapiEnsure(monthKey);
+        const month = await this.countapiUpdate(monthKey, 1);
+        this.setEl('month', month);
+      } catch (e) { console && console.warn && console.warn('CountAPI month failed', e); }
+
+      // Fallback: if any field still empty, use local to avoid blanks
+      ['total','today','month'].forEach(k => {
+        if (this.els[k] && (this.els[k].textContent.trim() === '' || this.els[k].textContent.trim() === '—')) {
+          try { this.updateWithLocal(); } catch(e){}
+        }
+      });
     },
+
+    // ---------- Online (global via CountAPI) ----------
+    async onlineCountapi() {
+      const key = 'online';
+      let incremented = false;
+      try {
+        await this.countapiEnsure(key);
+        const v = await this.countapiUpdate(key, 1);
+        incremented = true;
+        this.setEl('online', Math.max(0, v));
+      } catch (e) {
+        // Fallback to local presence if blocked
+        return this.onlineLocal();
+      }
+      const updateView = async () => {
+        try { const val = await this.countapiGet(key); this.setEl('online', Math.max(0, val)); } catch(e){}
+      };
+      updateView();
+      const iv = setInterval(updateView, 10000);
+      const decrement = async () => {
+        try { if (incremented) await this.countapiUpdate(key, -1); } catch(e){}
+        clearInterval(iv);
+      };
+      window.addEventListener('pagehide', decrement, { once: true });
+      window.addEventListener('beforeunload', decrement, { once: true });
+    }
 
     // ---------- Local demo mode ----------
     updateWithLocal() {
@@ -123,4 +244,3 @@
 
   global.VisitStats = VisitStats;
 })(window);
-

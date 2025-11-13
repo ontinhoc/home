@@ -1482,9 +1482,11 @@
     // Initialize visit stats
     try {
       VisitStats.init({
-        mode: 'countapi',          // 'countapi' for real counts, 'local' for demo/offline
-        namespace: 'ontinhoc-home',// change to your own namespace if desired
-        onlineStrategy: 'local'     // 'local' counts open tabs in this browser
+        // Using Cloudflare Worker backend mapped under ontapnhanh.com/visit-stats
+        mode: 'worker',
+        namespace: 'ontapnhanh',    // site-wide counters for ontapnhanh.com
+        onlineStrategy: 'worker',   // global online via Worker
+        baseUrl: 'https://ontapnhanh.com/visit-stats'
       });
     } catch(e) { console && console.warn && console.warn('VisitStats init failed', e); }
   </script>
