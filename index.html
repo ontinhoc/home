@@ -750,6 +750,45 @@
             text-shadow: 0 0 5px #ffd700;
         }
     </style>
+    <!-- Stats widget styles -->
+    <style id="visit-stats-styles">
+        .stats-section { margin: 2rem 0; }
+        .stats-section .container { max-width: 900px; }
+        .stats-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .stats-card-header {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .stats-list { list-style: none; margin: 0; padding: 0; }
+        .stats-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .stats-item:last-child { border-bottom: none; }
+        .stats-left { display: flex; align-items: center; gap: 0.75rem; color: var(--dark-gray); }
+        .stats-icon {
+            width: 28px; height: 28px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--light-gray);
+            border-radius: 6px; color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        .stats-label { font-weight: 500; }
+        .stats-value { font-weight: 700; color: var(--text-color); min-width: 90px; text-align: right; }
+        @media (max-width: 480px){ .stats-value { min-width: auto; } }
+    </style>
 </head>
 
 <body oncontextmenu="return false">
@@ -922,6 +961,34 @@
                     học tập và phát triển!</p>
             </section>
 
+            <!-- Stats Section --><!--
+            <section class="stats-section" aria-label="Thống kê lượt truy cập">
+                <div class="container">
+                    <div class="stats-card" id="visit-stats-old" role="region" aria-labelledby="stats-title" hidden>
+                        <div class="stats-card-header" id="stats-title">Thống kê</div>
+                        <ul class="stats-list">
+                            <li class="stats-item">
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">⚡</span><span class="stats-label">Đang truy cập</span></div>
+                                <span class="stats-value" data-key="online">—</span>
+                            </li>
+                            <li class="stats-item">
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📅</span><span class="stats-label">Hôm nay</span></div>
+                                <span class="stats-value" data-key="today">—</span>
+                            </li>
+                            <li class="stats-item">
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">🗓️</span><span class="stats-label">Tháng hiện tại</span></div>
+                                <span class="stats-value" data-key="month">—</span>
+                            </li>
+                            <li class="stats-item">
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📊</span><span class="stats-label">Tổng lượt truy cập</span></div>
+                                <span class="stats-value" data-key="total">—</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            -->
+
             <!-- Cards Section -->
             <section class="cards-section">
                 <h2 class="section-title">Chủ đề học tập</h2>
@@ -1053,6 +1120,33 @@
             </form>
         </div>
     </div>
+
+    <!-- Stats Section (moved near footer) -->
+    <section class="stats-section" aria-label="Thống kê lượt truy cập">
+        <div class="container">
+            <div class="stats-card" id="visit-stats" role="region" aria-labelledby="stats-title-footer">
+                <div class="stats-card-header" id="stats-title-footer">Thống kê</div>
+                <ul class="stats-list">
+                    <li class="stats-item">
+                        <div class="stats-left"><span class="stats-icon" aria-hidden="true">⚡</span><span class="stats-label">Đang truy cập</span></div>
+                        <span class="stats-value" data-key="online">—</span>
+                    </li>
+                    <li class="stats-item">
+                        <div class="stats-left"><span class="stats-icon" aria-hidden="true">📅</span><span class="stats-label">Hôm nay</span></div>
+                        <span class="stats-value" data-key="today">—</span>
+                    </li>
+                    <li class="stats-item">
+                        <div class="stats-left"><span class="stats-icon" aria-hidden="true">🗓️</span><span class="stats-label">Tháng hiện tại</span></div>
+                        <span class="stats-value" data-key="month">—</span>
+                    </li>
+                    <li class="stats-item">
+                        <div class="stats-left"><span class="stats-icon" aria-hidden="true">📊</span><span class="stats-label">Tổng lượt truy cập</span></div>
+                        <span class="stats-value" data-key="total">—</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
@@ -1286,6 +1380,32 @@
             } catch (e) {}
         });
     </script>
+  <script src="visit-stats.js"></script>
+  <script>
+    // Initialize visit stats
+    try {
+      VisitStats.init({
+        mode: 'countapi',          // 'countapi' for real counts, 'local' for demo/offline
+        namespace: 'ontinhoc-home',// change to your own namespace if desired
+        onlineStrategy: 'local'     // 'local' counts open tabs in this browser
+      });
+    } catch(e) { console && console.warn && console.warn('VisitStats init failed', e); }
+  </script>
+  <script>
+    // Remove any duplicate stats section, keep the footer one
+    document.addEventListener('DOMContentLoaded', function(){
+      try {
+        var sections = document.querySelectorAll('section.stats-section');
+        if (sections.length > 1) {
+          sections.forEach(function(sec){
+            if (!sec.querySelector('#visit-stats')) {
+              sec.remove();
+            }
+          });
+        }
+      } catch(e){}
+    });
+  </script>
   <script src="protect.js"></script>
 </body>
 </html>
