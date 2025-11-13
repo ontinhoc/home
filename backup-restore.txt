@@ -1,0 +1,37 @@
+Cách 1: Dùng Git (khuyên dùng)
+
+Khởi tạo repo tại thư mục dự án:
+cd C:\Users\csonline\Documents\home
+git init
+Tạo snapshot:
+git add -A
+git commit -m "snapshot 2025-11-13 10:30"
+(tùy chọn) gắn nhãn: git tag snap-2025-11-13_10-30
+Khôi phục khi lỗi:
+Xem lịch sử: git log --oneline --decorate
+Khôi phục file về một mốc: git restore --source <tag-hoặc-commit> .
+Hoặc đưa cả repo về mốc: git reset --hard <tag-hoặc-commit>
+Gợi ý .gitignore cơ bản:
+.git/, node_modules/, dist/, build/, .env, *.log
+======
+Đã xong. Tôi đã thêm tệp .gitignore, tạo một commit snapshot và gắn thẻ cho nó.
+
+Thẻ snapshot: snap-2025-11-13_20-59-12
+Tệp mới/đã cập nhật: .gitignore:1
+Cách khôi phục
+
+Xem lại snapshot: git log --oneline --decorate
+Liệt kê các thẻ snapshot: git tag -l "snap-*"
+Khôi phục các tệp vào snapshot này (giữ nguyên nhánh): git restore --source snap-2025-11-13_20-59-12 .
+Di chuyển toàn bộ kho lưu trữ vào snapshot này: git reset --hard snap-2025-11-13_20-59-12
+Tạo snapshot trong tương lai
+
+Giai đoạn và snapshot với thời gian hiện tại:
+git add -A
+Dấu thời gian PowerShell: $t = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+Cam kết: git commit -m "snapshot $t"
+Thẻ: git tag -a "snap-$t" -m "snapshot $t"
+Ghi chú
+
+Bạn có thể bỏ qua cảnh báo CRLF/LF; đây là điều bình thường trên Windows.
+Nếu bạn muốn các quy tắc bỏ qua khác, hãy chỉnh sửa .gitignore và tạo một snapshot mới.
