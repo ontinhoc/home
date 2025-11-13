@@ -860,6 +860,26 @@
         .first-lunar .solar-day { color: #16a34a; }
         .lunar-weekday-pill, .lunar-month-pill { cursor: pointer; }
     </style>
+    <style>
+        /* Back to top button */
+        #backToTop {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: var(--accent-color, #228B22);
+            color: #fff;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            display: none;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            font-size: 1.25rem;
+            z-index: 2000;
+        }
+        #backToTop:hover { opacity: 0.92; }
+    </style>
 </head>
 
 <body oncontextmenu="return false">
@@ -1475,6 +1495,7 @@
             } catch (e) {}
         });
     </script>
+  <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
   <script src="visit-stats.js"></script>
   <script src="lunar-calendar.js"></script>
   <script src="lunar-enhance.js"></script>
@@ -1530,6 +1551,17 @@
         }
       } catch(e){}
     });
+  </script>
+  <script>
+    // Back-to-top behavior
+    (function(){
+      var btn = document.getElementById('backToTop');
+      if (!btn) return;
+      function toggle(){ btn.style.display = (window.scrollY || document.documentElement.scrollTop) > 220 ? 'block' : 'none'; }
+      window.addEventListener('scroll', toggle, { passive: true });
+      toggle();
+      btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    })();
   </script>
   <script src="protect.js"></script>
 </body>
