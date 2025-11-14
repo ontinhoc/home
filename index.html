@@ -553,38 +553,38 @@
                 text-align: center;
             }
 
-    .banner {
-        padding: 2rem 1rem;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(77, 184, 255, 0.5);
-    }
+            .banner {
+                padding: 2rem 1rem;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(77, 184, 255, 0.5);
+            }
 
-    .banner h1 {
-        font-size: 2rem;
-    }
+            .banner h1 {
+                font-size: 2rem;
+            }
 
-    .banner h2 {
-        font-size: 1.5rem;
-    }
+            .banner h2 {
+                font-size: 1.5rem;
+            }
 
-    .banner-lists {
-        gap: 1rem;
-    }
+            .banner-lists {
+                gap: 1rem;
+            }
 
-    @media (max-width: 480px) {
-        .banner h1 {
-            font-size: 1.8rem;
-        }
+            @media (max-width: 480px) {
+                .banner h1 {
+                    font-size: 1.8rem;
+                }
 
-        .banner h2 {
-            font-size: 1.2rem;
-        }
+                .banner h2 {
+                    font-size: 1.2rem;
+                }
 
-        .banner-lists {
-            flex-direction: column;
-            gap: 1rem;
-        }
-    }
+                .banner-lists {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+            }
 
             .search-bar {
                 max-width: 100%;
@@ -753,17 +753,30 @@
     <!-- Stats + Widgets styles -->
     <style id="visit-stats-styles">
         /* Widgets layout */
-        .widgets-section { margin: 2rem 0; }
-        .widgets-section .container { max-width: 900px; }
+        .widgets-section {
+            margin: 2rem 0;
+        }
+
+        .widgets-section .container {
+            max-width: 900px;
+        }
+
         .widgets-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(300px, 380px)); /* equal width columns */
+            grid-template-columns: repeat(2, minmax(300px, 380px));
+            /* equal width columns */
             gap: 1.5rem;
-            justify-content: center; /* center the two blocks */
-            align-items: center;     /* center shorter one vertically */
+            justify-content: center;
+            /* center the two blocks */
+            align-items: center;
+            /* center shorter one vertically */
         }
+
         @media (max-width: 900px) {
-            .widgets-grid { grid-template-columns: 1fr; justify-content: stretch; }
+            .widgets-grid {
+                grid-template-columns: 1fr;
+                justify-content: stretch;
+            }
         }
 
         /* Stats card */
@@ -771,16 +784,23 @@
             background: #fff;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
+
         .stats-card-header {
             padding: 0.7rem 0.9rem;
             border-bottom: 1px solid var(--border-color);
             font-weight: 600;
             color: var(--text-color);
         }
-        .stats-list { list-style: none; margin: 0; padding: 0; }
+
+        .stats-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
         .stats-item {
             display: flex;
             align-items: center;
@@ -789,53 +809,129 @@
             padding: 0.65rem 0.85rem;
             border-bottom: 1px solid var(--border-color);
         }
-        .stats-item:last-child { border-bottom: none; }
-        .stats-left { display: flex; align-items: center; gap: 0.75rem; color: var(--dark-gray); }
+
+        .stats-item:last-child {
+            border-bottom: none;
+        }
+
+        .stats-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--dark-gray);
+        }
+
         .stats-icon {
-            width: 24px; height: 24px;
-            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: var(--light-gray);
-            border-radius: 6px; color: var(--primary-color);
+            border-radius: 6px;
+            color: var(--primary-color);
             font-size: 1rem;
         }
-        .stats-label { font-weight: 500; }
-        .stats-value { font-weight: 700; color: var(--text-color); min-width: 90px; text-align: right; }
-        @media (max-width: 480px){ .stats-value { min-width: auto; } }
+
+        .stats-label {
+            font-weight: 500;
+        }
+
+        .stats-value {
+            font-weight: 700;
+            color: var(--text-color);
+            min-width: 90px;
+            text-align: right;
+        }
+
+        @media (max-width: 480px) {
+            .stats-value {
+                min-width: auto;
+            }
+        }
 
         /* Lunar calendar styles */
         .lunar-card {
             background: #fff;
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
+
         .lunar-header {
             position: relative;
             background: linear-gradient(135deg, #43f37d, #2151ec);
             color: #fff;
             padding: 0.8rem 1rem 1rem;
         }
+
         .lunar-nav {
             position: absolute;
             top: 0.75rem;
-            left: 0.75rem;   /* keep buttons away from rounded edge */
-            right: 0.75rem;  /* so the next button is fully visible */
-            display: flex; justify-content: space-between;
-            z-index: 5; pointer-events: auto;
+            left: 0.75rem;
+            /* keep buttons away from rounded edge */
+            right: 0.75rem;
+            /* so the next button is fully visible */
+            display: flex;
+            justify-content: space-between;
+            z-index: 5;
+            pointer-events: auto;
         }
+
         .lunar-nav button {
-            border: none; background: rgba(255,255,255,0.25); color: #fff; width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+            border: none;
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            cursor: pointer;
         }
-        .lunar-month-title { text-align: center; font-weight: 600; opacity: 0.95; margin-top: 0.1rem; font-size: 0.95rem; }
-        .lunar-big-solar { text-align: center; font-size: 2.4rem; font-weight: 800; margin-top: 0.15rem; }
-        .lunar-weekday-pill, .lunar-month-pill {
-            display: inline-block; padding: 0.25rem 0.75rem; background: rgba(255,255,255,0.85);
-            color: #c94f66; border-radius: 999px; font-weight: 600; margin: 0.25rem auto; text-align: center;
+
+        .lunar-month-title {
+            text-align: center;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-top: 0.1rem;
+            font-size: 0.95rem;
         }
-        .lunar-weekday-pill { display: block; width: fit-content; }
-        .lunar-month-pill { display: block; width: fit-content; }
-        .lunar-big-lunar { text-align: center; font-size: 1.4rem; font-weight: 800; margin-top: 0.1rem; }
+
+        .lunar-big-solar {
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-top: 0.15rem;
+        }
+
+        .lunar-weekday-pill,
+        .lunar-month-pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.85);
+            color: #c94f66;
+            border-radius: 999px;
+            font-weight: 600;
+            margin: 0.25rem auto;
+            text-align: center;
+        }
+
+        .lunar-weekday-pill {
+            display: block;
+            width: fit-content;
+        }
+
+        .lunar-month-pill {
+            display: block;
+            width: fit-content;
+        }
+
+        .lunar-big-lunar {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-top: 0.1rem;
+        }
 
         .lunar-grid {
             width: 100%;
@@ -843,22 +939,77 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
         }
-        .lunar-dow { font-weight: 700; color: var(--dark-gray); text-align: center; padding: 0.6rem 0; background: #fafafa; border-bottom: 1px solid var(--border-color); }
+
+        .lunar-dow {
+            font-weight: 700;
+            color: var(--dark-gray);
+            text-align: center;
+            padding: 0.6rem 0;
+            background: #fafafa;
+            border-bottom: 1px solid var(--border-color);
+        }
+
         .lunar-cell {
             display: block;
-            min-height: 56px; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color);
-            position: relative; overflow: hidden; background: #fff;
+            min-height: 56px;
+            padding: 0.35rem 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            background: #fff;
         }
-        .lunar-cell:nth-child(7n) { border-right: none; }
-        .solar-day { font-weight: 700; font-size: 1rem; }
-        .lunar-mini { position: absolute; bottom: 6px; right: 6px; font-size: 0.72rem; color: #777; }
-        .off-month { color: #bbb; background: #fcfcfc; }
-        .sun { color: #e11d48; }
-        .today { outline: 2px solid #f59e0b; outline-offset: -2px; border-radius: 8px; background: #fef9c3; }
-        .lunar-mini-emph { color: #16a34a; font-weight: 700; }
-        .good-day .solar-day { color: #dc2626; }
-        .first-lunar .solar-day { color: #16a34a; }
-        .lunar-weekday-pill, .lunar-month-pill { cursor: pointer; }
+
+        .lunar-cell:nth-child(7n) {
+            border-right: none;
+        }
+
+        .solar-day {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .lunar-mini {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            font-size: 0.72rem;
+            color: #777;
+        }
+
+        .off-month {
+            color: #bbb;
+            background: #fcfcfc;
+        }
+
+        .sun {
+            color: #e11d48;
+        }
+
+        .today {
+            outline: 2px solid #f59e0b;
+            outline-offset: -2px;
+            border-radius: 8px;
+            background: #fef9c3;
+        }
+
+        .lunar-mini-emph {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .good-day .solar-day {
+            color: #dc2626;
+        }
+
+        .first-lunar .solar-day {
+            color: #16a34a;
+        }
+
+        .lunar-weekday-pill,
+        .lunar-month-pill {
+            cursor: pointer;
+        }
     </style>
     <style>
         /* Back to top button */
@@ -874,11 +1025,14 @@
             border-radius: 10px;
             display: none;
             cursor: pointer;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
             font-size: 1.25rem;
             z-index: 2000;
         }
-        #backToTop:hover { opacity: 0.92; }
+
+        #backToTop:hover {
+            opacity: 0.92;
+        }
     </style>
 </head>
 
@@ -950,22 +1104,11 @@
                         <a href="KeyBanQuyenGiaSi.html" class="nav-link" role="menuitem">AI</a>
                     </li>
                     <li class="nav-item" role="none">
-                        <a href="#" class="nav-link" role="menuitem" aria-haspopup="true"
-                            aria-expanded="false">Links</a>
-                        <ul class="dropdown" role="menu" aria-label="Tin học văn phòng">
-                            <li role="none"><a href="https://translate.google.com/" class="dropdown-item"
-                                    role="menuitem" target="_blank">Google dịch</a></li>
-                            <li role="none"><a href="https://vtsmas.vn/" class="dropdown-item" role="menuitem"
-                                    target="_blank">Smas</a></li>
-                            <li role="none"><a href="https://gli-thpttrancaovan.k12online.vn/" class="dropdown-item"
-                                    role="menuitem" target="_blank">K12online</a></li>
-                            <li role="none"><a href="https://teams.microsoft.com/v2/" class="dropdown-item"
-                                    role="menuitem" target="_blank">Teams</a></li>
-                            <li role="none"><a href="https://edoc.smas.edu.vn/" class="dropdown-item" role="menuitem"
-                                    target="_blank">Edoc</a></li>
-                            <li role="none"><a href="nop-bai.html" class="dropdown-item" role="menuitem">Nộp bài</a></li>
-                            <li role="none"><a href="random-names.html" class="dropdown-item" role="menuitem"
-                                    target="_blank">Gọi tên</a></li>
+                        <a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">My
+                            Links</a>
+                        <ul class="dropdown" role="menu" aria-label="My Links">
+                            <li role="none"><a href="my_links.html" class="dropdown-item" role="menuitem"
+                                    target="_blank" rel="noopener noreferrer">My Links</a></li>
                         </ul>
                     </li>
                     <li class="nav-item" role="none">
@@ -1222,19 +1365,23 @@
                         <div class="stats-card-header" id="stats-title-footer">Thống kê</div>
                         <ul class="stats-list">
                             <li class="stats-item">
-                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">⚡</span><span class="stats-label">Đang truy cập</span></div>
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">⚡</span><span
+                                        class="stats-label">Đang truy cập</span></div>
                                 <span class="stats-value" data-key="online">—</span>
                             </li>
                             <li class="stats-item">
-                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📅</span><span class="stats-label">Hôm nay</span></div>
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📅</span><span
+                                        class="stats-label">Hôm nay</span></div>
                                 <span class="stats-value" data-key="today">—</span>
                             </li>
                             <li class="stats-item">
-                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">🗓️</span><span class="stats-label">Tháng hiện tại</span></div>
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">🗓️</span><span
+                                        class="stats-label">Tháng hiện tại</span></div>
                                 <span class="stats-value" data-key="month">—</span>
                             </li>
                             <li class="stats-item">
-                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📊</span><span class="stats-label">Tổng lượt truy cập</span></div>
+                                <div class="stats-left"><span class="stats-icon" aria-hidden="true">📊</span><span
+                                        class="stats-label">Tổng lượt truy cập</span></div>
                                 <span class="stats-value" data-key="total">—</span>
                             </li>
                         </ul>
@@ -1242,7 +1389,9 @@
                 </div>
                 <!-- Right: Lunar calendar -->
                 <div>
-                    <div class="lunar-card" id="lunar-widget" role="region" aria-label="Lịch âm dương" data-linktemplate="https://licham.net/?date={YYYY}-{MM}-{DD}" data-monthlinktemplate="https://licham.net/?month={YYYY}-{MM}">
+                    <div class="lunar-card" id="lunar-widget" role="region" aria-label="Lịch âm dương"
+                        data-linktemplate="https://licham.net/?date={YYYY}-{MM}-{DD}"
+                        data-monthlinktemplate="https://licham.net/?month={YYYY}-{MM}">
                         <div class="lunar-header">
                             <div class="lunar-nav">
                                 <button type="button" class="lc-prev" aria-label="Tháng trước">‹</button>
@@ -1437,13 +1586,13 @@
     </script>
     <script>
         // Ensure 'Nộp bài' opens in a new tab on all devices
-        (function(){
-            try{
+        (function () {
+            try {
 
                 // Ensure all items in the desktop 'Links' dropdown open in new tab
                 var navLinks = document.querySelectorAll('.nav-item > .nav-link');
                 var linksDropdown = null;
-                navLinks.forEach(function(a){
+                navLinks.forEach(function (a) {
                     var txt = (a.textContent || '').trim().toLowerCase();
                     if (txt === 'links') {
                         var parent = a.parentElement;
@@ -1451,24 +1600,24 @@
                     }
                 });
                 if (linksDropdown) {
-                    linksDropdown.querySelectorAll('a.dropdown-item').forEach(function(a){
-                        a.setAttribute('target','_blank');
-                        a.setAttribute('rel','noopener');
+                    linksDropdown.querySelectorAll('a.dropdown-item').forEach(function (a) {
+                        a.setAttribute('target', '_blank');
+                        a.setAttribute('rel', 'noopener');
                     });
                 }
-            }catch(e){}
+            } catch (e) { }
         })();
     </script>
     <script>
-      (function(){
-        try {
-          var as = document.querySelectorAll('a[href$="nop-bai.html"]');
-          as.forEach(function(a){
-            var p = a.closest('li, .mobile-nav-item');
-            if (p) { p.remove(); } else { a.remove(); }
-          });
-        } catch(e){}
-      })();
+        (function () {
+            try {
+                var as = document.querySelectorAll('a[href$="nop-bai.html"]');
+                as.forEach(function (a) {
+                    var p = a.closest('li, .mobile-nav-item');
+                    if (p) { p.remove(); } else { a.remove(); }
+                });
+            } catch (e) { }
+        })();
     </script>
     <script>
         // Handle inactive "Tìm hiểu thêm" buttons
@@ -1481,7 +1630,7 @@
                         alert('Nội dung đang cập nhật - Vui lòng quay lại sau');
                     });
                 });
-            } catch (e) {}
+            } catch (e) { }
         });
     </script>
     <script>
@@ -1492,88 +1641,89 @@
                 if (btn) {
                     btn.innerHTML = '<strong style="color:#22c55e;">&#128073; XEM NGAY CÁC KHUYẾN MÃI &#128072;</strong>';
                 }
-            } catch (e) {}
+            } catch (e) { }
         });
     </script>
-  <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
-  <script src="visit-stats.js"></script>
-  <script src="lunar-calendar.js"></script>
-  <script src="lunar-enhance.js"></script>
-  <script>
-    // Initialize visit stats
-    try {
-      VisitStats.init({
-        // Using Cloudflare Worker backend mapped under ontapnhanh.com/visit-stats
-        mode: 'worker',
-        namespace: 'ontapnhanh',    // site-wide counters for ontapnhanh.com
-        onlineStrategy: 'worker',   // global online via Worker
-        baseUrl: 'https://ontapnhanh.com/visit-stats'
-      });
-    } catch(e) { console && console.warn && console.warn('VisitStats init failed', e); }
-  </script>
-  <script>
-    // Match widths and set calendar height = 2x stats height; recalc on resize/changes
-    (function(){
-      function adjust(){
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
+    <script src="visit-stats.js"></script>
+    <script src="lunar-calendar.js"></script>
+    <script src="lunar-enhance.js"></script>
+    <script>
+        // Initialize visit stats
         try {
-          var stats = document.getElementById('visit-stats');
-          var lunar = document.getElementById('lunar-widget');
-          if (!stats || !lunar) return;
-          // equal column widths handled by CSS; ensure cards fill column but cap max width
-          stats.style.width = '100%';
-          lunar.style.width = '100%';
-          // set calendar height = 2x stats
-          var h = stats.offsetHeight || 260;
-          lunar.style.minHeight = Math.round(h*2) + 'px';
-        } catch(e){}
-      }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', adjust); else adjust();
-      window.addEventListener('resize', adjust);
-      // observe stats mutations (after async counters update)
-      try {
-        var obs = new MutationObserver(adjust);
-        obs.observe(document.getElementById('visit-stats'), { childList: true, subtree: true, characterData: true });
-        setTimeout(adjust, 800); setTimeout(adjust, 2000);
-      } catch(e){}
-    })();
-  </script>
-  <script>
-    // Remove any duplicate stats section, keep the footer one
-    document.addEventListener('DOMContentLoaded', function(){
-      try {
-        var sections = document.querySelectorAll('section.stats-section');
-        if (sections.length > 1) {
-          sections.forEach(function(sec){
-            if (!sec.querySelector('#visit-stats')) {
-              sec.remove();
+            VisitStats.init({
+                // Using Cloudflare Worker backend mapped under ontapnhanh.com/visit-stats
+                mode: 'worker',
+                namespace: 'ontapnhanh',    // site-wide counters for ontapnhanh.com
+                onlineStrategy: 'worker',   // global online via Worker
+                baseUrl: 'https://ontapnhanh.com/visit-stats'
+            });
+        } catch (e) { console && console.warn && console.warn('VisitStats init failed', e); }
+    </script>
+    <script>
+        // Match widths and set calendar height = 2x stats height; recalc on resize/changes
+        (function () {
+            function adjust() {
+                try {
+                    var stats = document.getElementById('visit-stats');
+                    var lunar = document.getElementById('lunar-widget');
+                    if (!stats || !lunar) return;
+                    // equal column widths handled by CSS; ensure cards fill column but cap max width
+                    stats.style.width = '100%';
+                    lunar.style.width = '100%';
+                    // set calendar height = 2x stats
+                    var h = stats.offsetHeight || 260;
+                    lunar.style.minHeight = Math.round(h * 2) + 'px';
+                } catch (e) { }
             }
-          });
-        }
-      } catch(e){}
-    });
-  </script>
-  <script>
-    // Back-to-top behavior
-    (function(){
-      var btn = document.getElementById('backToTop');
-      if (!btn) return;
-      function toggle(){ btn.style.display = (window.scrollY || document.documentElement.scrollTop) > 220 ? 'block' : 'none'; }
-      window.addEventListener('scroll', toggle, { passive: true });
-      toggle();
-      btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
-    })();
-  </script>
-  <script src="protect.js"></script>
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', adjust); else adjust();
+            window.addEventListener('resize', adjust);
+            // observe stats mutations (after async counters update)
+            try {
+                var obs = new MutationObserver(adjust);
+                obs.observe(document.getElementById('visit-stats'), { childList: true, subtree: true, characterData: true });
+                setTimeout(adjust, 800); setTimeout(adjust, 2000);
+            } catch (e) { }
+        })();
+    </script>
+    <script>
+        // Remove any duplicate stats section, keep the footer one
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                var sections = document.querySelectorAll('section.stats-section');
+                if (sections.length > 1) {
+                    sections.forEach(function (sec) {
+                        if (!sec.querySelector('#visit-stats')) {
+                            sec.remove();
+                        }
+                    });
+                }
+            } catch (e) { }
+        });
+    </script>
+    <script>
+        // Back-to-top behavior
+        (function () {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            function toggle() { btn.style.display = (window.scrollY || document.documentElement.scrollTop) > 220 ? 'block' : 'none'; }
+            window.addEventListener('scroll', toggle, { passive: true });
+            toggle();
+            btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        })();
+    </script>
+    <script src="protect.js"></script>
 </body>
+
 </html>
 <script>
-  // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', (e) => {
-    const k = (e.key || '').toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && ['u','s','p','shift','i','j','c'].includes(k)) e.preventDefault();
-    if (e.key === 'F12') e.preventDefault();
-  });
+    // Rào cản nhẹ: chặn menu chuột phải và một số phím tắt phổ biến
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+        const k = (e.key || '').toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ['u', 's', 'p', 'shift', 'i', 'j', 'c'].includes(k)) e.preventDefault();
+        if (e.key === 'F12') e.preventDefault();
+    });
 </script>
 
 </html>
