@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Bài 9 Tin học 12: Tạo danh sách (ol, ul, dl) và tạo bảng dữ liệu (table, tr, td, th); định dạng bảng cơ bản, thực hành và luyện tập.">
+    <meta name="keywords" content="Tin học 12, tạo danh sách, ol, ul, dl, table, tr, td, th, caption, border, rowspan, colspan, list-style-type">
+    <meta name="author" content="Ontinhoc">
+    <title>Tạo Danh Sách, Bảng | Tin 12 - Bài 9 (Lý thuyết)</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        code{background:#f1f5f9;padding:1px 6px;border-radius:6px}
+        pre{background:#f1f5f9;padding:12px;border-radius:10px;overflow:auto}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 180px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 9: Tạo danh sách, bảng (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": [
+        "danh sách", "ol", "ul", "dl",
+        "table", "tr", "td", "th",
+        "caption", "rowspan", "colspan", "border"
+      ],
+      "description": "Tạo các loại danh sách (ol, ul, dl) và bảng dữ liệu (table, tr, td, th); định dạng bảng cơ bản và luyện tập."
+    }
+    </script>
+    <!-- Security/UX: disable context menu and include basic protect script -->
+    <!-- rel=noopener on outbound links; smooth in-page scrolling as in bài 8 -->
+    <!-- Consider CSP via server if deployed -->
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 9: Tạo Danh Sách, Bảng</h1>
+            <p>Hệ thống hóa cách tạo các loại danh sách (<code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;dl&gt;</code>) và bảng dữ liệu (<code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>); làm quen với định dạng bảng cơ bản và các bài thực hành.</p>
+        </header>
+
+        <nav aria-label="Mục lục bài học">
+            <a href="#muc-tieu">Mục tiêu</a>
+            <a href="#tao-danh-sach">Tạo danh sách</a>
+            <a href="#bang-du-lieu">Thiết lập bảng</a>
+            <a href="#thuc-hanh">Thực hành</a>
+            <a href="#tu-khoa">Từ khóa</a>
+        </nav>
+
+        <main>
+            <section id="muc-tieu" class="card">
+                <h2>Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết tạo các loại danh sách (<code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;dl&gt;</code>) và tạo bảng dữ liệu (<code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>).</li>
+                </ul>
+            </section>
+
+            <section id="tao-danh-sach" class="card">
+                <h2>1. Tạo danh sách</h2>
+
+                <h3>a) Khái niệm &amp; phân loại</h3>
+                <ul>
+                    <li>
+                        <strong>Danh sách có thứ tự – <code>&lt;ol&gt;</code>:</strong>
+                        dùng khi các mục cần đánh số theo thứ tự.
+                        Thuộc tính thường dùng:
+                        <ul>
+                            <li><code>type</code>: kiểu đánh số (<code>1</code>, <code>A</code>, <code>a</code>, <code>I</code>, <code>i</code>).</li>
+                            <li><code>start</code>: giá trị bắt đầu (ví dụ <code>&lt;ol type="A" start="3"&gt;</code>).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Danh sách không thứ tự – <code>&lt;ul&gt;</code>:</strong>
+                        dùng khi các mục ngang nhau, không cần số thứ tự.
+                        Ký hiệu đầu dòng chỉnh bằng thuộc tính <code>style</code>:
+                        <code>style="list-style-type:disc|circle|square|none"</code>
+                        (thường sử dụng một trong các giá trị <code>disc</code>, <code>circle</code>, <code>square</code>, <code>none</code>).
+                    </li>
+                    <li>
+                        <strong>Danh sách mô tả – <code>&lt;dl&gt;</code>:</strong>
+                        gồm các thuật ngữ và mô tả:
+                        <ul>
+                            <li><code>&lt;dt&gt;</code>: thuật ngữ (tên mục).</li>
+                            <li><code>&lt;dd&gt;</code>: phần mô tả/giải thích cho thuật ngữ.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="steps">
+                    <p><strong>Mẫu minh họa (rút gọn):</strong></p>
+<pre><code>&lt;h2&gt;Danh sách có thứ tự&lt;/h2&gt;
+&lt;ol type="1" start="1"&gt;
+  &lt;li&gt;HTML cơ bản&lt;/li&gt;
+  &lt;li&gt;Danh sách &amp;amp; bảng&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Danh sách không thứ tự&lt;/h2&gt;
+&lt;ul style="list-style-type:square"&gt;
+  &lt;li&gt;Tin học 10&lt;/li&gt;
+  &lt;li&gt;Tin học 11&lt;/li&gt;
+  &lt;li&gt;Tin học 12&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Danh sách mô tả&lt;/h2&gt;
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Ngôn ngữ đánh dấu siêu văn bản.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                </div>
+
+                <h3>b) Lồng danh sách</h3>
+                <ul>
+                    <li>Lồng danh sách nghĩa là đặt một danh sách bên trong một phần tử <code>&lt;li&gt;</code> của danh sách khác.</li>
+                    <li>Dùng để biểu diễn cấu trúc phân cấp (mục lớn – mục con), ví dụ chương – mục – tiểu mục.</li>
+                    <li>Cần thụt lề hợp lý để dễ đọc mã HTML và tránh nhầm lẫn thẻ đóng/mở.</li>
+                </ul>
+
+                <div class="note">
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Câu lạc bộ&lt;/li&gt;
+  &lt;li&gt;Nhóm sở thích
+    &lt;ol type="a"&gt;
+      &lt;li&gt;Thể thao&lt;/li&gt;
+      &lt;li&gt;Nghệ thuật&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    Ví dụ trên minh họa cách đặt <code>&lt;ol&gt;</code> (có thứ tự) bên trong một mục của <code>&lt;ul&gt;</code>.
+                </div>
+            </section>
+
+            <section id="bang-du-lieu" class="card">
+                <h2>2. Thiết lập bảng</h2>
+
+                <h3>a) Khi nào dùng bảng?</h3>
+                <ul>
+                    <li>Khi cần hiển thị dữ liệu dạng hàng – cột (thời khóa biểu, bảng điểm, lịch hoạt động, danh sách học sinh...).</li>
+                    <li>Có thể dùng bảng để tạo bố cục nhiều cột đơn giản, nhưng với bố cục phức tạp nên ưu tiên dùng CSS (sẽ học ở bài sau).</li>
+                </ul>
+
+                <h3>b) Các thành phần chính</h3>
+                <ul>
+                    <li><code>&lt;table&gt;</code>: toàn bộ bảng.</li>
+                    <li><code>&lt;tr&gt;</code> (table row): một hàng trong bảng.</li>
+                    <li><code>&lt;td&gt;</code> (table data): ô dữ liệu thường.</li>
+                    <li><code>&lt;th&gt;</code> (table header): ô tiêu đề (thường được in đậm, căn giữa).</li>
+                </ul>
+
+                <div class="steps">
+                    <p><strong>Mẫu bảng dữ liệu đơn giản:</strong></p>
+<pre><code>&lt;table style="border-collapse:collapse;width:100%;"&gt;
+  &lt;tr&gt;
+    &lt;th style="border:1px solid #94a3b8;"&gt;STT&lt;/th&gt;
+    &lt;th style="border:1px solid #94a3b8;"&gt;Họ tên&lt;/th&gt;
+    &lt;th style="border:1px solid #94a3b8;"&gt;Lớp&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;1&lt;/td&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;Nguyễn An&lt;/td&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;12A1&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+
+                <h3>c) Định dạng cơ bản cho bảng</h3>
+                <ul>
+                    <li><strong>Tiêu đề bảng:</strong> dùng <code>&lt;caption&gt;...&lt;/caption&gt;</code> đặt ngay sau thẻ <code>&lt;table&gt;</code>.</li>
+                    <li><strong>Viền (border):</strong> có thể dùng thuộc tính <code>style</code>:
+                        <code>style="border:1px solid blue"</code> hoặc đặt trên từng ô/hàng.</li>
+                    <li><strong>Kích thước:</strong> dùng <code>width</code>, <code>height</code> theo <code>%</code> hoặc <code>px</code>; nên ưu tiên <code>%</code> để phù hợp nhiều thiết bị.</li>
+                    <li><strong>Gộp ô:</strong>
+                        <code>rowspan</code> để gộp nhiều hàng,
+                        <code>colspan</code> để gộp nhiều cột trong cùng một ô.</li>
+                </ul>
+
+                <div class="note">
+<pre><code>&lt;table style="border-collapse:collapse;width:100%;"&gt;
+  &lt;caption&gt;Lịch hoạt động CLB&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th rowspan="2" style="border:1px solid #94a3b8;"&gt;Thứ&lt;/th&gt;
+    &lt;th colspan="2" style="border:1px solid #94a3b8;"&gt;Buổi&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th style="border:1px solid #94a3b8;"&gt;Sáng&lt;/th&gt;
+    &lt;th style="border:1px solid #94a3b8;"&gt;Chiều&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;Thứ 2&lt;/td&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;Bóng đá&lt;/td&gt;
+    &lt;td style="border:1px solid #94a3b8;"&gt;Cờ vua&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                    Ví dụ trên sử dụng cả <code>rowspan</code> và <code>colspan</code> để gộp ô tiêu đề.
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card">
+                <h2>3. Thực hành (hướng dẫn trong bài)</h2>
+
+                <h3>Nhiệm vụ 1 – Tạo danh sách CLB</h3>
+                <ul>
+                    <li>Phân tích cấu trúc danh sách: danh sách chính là các câu lạc bộ, trong đó có mục con “Thể thao”, “Nghệ thuật”.</li>
+                    <li>Tạo tiêu đề mức 2 bằng thẻ <code>&lt;h2&gt;</code>, ví dụ: <code>&lt;h2&gt;Câu lạc bộ trường em&lt;/h2&gt;</code>.</li>
+                    <li>Tạo danh sách chính bằng <code>&lt;ul&gt;</code>; các mục con “Thể thao”, “Nghệ thuật” là các phần tử <code>&lt;li&gt;</code>.</li>
+                    <li>Bên trong mỗi mục “Thể thao”, “Nghệ thuật” tạo danh sách lồng bằng <code>&lt;ol type="a"&gt;</code> liệt kê các CLB cụ thể.</li>
+                </ul>
+
+                <h3>Nhiệm vụ 2 – Tạo bảng Lịch hoạt động</h3>
+                <ul>
+                    <li>Xác định kích thước bảng 7×7 (7 hàng, 7 cột) phù hợp với nội dung lịch hoạt động trong tuần.</li>
+                    <li>Dùng <code>&lt;caption&gt;</code> để đặt tiêu đề bảng, ví dụ: “Lịch hoạt động câu lạc bộ tuần lễ ...”.</li>
+                    <li>Sử dụng <code>rowspan</code>, <code>colspan</code> để gộp các ô tiêu đề (ví dụ tiêu đề chung cho “Buổi sáng”, “Buổi chiều”).</li>
+                    <li>Sau khi hoàn thiện phần cấu trúc, điền dữ liệu vào từng ô <code>&lt;td&gt;</code> tương ứng với ngày, buổi, hoạt động.</li>
+                </ul>
+
+                <h3>Luyện tập &amp; vận dụng</h3>
+                <ul>
+                    <li>Thử thay đổi viền bảng bằng thuộc tính <code>style</code> (độ dày, kiểu đường, màu) thay vì chỉ dùng thuộc tính <code>border</code> đơn giản.</li>
+                    <li>Viết một chương trình Python sinh tệp HTML chứa bảng và chèn dữ liệu tự động (ví dụ tạo bảng điểm, bảng lịch trực nhật...).</li>
+                    <li>Kết hợp danh sách và bảng trong cùng một trang để trình bày thông tin rõ ràng, dễ đọc trên nhiều thiết bị.</li>
+                </ul>
+            </section>
+
+            <section id="tu-khoa" class="card">
+                <h2>Từ khóa ghi nhớ</h2>
+                <div class="keywords">
+                    <span class="badge">&lt;ol&gt;</span>
+                    <span class="badge">&lt;ul&gt;</span>
+                    <span class="badge">&lt;dl&gt;</span>
+                    <span class="badge">&lt;li&gt;</span>
+                    <span class="badge">&lt;dt&gt;</span>
+                    <span class="badge">&lt;dd&gt;</span>
+                    <span class="badge">&lt;table&gt;</span>
+                    <span class="badge">&lt;tr&gt;</span>
+                    <span class="badge">&lt;td&gt;</span>
+                    <span class="badge">&lt;th&gt;</span>
+                    <span class="badge">&lt;caption&gt;</span>
+                    <span class="badge">rowspan</span>
+                    <span class="badge">colspan</span>
+                    <span class="badge">list-style-type</span>
+                    <span class="badge">border</span>
+                    <span class="badge">width</span>
+                    <span class="badge">height</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang">↑</button>
+    <script>
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+
