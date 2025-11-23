@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 12 - Bài 10: Tạo liên kết. Tìm hiểu siêu văn bản, URL tuyệt đối/tương đối, các kiểu liên kết trong và ngoài trang, cùng bài tập luyện tập - vận dụng.">
+    <meta name="keywords" content="Tin học 12, tạo liên kết, siêu văn bản, hyperlink, URL tuyệt đối, URL tương đối, liên kết trong trang, liên kết ngoài, HTML a href">
+    <meta name="author" content="Ontinhoc">
+    <title>Tạo Liên Kết | Tin 12 - Bài 10</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 10: Tạo liên kết (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["tạo liên kết", "siêu văn bản", "hyperlink", "URL tuyệt đối", "URL tương đối", "liên kết trong trang", "liên kết ngoài"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Giới thiệu siêu văn bản, các loại URL và những cách tạo liên kết trong/ngoài trang web, kèm bài tập luyện tập - vận dụng cho Tin học 12."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 10: Tạo liên kết</h1>
+            <p>Ôn tập khái niệm siêu văn bản, hiểu URL tuyệt đối/tương đối và thực hành các kiểu liên kết trong trang, trong website và liên kết ngoài.</p>
+            <nav aria-label="Mục lục">
+                <a href="#sieu-van-ban">Siêu văn bản &amp; đường dẫn</a>
+                <a href="#cac-cach-lien-ket">Các cách liên kết</a>
+                <a href="#thuc-hanh-luyen-tap">Thực hành - Luyện tập - Vận dụng</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="sieu-van-ban" class="card" aria-labelledby="sieu-van-ban-title">
+                <h2 id="sieu-van-ban-title">1. Siêu văn bản &amp; đường dẫn</h2>
+                <h3>Siêu văn bản (hypertext)</h3>
+                <ul>
+                    <li>Siêu văn bản là văn bản có thể chứa văn bản, âm thanh, hình ảnh… và các siêu liên kết (hyperlink) tới những tài liệu khác.</li>
+                    <li>Người dùng không cần đọc tuần tự từ đầu đến cuối mà có thể nhảy đến các phần liên quan thông qua liên kết.</li>
+                </ul>
+                <h3>Thẻ liên kết &amp; URL</h3>
+                <p>Thẻ liên kết trong HTML có dạng: <code>&lt;a href=&quot;URL&quot;&gt;Nội dung hiển thị&lt;/a&gt;</code>, trong đó thuộc tính <code>href</code> chứa URL của tài nguyên đích (trang HTML, hình ảnh, âm thanh, video…).</p>
+                <div class="note" role="note">
+                    <strong>Ghi nhớ:</strong> URL (Uniform Resource Locator) dùng để chỉ vị trí tài nguyên trên web hoặc trong cùng website.
+                </div>
+                <h3>Các loại URL</h3>
+                <ul>
+                    <li><strong>URL tuyệt đối</strong>: gồm giao thức + tên miền + đường dẫn chi tiết, ví dụ: <code>https://example.com/thu-muc/trang.html</code>. Thường dùng khi liên kết tới tài nguyên trên Internet.</li>
+                    <li><strong>URL tương đối</strong>: mô tả đường dẫn tính từ vị trí tệp HTML hiện tại trong cùng website (cùng máy chủ). Ví dụ: <code>BT/bai_tap_1.html</code>.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Hypertext</span>
+                    <span class="badge">Hyperlink</span>
+                    <span class="badge">URL tuyệt đối</span>
+                    <span class="badge">URL tương đối</span>
+                    <span class="badge">&lt;a href&gt;</span>
+                </div>
+            </section>
+
+            <section id="cac-cach-lien-ket" class="card" aria-labelledby="cac-cach-lien-ket-title">
+                <h2 id="cac-cach-lien-ket-title">2. Các cách liên kết tới một trang web</h2>
+
+                <h3>a) Liên kết tới trang web khác (liên kết ngoài)</h3>
+                <ul>
+                    <li>Liên kết ngoài sử dụng thẻ <code>&lt;a&gt;</code> với đường dẫn tuyệt đối trong thuộc tính <code>href</code>.</li>
+                    <li>Ví dụ: liên kết từ một trang bài học trong SGK tới mục “Sách điện tử” trên Internet.</li>
+                </ul>
+
+                <h3>b) Liên kết đến vị trí khác trong cùng website (liên kết trong)</h3>
+                <p>Dùng đường dẫn tương đối để liên kết tới các trang khác nằm trong cùng website. Hình 10.1 (SGK tr.59) minh họa cấu trúc thư mục và các trường hợp:</p>
+                <ul>
+                    <li><strong>Cùng thư mục</strong>: <code>href=&quot;thong_tin.html&quot;</code>.</li>
+                    <li><strong>Khác thư mục – dưới 1 cấp</strong>: <code>href=&quot;bai_tap/bai_tap_1.html&quot;</code>.</li>
+                    <li><strong>Khác thư mục – nhiều cấp</strong>: <code>href=&quot;bai_tap/on_tap/bai_tap_on_tap.html&quot;</code>.</li>
+                    <li><strong>Quay về thư mục cha</strong>: dùng <code>../</code> (mỗi <code>../</code> lùi lên 1 cấp thư mục), ví dụ: <code>href=&quot;../index.html&quot;</code>.</li>
+                </ul>
+                <div class="note" role="note">
+                    Khi di chuyển tệp HTML sang thư mục khác, cần kiểm tra và cập nhật lại các đường dẫn tương đối để liên kết không bị lỗi.
+                </div>
+
+                <h3>c) Liên kết tới một vị trí trong cùng trang</h3>
+                <div class="steps" role="note">
+                    <strong>Các bước tạo liên kết trong trang:</strong>
+                    <ol>
+                        <li>Bước 1: Gắn thuộc tính <code>id</code> duy nhất cho phần tử đích (đoạn nội dung cần nhảy tới).</li>
+                        <li>Bước 2: Tạo liên kết với thuộc tính <code>href</code> dạng <code>#ten_id</code> trỏ tới mã định danh đó.</li>
+                    </ol>
+                </div>
+                <p>Ví dụ:</p>
+                <p><code>&lt;table id=&quot;Thong_tin&quot;&gt;…&lt;/table&gt;</code></p>
+                <p><code>&lt;a href=&quot;#Thong_tin&quot;&gt;Thông tin chi tiết&lt;/a&gt;</code></p>
+
+                <h3>d) Tạo liên kết cho hình ảnh</h3>
+                <ul>
+                    <li>Có thể “bọc” thẻ <code>&lt;img&gt;</code> bên trong thẻ <code>&lt;a&gt;</code> để khi bấm vào hình ảnh sẽ mở liên kết.</li>
+                </ul>
+                <p>Ví dụ (trang <code>index.html</code> liên kết tới <code>thong_tin.html</code> bằng ảnh trong thư mục <code>images/sun.png</code>):</p>
+                <p>
+                    <code>
+                        &lt;a href=&quot;thong_tin.html&quot;&gt;<br>
+                        &nbsp;&nbsp;&lt;img src=&quot;images/sun.png&quot; alt=&quot;Mặt trời&quot;&gt;<br>
+                        &lt;/a&gt;
+                    </code>
+                </p>
+            </section>
+
+            <section id="thuc-hanh-luyen-tap" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">3. Thực hành – Luyện tập – Vận dụng</h2>
+
+                <h3>Nhiệm vụ 1: Liên kết trong trang</h3>
+                <ul>
+                    <li>Tạo bảng lịch hoạt động Câu lạc bộ (CLB) và gán một <code>id</code> cho bảng, ví dụ: <code>id=&quot;CLBTT&quot;</code>.</li>
+                    <li>Đặt một liên kết ở đầu trang với <code>href=&quot;#CLBTT&quot;</code> để khi bấm vào sẽ nhảy tới bảng lịch CLB.</li>
+                </ul>
+
+                <h3>Nhiệm vụ 2: Liên kết sang trang khác</h3>
+                <ul>
+                    <li>Tạo trang <code>thong_tin.html</code> trong cùng website, chứa thông tin chi tiết về CLB (mục tiêu, lịch sinh hoạt, nội quy,…).</li>
+                    <li>Trên trang chủ, tạo liên kết dùng đường dẫn tương đối để mở <code>thong_tin.html</code>.</li>
+                </ul>
+
+                <h3>Luyện tập / Vận dụng</h3>
+                <ul>
+                    <li>Viết liên kết “Quay về trang chủ” trên các trang con, sử dụng đường dẫn tương đối thích hợp.</li>
+                    <li>Xây dựng một trang giới thiệu có ít nhất 3 liên kết (tới các phần khác trong trang, tới các trang khác trong website hoặc liên kết ngoài).</li>
+                    <li>Bổ sung mô tả chi tiết về các CLB và gắn các liên kết trong bảng lịch tới phần mô tả tương ứng trong cùng trang hoặc trong trang khác.</li>
+                </ul>
+                <div class="note" role="note">
+                    Khi hoàn thành các nhiệm vụ, hãy kiểm tra lại toàn bộ liên kết (trong trang, trong website và liên kết ngoài) để đảm bảo không có liên kết bị gãy.
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
+
