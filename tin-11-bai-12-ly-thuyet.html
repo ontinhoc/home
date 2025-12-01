@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 12: Hệ quản trị cơ sở dữ liệu và Hệ cơ sở dữ liệu. Hiểu khái niệm hệ QTCSDL, hệ CSDL; phân biệt CSDL tập trung và phân tán; chức năng chính, ưu nhược điểm.">
+    <meta name="keywords" content="Tin học 11, hệ quản trị cơ sở dữ liệu, hệ cơ sở dữ liệu, CSDL tập trung, CSDL phân tán, bảo mật, client server">
+    <meta name="author" content="Ontinhoc">
+    <title>Hệ QTCSDL & Hệ CSDL | Tin 11 - Bài 12</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 12: Hệ quản trị cơ sở dữ liệu và Hệ cơ sở dữ liệu (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["hệ quản trị cơ sở dữ liệu", "hệ cơ sở dữ liệu", "csdl tập trung", "csdl phân tán", "bảo mật", "client server"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hiểu khái niệm hệ quản trị CSDL, hệ CSDL; phân biệt CSDL tập trung và phân tán; chức năng chính, ưu nhược điểm." 
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 12: HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU & HỆ CSDL (Tin Học 11)</h1>
+            <p>Hệ quản trị CSDL, hệ CSDL; nhóm chức năng chính, mô hình triển khai và phân biệt CSDL tập trung - phân tán để lựa chọn giải pháp phù hợp.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#qtcddl">Hệ QTCSDL</a>
+                <a href="#he-csdl">Hệ CSDL</a>
+                <a href="#csdl-phan-tan">CSDL tập trung & phân tán</a>
+                <a href="#luyen-tap">Luyện tập</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">🎯 Mục tiêu bài học</h2>
+                <ul>
+                    <li>Hiểu khái niệm hệ quản trị CSDL (QTCSDL), hệ CSDL; phân biệt CSDL tập trung và CSDL phân tán.</li>
+                    <li>Nắm nhóm chức năng chính của Hệ QTCSDL, vai trò API giúp ứng dụng làm việc với CSDL.</li>
+                    <li>Phân tích ưu - nhược điểm để chọn mô hình phù hợp khi triển khai hệ thống thực tế.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Hệ QTCSDL</span>
+                    <span class="badge">Hệ CSDL</span>
+                    <span class="badge">CSDL tập trung</span>
+                    <span class="badge">CSDL phân tán</span>
+                    <span class="badge">Bảo mật</span>
+                    <span class="badge">Client-Server</span>
+                </div>
+            </section>
+
+            <section id="qtcddl" class="card" aria-labelledby="qtcddl-title">
+                <h2 id="qtcddl-title">1) Hệ quản trị cơ sở dữ liệu (QTCSDL)</h2>
+                <p><strong>Khái niệm ngắn gọn:</strong> Phần mềm cung cấp phương thức lưu trữ – cập nhật – truy xuất dữ liệu của CSDL; đảm bảo bảo mật và an toàn; đồng thời cung cấp giao diện lập trình ứng dụng (API) cho phần mềm khác.</p>
+                <h3>Nhóm chức năng chính</h3>
+                <ol>
+                    <li><strong>Định nghĩa dữ liệu:</strong> Tạo/sửa cấu trúc; đặt ràng buộc toàn vẹn để dữ liệu hợp lệ.</li>
+                    <li><strong>Cập nhật & truy xuất:</strong> Thêm/xóa/sửa dữ liệu; truy vấn theo tiêu chí để lấy thông tin.</li>
+                    <li><strong>Bảo mật & an toàn:</strong> Kiểm soát quyền truy cập; kiểm soát giao dịch để dữ liệu nhất quán; sao lưu – phục hồi.</li>
+                    <li><strong>Giao diện lập trình ứng dụng:</strong> Cung cấp phương thức/công cụ để ứng dụng kết nối và làm việc với CSDL.</li>
+                </ol>
+                <div class="steps" role="note">
+                    <strong>Một số Hệ QTCSDL phổ biến:</strong>
+                    <ul>
+                        <li>Oracle, MySQL, SQL Server, DB2, PostgreSQL, SQLite.</li>
+                        <li>Access tồn tại nhưng hạn chế hiệu suất khi triển khai hệ lớn.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="he-csdl" class="card" aria-labelledby="he-csdl-title">
+                <h2 id="he-csdl-title">2) Hệ cơ sở dữ liệu (Hệ CSDL)</h2>
+                <ul>
+                    <li><strong>Thành phần:</strong> CSDL + Hệ QTCSDL + các phần mềm ứng dụng khai thác CSDL.</li>
+                    <li><strong>Ứng dụng CSDL:</strong> Phần mềm tương tác với Hệ QTCSDL để tra cứu/khai thác thông tin thuận tiện (ví dụ tra cứu điểm thi trực tuyến).</li>
+                    <li><strong>Mô hình khách - chủ (client-server):</strong> Phần “chủ” xử lý và quản lý dữ liệu; phần “khách” là giao diện gửi yêu cầu, nhận kết quả (Hình 12.1–12.2).</li>
+                </ul>
+                <div class="note" role="note">Hệ CSDL cung cấp lớp giữa dữ liệu và ứng dụng, giúp thay đổi/lưu trữ dữ liệu mà không làm vỡ ứng dụng đã triển khai.</div>
+            </section>
+
+            <section id="csdl-phan-tan" class="card" aria-labelledby="csdl-phan-tan-title">
+                <h2 id="csdl-phan-tan-title">3) CSDL tập trung và CSDL phân tán</h2>
+                <h3>Khái niệm</h3>
+                <ul>
+                    <li><strong>CSDL tập trung:</strong> Toàn bộ CSDL đặt trên một máy; thường gặp ở hệ nhỏ, một người thiết kế - bảo trì - khai thác (Hình 12.4).</li>
+                    <li><strong>CSDL phân tán:</strong> Dữ liệu lưu trên nhiều trạm trong mạng; có ứng dụng cục bộ (dùng dữ liệu tại trạm) và ứng dụng toàn cục/phân tán (kết hợp từ ≥2 trạm) (Hình 12.5).</li>
+                </ul>
+                <h3>Ưu/nhược điểm chính</h3>
+                <ul>
+                    <li><strong>Phân tán - ưu:</strong> Dễ mở rộng; tăng sẵn sàng và độ tin cậy nhờ nhiều bản sao.</li>
+                    <li><strong>Phân tán - nhược:</strong> Thiết kế/triển khai phức tạp; khó đảm bảo nhất quán; chi phí duy trì cao.</li>
+                    <li><strong>Tập trung:</strong> Triển khai đơn giản nhưng phụ thuộc một điểm, dễ thành nút nghẽn.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>Thực tế & lưu ý:</strong>
+                    <ul>
+                        <li>Hệ lớn, nhiều người truy cập rộng (Facebook/Google/Amazon) chọn mô hình phân tán để tối ưu tốc độ và giảm tải truyền.</li>
+                        <li>Phân biệt: CSDL tập trung nhưng xử lí phân tán (mô hình máy chủ tệp) khác với hệ CSDL phân tán thực sự.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">Luyện tập – Vận dụng (trích sách)</h2>
+                <ul>
+                    <li>Liệt kê chức năng theo từng nhóm của Hệ QTCSDL.</li>
+                    <li>Phân tích ưu/nhược của mô hình phân tán so với tập trung.</li>
+                    <li>Nêu ví dụ một hệ CSDL và các thành phần trong hệ đó.</li>
+                    <li>Tra cứu tên một số Hệ QTCSDL quan hệ.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
