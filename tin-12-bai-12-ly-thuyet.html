@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Tin học 12 - Bài 12: Tạo biểu mẫu HTML Form với thẻ form, label, input, select, textarea, fieldset, legend, thực hành và luyện tập.">
+    <meta name="keywords"
+        content="Tin học 12, biểu mẫu, form, HTML form, label, input, select, textarea, fieldset, legend">
+    <meta name="author" content="Ontinhoc">
+    <title>Tạo Biểu Mẫu (HTML Form) | Tin 12 - Bài 12</title>
+    <style>
+        :root {
+            --bg: #f7fafc;
+            --card: #fff;
+            --primary: #0ea5e9;
+            --muted: #64748b;
+            --accent: #0369a1;
+            --radius: 12px;
+            --content-max: 1080px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: #0f172a;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: var(--content-max)
+        }
+
+        header {
+            background: linear-gradient(93deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 30px rgba(14, 165, 233, 0.22)
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem
+        }
+
+        header p {
+            margin: 10px 0 0;
+            opacity: 0.95;
+            max-width: 820px;
+            line-height: 1.5
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0
+        }
+
+        nav a {
+            background: var(--card);
+            padding: 9px 14px;
+            border-radius: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(2, 6, 23, 0.08);
+            transition: transform 0.18s ease, box-shadow 0.18s ease
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.18)
+        }
+
+        main {
+            margin-top: 16px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 22px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+            margin-bottom: 18px
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.45rem
+        }
+
+        h3 {
+            color: #0f766e;
+            margin-top: 16px
+        }
+
+        p {
+            line-height: 1.6
+        }
+
+        ul,
+        ol {
+            margin: 10px 0 10px 22px;
+            padding: 0;
+            line-height: 1.6
+        }
+
+        li {
+            margin-bottom: 8px
+        }
+
+        .note {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 12px
+        }
+
+        .steps {
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 12px
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+
+        #backToTop {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            display: none;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(3, 105, 161, 0.35);
+            font-size: 1.25rem
+        }
+
+        #backToTop:hover {
+            opacity: 0.92
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 6px
+        }
+
+        @media(max-width:720px) {
+            body {
+                padding: 18px
+            }
+
+            header {
+                padding: 24px
+            }
+
+            header h1 {
+                font-size: 1.45rem
+            }
+
+            nav a {
+                flex: 1 1 160px;
+                text-align: center
+            }
+
+            .card {
+                padding: 18px
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 12: Tạo biểu mẫu (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["biểu mẫu", "HTML form", "label", "input", "select", "textarea", "Tin học 12"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hướng dẫn thẻ form, label, input (type thông dụng), select/option, textarea, fieldset/legend kèm thực hành và luyện tập cho Tin học 12."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn"
+        style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 12: Tạo biểu mẫu (HTML Form)</h1>
+            <p>Tóm tắt cấu trúc thẻ <code>&lt;form&gt;</code>, các phần tử nhập liệu phổ biến (label, input, select, textarea, fieldset, legend)
+                và hướng dẫn thực hành – luyện tập để thu thập, gửi dữ liệu an toàn.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu &amp; khái niệm</a>
+                <a href="#phan-tu-form">Phần tử form</a>
+                <a href="#thuc-hanh">Thực hành</a>
+                <a href="#luyen-tap">Luyện tập - Vận dụng</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">1. Mục tiêu &amp; cấu trúc biểu mẫu web</h2>
+                <h3>Mục tiêu</h3>
+                <ul>
+                    <li>Biết cấu trúc cơ bản của biểu mẫu web (thẻ <code>&lt;form&gt;</code> và các phần tử form).</li>
+                    <li>Sử dụng được các phần tử: <code>label</code>, <code>input</code> (với các <code>type</code> thông dụng),
+                        <code>select</code>/<code>option</code>, <code>textarea</code>, <code>fieldset</code>/<code>legend</code>.</li>
+                </ul>
+
+                <h3>Khái niệm &amp; vai trò (trang 67)</h3>
+                <p>Biểu mẫu (form) dùng để thu thập dữ liệu người dùng và gửi tới chương trình xử lí (thường trên máy chủ).</p>
+                <ul>
+                    <li>Phần hiển thị trên trang (HTML).</li>
+                    <li>Ứng dụng/script xử lí dữ liệu (ngoài phạm vi HTML).</li>
+                </ul>
+
+                <h3>Thẻ tạo form</h3>
+                <div class="steps" role="note">
+                    <strong>Khung cơ bản:</strong>
+                    <p>
+                        <code>
+                            &lt;form&gt;<br>
+                            &nbsp;&nbsp;...các phần tử của biểu mẫu...<br>
+                            &lt;/form&gt;
+                        </code>
+                    </p>
+                </div>
+                <div class="note" role="note">
+                    <strong>Ghi nhớ:</strong> Phần tử thường dùng: <code>input</code>, <code>label</code>, <code>select</code>,
+                    <code>textarea</code>; có thể thêm <code>fieldset</code>, <code>legend</code>, <code>datalist</code> (trang 67).
+                </div>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">form</span>
+                    <span class="badge">action</span>
+                    <span class="badge">method</span>
+                    <span class="badge">input</span>
+                    <span class="badge">select</span>
+                </div>
+            </section>
+
+            <section id="phan-tu-form" class="card" aria-labelledby="phan-tu-form-title">
+                <h2 id="phan-tu-form-title">2. Các phần tử chính trong biểu mẫu</h2>
+
+                <h3>a) label (trang 67)</h3>
+                <p>Mục đích: tạo nhãn cho ô nhập; nhấp vào nhãn sẽ focus vào ô nhập liên kết qua <code>for</code> ↔ <code>id</code>.</p>
+                <div class="steps" role="note">
+                    <strong>Cấu trúc:</strong>
+                    <p>
+                        <code>&lt;label for=&quot;ma_id_input&quot;&gt;Tên nhãn&lt;/label&gt;</code>
+                    </p>
+                </div>
+
+                <h3>b) input (trang 68)</h3>
+                <p>Ô nhập liệu đa dụng; cần thêm nhãn bằng <code>label</code>.</p>
+                <div class="steps" role="note">
+                    <strong>Cấu trúc &amp; thuộc tính:</strong>
+                    <p>
+                        <code>
+                            &lt;input id=&quot;ma_id&quot; type=&quot;loai_input&quot; name=&quot;ten_input&quot;&gt;
+                        </code>
+                    </p>
+                    <ul>
+                        <li><code>name</code>: tên trường dùng khi xử lí dữ liệu.</li>
+                        <li><code>type</code>: xác định kiểu dữ liệu/ô nhập.</li>
+                    </ul>
+                </div>
+                <h3>Type thông dụng (Bảng 12.1)</h3>
+                <ul>
+                    <li><code>text</code>, <code>password</code>, <code>number</code>.</li>
+                    <li><code>radio</code> (chọn 1 trong nhiều cùng <code>name</code>), <code>checkbox</code> (có/không, nhiều chọn).</li>
+                    <li><code>button</code> (nút bấm, cần <code>value</code>), <code>file</code> (chọn tệp), <code>submit</code> (gửi form, thường kèm <code>value</code>).</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Ghi nhớ:</strong> Với <code>radio/checkbox</code>, thường thêm <code>value</code> để biết lựa chọn. Input chỉ là ô nhập;
+                    muốn có nhãn, phải dùng kèm <code>label</code> (trang 68).
+                </div>
+
+                <h3>c) select/option (trang 69)</h3>
+                <p>Tạo danh sách thả xuống cho người dùng chọn một giá trị.</p>
+                <div class="steps" role="note">
+                    <strong>Cấu trúc:</strong>
+                    <p>
+                        <code>
+                            &lt;select id=&quot;ma_id&quot; name=&quot;ten_select&quot;&gt;<br>
+                            &nbsp;&nbsp;&lt;option value=&quot;gia_tri&quot;&gt;Nhãn hiển thị&lt;/option&gt;<br>
+                            &lt;/select&gt;
+                        </code>
+                    </p>
+                    <p>Ví dụ “Lớp 10/11/12” như Hình 12.1.</p>
+                </div>
+
+                <h3>d) textarea (trang 69)</h3>
+                <p>Tạo vùng nhập văn bản nhiều dòng, có <code>rows</code>, <code>cols</code>; nội dung giữa cặp thẻ là giá trị mặc định.</p>
+
+                <h3>e) fieldset/legend (trang 69)</h3>
+                <p>Nhóm các phần tử liên quan trong một khung; <code>legend</code> đặt tiêu đề nhóm.</p>
+                <div class="steps" role="note">
+                    <strong>Ví dụ nhóm thông tin:</strong>
+                    <p>
+                        <code>
+                            &lt;fieldset&gt;<br>
+                            &nbsp;&nbsp;&lt;legend&gt;Thông tin cá nhân&lt;/legend&gt;<br>
+                            &nbsp;&nbsp;...các cặp label - input...<br>
+                            &lt;/fieldset&gt;
+                        </code>
+                    </p>
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">3. Thực hành tạo biểu mẫu</h2>
+
+                <h3>Nhiệm vụ 1 – Biểu mẫu “Thông tin món ăn” (Hình 12.2, trang 69)</h3>
+                <ol>
+                    <li>B1: Thêm tiêu đề (<code>&lt;h2&gt;</code>).</li>
+                    <li>B2: Tạo <code>&lt;form&gt;</code>.</li>
+                    <li>B3: Tạo các cặp <code>label</code> – <code>input</code> (đặt <code>id</code> để liên kết với <code>label</code>; chèn
+                        <code>&lt;br&gt;</code> để xuống dòng nếu cần).</li>
+                </ol>
+
+                <h3>Nhiệm vụ 2 – Biểu mẫu “Đăng kí môn thi tốt nghiệp” (Hình 12.3, trang 70)</h3>
+                <p>Trường cần có &amp; gợi ý kiểu:</p>
+                <ul>
+                    <li>Họ và tên (<code>text</code>), CCCD (<code>number</code>), Ngày sinh (<code>date</code>), Giới tính (<code>radio</code> hoặc <code>select</code>).</li>
+                    <li>Môn Toán/Văn/Ngoại ngữ (<code>checkbox</code>), tổ hợp KHTN/KHXH (<code>radio</code> hoặc <code>select</code>).</li>
+                    <li>Nút gửi (<code>submit</code>).</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Mẹo trình bày:</strong> Có thể thêm <code>&lt;h1&gt;</code> và nhóm các trường bằng <code>&lt;fieldset&gt;</code> cho dễ nhìn.
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">4. Luyện tập - Vận dụng</h2>
+                <h3>Luyện tập</h3>
+                <ul>
+                    <li>Tạo lần lượt các phần tử form và <code>input</code> với nhiều <code>type</code>; nêu 3 ví dụ cho mỗi loại.</li>
+                </ul>
+
+                <h3>Vận dụng (trang 70)</h3>
+                <ul>
+                    <li>Tạo form đăng kí CLB.</li>
+                    <li>Sửa mã nguồn bài trước để thêm liên kết “Đăng kí” hiển thị form trong <code>&lt;iframe&gt;</code>.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Kiểm tra:</strong> Đảm bảo liên kết <code>label</code>-<code>id</code>, đặt <code>name</code> cho các trường để gửi dữ liệu và
+                    chọn <code>type</code> phù hợp yêu cầu nhập liệu.
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, { capture: true });
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+
+</html>
