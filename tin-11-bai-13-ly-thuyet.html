@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 13: Cơ sở dữ liệu quan hệ. Khái niệm mô hình bảng - quan hệ, khóa chính/khóa ngoại, JOIN, lợi ích tách bảng, kiểu dữ liệu trường và luyện tập." />
+    <meta name="keywords" content="Tin học 11, cơ sở dữ liệu quan hệ, khóa chính, khóa ngoại, JOIN, kiểu dữ liệu" />
+    <meta name="author" content="Ontinhoc">
+    <title>CSDL Quan hệ | Tin 11 - Bài 13</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 13: Cơ sở dữ liệu quan hệ (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["cơ sở dữ liệu quan hệ", "khóa chính", "khóa ngoại", "JOIN", "kiểu dữ liệu"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Khái niệm mô hình CSDL quan hệ, khóa chính/khóa ngoại, JOIN, lợi ích tách bảng và chọn kiểu dữ liệu cho trường." 
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 13: CƠ SỞ DỮ LIỆU QUAN HỆ (Tin Học 11)</h1>
+            <p>Mô hình bảng-hàng-cột theo E.F. Codd, cách thiết lập quan hệ qua khóa chính/khóa ngoại và JOIN, lợi ích tách bảng cùng lưu ý chọn kiểu dữ liệu.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#csdl-quan-he">Khái niệm</a>
+                <a href="#thuat-ngu">Thuật ngữ</a>
+                <a href="#loi-ich">Lợi ích</a>
+                <a href="#kieu-du-lieu">Kiểu dữ liệu</a>
+                <a href="#luyen-tap">Luyện tập</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">🎯 Mục tiêu bài học</h2>
+                <ul>
+                    <li>Hiểu mô hình CSDL quan hệ: dữ liệu tổ chức thành bảng, liên kết qua khóa.</li>
+                    <li>Nhận biết thuật ngữ bản ghi, trường, khóa chính/khóa ngoại, JOIN.</li>
+                    <li>Phân tích lợi ích tách bảng, tránh dư thừa, đảm bảo nhất quán dữ liệu.</li>
+                    <li>Chọn kiểu dữ liệu phù hợp cho từng trường để kiểm soát nhập liệu.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">CSDL quan hệ</span>
+                    <span class="badge">Bảng</span>
+                    <span class="badge">Khóa chính</span>
+                    <span class="badge">Khóa ngoại</span>
+                    <span class="badge">JOIN</span>
+                    <span class="badge">Kiểu dữ liệu</span>
+                </div>
+            </section>
+
+            <section id="csdl-quan-he" class="card" aria-labelledby="csdl-quan-he-title">
+                <h2 id="csdl-quan-he-title">1) Khái niệm CSDL quan hệ</h2>
+                <p><strong>Mô hình CSDL quan hệ:</strong> Tổ chức dữ liệu thành các bảng (table) gồm hàng và cột; mỗi bảng đại diện một đối tượng, các bảng liên kết với nhau qua khóa. Mô hình rộng rãi từ đề xuất của E.F. Codd.</p>
+                <div class="note" role="note">
+                    <strong>Ví dụ CSDL âm nhạc:</strong> Các bảng Nhạc sĩ, Ca sĩ, Bản nhạc, Bản thu âm liên kết qua mã Aid, Sid, Mid (xem sơ đồ trang 64–65, hình quan hệ trang 65).
+                </div>
+            </section>
+
+            <section id="thuat-ngu" class="card" aria-labelledby="thuat-ngu-title">
+                <h2 id="thuat-ngu-title">2) Một số thuật ngữ, khái niệm liên quan</h2>
+                <ul>
+                    <li><strong>Bản ghi (record):</strong> Mỗi hàng trong bảng, chứa thông tin về một đối tượng.</li>
+                    <li><strong>Trường (field/thuộc tính):</strong> Mỗi cột trong bảng, mô tả thuộc tính của đối tượng.</li>
+                    <li><strong>Khóa (key):</strong> Trường/nhóm trường dùng để phân biệt các bản ghi.</li>
+                    <li><strong>Khóa chính (primary key):</strong> Khóa được chọn để định danh duy nhất bản ghi (ưu tiên gọn, ổn định).</li>
+                    <li><strong>Khóa ngoại (foreign key):</strong> Trường ở bảng A tham chiếu khóa chính bảng B, tạo quan hệ giữa hai bảng.</li>
+                    <li><strong>Liên kết dữ liệu (JOIN):</strong> Ghép nối các bảng theo khóa để khai thác thông tin tổng hợp (ví dụ nối Nhạc sĩ↔Bản nhạc qua Aid; Bản thu âm↔Ca sĩ qua Sid; rồi nối với Bản nhạc qua Mid - trang 65–66, hình minh họa trang 66–67).</li>
+                </ul>
+            </section>
+
+            <section id="loi-ich" class="card" aria-labelledby="loi-ich-title">
+                <h2 id="loi-ich-title">3) Lợi ích tách bảng & liên kết</h2>
+                <ul>
+                    <li>Giảm dư thừa, tiết kiệm lưu trữ, dễ bảo trì.</li>
+                    <li>Đảm bảo nhất quán dữ liệu: thay đổi tên/thuộc tính chỉ một nơi.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>So sánh:</strong>
+                    <ul>
+                        <li>Bảng NBC một bảng vs mô hình 4 bảng (trang 67) cho thấy tách bảng giúp tránh lặp tên nhạc sĩ/ca sĩ.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="kieu-du-lieu" class="card" aria-labelledby="kieu-du-lieu-title">
+                <h2 id="kieu-du-lieu-title">4) Kiểu dữ liệu của trường</h2>
+                <ul>
+                    <li>Mỗi trường chọn kiểu dữ liệu phù hợp: số nguyên, xâu ký tự giới hạn độ dài, logic, ngày/tháng/năm, số thực thập phân,...</li>
+                    <li>Mục đích: tiết kiệm dung lượng, kiểm soát tính đúng đắn khi nhập liệu.</li>
+                </ul>
+                <div class="note" role="note">Ví dụ bảng điểm tiếng Anh: SBD, Họ tên, GT, Ngày sinh, Điểm, Mã kỳ thi (trang 67–68).</div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">5) Luyện tập – Vận dụng (định hướng)</h2>
+                <ul>
+                    <li>Xác định khóa chính/khóa ngoại cho CSDL học tập (bảng Học sinh, Môn học, Điểm).</li>
+                    <li>Đề xuất các bảng và khóa cho tình huống thi tốt nghiệp (SBD, phòng thi, môn thi,...). (Trang 68.)</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
