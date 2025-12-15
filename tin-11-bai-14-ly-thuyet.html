@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 14: SQL - ngôn ngữ truy vấn có cấu trúc. Mục tiêu, lợi ích SQL, DDL tạo CSDL/bảng, DML truy vấn & cập nhật, DCL cấp/thu hồi quyền bằng GRANT/REVOKE." />
+    <meta name="keywords" content="Tin học 11, SQL, DDL, DML, DCL, CREATE TABLE, SELECT, GRANT, REVOKE" />
+    <meta name="author" content="Ontinhoc">
+    <title>SQL | Tin 11 - Bài 14</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 14: SQL - Ngôn ngữ truy vấn có cấu trúc (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["SQL", "DDL", "DML", "DCL", "truy vấn", "GRANT", "REVOKE"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Tổng quan SQL: lợi ích truy vấn khai báo, tạo CSDL/bảng với DDL, truy xuất/cập nhật với DML và kiểm soát quyền bằng DCL." 
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Bài 14: SQL - NGÔN NGỮ TRUY VẤN CÓ CẤU TRÚC (Tin Học 11)</h1>
+            <p>SQL cho phép mô tả <em>muốn dữ liệu gì</em> thay vì chỉ định từng bước xử lí. Bài học tóm tắt lợi ích, nhóm lệnh DDL/DML/DCL và ví dụ GRANT/REVOKE theo SGK.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#loi-ich-sql">Lợi ích SQL</a>
+                <a href="#ddl-khoi-tao">DDL - Khởi tạo</a>
+                <a href="#dml-cap-nhat">DML - Truy vấn</a>
+                <a href="#dcl-quyen">DCL - Quyền</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">0) Mục tiêu</h2>
+                <ul>
+                    <li>Hiểu ở mức nguyên lí: tạo lập CSDL/bảng, thêm–xoá–sửa dữ liệu, truy vấn và cấp/thu hồi quyền bằng SQL (tr.69).</li>
+                    <li>Nhận biết 3 nhóm lệnh: DDL (định nghĩa), DML (thao tác dữ liệu), DCL (quyền truy cập).</li>
+                    <li>Nhìn ra ưu thế truy vấn khai báo và tính chuẩn chung của SQL trên các hệ QTCSDL.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khoá">
+                    <span class="badge">SQL</span>
+                    <span class="badge">DDL</span>
+                    <span class="badge">DML</span>
+                    <span class="badge">DCL</span>
+                    <span class="badge">GRANT/REVOKE</span>
+                </div>
+            </section>
+
+            <section id="loi-ich-sql" class="card" aria-labelledby="loi-ich-title">
+                <h2 id="loi-ich-title">1) Lợi ích của ngôn ngữ truy vấn (SQL) (tr.69)</h2>
+                <ul>
+                    <li>Truy vấn khai báo: nêu <em>muốn gì</em> thay vì lập trình thủ tục chỉ định <em>làm thế nào</em>.</li>
+                    <li>Hệ QTCSDL tự tối ưu truy vấn, giảm công sức và sai sót so với đọc file/duyệt bản ghi bằng ngôn ngữ lập trình.</li>
+                    <li>SQL là chuẩn chung chạy trên hầu hết hệ QTCSDL (Oracle, SQL Server, MySQL, PostgreSQL,…).</li>
+                </ul>
+                <div class="note" role="note"><strong>Lưu ý:</strong> Khi thay đổi hệ QTCSDL, cú pháp lõi SQL vẫn tương tự nên dễ di chuyển.</div>
+            </section>
+
+            <section id="ddl-khoi-tao" class="card" aria-labelledby="ddl-title">
+                <h2 id="ddl-title">2) Khởi tạo CSDL – DDL (Data Definition Language) (tr.70)</h2>
+                <ul>
+                    <li><strong>Lệnh chính:</strong> <code>CREATE DATABASE</code>, <code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>PRIMARY KEY</code>, <code>FOREIGN KEY ... REFERENCES ...</code>.</li>
+                    <li><strong>Kiểu dữ liệu thường gặp:</strong> <code>CHAR(n)</code>, <code>VARCHAR(n)</code>, <code>BOOLEAN</code>, <code>INT/INTEGER</code>, <code>REAL</code>, <code>DATE 'YYYY-MM-DD'</code>, <code>TIME 'HH:MM:SS'</code>.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Ví dụ:</strong>
+                    <ul>
+                        <li>Tạo CSDL <code>music</code>; tạo bảng <code>bannhac(Mid CHAR(4) PRIMARY KEY, Aid INT, TenBN VARCHAR(128))</code>.</li>
+                        <li>Tạo bảng <code>nhacsi(Aid INT, TenNS VARCHAR(64))</code>; ràng buộc <code>FOREIGN KEY (Aid) REFERENCES nhacsi(Aid)</code> nếu cần liên kết.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="dml-cap-nhat" class="card" aria-labelledby="dml-title">
+                <h2 id="dml-title">3) Cập nhật &amp; Truy xuất dữ liệu – DML (Data Manipulation Language) (tr.71)</h2>
+                <ul>
+                    <li><strong>Truy xuất:</strong> <code>SELECT ... FROM ... WHERE ... ORDER BY ...</code>; dùng <code>INNER JOIN</code> để kết bảng theo khoá.</li>
+                    <li><strong>Ví dụ truy vấn:</strong>
+                        <ul>
+                            <li>Lấy <code>Mid</code>, <code>TenBN</code> từ <code>bannhac</code> có <code>Aid = 1</code>, sắp xếp <code>TenBN</code>.</li>
+                            <li><code>JOIN</code> <code>bannhac</code> với <code>nhacsi</code> theo <code>Aid</code> để lấy <code>TenBN</code>, <code>TenNS</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cập nhật:</strong> <code>INSERT INTO ... VALUES ...</code>; <code>DELETE FROM ... WHERE ...</code>; <code>UPDATE ... SET ... WHERE ...</code>.</li>
+                    <li><strong>Ví dụ cập nhật:</strong> thêm 2 nhạc sĩ; xoá <code>Mid='0005'</code> khỏi <code>bannhac</code>; đổi <code>TenNS</code> khi <code>Aid = 6</code>.</li>
+                    <li><strong>Hàm tổng hợp:</strong> ví dụ <code>SELECT AVG(tb) FROM diemtoan_11A;</code>.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>Thao tác mẫu:</strong>
+                    <ul>
+                        <li><code>SELECT Mid, TenBN FROM bannhac WHERE Aid = 1 ORDER BY TenBN;</code></li>
+                        <li><code>SELECT TenBN, TenNS FROM bannhac INNER JOIN nhacsi USING (Aid);</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="dcl-quyen" class="card" aria-labelledby="dcl-title">
+                <h2 id="dcl-title">4) Kiểm soát quyền truy cập – DCL (Data Control Language) (tr.72)</h2>
+                <ul>
+                    <li><strong>Cấp quyền:</strong> <code>GRANT</code> cho phép đọc/ghi/thay đổi cấu trúc.</li>
+                    <li><strong>Thu hồi:</strong> <code>REVOKE</code> gỡ quyền đã cấp.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Ví dụ:</strong>
+                    <ul>
+                        <li><code>GRANT SELECT ON music.* TO guest;</code> (cấp quyền đọc tất cả bảng trong <code>music</code>).</li>
+                        <li><code>REVOKE CREATE, ALTER ON music.bannhac FROM mod;</code> (thu hồi quyền tạo/sửa cấu trúc bảng).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
