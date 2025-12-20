@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Trang chủ -->
+  <url>
+    <loc>https://ontapnhanh.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Tin học phổ thông lớp 3–5 -->
+  <url>
+    <loc>https://ontapnhanh.com/tin-hoc-pho-thong-lop-3-5.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Tin học phổ thông lớp 6–9 -->
+  <url>
+    <loc>https://ontapnhanh.com/tin-hoc-pho-thong-lop-6-9.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Tin học phổ thông lớp 10–12 -->
+  <url>
+    <loc>https://ontapnhanh.com/tin-hoc-pho-thong-lop-10-12.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
