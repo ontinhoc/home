@@ -1,0 +1,3306 @@
+{
+  "multiple": [
+    {
+      "id": 1,
+      "text": "Hình thức nào sau đây là giao tiếp trong không gian mạng?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Gặp mặt trực tiếp tại lớp học",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Gửi thư tay cho bạn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Trò chuyện qua ứng dụng nhắn tin trực tuyến",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Nói chuyện trực tiếp qua điện thoại cố định",
+          "correct": false
+        }
+      ],
+      "explain": "Ứng dụng nhắn tin trực tuyến là hình thức giao tiếp trong không gian mạng."
+    },
+    {
+      "id": 2,
+      "text": "Không gian mạng được hiểu là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "môi trường giao tiếp ngoài đời thực",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "môi trường do mạng máy tính tạo ra",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không gian chỉ dùng cho giải trí",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "môi trường học tập truyền thống",
+          "correct": false
+        }
+      ],
+      "explain": "Không gian mạng là môi trường do mạng máy tính tạo ra."
+    },
+    {
+      "id": 3,
+      "text": "Mạng xã hội là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "phần cứng máy tính",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "phần mềm hệ điều hành",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "dịch vụ giao tiếp trong không gian mạng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "thiết bị lưu trữ dữ liệu",
+          "correct": false
+        }
+      ],
+      "explain": "Mạng xã hội là một dịch vụ giao tiếp trực tuyến."
+    },
+    {
+      "id": 4,
+      "text": "Thư điện tử (email) là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "hình thức giao tiếp trực tiếp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dịch vụ lưu trữ dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "dịch vụ giao tiếp trong không gian mạng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "thiết bị mạng",
+          "correct": false
+        }
+      ],
+      "explain": "Thư điện tử là dịch vụ giao tiếp trong không gian mạng."
+    },
+    {
+      "id": 5,
+      "text": "Gọi video trực tuyến là ví dụ của",
+      "choices": [
+        {
+          "key": "A",
+          "text": "giao tiếp truyền thống",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giao tiếp trong không gian mạng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "giao tiếp bằng văn bản giấy",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "giao tiếp một chiều",
+          "correct": false
+        }
+      ],
+      "explain": "Gọi video trực tuyến là giao tiếp trong không gian mạng."
+    },
+    {
+      "id": 6,
+      "text": "Blog cá nhân thuộc loại",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thiết bị phần cứng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dịch vụ giao tiếp trực tuyến",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "mạng LAN",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "phần mềm hệ thống",
+          "correct": false
+        }
+      ],
+      "explain": "Blog cá nhân là một dịch vụ giao tiếp/truyền tải thông tin trực tuyến."
+    },
+    {
+      "id": 7,
+      "text": "Diễn đàn trực tuyến dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "lưu trữ phần mềm",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "trao đổi và thảo luận thông tin",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "cài đặt hệ điều hành",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "thiết kế phần cứng",
+          "correct": false
+        }
+      ],
+      "explain": "Diễn đàn trực tuyến dùng để trao đổi, thảo luận thông tin."
+    },
+    {
+      "id": 8,
+      "text": "Ứng dụng nhắn tin nhanh là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "công cụ soạn thảo văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dịch vụ giao tiếp trong không gian mạng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thiết bị ngoại vi",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "trình duyệt web",
+          "correct": false
+        }
+      ],
+      "explain": "Ứng dụng nhắn tin nhanh là dịch vụ giao tiếp trong không gian mạng."
+    },
+    {
+      "id": 9,
+      "text": "Internet được coi là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không gian mạng nhỏ nhất",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "không gian mạng lớn nhất",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thiết bị mạng",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "phần mềm ứng dụng",
+          "correct": false
+        }
+      ],
+      "explain": "Internet được coi là không gian mạng lớn nhất."
+    },
+    {
+      "id": 10,
+      "text": "Giao tiếp trong không gian mạng còn được gọi là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "giao tiếp truyền thống",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giao tiếp trực tiếp",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "giao tiếp trực tuyến",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "giao tiếp ngoại tuyến",
+          "correct": false
+        }
+      ],
+      "explain": "Giao tiếp trong không gian mạng còn gọi là giao tiếp trực tuyến."
+    },
+    {
+      "id": 11,
+      "text": "Ưu điểm nổi bật của giao tiếp trong không gian mạng là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chỉ giao tiếp được trong giờ hành chính",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "phụ thuộc hoàn toàn vào địa điểm",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "thuận tiện, mọi lúc mọi nơi có Internet",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "tốn nhiều chi phí di chuyển",
+          "correct": false
+        }
+      ],
+      "explain": "Giao tiếp trực tuyến thuận tiện vì có thể thực hiện mọi lúc, mọi nơi khi có Internet."
+    },
+    {
+      "id": 12,
+      "text": "Giao tiếp trực tuyến giúp mở rộng quan hệ xã hội vì",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chỉ kết nối được người quen",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dễ kết nối nhiều người có cùng sở thích",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không cần công cụ hỗ trợ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chỉ dùng cho học tập",
+          "correct": false
+        }
+      ],
+      "explain": "Dễ kết nối nhiều người có cùng sở thích, nhu cầu."
+    },
+    {
+      "id": 13,
+      "text": "Nhược điểm của giao tiếp qua tin nhắn văn bản là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không tiết kiệm thời gian",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "thiếu tín hiệu phi ngôn ngữ",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không thể lưu trữ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "không thể gửi đi",
+          "correct": false
+        }
+      ],
+      "explain": "Tin nhắn văn bản thiếu tín hiệu phi ngôn ngữ (nét mặt, giọng nói,…)."
+    },
+    {
+      "id": 14,
+      "text": "Thiếu tín hiệu phi ngôn ngữ có thể dẫn đến",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tăng tốc độ mạng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "hiểu lầm trong giao tiếp",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "giảm bảo mật dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "mất kết nối Internet",
+          "correct": false
+        }
+      ],
+      "explain": "Thiếu tín hiệu phi ngôn ngữ dễ gây hiểu lầm trong giao tiếp."
+    },
+    {
+      "id": 15,
+      "text": "Nguy cơ về quyền riêng tư trong giao tiếp trực tuyến là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "khó kết nối bạn bè",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dễ bị lộ thông tin cá nhân",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không gửi được tệp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "không chia sẻ được hình ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Nguy cơ lớn là bị lộ thông tin cá nhân."
+    },
+    {
+      "id": 16,
+      "text": "Việc giả mạo thông tin cá nhân trên mạng làm",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tăng độ tin cậy",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "khó xây dựng mối quan hệ tin cậy",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "tăng hiệu quả giao tiếp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "giảm rủi ro bảo mật",
+          "correct": false
+        }
+      ],
+      "explain": "Giả mạo thông tin làm giảm độ tin cậy, khó xây dựng quan hệ."
+    },
+    {
+      "id": 17,
+      "text": "Sự cố kĩ thuật ảnh hưởng đến giao tiếp trực tuyến vì",
+      "choices": [
+        {
+          "key": "A",
+          "text": "làm tăng chi phí",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "gây gián đoạn hoặc trì hoãn giao tiếp",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "làm tăng tốc độ xử lí",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "giúp giao tiếp hiệu quả hơn",
+          "correct": false
+        }
+      ],
+      "explain": "Sự cố kĩ thuật gây gián đoạn hoặc trì hoãn giao tiếp."
+    },
+    {
+      "id": 18,
+      "text": "Giao tiếp trực tuyến phù hợp nhất trong trường hợp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "cần gặp trực tiếp để xử lí công việc tay chân",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "người ở xa nhau",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không có Internet",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "cần trao đổi giấy tờ gốc",
+          "correct": false
+        }
+      ],
+      "explain": "Giao tiếp trực tuyến đặc biệt phù hợp khi người ở xa nhau."
+    },
+    {
+      "id": 19,
+      "text": "Hội nghị truyền hình giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tăng chi phí đi lại",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giảm nhu cầu di chuyển",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "hạn chế giao tiếp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chỉ dùng cho giải trí",
+          "correct": false
+        }
+      ],
+      "explain": "Hội nghị truyền hình giúp giảm nhu cầu di chuyển."
+    },
+    {
+      "id": 20,
+      "text": "Giao tiếp trong không gian mạng cần chú ý vì",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không có rủi ro",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "luôn an toàn tuyệt đối",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "tiềm ẩn nhiều nguy cơ nếu sử dụng không đúng cách",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "không liên quan đến pháp luật",
+          "correct": false
+        }
+      ],
+      "explain": "Giao tiếp trực tuyến tiềm ẩn rủi ro nếu không sử dụng đúng cách."
+    },
+    {
+      "id": 21,
+      "text": "Khi tham gia thảo luận trên mạng xã hội, hành vi nào là phù hợp?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Dùng từ ngữ xúc phạm người khác",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Chia sẻ thông tin chưa kiểm chứng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Trình bày ý kiến lịch sự, tôn trọng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Công kích cá nhân",
+          "correct": false
+        }
+      ],
+      "explain": "Ứng xử văn minh là trình bày ý kiến lịch sự, tôn trọng người khác."
+    },
+    {
+      "id": 22,
+      "text": "Để hạn chế hiểu lầm khi nhắn tin, người dùng nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "viết ngắn gọn nhưng mơ hồ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "sử dụng ngôn từ rõ ràng, lịch sự",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "viết toàn chữ in hoa",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "bỏ qua cảm xúc người nhận",
+          "correct": false
+        }
+      ],
+      "explain": "Ngôn từ rõ ràng, lịch sự giúp hạn chế hiểu lầm khi nhắn tin."
+    },
+    {
+      "id": 23,
+      "text": "Khi phát hiện thông tin cá nhân bị lộ trên mạng, hành động phù hợp là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tiếp tục chia sẻ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "bỏ qua hoàn toàn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "thay đổi mật khẩu và báo cáo",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "đăng lại nhiều lần",
+          "correct": false
+        }
+      ],
+      "explain": "Cần thay đổi mật khẩu và báo cáo khi lộ thông tin cá nhân."
+    },
+    {
+      "id": 24,
+      "text": "Trong giao tiếp trực tuyến với bạn học, em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chia sẻ thông tin riêng tư của bạn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "tôn trọng quyền riêng tư của người khác",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "công khai tin nhắn cá nhân",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "bình luận tiêu cực",
+          "correct": false
+        }
+      ],
+      "explain": "Tôn trọng quyền riêng tư là nguyên tắc ứng xử nhân văn."
+    },
+    {
+      "id": 25,
+      "text": "Để giao tiếp an toàn trên mạng, người dùng cần",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tin mọi thông tin nhận được",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "không cần bảo mật tài khoản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "tuân thủ quy tắc ứng xử văn hoá",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "sử dụng ngôn ngữ thiếu chuẩn mực",
+          "correct": false
+        }
+      ],
+      "explain": "Tuân thủ quy tắc ứng xử văn hoá giúp giao tiếp an toàn trên mạng."
+    },
+    {
+      "id": 26,
+      "text": "Định dạng văn bản là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "nhập nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "chỉnh sửa lỗi chính tả",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "thay đổi hình thức trình bày văn bản",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "lưu trữ văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng văn bản là thay đổi hình thức trình bày (phông chữ, cỡ chữ, căn lề,…), không làm thay đổi nội dung."
+    },
+    {
+      "id": 27,
+      "text": "Định dạng ký tự dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "căn lề đoạn văn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "thay đổi phông chữ, cỡ chữ, kiểu chữ",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "chia văn bản thành nhiều trang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chèn hình ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng kí tự tác động đến phông chữ, cỡ chữ, kiểu chữ (đậm, nghiêng, gạch chân)."
+    },
+    {
+      "id": 28,
+      "text": "Công cụ dùng để in đậm chữ là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Italic",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Underline",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Bold",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Align",
+          "correct": false
+        }
+      ],
+      "explain": "Bold là công cụ dùng để in đậm chữ."
+    },
+    {
+      "id": 29,
+      "text": "Công cụ Italic có tác dụng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "gạch chân văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "in nghiêng văn bản",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "in đậm văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "đổi màu chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Italic dùng để in nghiêng văn bản."
+    },
+    {
+      "id": 30,
+      "text": "Công cụ Underline dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "in nghiêng chữ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "in đậm chữ",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "gạch chân chữ",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "đổi phông chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Underline dùng để gạch chân chữ."
+    },
+    {
+      "id": 31,
+      "text": "Định dạng đoạn văn bản KHÔNG bao gồm",
+      "choices": [
+        {
+          "key": "A",
+          "text": "căn lề",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giãn dòng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "màu chữ",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "khoảng cách đoạn",
+          "correct": false
+        }
+      ],
+      "explain": "Màu chữ thuộc định dạng kí tự, không phải định dạng đoạn văn."
+    },
+    {
+      "id": 32,
+      "text": "Căn lề trái của đoạn văn bản có tác dụng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "căn đều hai bên",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "căn về bên trái trang",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "căn về bên phải trang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "căn giữa trang",
+          "correct": false
+        }
+      ],
+      "explain": "Căn lề trái giúp đoạn văn thẳng về phía bên trái trang giấy."
+    },
+    {
+      "id": 33,
+      "text": "Giãn dòng văn bản dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thay đổi màu chữ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "điều chỉnh khoảng cách giữa các dòng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "căn lề đoạn",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chèn ký tự đặc biệt",
+          "correct": false
+        }
+      ],
+      "explain": "Giãn dòng là điều chỉnh khoảng cách giữa các dòng văn bản."
+    },
+    {
+      "id": 34,
+      "text": "Định dạng trang văn bản liên quan đến",
+      "choices": [
+        {
+          "key": "A",
+          "text": "phông chữ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "căn lề đoạn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "lề trang, khổ giấy, hướng giấy",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "kiểu chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng trang liên quan đến lề trang, khổ giấy, hướng giấy."
+    },
+    {
+      "id": 35,
+      "text": "Khổ giấy A4 là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "khổ giấy nhỏ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "khổ giấy mặc định thường dùng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "khổ giấy lớn",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "khổ giấy dùng cho ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "A4 là khổ giấy mặc định, thường dùng trong soạn thảo và in ấn."
+    },
+    {
+      "id": 36,
+      "text": "Vì sao cần định dạng văn bản?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Để nhập văn bản nhanh hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Để văn bản dễ đọc, rõ ràng và khoa học",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Để giảm dung lượng tệp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Để tăng tốc độ máy tính",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng giúp văn bản dễ đọc, rõ ràng, khoa học và truyền đạt thông tin hiệu quả."
+    },
+    {
+      "id": 37,
+      "text": "Việc căn lề và giãn dòng hợp lí giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tăng số trang văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "văn bản trình bày rõ ràng, dễ theo dõi",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "giảm độ chính xác của văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Căn lề, giãn dòng hợp lí giúp người đọc theo dõi nội dung dễ dàng."
+    },
+    {
+      "id": 38,
+      "text": "In đậm hoặc in nghiêng thường được dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "làm văn bản dài hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "nhấn mạnh nội dung quan trọng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi bố cục trang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "căn lề văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "In đậm, in nghiêng thường dùng để nhấn mạnh nội dung quan trọng."
+    },
+    {
+      "id": 39,
+      "text": "Nếu văn bản không được định dạng hợp lí, người đọc có thể",
+      "choices": [
+        {
+          "key": "A",
+          "text": "hiểu nội dung nhanh hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "gặp khó khăn khi đọc và theo dõi",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "không mở được tệp",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chỉnh sửa nội dung dễ hơn",
+          "correct": false
+        }
+      ],
+      "explain": "Văn bản không định dạng hợp lí sẽ gây khó khăn khi đọc và tiếp nhận thông tin."
+    },
+    {
+      "id": 40,
+      "text": "Định dạng trang văn bản phù hợp giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "trình bày văn bản đúng yêu cầu in ấn",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "sửa lỗi chính tả",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "tăng dung lượng tệp",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng trang đúng giúp văn bản đáp ứng yêu cầu in ấn, trình bày chuẩn."
+    },
+    {
+      "id": 41,
+      "text": "Khi soạn thảo một báo cáo học tập, em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không định dạng để tiết kiệm thời gian",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "định dạng tiêu đề nổi bật, nội dung rõ ràng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "dùng nhiều màu sắc tuỳ ý",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chỉ sử dụng một cỡ chữ rất nhỏ",
+          "correct": false
+        }
+      ],
+      "explain": "Báo cáo học tập cần tiêu đề nổi bật, nội dung rõ ràng, trình bày khoa học."
+    },
+    {
+      "id": 42,
+      "text": "Để nhấn mạnh tên bài trong văn bản, thao tác phù hợp nhất là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "in nghiêng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "gạch chân",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "in đậm và tăng cỡ chữ",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "đổi màu nền trang",
+          "correct": false
+        }
+      ],
+      "explain": "In đậm và tăng cỡ chữ giúp tiêu đề nổi bật, đúng chuẩn trình bày."
+    },
+    {
+      "id": 43,
+      "text": "Khi văn bản có nhiều đoạn, để dễ đọc em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "bỏ giãn dòng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giãn dòng và tạo khoảng cách giữa các đoạn",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "dùng nhiều phông chữ khác nhau",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "viết liền tất cả các đoạn",
+          "correct": false
+        }
+      ],
+      "explain": "Giãn dòng và tạo khoảng cách đoạn giúp văn bản nhiều đoạn dễ đọc hơn."
+    },
+    {
+      "id": 44,
+      "text": "Khi in một văn bản hành chính, em cần chú ý nhất đến",
+      "choices": [
+        {
+          "key": "A",
+          "text": "màu chữ sặc sỡ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "khổ giấy, lề trang và căn lề",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "hình ảnh minh hoạ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "hiệu ứng chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Văn bản hành chính cần đúng khổ giấy, lề trang, căn lề theo quy định."
+    },
+    {
+      "id": 45,
+      "text": "Để trình bày văn bản khoa học, người soạn thảo nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "sử dụng định dạng thống nhất",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "dùng mỗi đoạn một kiểu chữ khác nhau",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "thay đổi cỡ chữ liên tục",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "không căn lề văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng thống nhất giúp văn bản khoa học, chuyên nghiệp."
+    },
+    {
+      "id": 46,
+      "text": "Danh sách trong văn bản dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "trang trí văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "trình bày nội dung theo thứ tự hoặc liệt kê",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi phông chữ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chia trang văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách dùng để trình bày nội dung theo dạng liệt kê, có hoặc không theo thứ tự."
+    },
+    {
+      "id": 47,
+      "text": "Loại danh sách dùng các dấu chấm, dấu gạch đầu dòng là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "danh sách đánh số",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "danh sách phân cấp",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "danh sách không đánh số",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "bảng biểu",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách không đánh số sử dụng các dấu đầu dòng như chấm, gạch ngang."
+    },
+    {
+      "id": 48,
+      "text": "Danh sách đánh số thường được sử dụng khi",
+      "choices": [
+        {
+          "key": "A",
+          "text": "liệt kê không cần thứ tự",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "trình bày các bước theo trình tự",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "trang trí văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chèn hình ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách đánh số phù hợp khi trình bày các bước theo trình tự thực hiện."
+    },
+    {
+      "id": 49,
+      "text": "Bảng trong văn bản được tạo từ",
+      "choices": [
+        {
+          "key": "A",
+          "text": "các đoạn văn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "các trang văn bản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "các hàng và các cột",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "các ký tự đặc biệt",
+          "correct": false
+        }
+      ],
+      "explain": "Bảng trong văn bản được cấu tạo từ các hàng và các cột."
+    },
+    {
+      "id": 50,
+      "text": "Thành phần nhỏ nhất trong bảng là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "hàng",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "cột",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "ô (cell)",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "khung bảng",
+          "correct": false
+        }
+      ],
+      "explain": "Ô (cell) là thành phần nhỏ nhất trong bảng, nằm tại giao điểm của hàng và cột."
+    },
+    {
+      "id": 51,
+      "text": "Việc sử dụng danh sách trong văn bản giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "văn bản dài hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "nội dung rõ ràng, dễ theo dõi",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "tăng dung lượng tệp",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách giúp nội dung rõ ràng, mạch lạc, người đọc dễ theo dõi."
+    },
+    {
+      "id": 52,
+      "text": "Danh sách đánh số phù hợp nhất khi trình bày",
+      "choices": [
+        {
+          "key": "A",
+          "text": "các ví dụ minh hoạ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "các ý không liên quan",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "các bước thực hiện công việc",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "đoạn văn mô tả",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách đánh số thể hiện rõ trình tự các bước công việc."
+    },
+    {
+      "id": 53,
+      "text": "Bảng thường được sử dụng trong văn bản để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "trình bày dữ liệu có cấu trúc",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "làm văn bản sinh động",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "thay đổi màu chữ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "căn lề đoạn văn",
+          "correct": false
+        }
+      ],
+      "explain": "Bảng phù hợp để trình bày dữ liệu có cấu trúc (so sánh, thống kê)."
+    },
+    {
+      "id": 54,
+      "text": "So với đoạn văn thông thường, bảng có ưu điểm là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chiếm nhiều diện tích hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "khó chỉnh sửa hơn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "giúp so sánh và tổng hợp thông tin rõ ràng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "không thể định dạng",
+          "correct": false
+        }
+      ],
+      "explain": "Bảng giúp so sánh và tổng hợp thông tin rõ ràng hơn so với đoạn văn."
+    },
+    {
+      "id": 55,
+      "text": "Nếu văn bản có nhiều thông tin dạng liệt kê, nên sử dụng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "đoạn văn dài",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "hình ảnh",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "danh sách",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "hiệu ứng chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Thông tin dạng liệt kê nên trình bày bằng danh sách để dễ đọc."
+    },
+    {
+      "id": 56,
+      "text": "Khi trình bày thời khoá biểu trong văn bản, cách phù hợp nhất là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "viết thành đoạn văn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dùng danh sách không đánh số",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "tạo bảng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "chèn hình ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Thời khoá biểu có cấu trúc hàng – cột nên trình bày bằng bảng."
+    },
+    {
+      "id": 57,
+      "text": "Để trình bày các bước giải một bài toán rõ ràng, em nên sử dụng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "bảng nhiều cột",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "danh sách đánh số",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "danh sách không đánh số",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "đoạn văn dài",
+          "correct": false
+        }
+      ],
+      "explain": "Các bước giải bài toán cần thể hiện trình tự → dùng danh sách đánh số."
+    },
+    {
+      "id": 58,
+      "text": "Khi văn bản có nhiều mục con, thao tác phù hợp là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "viết liền thành một đoạn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dùng danh sách phân cấp",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "tăng cỡ chữ toàn bộ văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "đổi màu nền trang",
+          "correct": false
+        }
+      ],
+      "explain": "Danh sách phân cấp giúp thể hiện rõ các mục và mục con."
+    },
+    {
+      "id": 59,
+      "text": "Để bảng trong văn bản dễ đọc hơn, người soạn thảo nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không căn chỉnh nội dung",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "định dạng hàng, cột và đường viền hợp lí",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "dùng nhiều phông chữ khác nhau",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "bỏ tiêu đề bảng",
+          "correct": false
+        }
+      ],
+      "explain": "Định dạng hợp lí hàng, cột, đường viền giúp bảng dễ đọc và khoa học."
+    },
+    {
+      "id": 60,
+      "text": "Khi trình bày kết quả thống kê đơn giản trong báo cáo học tập, em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "mô tả bằng lời",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "trình bày dưới dạng bảng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "dùng danh sách không đánh số",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "không cần trình bày",
+          "correct": false
+        }
+      ],
+      "explain": "Kết quả thống kê đơn giản nên trình bày dưới dạng bảng để rõ ràng."
+    },
+    {
+      "id": 61,
+      "text": "Liên kết (hyperlink) trong văn bản dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thay đổi phông chữ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "liên kết tới thông tin khác",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "trang trí văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "căn lề đoạn văn",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết (hyperlink) dùng để kết nối tới thông tin khác như trang web, tệp, email hoặc vị trí trong văn bản."
+    },
+    {
+      "id": 62,
+      "text": "Liên kết trong văn bản có thể trỏ tới",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chỉ trang web",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "chỉ tệp tin",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "chỉ địa chỉ email",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "trang web, tệp tin, vị trí trong văn bản hoặc email",
+          "correct": true
+        }
+      ],
+      "explain": "Liên kết có thể trỏ tới nhiều đối tượng: trang web, tệp tin, vị trí trong văn bản hoặc địa chỉ email."
+    },
+    {
+      "id": 63,
+      "text": "Thành phần hiển thị để người dùng nháy vào liên kết được gọi là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "địa chỉ liên kết",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "văn bản liên kết",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "tệp liên kết",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "trang đích",
+          "correct": false
+        }
+      ],
+      "explain": "Văn bản liên kết là phần hiển thị để người dùng nháy chuột truy cập."
+    },
+    {
+      "id": 64,
+      "text": "Khi tạo liên kết trong văn bản, thao tác đầu tiên thường là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "nháy chuột phải",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "chọn văn bản hoặc đối tượng cần tạo liên kết",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "lưu tệp văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "định dạng trang",
+          "correct": false
+        }
+      ],
+      "explain": "Muốn tạo liên kết, trước hết phải chọn văn bản hoặc đối tượng cần gắn liên kết."
+    },
+    {
+      "id": 65,
+      "text": "Liên kết đến một trang web thường bắt đầu bằng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "www",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "mailto",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "http:// hoặc https://",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "file://",
+          "correct": false
+        }
+      ],
+      "explain": "Địa chỉ trang web thường bắt đầu bằng http:// hoặc https://."
+    },
+    {
+      "id": 66,
+      "text": "Vai trò chính của liên kết trong văn bản là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "làm văn bản dài hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "giúp truy cập nhanh đến thông tin liên quan",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "tăng dung lượng tệp",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết giúp truy cập nhanh tới thông tin liên quan, tăng hiệu quả tra cứu."
+    },
+    {
+      "id": 67,
+      "text": "Liên kết giúp văn bản trở nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "rối hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "khó đọc hơn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "linh hoạt và thuận tiện khi tra cứu",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "chỉ dùng để trang trí",
+          "correct": false
+        }
+      ],
+      "explain": "Nhờ liên kết, văn bản linh hoạt hơn, người đọc dễ dàng điều hướng."
+    },
+    {
+      "id": 68,
+      "text": "So với việc chèn địa chỉ web dưới dạng văn bản thường, liên kết có ưu điểm là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "khó sử dụng hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "không cần Internet",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "nháy chuột để truy cập trực tiếp",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "chiếm nhiều dung lượng",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết cho phép nháy chuột truy cập trực tiếp thay vì sao chép địa chỉ."
+    },
+    {
+      "id": 69,
+      "text": "Liên kết tới vị trí trong cùng văn bản giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thay đổi định dạng văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "di chuyển nhanh đến nội dung cần xem",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "xóa nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "in văn bản nhanh hơn",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết nội bộ giúp di chuyển nhanh đến phần nội dung cần xem trong cùng văn bản."
+    },
+    {
+      "id": 70,
+      "text": "Nếu văn bản có nhiều mục, việc sử dụng liên kết sẽ",
+      "choices": [
+        {
+          "key": "A",
+          "text": "làm văn bản khó theo dõi",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "không có tác dụng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "giúp điều hướng và tìm kiếm thông tin hiệu quả",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Văn bản nhiều mục sẽ dễ theo dõi hơn khi có liên kết điều hướng."
+    },
+    {
+      "id": 71,
+      "text": "Khi soạn thảo tài liệu học tập có nhiều phần, cách trình bày phù hợp là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "viết liền toàn bộ nội dung",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "tạo liên kết từ mục lục đến các phần",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "chỉ dùng chữ in đậm",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "đổi màu toàn bộ văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết từ mục lục đến các phần giúp tài liệu học tập rõ ràng, thuận tiện."
+    },
+    {
+      "id": 72,
+      "text": "Để người đọc có thể gửi email trực tiếp khi nháy chuột, em nên tạo liên kết tới",
+      "choices": [
+        {
+          "key": "A",
+          "text": "trang web",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "tệp văn bản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "địa chỉ email",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "vị trí trong văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết tới địa chỉ email cho phép gửi thư trực tiếp khi nháy chuột."
+    },
+    {
+      "id": 73,
+      "text": "Khi chèn liên kết đến trang web bên ngoài, để an toàn em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không kiểm tra liên kết",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "sử dụng liên kết từ nguồn không rõ ràng",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "kiểm tra độ tin cậy của trang web",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "chia sẻ cho nhiều người ngay",
+          "correct": false
+        }
+      ],
+      "explain": "Cần kiểm tra độ tin cậy của trang web để sử dụng liên kết an toàn."
+    },
+    {
+      "id": 74,
+      "text": "Nếu một liên kết không còn hoạt động, thao tác phù hợp là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "giữ nguyên liên kết",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "xóa toàn bộ văn bản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "chỉnh sửa hoặc cập nhật lại địa chỉ liên kết",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "đổi màu chữ",
+          "correct": false
+        }
+      ],
+      "explain": "Liên kết không còn hoạt động cần được chỉnh sửa hoặc cập nhật địa chỉ mới."
+    },
+    {
+      "id": 75,
+      "text": "Khi trình bày văn bản hướng dẫn sử dụng phần mềm, liên kết nên được dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "trang trí cho đẹp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "liên kết tới tài liệu hoặc trang hướng dẫn chi tiết",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "thay đổi bố cục trang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "giảm số trang in",
+          "correct": false
+        }
+      ],
+      "explain": "Trong tài liệu hướng dẫn, liên kết nên trỏ tới tài liệu hoặc trang hướng dẫn chi tiết."
+    },
+    {
+      "id": 76,
+      "text": "Thẻ HTML dùng để chèn hình ảnh vào trang web là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<media>",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<image>",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "<img>",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "<picture>",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <img> được dùng để chèn hình ảnh vào trang web HTML."
+    },
+    {
+      "id": 77,
+      "text": "Thuộc tính bắt buộc của thẻ <img> là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "width",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "height",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "alt",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "src",
+          "correct": true
+        }
+      ],
+      "explain": "Thuộc tính src là bắt buộc vì xác định đường dẫn đến tệp hình ảnh."
+    },
+    {
+      "id": 78,
+      "text": "Thẻ HTML dùng để chèn video vào trang web là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<movie>",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<video>",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "<media>",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "<iframe>",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <video> dùng để chèn và phát video trực tiếp trên trang web."
+    },
+    {
+      "id": 79,
+      "text": "Thẻ <iframe> dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chèn hình ảnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "chèn âm thanh",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "nhúng nội dung trang web khác",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "định dạng văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <iframe> dùng để nhúng nội dung từ một trang web khác vào trang hiện tại."
+    },
+    {
+      "id": 80,
+      "text": "Đa phương tiện trong trang web KHÔNG bao gồm",
+      "choices": [
+        {
+          "key": "A",
+          "text": "hình ảnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "âm thanh",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "video",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "đoạn văn bản thuần chữ",
+          "correct": true
+        }
+      ],
+      "explain": "Đoạn văn bản thuần chữ không phải là nội dung đa phương tiện."
+    },
+    {
+      "id": 81,
+      "text": "Việc chèn hình ảnh vào trang web giúp",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tăng dung lượng tệp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "làm nội dung sinh động, dễ hiểu hơn",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "giảm tốc độ Internet",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "thay đổi cấu trúc HTML",
+          "correct": false
+        }
+      ],
+      "explain": "Hình ảnh giúp nội dung trực quan, sinh động và dễ hiểu hơn."
+    },
+    {
+      "id": 82,
+      "text": "Thẻ <iframe> thường được dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "hiển thị hình ảnh nền",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "nhúng video, bản đồ hoặc trang web khác",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "tạo bảng",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "định dạng chữ",
+          "correct": false
+        }
+      ],
+      "explain": "<iframe> thường dùng để nhúng video, bản đồ hoặc trang web khác."
+    },
+    {
+      "id": 83,
+      "text": "Khi chèn video bằng thẻ <video>, lợi ích chính là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "không cần Internet",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "phát video trực tiếp trên trang web",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "giảm kích thước trang",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "thay thế hoàn toàn hình ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <video> cho phép phát video trực tiếp ngay trên trang web."
+    },
+    {
+      "id": 84,
+      "text": "Thuộc tính alt của thẻ <img> có tác dụng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thay đổi kích thước ảnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "hiển thị văn bản thay thế khi ảnh không tải được",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "căn lề ảnh",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "tạo liên kết cho ảnh",
+          "correct": false
+        }
+      ],
+      "explain": "Thuộc tính alt hiển thị văn bản thay thế khi ảnh không tải được hoặc hỗ trợ người khiếm thị."
+    },
+    {
+      "id": 85,
+      "text": "So với văn bản thuần chữ, nội dung có đa phương tiện",
+      "choices": [
+        {
+          "key": "A",
+          "text": "khó tiếp cận hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "ít thông tin hơn",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "trực quan và hấp dẫn hơn",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "không cần thiết cho học tập",
+          "correct": false
+        }
+      ],
+      "explain": "Đa phương tiện giúp nội dung trực quan, hấp dẫn và tăng hiệu quả truyền đạt."
+    },
+    {
+      "id": 86,
+      "text": "Biểu mẫu (form) trong HTML dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "trình bày nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "thu thập thông tin từ người dùng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "chèn hình ảnh vào trang web",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "định dạng trang web",
+          "correct": false
+        }
+      ],
+      "explain": "Biểu mẫu (form) dùng để thu thập thông tin từ người dùng và gửi dữ liệu đi xử lí."
+    },
+    {
+      "id": 87,
+      "text": "Thẻ HTML dùng để tạo biểu mẫu là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<input>",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<form>",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "<table>",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "<label>",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <form> dùng để tạo vùng chứa biểu mẫu trong HTML."
+    },
+    {
+      "id": 88,
+      "text": "Thẻ <input> trong biểu mẫu dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "chứa toàn bộ biểu mẫu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "nhập dữ liệu từ người dùng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "gửi dữ liệu lên máy chủ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "định dạng văn bản",
+          "correct": false
+        }
+      ],
+      "explain": "Thẻ <input> dùng để tạo các ô nhập dữ liệu từ người dùng."
+    },
+    {
+      "id": 89,
+      "text": "Kiểu dữ liệu type=\"text\" của thẻ <input> dùng để",
+      "choices": [
+        {
+          "key": "A",
+          "text": "nhập mật khẩu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "chọn một đáp án",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "nhập văn bản một dòng",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "gửi biểu mẫu",
+          "correct": false
+        }
+      ],
+      "explain": "type=\"text\" cho phép nhập một dòng văn bản ngắn."
+    },
+    {
+      "id": 90,
+      "text": "Nút gửi dữ liệu trong biểu mẫu thường được tạo bằng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<input type=\"text\">",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<input type=\"reset\">",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "<input type=\"submit\">",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "<input type=\"radio\">",
+          "correct": false
+        }
+      ],
+      "explain": "<input type=\"submit\"> tạo nút gửi dữ liệu biểu mẫu."
+    },
+    {
+      "id": 91,
+      "text": "Khi thiết kế biểu mẫu đăng ký thành viên, thành phần nào là cần thiết nhất?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Hình nền trang web",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Ô nhập thông tin người dùng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Video minh hoạ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Bảng thống kê",
+          "correct": false
+        }
+      ],
+      "explain": "Biểu mẫu đăng ký cần các ô nhập thông tin người dùng để thu thập dữ liệu."
+    },
+    {
+      "id": 92,
+      "text": "Để người dùng chọn một trong nhiều lựa chọn, em nên dùng",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<input type=\"text\">",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<input type=\"checkbox\">",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "<input type=\"radio\">",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "<textarea>",
+          "correct": false
+        }
+      ],
+      "explain": "type=\"radio\" cho phép người dùng chọn một trong nhiều lựa chọn."
+    },
+    {
+      "id": 93,
+      "text": "Khi cần người dùng nhập nội dung dài (ý kiến, góp ý), thẻ phù hợp là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "<input type=\"text\">",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "<input type=\"password\">",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "<textarea>",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "<select>",
+          "correct": false
+        }
+      ],
+      "explain": "<textarea> phù hợp để nhập nội dung dài, nhiều dòng."
+    },
+    {
+      "id": 94,
+      "text": "Trong biểu mẫu khảo sát, để tránh người dùng gửi biểu mẫu trống, em nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "bỏ các ô nhập liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "sử dụng thuộc tính required",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "dùng nhiều màu sắc",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "chèn iframe",
+          "correct": false
+        }
+      ],
+      "explain": "Thuộc tính required buộc người dùng phải nhập dữ liệu trước khi gửi."
+    },
+    {
+      "id": 95,
+      "text": "Khi tạo biểu mẫu trên trang web, người thiết kế cần quan tâm nhất đến",
+      "choices": [
+        {
+          "key": "A",
+          "text": "số lượng hình ảnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "tính tiện lợi và dễ sử dụng cho người dùng",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "hiệu ứng chuyển động",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "màu nền trang web",
+          "correct": false
+        }
+      ],
+      "explain": "Biểu mẫu cần dễ dùng, rõ ràng để người dùng thao tác thuận tiện."
+    },
+    {
+      "id": 96,
+      "text": "Một trang web chỉ sử dụng HTML nên giao diện đơn giản, khó thay đổi kiểu trình bày. Để làm trang web sinh động hơn mà không thay đổi nội dung HTML, người thiết kế nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "thêm nhiều thẻ HTML mới",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "sử dụng CSS để định dạng trang web",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "chèn thêm iframe",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "tạo nhiều trang HTML khác",
+          "correct": false
+        }
+      ],
+      "explain": "CSS (Cascading Style Sheets) dùng để định dạng và trình bày trang web mà không làm thay đổi nội dung HTML. Nhờ CSS, trang web trở nên sinh động và dễ điều chỉnh giao diện."
+    },
+    {
+      "id": 97,
+      "text": "Khi muốn thay đổi màu chữ và phông chữ cho toàn bộ trang web mà không chỉnh sửa từng thẻ HTML, cách làm phù hợp nhất là",
+      "choices": [
+        {
+          "key": "A",
+          "text": "định dạng trực tiếp trong từng thẻ HTML",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "sử dụng bảng trong HTML",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "sử dụng CSS",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "chèn hình ảnh nền",
+          "correct": false
+        }
+      ],
+      "explain": "Sử dụng CSS cho phép thay đổi màu chữ, phông chữ cho toàn bộ trang web một cách tập trung, hiệu quả hơn so với định dạng từng thẻ HTML."
+    },
+    {
+      "id": 98,
+      "text": "Một học sinh thiết kế website giới thiệu trường học. Để đảm bảo các trang có giao diện thống nhất, học sinh này nên",
+      "choices": [
+        {
+          "key": "A",
+          "text": "viết lại nội dung cho từng trang",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "dùng cùng một tệp CSS cho các trang",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "chèn cùng một hình ảnh",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "sao chép toàn bộ mã HTML",
+          "correct": false
+        }
+      ],
+      "explain": "Dùng chung một tệp CSS giúp các trang web có giao diện thống nhất và dễ quản lí."
+    },
+    {
+      "id": 99,
+      "text": "Trong thiết kế trang web, việc tách phần nội dung (HTML) và phần trình bày (CSS) mang lại lợi ích nào sau đây?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Làm mã HTML dài hơn",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Khó chỉnh sửa trang web",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Dễ bảo trì và thay đổi giao diện",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Giảm khả năng hiển thị trang web",
+          "correct": false
+        }
+      ],
+      "explain": "Việc tách nội dung (HTML) và trình bày (CSS) giúp dễ bảo trì, chỉnh sửa và thay đổi giao diện trang web."
+    },
+    {
+      "id": 100,
+      "text": "Khi cần thay đổi giao diện trang web cho phù hợp với nhiều thiết bị (máy tính, điện thoại), vai trò của CSS thể hiện rõ nhất ở việc",
+      "choices": [
+        {
+          "key": "A",
+          "text": "tạo thêm nhiều thẻ HTML",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "thay đổi nội dung văn bản",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "điều khiển cách hiển thị trang web",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "lưu trữ dữ liệu người dùng",
+          "correct": false
+        }
+      ],
+      "explain": "CSS cho phép điều khiển cách hiển thị trang web trên các thiết bị khác nhau, góp phần làm trang web linh hoạt và thân thiện với người dùng."
+    }
+  ],
+  "truefalse": [
+    {
+      "id": 1,
+      "text": "Giao tiếp trong không gian mạng có nhiều ưu và nhược điểm.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Giao tiếp trực tuyến có thể thực hiện ở mọi nơi nếu có Internet.",
+          "answer": true,
+          "explain": "Có Internet là có thể giao tiếp trực tuyến ở nhiều nơi."
+        },
+        {
+          "key": "b",
+          "text": "Giao tiếp trực tuyến không bao giờ xảy ra hiểu lầm.",
+          "answer": false,
+          "explain": "Vẫn có thể xảy ra hiểu lầm khi giao tiếp trực tuyến."
+        },
+        {
+          "key": "c",
+          "text": "Thiếu tín hiệu phi ngôn ngữ là một nhược điểm của giao tiếp trực tuyến.",
+          "answer": true,
+          "explain": "Thiếu tín hiệu phi ngôn ngữ là nhược điểm của giao tiếp số."
+        },
+        {
+          "key": "d",
+          "text": "Người dùng cần có ý thức khi tham gia giao tiếp trên mạng.",
+          "answer": true,
+          "explain": "Người dùng cần có ý thức khi giao tiếp trên mạng."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Khi tham gia giao tiếp trong không gian mạng:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Cần tôn trọng quyền riêng tư của người khác.",
+          "answer": true,
+          "explain": "Tôn trọng quyền riêng tư là yêu cầu quan trọng."
+        },
+        {
+          "key": "b",
+          "text": "Có thể tuỳ ý phát tán thông tin cá nhân.",
+          "answer": false,
+          "explain": "Không được tuỳ ý phát tán thông tin cá nhân."
+        },
+        {
+          "key": "c",
+          "text": "Nên sử dụng ngôn từ lịch sự, phù hợp.",
+          "answer": true,
+          "explain": "Ngôn từ lịch sự thể hiện ứng xử văn minh."
+        },
+        {
+          "key": "d",
+          "text": "Không cần quan tâm đến cảm xúc người khác.",
+          "answer": false,
+          "explain": "Cần quan tâm đến cảm xúc của người khác."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Về an toàn khi giao tiếp trực tuyến:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Thông tin cá nhân luôn được bảo mật tuyệt đối.",
+          "answer": false,
+          "explain": "Thông tin cá nhân không luôn được bảo mật tuyệt đối."
+        },
+        {
+          "key": "b",
+          "text": "Có nguy cơ bị tấn công mạng nếu bảo mật kém.",
+          "answer": true,
+          "explain": "Bảo mật kém làm tăng nguy cơ bị tấn công mạng."
+        },
+        {
+          "key": "c",
+          "text": "Cần đặt mật khẩu mạnh cho tài khoản.",
+          "answer": true,
+          "explain": "Mật khẩu mạnh giúp bảo vệ tài khoản."
+        },
+        {
+          "key": "d",
+          "text": "Có thể chia sẻ mật khẩu cho người lạ.",
+          "answer": false,
+          "explain": "Không được chia sẻ mật khẩu cho người lạ."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Về ưu điểm của giao tiếp trong không gian mạng:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Giúp tiết kiệm thời gian và chi phí.",
+          "answer": true,
+          "explain": "Giao tiếp trực tuyến giúp tiết kiệm thời gian, chi phí."
+        },
+        {
+          "key": "b",
+          "text": "Chỉ phù hợp cho giải trí.",
+          "answer": false,
+          "explain": "Không chỉ dùng cho giải trí."
+        },
+        {
+          "key": "c",
+          "text": "Giúp mở rộng mối quan hệ xã hội.",
+          "answer": true,
+          "explain": "Giúp mở rộng quan hệ xã hội."
+        },
+        {
+          "key": "d",
+          "text": "Không hỗ trợ học tập.",
+          "answer": false,
+          "explain": "Giao tiếp trực tuyến hỗ trợ học tập hiệu quả."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Ứng xử văn hoá trong không gian mạng thể hiện ở việc:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Tôn trọng ý kiến người khác.",
+          "answer": true,
+          "explain": "Tôn trọng ý kiến là biểu hiện ứng xử văn hoá."
+        },
+        {
+          "key": "b",
+          "text": "Công kích cá nhân khi bất đồng.",
+          "answer": false,
+          "explain": "Công kích cá nhân là hành vi thiếu văn minh."
+        },
+        {
+          "key": "c",
+          "text": "Chia sẻ thông tin có trách nhiệm.",
+          "answer": true,
+          "explain": "Chia sẻ thông tin có trách nhiệm là cần thiết."
+        },
+        {
+          "key": "d",
+          "text": "Tuân thủ các quy tắc ứng xử trên mạng.",
+          "answer": true,
+          "explain": "Cần tuân thủ các quy tắc ứng xử trên mạng."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Một học sinh lớp 12 thiết kế một trang web giới thiệu hoạt động của Câu lạc bộ Tin học. Trang web có chèn hình ảnh minh hoạ, video giới thiệu hoạt động và một bản đồ chỉ đường đến trường được nhúng từ Google Maps. Sau khi hoàn thành, học sinh này đưa ra các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Để chèn hình ảnh vào trang web, có thể sử dụng thẻ <img> với thuộc tính src chỉ đường dẫn đến tệp ảnh.",
+          "answer": true,
+          "explain": "Thẻ <img> dùng để chèn hình ảnh vào trang web, trong đó thuộc tính src xác định đường dẫn đến tệp ảnh."
+        },
+        {
+          "key": "b",
+          "text": "Thẻ <img> là thẻ đôi, luôn phải có thẻ đóng </img>.",
+          "answer": false,
+          "explain": "<img> là thẻ đơn, không có thẻ đóng </img>."
+        },
+        {
+          "key": "c",
+          "text": "Video giới thiệu hoạt động có thể được chèn trực tiếp vào trang web bằng thẻ <video>.",
+          "answer": true,
+          "explain": "Thẻ <video> cho phép chèn và phát video trực tiếp trên trang web HTML."
+        },
+        {
+          "key": "d",
+          "text": "Bản đồ Google Maps có thể được nhúng vào trang web bằng thẻ <iframe>.",
+          "answer": true,
+          "explain": "Thẻ <iframe> có thể dùng để nhúng bản đồ Google Maps vào trang web."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Khi tìm hiểu về chèn đa phương tiện trong HTML, một nhóm học sinh thảo luận và đưa ra các ý kiến sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Hình ảnh, âm thanh và video đều được coi là nội dung đa phương tiện trong trang web.",
+          "answer": true,
+          "explain": "Hình ảnh, âm thanh và video đều là các dạng nội dung đa phương tiện."
+        },
+        {
+          "key": "b",
+          "text": "Chèn đa phương tiện giúp nội dung trang web trực quan và hấp dẫn hơn so với chỉ dùng văn bản.",
+          "answer": true,
+          "explain": "Đa phương tiện giúp nội dung trực quan, sinh động và dễ tiếp cận hơn so với văn bản thuần chữ."
+        },
+        {
+          "key": "c",
+          "text": "Việc chèn đa phương tiện không ảnh hưởng đến trải nghiệm người dùng khi truy cập trang web.",
+          "answer": false,
+          "explain": "Đa phương tiện có ảnh hưởng lớn đến trải nghiệm người dùng (tốc độ tải, mức độ hấp dẫn)."
+        },
+        {
+          "key": "d",
+          "text": "Để chèn đa phương tiện, cần sử dụng các thẻ HTML phù hợp với từng loại nội dung.",
+          "answer": true,
+          "explain": "Mỗi loại đa phương tiện cần được chèn bằng thẻ HTML phù hợp."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Một trang web học tập sử dụng video bài giảng trực tuyến để hỗ trợ học sinh tự học. Liên quan đến việc sử dụng thẻ <video> trong HTML, có các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Thẻ <video> cho phép phát video trực tiếp ngay trên trang web.",
+          "answer": true,
+          "explain": "Thẻ <video> cho phép phát video trực tiếp trên trang web."
+        },
+        {
+          "key": "b",
+          "text": "Video chỉ có thể phát sau khi tải xong toàn bộ tệp video.",
+          "answer": false,
+          "explain": "Video có thể phát khi đang tải (streaming), không cần chờ tải xong toàn bộ."
+        },
+        {
+          "key": "c",
+          "text": "Người dùng có thể điều khiển phát, tạm dừng video khi sử dụng thẻ <video>.",
+          "answer": true,
+          "explain": "Người dùng có thể điều khiển phát, tạm dừng, tua video."
+        },
+        {
+          "key": "d",
+          "text": "Thẻ <video> không phải là một thẻ HTML hợp lệ.",
+          "answer": false,
+          "explain": "Thẻ <video> là thẻ HTML hợp lệ, được dùng phổ biến trong thiết kế web."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Trong quá trình thiết kế một trang web du lịch, học sinh muốn nhúng một video YouTube và một trang web giới thiệu địa điểm du lịch khác vào trang của mình. Các nhận định được đưa ra như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Thẻ <iframe> được dùng để nhúng nội dung từ một trang web khác vào trang hiện tại.",
+          "answer": true,
+          "explain": "<iframe> dùng để nhúng nội dung từ một trang web khác."
+        },
+        {
+          "key": "b",
+          "text": "Có thể sử dụng <iframe> để nhúng video YouTube vào trang web.",
+          "answer": true,
+          "explain": "Video YouTube thường được nhúng bằng <iframe>."
+        },
+        {
+          "key": "c",
+          "text": "Thẻ <iframe> chỉ dùng để chèn hình ảnh vào trang web.",
+          "answer": false,
+          "explain": "<iframe> không chỉ dùng để chèn hình ảnh, mà để nhúng nhiều loại nội dung web."
+        },
+        {
+          "key": "d",
+          "text": "Nội dung được nhúng bằng <iframe> sẽ hiển thị trong một khung riêng trên trang web.",
+          "answer": true,
+          "explain": "Nội dung iframe hiển thị trong một khung riêng trên trang web."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Khi sử dụng đa phương tiện và iframe trong thiết kế trang web, một học sinh đưa ra các ý kiến sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Cần lựa chọn nội dung đa phương tiện phù hợp với mục đích và đối tượng của trang web.",
+          "answer": true,
+          "explain": "Nội dung đa phương tiện cần phù hợp với mục đích và đối tượng người dùng."
+        },
+        {
+          "key": "b",
+          "text": "Chèn càng nhiều hình ảnh, video thì trang web càng tốt, không cần cân nhắc.",
+          "answer": false,
+          "explain": "Chèn quá nhiều đa phương tiện có thể làm trang web nặng, tải chậm."
+        },
+        {
+          "key": "c",
+          "text": "Sau khi chèn iframe, cần kiểm tra xem nội dung nhúng có hiển thị và hoạt động đúng hay không.",
+          "answer": true,
+          "explain": "Sau khi chèn iframe, cần kiểm tra nội dung nhúng có hiển thị và hoạt động đúng."
+        },
+        {
+          "key": "d",
+          "text": "Không cần quan tâm đến nguồn gốc và độ tin cậy của nội dung được nhúng bằng iframe.",
+          "answer": false,
+          "explain": "Cần quan tâm đến nguồn gốc và độ tin cậy của nội dung được nhúng để đảm bảo an toàn."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Một học sinh thiết kế biểu mẫu đăng ký tham gia Câu lạc bộ Tin học trên trang web của trường, trong đó có các ô nhập họ tên, lớp, email và nút gửi thông tin. Sau khi hoàn thành, học sinh này đưa ra các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Biểu mẫu HTML được tạo bằng thẻ <form>.",
+          "answer": true,
+          "explain": "Biểu mẫu HTML được tạo bằng thẻ <form>."
+        },
+        {
+          "key": "b",
+          "text": "Thẻ <input> chỉ dùng để tạo nút gửi dữ liệu.",
+          "answer": false,
+          "explain": "Thẻ <input> dùng để tạo nhiều loại ô nhập liệu, không chỉ nút gửi."
+        },
+        {
+          "key": "c",
+          "text": "Ô nhập họ tên có thể được tạo bằng <input type=\"text\">.",
+          "answer": true,
+          "explain": "<input type=\"text\"> phù hợp để nhập họ tên."
+        },
+        {
+          "key": "d",
+          "text": "Biểu mẫu không dùng để thu thập thông tin người dùng.",
+          "answer": false,
+          "explain": "Biểu mẫu sinh ra để thu thập thông tin người dùng."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Trong quá trình tìm hiểu về các thành phần của biểu mẫu HTML, nhóm học sinh thảo luận và đưa ra các ý kiến sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "<input>, <textarea> và <select> đều có thể dùng trong biểu mẫu.",
+          "answer": true,
+          "explain": "<input>, <textarea>, <select> đều là thành phần của biểu mẫu."
+        },
+        {
+          "key": "b",
+          "text": "<textarea> phù hợp để nhập nội dung nhiều dòng.",
+          "answer": true,
+          "explain": "<textarea> cho phép nhập nội dung nhiều dòng."
+        },
+        {
+          "key": "c",
+          "text": "<form> chỉ dùng để trang trí trang web.",
+          "answer": false,
+          "explain": "<form> không phải để trang trí mà để tạo biểu mẫu."
+        },
+        {
+          "key": "d",
+          "text": "Biểu mẫu giúp thu thập và gửi dữ liệu người dùng.",
+          "answer": true,
+          "explain": "Biểu mẫu giúp thu thập và gửi dữ liệu người dùng."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Một trang web khảo sát ý kiến học sinh sử dụng biểu mẫu HTML để thu thập phản hồi. Liên quan đến việc sử dụng biểu mẫu, có các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Có thể dùng nút submit để gửi dữ liệu biểu mẫu.",
+          "answer": true,
+          "explain": "Nút submit dùng để gửi dữ liệu biểu mẫu."
+        },
+        {
+          "key": "b",
+          "text": "Biểu mẫu luôn tự động kiểm tra dữ liệu nhập vào mà không cần thiết lập gì thêm.",
+          "answer": false,
+          "explain": "Biểu mẫu chỉ kiểm tra dữ liệu khi có thiết lập (ví dụ required)."
+        },
+        {
+          "key": "c",
+          "text": "Có thể dùng thuộc tính required để yêu cầu người dùng nhập dữ liệu.",
+          "answer": true,
+          "explain": "Thuộc tính required yêu cầu người dùng phải nhập dữ liệu."
+        },
+        {
+          "key": "d",
+          "text": "Biểu mẫu không liên quan đến trải nghiệm người dùng.",
+          "answer": false,
+          "explain": "Biểu mẫu ảnh hưởng trực tiếp đến trải nghiệm người dùng."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Khi thiết kế biểu mẫu đăng nhập cho một trang web học tập, học sinh đưa ra các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Ô nhập mật khẩu có thể dùng <input type=\"password\">.",
+          "answer": true,
+          "explain": "<input type=\"password\"> dùng cho ô nhập mật khẩu."
+        },
+        {
+          "key": "b",
+          "text": "Dữ liệu nhập trong biểu mẫu không cần bảo mật.",
+          "answer": false,
+          "explain": "Dữ liệu biểu mẫu cần được bảo mật, nhất là thông tin đăng nhập."
+        },
+        {
+          "key": "c",
+          "text": "Biểu mẫu cần trình bày rõ ràng, dễ sử dụng.",
+          "answer": true,
+          "explain": "Biểu mẫu cần rõ ràng, dễ sử dụng."
+        },
+        {
+          "key": "d",
+          "text": "Biểu mẫu chỉ dùng trong các trang thương mại điện tử.",
+          "answer": false,
+          "explain": "Biểu mẫu được dùng trong nhiều loại trang web, không chỉ thương mại điện tử."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "Trong thiết kế trang web, việc sử dụng biểu mẫu cần được cân nhắc hợp lí. Một số nhận định được đưa ra như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Biểu mẫu nên có bố cục rõ ràng, dễ hiểu.",
+          "answer": true,
+          "explain": "Bố cục rõ ràng giúp người dùng dễ thao tác."
+        },
+        {
+          "key": "b",
+          "text": "Càng nhiều ô nhập liệu thì biểu mẫu càng hiệu quả.",
+          "answer": false,
+          "explain": "Quá nhiều ô nhập liệu có thể gây khó chịu cho người dùng."
+        },
+        {
+          "key": "c",
+          "text": "Cần kiểm tra hoạt động của biểu mẫu sau khi tạo.",
+          "answer": true,
+          "explain": "Cần kiểm tra biểu mẫu sau khi tạo để đảm bảo hoạt động đúng."
+        },
+        {
+          "key": "d",
+          "text": "Không cần quan tâm đến người dùng khi thiết kế biểu mẫu.",
+          "answer": false,
+          "explain": "Thiết kế biểu mẫu luôn phải hướng tới người dùng."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "Một học sinh sử dụng CSS để định dạng văn bản cho trang web giới thiệu trường học. Trong tệp CSS, học sinh này thiết lập màu chữ, phông chữ và cỡ chữ cho các đoạn văn. Sau đó, học sinh đưa ra các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "CSS có thể dùng để thay đổi màu chữ của văn bản trên trang web.",
+          "answer": true,
+          "explain": "CSS cho phép thay đổi màu chữ của văn bản thông qua thuộc tính color."
+        },
+        {
+          "key": "b",
+          "text": "CSS chỉ dùng để định dạng bố cục trang web, không định dạng văn bản.",
+          "answer": false,
+          "explain": "CSS không chỉ định dạng bố cục mà còn định dạng văn bản như màu sắc, phông chữ, cỡ chữ."
+        },
+        {
+          "key": "c",
+          "text": "Thuộc tính font-size trong CSS dùng để thay đổi cỡ chữ.",
+          "answer": true,
+          "explain": "Thuộc tính font-size dùng để thay đổi kích thước (cỡ) chữ."
+        },
+        {
+          "key": "d",
+          "text": "Việc định dạng văn bản bằng CSS không ảnh hưởng đến giao diện trang web.",
+          "answer": false,
+          "explain": "Định dạng văn bản bằng CSS ảnh hưởng trực tiếp đến giao diện và khả năng đọc của trang web."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Khi tìm hiểu về các thuộc tính CSS dùng cho văn bản, một nhóm học sinh thảo luận và đưa ra các ý kiến sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Thuộc tính color dùng để xác định màu chữ.",
+          "answer": true,
+          "explain": "Thuộc tính color xác định màu chữ của văn bản."
+        },
+        {
+          "key": "b",
+          "text": "Thuộc tính font-family dùng để chọn phông chữ cho văn bản.",
+          "answer": true,
+          "explain": "font-family dùng để chọn phông chữ cho văn bản."
+        },
+        {
+          "key": "c",
+          "text": "Thuộc tính text-align dùng để căn lề văn bản.",
+          "answer": true,
+          "explain": "text-align dùng để căn lề văn bản (trái, phải, giữa, đều)."
+        },
+        {
+          "key": "d",
+          "text": "Thuộc tính border dùng để căn giữa văn bản.",
+          "answer": false,
+          "explain": "border dùng để tạo đường viền, không dùng để căn giữa văn bản."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Một trang web học tập sử dụng CSS để làm nổi bật tiêu đề và nội dung chính. Liên quan đến việc định dạng văn bản bằng CSS, có các nhận định sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Có thể dùng CSS để in đậm hoặc in nghiêng văn bản.",
+          "answer": true,
+          "explain": "CSS có thể in đậm (font-weight) hoặc in nghiêng (font-style) văn bản."
+        },
+        {
+          "key": "b",
+          "text": "CSS không thể thay đổi khoảng cách giữa các dòng văn bản.",
+          "answer": false,
+          "explain": "CSS có thể thay đổi khoảng cách dòng bằng thuộc tính line-height."
+        },
+        {
+          "key": "c",
+          "text": "Thuộc tính line-height dùng để điều chỉnh khoảng cách dòng.",
+          "answer": true,
+          "explain": "line-height dùng để điều chỉnh khoảng cách giữa các dòng văn bản."
+        },
+        {
+          "key": "d",
+          "text": "Định dạng văn bản bằng CSS giúp nội dung dễ đọc hơn.",
+          "answer": true,
+          "explain": "Định dạng văn bản hợp lí giúp nội dung dễ đọc và rõ ràng hơn."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Trong quá trình thiết kế trang web, học sinh sử dụng vùng chọn CSS (selector) để định dạng văn bản cho các phần khác nhau. Các nhận định được đưa ra như sau:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Vùng chọn theo thẻ (tag selector) có thể áp dụng định dạng cho tất cả các thẻ cùng loại.",
+          "answer": true,
+          "explain": "Vùng chọn theo thẻ (tag selector) áp dụng cho tất cả các thẻ cùng loại."
+        },
+        {
+          "key": "b",
+          "text": "Vùng chọn theo lớp (class) chỉ áp dụng cho một phần tử duy nhất.",
+          "answer": false,
+          "explain": "Vùng chọn theo lớp (class) có thể áp dụng cho nhiều phần tử, không chỉ một."
+        },
+        {
+          "key": "c",
+          "text": "Vùng chọn theo id chỉ nên dùng cho một phần tử trên trang.",
+          "answer": true,
+          "explain": "Vùng chọn theo id chỉ nên dùng cho một phần tử duy nhất trên trang."
+        },
+        {
+          "key": "d",
+          "text": "CSS cho phép định dạng văn bản theo từng nhóm phần tử khác nhau.",
+          "answer": true,
+          "explain": "CSS cho phép định dạng văn bản theo từng nhóm phần tử khác nhau."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "Khi định dạng văn bản bằng CSS, người thiết kế cần chú ý đến tính thẩm mỹ và khả năng đọc. Một số nhận định sau được đưa ra:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Nên sử dụng màu chữ và màu nền có độ tương phản phù hợp.",
+          "answer": true,
+          "explain": "Màu chữ và màu nền cần có độ tương phản phù hợp để dễ đọc."
+        },
+        {
+          "key": "b",
+          "text": "Càng dùng nhiều phông chữ khác nhau thì văn bản càng dễ đọc.",
+          "answer": false,
+          "explain": "Dùng quá nhiều phông chữ làm văn bản rối và khó đọc."
+        },
+        {
+          "key": "c",
+          "text": "Định dạng văn bản hợp lí giúp cải thiện trải nghiệm người dùng.",
+          "answer": true,
+          "explain": "Định dạng văn bản hợp lí giúp cải thiện trải nghiệm người dùng."
+        },
+        {
+          "key": "d",
+          "text": "Không cần quan tâm đến người đọc khi định dạng văn bản bằng CSS.",
+          "answer": false,
+          "explain": "Khi định dạng văn bản bằng CSS luôn phải quan tâm đến người đọc."
+        }
+      ]
+    }
+  ]
+}
