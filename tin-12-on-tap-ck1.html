@@ -1568,7 +1568,9 @@ function buildOrder(){
       const choices = document.createElement('div'); choices.className='choices'
       q.choices.forEach((c, i)=>{
         const row = document.createElement('div'); row.className='choice'; row.dataset.key = c.key
-        row.innerHTML = `<div class="badge">${String.fromCharCode(65+i)}</div><div>${c.text}</div>`
+        const badge = document.createElement('div'); badge.className = 'badge'; badge.textContent = String.fromCharCode(65+i)
+        const text = document.createElement('div'); text.textContent = c.text
+        row.appendChild(badge); row.appendChild(text)
         row.addEventListener('click', ()=> handleMCSelect(q, row, c))
         choices.appendChild(row)
       })
@@ -1602,7 +1604,13 @@ function buildOrder(){
       const block = document.createElement('div'); block.className='tf-block'
       q.statements.forEach((st, idx)=>{
         const row = document.createElement('div'); row.className='tf-row'; row.dataset.idx = idx
-        row.innerHTML = `<div><b>${st.key})</b> ${st.text}<div class="tf-exp" style="display:none"></div></div>`
+        const content = document.createElement('div')
+        const key = document.createElement('b'); key.textContent = `${st.key})`
+        content.appendChild(key)
+        content.appendChild(document.createTextNode(` ${st.text}`))
+        const exp = document.createElement('div'); exp.className = 'tf-exp'; exp.style.display = 'none'
+        content.appendChild(exp)
+        row.appendChild(content)
         const act = document.createElement('div'); act.className='tf-actions'
         const bT = document.createElement('button'); bT.className='tf-btn true'; bT.textContent='ĐÚNG'
         const bF = document.createElement('button'); bF.className='tf-btn false'; bF.textContent='SAI'
