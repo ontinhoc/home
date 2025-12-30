@@ -191,7 +191,7 @@
       };
       window.addEventListener('pagehide', decrement, { once: true });
       window.addEventListener('beforeunload', decrement, { once: true });
-    }
+    },
 
     // ---------- Local demo mode ----------
     updateWithLocal() {
