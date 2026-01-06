@@ -1,0 +1,1737 @@
+{
+  "multiple": [
+    {
+      "id": 1,
+      "text": "Nguyên tắc Hãy chậm lại là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thực hiện việc tra cứu số điện thoại, địa chỉ cơ quan hoặc tổ chức mà người gửi thông tin mang danh để liên hệ xác minh trực tiếp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mọi yêu cầu thành toán hoặc gửi tiền ngay lập tức đều cần phải đặt dấu hỏi. Vì vậy nếu cảm thấy giao dịch này không đáng tin hãy dừng lại vì nó có thể là lừa đảo",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Những kẻ lừa đảo thường tạo ra cảm giác cấp bách để chúng có thể vượt qua khả năng nhận định một cách sáng suốt của nạn nhân",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Một yêu cầu thành toán hoặc gửi tiền ngay lập tức đều cần phải đặt dấu hỏi. Vì vậy nếu cảm thấy giao dịch này không đáng tin hãy dừng lại vì nó có thể là lừa đảo",
+          "correct": false
+        }
+      ],
+      "explain": "Nguyên tắc “Hãy chậm lại” nhắc chúng ta cảnh giác với cảm giác khẩn cấp do kẻ lừa đảo tạo ra để tránh suy nghĩ vội vàng."
+    },
+    {
+      "id": 2,
+      "text": "Nguyên tắc Dừng lại, không gửi là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thực hiện việc tra cứu số điện thoại, địa chỉ cơ quan hoặc tổ chức mà người gửi thông tin mang danh để liên hệ xác minh trực tiếp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Mọi yêu cầu thành toán hoặc gửi tiền ngay lập tức đều cần phải đặt dấu hỏi. Vì vậy nếu cảm thấy giao dịch này không đáng tin hãy dừng lại vì nó có thể là lừa đảo",
+          "correct": true
+        },
+        {
+          "key": "C",
+          "text": "Những kẻ lừa đảo thường tạo ra cảm giác cấp bách để chúng có thể vượt qua khả năng nhận định một cách sáng suốt của nạn nhân",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Không thực hiện việc tra cứu số điện thoại, địa chỉ cơ quan hoặc tổ chức mà người gửi thông tin mang danh để liên hệ xác minh trực tiếp.",
+          "correct": false
+        }
+      ],
+      "explain": "Nguyên tắc này yêu cầu dừng lại và không gửi tiền khi có yêu cầu thanh toán đáng ngờ."
+    },
+    {
+      "id": 3,
+      "text": "Nguyên tắc Kiểm tra ngay là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Thực hiện việc tra cứu số điện thoại, địa chỉ cơ quan hoặc tổ chức mà người gửi thông tin mang danh để liên hệ xác minh trực tiếp",
+          "correct": true
+        },
+        {
+          "key": "B",
+          "text": "Mọi yêu cầu thành toán hoặc gửi tiền ngay lập tức đều cần phải đặt dấu hỏi. Vì vậy nếu cảm thấy giao dịch này không đáng tin hãy dừng lại vì nó có thể là lừa đảo",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Những kẻ lừa đảo thường tạo ra cảm giác cấp bách để chúng có thể vượt qua khả năng nhận định một cách sáng suốt của nạn nhân",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Một yêu cầu thành toán hoặc gửi tiền ngay lập tức đều cần phải đặt dấu hỏi. Vì vậy nếu cảm thấy giao dịch này không đáng tin hãy dừng lại vì nó có thể là lừa đảo",
+          "correct": false
+        }
+      ],
+      "explain": "“Kiểm tra ngay” là xác minh thông tin bằng cách tra cứu và liên hệ các nguồn chính thống."
+    },
+    {
+      "id": 4,
+      "text": "Khi có kẻ lừa đảo hỗ trợ kĩ thuật cố gắng thuyết phục rằng thiết bị của bạn đang gặp sự cố và yêu cầu thanh toán ngay lập tức cho các dịch vụ để khắc phục các sự cố đó mà trên thực tế nó không hề tồn tại. Em có thể thực hiện nguyên tắc kiểm tra ngay bằng cách?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tự đặt ra câu hỏi khi thông báo hiện lên có vẻ rất khẩn cấp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Cập nhật phần mềm bảo mật và quét virus",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thử tìm kiếm tên công ty hoặc số điện thoại kèm theo những từ khóa như \" lừa đảo\" hoặc \" khiếu nai\". Tìm đến một đơn vị có uy tín và tin cậy để nhờ hỗ trợ",
+          "correct": true
+        },
+        {
+          "key": "D",
+          "text": "Các đơn vị hỗ trợ công nghệ hợp pháp sẽ không yêu cầu thanh toán ngay dưới dạng thẻ điện thoại, chuyển khoản....... khi mà dịch vụ chưa được thực hiện",
+          "correct": false
+        }
+      ],
+      "explain": "Tìm kiếm thông tin và nhờ đơn vị uy tín giúp xác minh có phải là lừa đảo hay không."
+    },
+    {
+      "id": 5,
+      "text": "Khi có kẻ lừa đảo hỗ trợ kĩ thuật cố gắng thuyết phục rằng thiết bị của bạn đang gặp sự cố và yêu cầu thanh toán ngay lập tức cho các dịch vụ để khắc phục các sự cố đó mà trên thực tế nó không hề tồn tại. Em có thể thực hiện nguyên tắc Dừng lại, không gửi bằng cách?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tự đặt ra câu hỏi khi thông báo hiện lên có vẻ rất khẩn cấp",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Cập nhật phần mềm bảo mật và quét virus",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thử tìm kiếm tên công ty hoặc số điện thoại kèm theo những từ khóa như \" lừa đảo\" hoặc \" khiếu nai\". Tìm đến một đơn vị có uy tín và tin cậy để nhờ hỗ trợ",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Các đơn vị hỗ trợ công nghệ hợp pháp sẽ không yêu cầu thanh toán ngay dưới dạng thẻ điện thoại, chuyển khoản....... khi mà dịch vụ chưa được thực hiện",
+          "correct": true
+        }
+      ],
+      "explain": "Không gửi tiền vì các dịch vụ hỗ trợ hợp pháp không yêu cầu thanh toán ngay khi chưa thực hiện dịch vụ."
+    },
+     {
+      "id": 6,
+      "text": "Việc ghi chép dữ liệu dùng để?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Lưu trữ dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Khai thác dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Truy xuất dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Lưu trữ dữ liệu; Khai thác dữ liệu; Truy xuất dữ liệu",
+          "correct": true
+        }
+      ],
+      "explain": "Ghi chép dữ liệu nhằm lưu trữ thông tin, phục vụ cho việc khai thác và truy xuất khi cần."
+    },
+    {
+      "id": 7,
+      "text": "Việc ghi chép điểm các môn học nhằm?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Không lưu trữ",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Không lập danh dách học sinh có điểm từ cao xuống thấp",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Không tìm kiếm và lập danh học học sinh có điểm học kì cao",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Lưu trữ",
+          "correct": true
+        }
+      ],
+      "explain": "Ghi chép điểm nhằm lưu trữ dữ liệu điểm để theo dõi và đánh giá kết quả học tập."
+    },
+    {
+      "id": 8,
+      "text": "Truy xuất dữ liệu là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tìm kiếm dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Sắp xếp dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Lọc ra dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tìm kiếm dữ liệu; Sắp xếp dữ liệu; Lọc ra dữ liệu",
+          "correct": true
+        }
+      ],
+      "explain": "Truy xuất dữ liệu bao gồm các thao tác tìm kiếm, sắp xếp và lọc dữ liệu theo yêu cầu."
+    },
+    {
+      "id": 9,
+      "text": "Khai thác thông tin từ những dữ liệu đã có là?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Tính toán dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Phân tích dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Thống kê dữ liệu",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Tính toán dữ liệu; Phân tích dữ liệu; Thống kê dữ liệu",
+          "correct": true
+        }
+      ],
+      "explain": "Khai thác thông tin là quá trình tính toán, phân tích và thống kê dữ liệu đã có."
+    },
+    {
+      "id": 10,
+      "text": "Ở bệnh viện cần phải lưu trữ và khai thác dữ liệu nào dưới đây?",
+      "choices": [
+        {
+          "key": "A",
+          "text": "Các bệnh nhân đến khám chữa bệnh",
+          "correct": false
+        },
+        {
+          "key": "B",
+          "text": "Các loại thuốc",
+          "correct": false
+        },
+        {
+          "key": "C",
+          "text": "Các vật tư y tế được mua",
+          "correct": false
+        },
+        {
+          "key": "D",
+          "text": "Các bệnh nhân đến khám chữa bệnh; Các loại thuốc; Các vật tư y tế được mua",
+          "correct": true
+        }
+      ],
+      "explain": "Bệnh viện cần quản lý đồng thời dữ liệu bệnh nhân, thuốc và vật tư y tế để hoạt động hiệu quả."
+    },
+     {
+    "id": 6,
+    "text": "Các công việc quản lý nào có trong thực tế hiện nay?",
+    "choices": [
+      { "key": "A", "text": "Quản lý nhân viên", "correct": false },
+      { "key": "B", "text": "Quản lý tài chính", "correct": false },
+      { "key": "C", "text": "Quản lý thiết bị", "correct": false },
+      { "key": "D", "text": "Quản lý nhân viên ; Quản lý tài chính; Quản lý thiết bị", "correct": true }
+    ],
+    "explain": "Trong thực tế có nhiều công việc quản lý như nhân viên, tài chính và thiết bị."
+  },
+  {
+    "id": 7,
+    "text": "Để quản lý kết quả học tập, em phải quản lý điểm của từng môn học theo?",
+    "choices": [
+      { "key": "A", "text": "Điểm đánh giá thường xuyên", "correct": false },
+      { "key": "B", "text": "Điểm đánh giá giữa kì", "correct": false },
+      { "key": "C", "text": "Điểm đánh giá cuối kì", "correct": false },
+      { "key": "D", "text": "Điểm đánh giá thường xuyên; Điểm đánh giá giữa kì; Điểm đánh giá cuối kì", "correct": true }
+    ],
+    "explain": "Cần quản lý đầy đủ các loại điểm: thường xuyên, giữa kì và cuối kì."
+  },
+  {
+    "id": 8,
+    "text": "Việc ghi chép điểm có thể sai sót, nhầm lẫn vì vậy có thể phải?",
+    "choices": [
+      { "key": "A", "text": "Xóa một dữ liệu điểm", "correct": false },
+      { "key": "B", "text": "Sửa một dữ liệu điểm", "correct": false },
+      { "key": "C", "text": "Xóa một dữ liệu điểm; Sửa một dữ liệu điểm", "correct": true },
+      { "key": "D", "text": "Sửa một dữ liệu ngân hàng", "correct": false }
+    ],
+    "explain": "Khi ghi sai có thể cần xóa dữ liệu điểm sai hoặc sửa lại dữ liệu điểm cho đúng."
+  },
+  {
+    "id": 9,
+    "text": "Hãy cho biết, theo lịch sử phát triển, máy tính thay đổi như thế nào về kích thước?",
+    "choices": [
+      { "key": "A", "text": "Từ rất lớn cho đến nhỏ", "correct": true },
+      { "key": "B", "text": "Từ rất nhỏ cho đến nhỏ và rất lớn", "correct": false },
+      { "key": "C", "text": "Từ rất lớn cho đến nhỏ; Từ rất nhỏ cho đến nhỏ và rất lớn", "correct": false },
+      { "key": "D", "text": "Từ rất nhỏ cho đến nhỏ", "correct": false }
+    ],
+    "explain": "Máy tính ban đầu rất lớn, sau đó phát triển theo hướng ngày càng nhỏ gọn hơn."
+  },
+  {
+    "id": 10,
+    "text": "Việc nào được gọi là cập nhật dữ liệu?",
+    "choices": [
+      { "key": "A", "text": "Thêm dữ liệu", "correct": false },
+      { "key": "B", "text": "Xóa dữ liệu", "correct": false },
+      { "key": "C", "text": "Chỉnh sửa dữ liệu", "correct": false },
+      { "key": "D", "text": "Thêm dữ liệu; Xóa dữ liệu; Chỉnh sửa dữ liệu", "correct": true }
+    ],
+    "explain": "Cập nhật dữ liệu bao gồm thêm mới, xóa và chỉnh sửa dữ liệu."
+  },
+  {
+    "id": 11,
+    "text": "Việc ghi chép dữ liệu dùng để?",
+    "choices": [
+      { "key": "A", "text": "Lưu trữ dữ liệu", "correct": false },
+      { "key": "B", "text": "Khai thác dữ liệu", "correct": false },
+      { "key": "C", "text": "Truy xuất dữ liệu", "correct": false },
+      { "key": "D", "text": "Lưu trữ dữ liệu; Khai thác dữ liệu; Truy xuất dữ liệu", "correct": true }
+    ],
+    "explain": "Ghi chép dữ liệu để lưu trữ và phục vụ khai thác, truy xuất khi cần."
+  },
+  {
+    "id": 12,
+    "text": "Việc ghi chép điểm các môn học nhằm?",
+    "choices": [
+      { "key": "A", "text": "Không lưu trữ", "correct": false },
+      { "key": "B", "text": "Không lập danh dách học sinh có điểm từ cao xuống thấp", "correct": false },
+      { "key": "C", "text": "Không tìm kiếm và lập danh học học sinh có điểm học kì cao", "correct": false },
+      { "key": "D", "text": "Lưu trữ", "correct": true }
+    ],
+    "explain": "Ghi chép điểm nhằm lưu trữ dữ liệu điểm để theo dõi và đánh giá kết quả học tập."
+  },
+  {
+    "id": 13,
+    "text": "Truy xuất dữ liệu là?",
+    "choices": [
+      { "key": "A", "text": "Tìm kiếm dữ liệu", "correct": false },
+      { "key": "B", "text": "Sắp xếp dữ liệu", "correct": false },
+      { "key": "C", "text": "Lọc ra dữ liệu", "correct": false },
+      { "key": "D", "text": "Tìm kiếm dữ liệu; Sắp xếp dữ liệu; Lọc ra dữ liệu", "correct": true }
+    ],
+    "explain": "Truy xuất dữ liệu gồm tìm kiếm, sắp xếp và lọc dữ liệu theo yêu cầu."
+  },
+  {
+    "id": 14,
+    "text": "Khai thác thông tin từ những dữ liệu đã có là?",
+    "choices": [
+      { "key": "A", "text": "Tính toán dữ liệu", "correct": false },
+      { "key": "B", "text": "Phân tích dữ liệu", "correct": false },
+      { "key": "C", "text": "Thống kê dữ liệu", "correct": false },
+      { "key": "D", "text": "Tính toán dữ liệu; Phân tích dữ liệu; Thống kê dữ liệu", "correct": true }
+    ],
+    "explain": "Khai thác thông tin là tính toán, phân tích và thống kê từ dữ liệu đã có."
+  },
+  {
+    "id": 15,
+    "text": "Ở bệnh viện cần phải lưu trữ và khai thác dữ liệu nào dưới đây?",
+    "choices": [
+      { "key": "A", "text": "Các bệnh nhân đến khám chữa bệnh", "correct": false },
+      { "key": "B", "text": "Các loại thuốc", "correct": false },
+      { "key": "C", "text": "Các vật tư y tế được mua", "correct": false },
+      { "key": "D", "text": "Các bệnh nhân đến khám chữa bệnh; Các loại thuốc; Các vật tư y tế được mua", "correct": true }
+    ],
+    "explain": "Bệnh viện cần quản lý cả bệnh nhân, thuốc và vật tư y tế để phục vụ khám chữa bệnh và quản lý hiệu quả."
+  },
+   {
+    "id": 16,
+    "text": "Mô đun Danh sách lớp phải ?",
+    "image":"img_tin11_ck1/cau16.png",
+    "imageAlt":"CSDL điểm",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Đọc dữ liệu từ Danh sách lớp học, tạo lập tệp Bảng điểm môn học nếu chưa có, cập nhật tệp Bảng điểm môn học nếu xuất hiện những dòng mới trong danh sách lớp học",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Đọc và ghi dữ liệu cập nhật vào Bảng điểm môn học",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Đọc dữ liệu từ Bảng điểm môn học, xử lý dữ liệu để tạo và kết xuất ra bảng điểm lớp học",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Chịu trách nhiệm đọc và ghi dữ liệu cập nhật vào Danh sách lớp học",
+        "correct": true
+      }
+    ],
+    "explain": "Mô đun Danh sách lớp có nhiệm vụ quản lý dữ liệu danh sách học sinh nên phải đọc và ghi dữ liệu vào Danh sách lớp học."
+  },
+  {
+    "id": 17,
+    "text": "Mô đun Lập bảng điểm phải ?",
+    "image":"img_tin11_ck1/cau17.png",
+    "imageAlt":"CSDL điểm",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Đọc dữ liệu từ Danh sách lớp học, tạo lập tệp Bảng điểm môn học nếu chưa có, cập nhật tệp Bảng điểm môn học nếu xuất hiện những dòng mới trong danh sách lớp học",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Đọc và ghi dữ liệu cập nhật vào Bảng điểm môn học",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Đọc dữ liệu từ Bảng điểm môn học, xử lý dữ liệu để tạo và kết xuất ra bảng điểm lớp học",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Chịu trách nhiệm đọc và ghi dữ liệu cập nhật vào Danh sách lớp học",
+        "correct": false
+      }
+    ],
+    "explain": "Mô đun Lập bảng điểm dùng để tạo và cập nhật bảng điểm nên phải lấy dữ liệu từ danh sách lớp học."
+  },
+  {
+    "id": 18,
+    "text": "Khi thay đổi cấu trúc các dòng ghi dữ liệu thì các mô đun phần mềm liên quan như thế nào?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Bắt buộc phải chỉnh sửa theo",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Giữ nguyên giá trị",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Tùy dữ liệu mà thay đổi",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Không giữ nguyên giá trị",
+        "correct": false
+      }
+    ],
+    "explain": "Khi cấu trúc dữ liệu thay đổi, các mô đun xử lý dữ liệu đó phải chỉnh sửa theo để hoạt động đúng."
+  },
+  {
+    "id": 19,
+    "text": "Khi quy định mới về điểm có phần lẻ thập phân, dùng dấu phẩu làm dấu anwng cách phần nguyên phân và phần thập phân của điểm dẫn tới việc?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Phải dùng dấu phẩy để ngăn cách các thành phần của dòng dữ liệu",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Phải dùng dấu khác dấu phẩy để ngăn cách các thành phần của dòng dữ liệu",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Phải dùng dấu khác dấu chấm phẩy để ngăn cách các thành phần của dòng dữ liệu",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Không phải dùng dấu khác dấu chấm phẩy để ngăn cách các thành phần của dòng dữ liệu",
+        "correct": false
+      }
+    ],
+    "explain": "Vì dấu phẩy đã dùng cho số thập phân nên không thể dùng dấu phẩy để phân tách các trường dữ liệu."
+  },
+  {
+    "id": 20,
+    "text": "Tình trạng phụ thuộc giữa chương trình và dữ liệu dẫn tới việc?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Nếu thay đổi cách lưu trữ dữ liệu phải sửa đổi phần mềm",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Nếu thay đổi cách lưu trữ dữ liệu không phải sửa đổi phần mềm",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Nếu không thay đổi cách lưu trữ dữ liệu thì phải sửa đổi phần mềm",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Không thay đổi cách lưu trữ dữ liệu thì phải sửa đổi phần mềm",
+        "correct": false
+      }
+    ],
+    "explain": "Khi chương trình phụ thuộc vào dữ liệu, thay đổi dữ liệu sẽ buộc phải sửa đổi phần mềm."
+  },
+  {
+    "id": 21,
+    "text": "Tính toàn vẹn của cơ sở dữ liệu là",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Cơ sở dữ liệu phải được bảo vệ an toàn, ngăn chặn được những truy xuất trái phép, chống được việc sao chép dữ liệu không hợp lệ",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Khả năng mô đun phần mềm ứng dụng không cần phải cập nhật khi thay đổi cách thức tổ chức hoặc lưu trữ dữ liệu",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Các giá trị dữ liệu phải thỏa mãn những ràng buộc cụ thể tùy thuộc vào thực tế mà nó phản ánh",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "text": "Mô đun phần mềm ứng dụng không cần phải cập nhật khi thay đổi cách thức tổ chức hoặc lưu trữ dữ liệu",
+        "correct": false
+      }
+    ],
+    "explain": "Tính toàn vẹn đảm bảo dữ liệu đúng, hợp lệ và phản ánh đúng thực tế."
+  },
+  {
+    "id": 22,
+    "text": "Tính bảo mật và an toàn của cơ sở dữ liệu là",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Cơ sở dữ liệu phải được bảo vệ an toàn, ngăn chặn được những truy xuất trái phép, chống được việc sao chép dữ liệu không hợp lệ",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Khả năng mô đun phần mềm ứng dụng không cần phải cập nhật khi thay đổi cách thức tổ chức hoặc lưu trữ dữ liệu",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Các giá trị dữ liệu phải thỏa mãn những ràng buộc cụ thể tùy thuộc vào thực tế mà nó phản ánh",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Giá trị dữ liệu phải thỏa mãn những ràng buộc cụ thể tùy thuộc vào thực tế mà nó phản ánh.",
+        "correct": false
+      }
+    ],
+    "explain": "Tính bảo mật giúp ngăn truy cập trái phép và bảo vệ dữ liệu khỏi bị sao chép không hợp lệ."
+  },
+  {
+    "id": 23,
+    "text": "Cơ sở dữ liệu là?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Một tập hợp các dữ liệu có liên quan với nhau",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Một tập hợp các dữ liệu có liên quan với nhau, được lưu trữ một cách có tổ chức trên hệ thống máy tính",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Một tập hợp các dữ liệu được lưu trữ một cách có tổ chức trên hệ thống máy tính",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Nhiều tập hợp các dữ liệu được lưu trữ một cách có tổ chức trên hệ thống máy tính",
+        "correct": false
+      }
+    ],
+    "explain": "Cơ sở dữ liệu là dữ liệu có liên quan, được tổ chức và lưu trữ trên máy tính."
+  },
+  {
+    "id": 24,
+    "text": "Những bài toán quản lý liên quan tới những lĩnh vực lớn hoặc có nhiều biến đồng sẽ thường xuất hiện?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Các yêu cầu khai thác thông tin đa dạng khác nhau từ dữ liệu lưu trữ",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Các yêu cầu xử lý thông tin phức tạp",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Các yêu cầu thu thập thông tin khó thực hiện",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Yêu cầu thu thập thông tin khó thực hiện",
+        "correct": false
+      }
+    ],
+    "explain": "Bài toán quản lý lớn thường cần khai thác thông tin theo nhiều cách khác nhau từ dữ liệu lưu trữ."
+  },
+  {
+    "id": 25,
+    "text": "Dữ liệu cần được tổ chức lưu trữ như thế nào?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Cùng xây dựng phát triển phần mềm",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "Độc lập với việc xây dựng phát triển phần mềm",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "text": "Cùng xây dựng phát triển phần cứng",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Cùng xây dựng phát triển hệ thống",
+        "correct": false
+      }
+    ],
+    "explain": "Dữ liệu nên được tổ chức độc lập với phần mềm để dễ bảo trì và mở rộng."
+  },
+   {
+    "id": 26,
+    "text": "Phần mềm hỗ trợ làm việc với CSDL cần có  các chức năng cập nhật dữ liệu và kiểm tra tính đúng đắn của dữ liệu, hỗ trợ truy xuất dữ liệu và cung cấp giao diện đơn giản để?",
+    "choices": [
+      { "key": "A", "text": "Người dùng dễ dàng truy xuất dữ liệu", "correct": false },
+      { "key": "B", "text": "Người dùng dễ dàng tra tìm dữ liệu", "correct": false },
+      { "key": "C", "text": "Người dùng có thể xem nội dung của các bảng dữ liệu một cách dễ dàng", "correct": true },
+      { "key": "D", "text": "Người dùng dễ dàng tra tìm tài liệu", "correct": false }
+    ],
+    "explain": "Giao diện đơn giản giúp người dùng dễ dàng xem nội dung các bảng dữ liệu để làm việc với CSDL."
+  },
+  {
+    "id": 27,
+    "text": "Khó khăn trong việc lưu trữ dữ liệu xảy ra khi?",
+    "choices": [
+      { "key": "A", "text": "Hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ không có tính năng quản lý dữ liệu", "correct": false },
+      { "key": "B", "text": "Các hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu có thể không có tính năng bảo mật", "correct": false },
+      { "key": "C", "text": "Một hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ phải tổ chức và lưu trữ dữ liệu một cách thủ công", "correct": true },
+      { "key": "D", "text": "Người dùng phải thực hiện các hoạt động lọc, sắp xếp và phân tích dữ liệu một cách thủ công", "correct": false }
+    ],
+    "explain": "Không có hệ quản trị CSDL thì việc tổ chức và lưu trữ dữ liệu phải làm thủ công, gây khó khăn."
+  },
+  {
+    "id": 28,
+    "text": "Khó khăn trong việc không có tính năng bảo mật xảy ra khi?",
+    "choices": [
+      { "key": "A", "text": "Hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ không có tính năng quản lý dữ liệu", "correct": false },
+      { "key": "B", "text": "Các hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu có thể không có tính năng bảo mật", "correct": true },
+      { "key": "C", "text": "Một hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ phải tổ chức và lưu trữ dữ liệu một cách thủ công", "correct": false },
+      { "key": "D", "text": "Người dùng phải thực hiện các hoạt động lọc, sắp xếp và phân tích dữ liệu một cách thủ công", "correct": false }
+    ],
+    "explain": "Không có hệ quản trị CSDL thì hệ thống có thể không được trang bị các cơ chế bảo mật cần thiết."
+  },
+  {
+    "id": 29,
+    "text": "Khó khăn trong việc không có tính năng quản lý xảy ra khi?",
+    "choices": [
+      { "key": "A", "text": "Hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ không có tính năng quản lý dữ liệu", "correct": true },
+      { "key": "B", "text": "Các hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu có thể không có tính năng bảo mật", "correct": false },
+      { "key": "C", "text": "Một hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ phải tổ chức và lưu trữ dữ liệu một cách thủ công", "correct": false },
+      { "key": "D", "text": "Người dùng phải thực hiện các hoạt động lọc, sắp xếp và phân tích dữ liệu một cách thủ công", "correct": false }
+    ],
+    "explain": "Không có hệ quản trị CSDL thì hệ thống sẽ thiếu các chức năng quản lý dữ liệu."
+  },
+  {
+    "id": 30,
+    "text": "Khó khăn trong việc không thể đồng bộ hóa dữ liệu xảy ra khi?",
+    "choices": [
+      { "key": "A", "text": "Hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ không có tính năng quản lý dữ liệu", "correct": false },
+      { "key": "B", "text": "Các hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu có thể không có tính năng bảo mật", "correct": false },
+      { "key": "C", "text": "Một hệ thống lưu trữ dữ liệu không có hệ quản trị cơ sở dữ liệu sẽ phải tổ chức và lưu trữ dữ liệu một cách thủ công", "correct": false },
+      { "key": "D", "text": "Không có tính năng đồng bộ hóa dữ liệu tự động như trong hệ quản trị cơ sở dữ liệu", "correct": true }
+    ],
+    "explain": "Hệ quản trị CSDL cung cấp khả năng đồng bộ dữ liệu tự động; không có nó sẽ gây khó khăn."
+  },
+  {
+    "id": 31,
+    "text": "Hệ quả của việc không thể đồng bộ hóa dữ liệu là?",
+    "choices": [
+      { "key": "A", "text": "Việc truy xuất dữ liệu trở nên phức tạp và khó khăn hơn", "correct": false },
+      { "key": "B", "text": "Việc quản lý dữ liệu trở nên khó khăn và không hiệu quả", "correct": false },
+      { "key": "C", "text": "Việc dữ liệu không được bảo vệ và có thể bị đánh cắp hoặc thay đổi bởi các kẻ tấn công", "correct": false },
+      { "key": "D", "text": "Việc đồng bộ hóa dữ liệu giữa các ứng dụng khác nhau trở nên khó khăn và phức tạp hơn", "correct": true }
+    ],
+    "explain": "Không đồng bộ hóa được sẽ khiến việc chia sẻ và sử dụng dữ liệu giữa các ứng dụng gặp khó khăn."
+  },
+  {
+    "id": 32,
+    "text": "Hệ quả của khó khăn trong việc lưu trữ dữ liệu là?",
+    "choices": [
+      { "key": "A", "text": "Việc truy xuất dữ liệu trở nên phức tạp và khó khăn hơn", "correct": false },
+      { "key": "B", "text": "Việc quản lý dữ liệu trở nên khó khăn và không hiệu quả", "correct": false },
+      { "key": "C", "text": "Việc dữ liệu không được bảo vệ và có thể bị đánh cắp hoặc thay đổi bởi các kẻ tấn công", "correct": false },
+      { "key": "D", "text": "Việc lưu trữ dữ liệu không hiệu quả và khó khăn trong việc quản lý và truy xuất dữ liệu", "correct": true }
+    ],
+    "explain": "Lưu trữ khó khăn dẫn đến quản lý kém và truy xuất dữ liệu không hiệu quả."
+  },
+  {
+    "id": 33,
+    "text": "Hệ quả của việc khôngcó tính năng bảo mật là?",
+    "choices": [
+      { "key": "A", "text": "Việc truy xuất dữ liệu trở nên phức tạp và khó khăn hơn", "correct": false },
+      { "key": "B", "text": "Việc quản lý dữ liệu trở nên khó khăn và không hiệu quả", "correct": false },
+      { "key": "C", "text": "Việc dữ liệu không được bảo vệ và có thể bị đánh cắp hoặc thay đổi bởi các kẻ tấn công", "correct": true },
+      { "key": "D", "text": "Việc đồng bộ hóa dữ liệu giữa các ứng dụng khác nhau trở nên khó khăn và phức tạp hơn", "correct": false }
+    ],
+    "explain": "Không có bảo mật khiến dữ liệu dễ bị truy cập trái phép hoặc bị thay đổi."
+  },
+  {
+    "id": 34,
+    "text": "Hệ quả của việc không có tính năng quản lý là?",
+    "choices": [
+      { "key": "A", "text": "Việc truy xuất dữ liệu trở nên phức tạp và khó khăn hơn", "correct": false },
+      { "key": "B", "text": "Việc quản lý dữ liệu trở nên khó khăn và không hiệu quả", "correct": true },
+      { "key": "C", "text": "Việc dữ liệu không được bảo vệ và có thể bị đánh cắp hoặc thay đổi bởi các kẻ tấn công", "correct": false },
+      { "key": "D", "text": "Việc đồng bộ hóa dữ liệu giữa các ứng dụng khác nhau trở nên khó khăn và phức tạp hơn", "correct": false }
+    ],
+    "explain": "Thiếu tính năng quản lý làm cho việc quản lý dữ liệu kém hiệu quả."
+  },
+  {
+    "id": 35,
+    "text": "Hệ quả của khó khăn trong việc truy xuất dữ liệu là?",
+    "choices": [
+      { "key": "A", "text": "Việc truy xuất dữ liệu trở nên phức tạp và khó khăn hơn", "correct": true },
+      { "key": "B", "text": "Việc quản lý dữ liệu trở nên khó khăn và không hiệu quả", "correct": false },
+      { "key": "C", "text": "Việc dữ liệu không được bảo vệ và có thể bị đánh cắp hoặc thay đổi bởi các kẻ tấn công", "correct": false },
+      { "key": "D", "text": "Việc đồng bộ hóa dữ liệu giữa các ứng dụng khác nhau trở nên khó khăn và phức tạp hơn", "correct": false }
+    ],
+    "explain": "Khi truy xuất khó khăn thì việc truy xuất dữ liệu sẽ phức tạp và mất nhiều thời gian hơn."
+  },
+  {
+    "id": 36,
+    "text": "Để khai thác dữ liệu hiệu quả cần?",
+    "choices": [
+      { "key": "A", "text": "Sử dụng một hệ quản trị cơ sở dữ liệu đáng tin cậy để giải quyết các khó khăn và đảm bảo tính hiệu quả và bảo mật của dữ liệu", "correct": true },
+      { "key": "B", "text": "Sử dụng một hệ quản trị cơ sở dữ liệu đa năng", "correct": false },
+      { "key": "C", "text": "Sử dụng một hệ quản trị cơ sở dữ liệu mới mẻ để giải quyết các khó khăn và đảm bảo tính hiệu quả và bảo mật của dữ liệu", "correct": false },
+      { "key": "D", "text": "Sử dụng một hệ quản trị cơ sở dữ liệu.", "correct": false }
+    ],
+    "explain": "Hệ quản trị CSDL đáng tin cậy giúp khai thác dữ liệu hiệu quả và an toàn."
+  },
+  {
+    "id": 37,
+    "text": " Một hệ QTCSDL có thể quản trị bao nhiêu CSDL?",
+    "choices": [
+      { "key": "A", "text": "Một CSDL", "correct": false },
+      { "key": "B", "text": "Mười CSDL", "correct": false },
+      { "key": "C", "text": "Nhiều CSDL", "correct": true },
+      { "key": "D", "text": "Ít CSDL", "correct": false }
+    ],
+    "explain": "Một hệ quản trị CSDL có thể quản lý nhiều cơ sở dữ liệu khác nhau."
+  },
+  {
+    "id": 38,
+    "text": "Dữ liệu cần được bảo mật, chỉ cung cắp cho?",
+    "choices": [
+      { "key": "A", "text": "Người có thẩm quyền", "correct": true },
+      { "key": "B", "text": "Người nắm dữ dữ liệu", "correct": false },
+      { "key": "C", "text": "Người tạo lập phần mềm", "correct": false },
+      { "key": "D", "text": "Người tạo lập phần cứng", "correct": false }
+    ],
+    "explain": "Dữ liệu chỉ nên cung cấp cho người có thẩm quyền để đảm bảo an toàn."
+  },
+  {
+    "id": 39,
+    "text": "Khi nhiêu người được truy cập đông thời vào CSDL sẽ nảy sinh ra vấn đề?",
+    "choices": [
+      { "key": "A", "text": "Tranh chấp dữ liệu", "correct": true },
+      { "key": "B", "text": "Trộm cắp dữ liệu", "correct": false },
+      { "key": "C", "text": "Thay đổi dữ liệu", "correct": false },
+      { "key": "D", "text": "Thay đổi hệ thống", "correct": false }
+    ],
+    "explain": "Nhiều người truy cập đồng thời có thể gây ra tranh chấp dữ liệu."
+  },
+  {
+    "id": 40,
+    "text": "Hệ quản trị cơ sở dữ liệu là",
+    "choices": [
+      { "key": "A", "text": "Tập hợp các dữ liệu khác nhau được lưu vào máy tính theo một cấu trúc và logic nhất định", "correct": false },
+      { "key": "B", "text": "Phần mềm dùng để tạo lập, tìm kiếm, lưu trữ,… cơ sở dữ liệu", "correct": true },
+      { "key": "C", "text": "Phần mềm quản lý dữ liệu", "correct": false },
+      { "key": "D", "text": "Phần mềm quản lý ứng dụng", "correct": false }
+    ],
+    "explain": "Hệ quản trị CSDL là phần mềm hỗ trợ tạo lập, lưu trữ, tìm kiếm và quản lý cơ sở dữ liệu."
+  },
+   {
+    "id": 41,
+    "text": "Mô hình cơ sở dữ liệu là gì?",
+    "choices": [
+      { "key": "A", "text": "Một loại mô hình dữ liệu xác định một cách cơ bản cách thức dữ liệu có thể được lưu trữ, sắp xếp và thao tác", "correct": false },
+      { "key": "B", "text": "Một loại mô hình dữ liệu xác định cấu trúc logic của cơ sở dữ liệu", "correct": false },
+      { "key": "C", "text": "Một loại mô hình dữ liệu xác định cấu trúc logic của cơ sở dữ liệu và xác định một cách cơ bản cách thức dữ liệu có thể được lưu trữ, sắp xếp và thao tác", "correct": true },
+      { "key": "D", "text": "Một loại mô hình dữ liệu xác định cấu trúc logic của máy tính", "correct": false }
+    ],
+    "explain": "Mô hình CSDL vừa mô tả cấu trúc logic, vừa quy định cách lưu trữ và thao tác dữ liệu."
+  },
+  {
+    "id": 42,
+    "text": "Bản thu âm trong Hình 13.1d tương ứng với dòng 0005 TN là bản thu âm của bản nhạc nào?",
+    "image":"img_tin11_ck1/cau42.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Tình ca", "correct": false },
+      { "key": "B", "text": "Xa khơi", "correct": false },
+      { "key": "C", "text": "Việt Nam quê hương tôi", "correct": true },
+      { "key": "D", "text": "Du kích sông Thao", "correct": false }
+    ],
+    "explain": "Theo dữ liệu ở Hình 13.1d, dòng 0005 TN ứng với bản nhạc Du kích sông Thao."
+  },
+  {
+    "id": 43,
+    "text": "Bản thu âm trong Hình 13.1d tương ứng với dòng 0005 TN là bản thu âm do ca sĩ nào thể hiện?",
+    "image":"img_tin11_ck1/cau43.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Lê Dung", "correct": false },
+      { "key": "B", "text": "Trần Khánh", "correct": false },
+      { "key": "C", "text": "Quốc Hương", "correct": false },
+      { "key": "D", "text": "Tân nhân", "correct": true }
+    ],
+    "explain": "Dòng 0005 TN trong bảng cho biết bản thu âm do ca sĩ Lê Dung thể hiện."
+  },
+  {
+    "id": 44,
+    "text": "Bản thu âm trong Hình 13.1d tương ứng với dòng 0005 TN là bản thu âm do nhạc sĩ nào sáng tác?",
+    "choices": [
+      { "key": "A", "text": "Tân nhân", "correct": false },
+      { "key": "B", "text": "Văn Cao", "correct": false },
+      { "key": "C", "text": "Đỗ Nhuận", "correct": true },
+      { "key": "D", "text": "Hoàng Việt", "correct": false }
+    ],
+    "explain": "Bản nhạc Du kích sông Thao là sáng tác của nhạc sĩ Hoàng Việt."
+  },
+  {
+    "id": 45,
+    "text": "CDSL này được xây dựng nhằm?",
+    "image":"img_tin11_ck1/cau45.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Đáp ứng nhu cầu tìm kiến bản thu âm lưu trữ trong hệ thống thoe tên bản nhạc", "correct": true },
+      { "key": "B", "text": "Không đáp ứng nhu cầu tìm kiến bản thu âm lưu trữ trong hệ thống thoe tên nhạc sĩ", "correct": false },
+      { "key": "C", "text": "Không đáp ứng nhu cầu tìm kiến bản thu âm lưu trữ trong hệ thống thoe tên ca sĩ", "correct": false },
+      { "key": "D", "text": "Không đáp ứng nhu cầu tìm kiến bản thu âm lưu trữ trong hệ thống thoe tên bản nhạc", "correct": false }
+    ],
+    "explain": "CSDL được xây dựng để đáp ứng nhu cầu tìm kiếm bản thu âm theo tên bản nhạc."
+  },
+  {
+    "id": 46,
+    "text": "CSDL này được thể hiện như thế nào?",
+    "image":"img_tin11_ck1/cau46.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Mỗi bảng lưu trữ dữ liệu của các đối tượng có các thuộc tính giống nhau", "correct": true },
+      { "key": "B", "text": "Mỗi đối tượng một cột", "correct": false },
+      { "key": "C", "text": "Tổ chức ở dạng bảng gồm các hàng và bảng", "correct": false },
+      { "key": "D", "text": "Mỗi bảng lưu trữ dữ liệu của các đối tượng có các thuộc tính khác nhau", "correct": false }
+    ],
+    "explain": "Trong CSDL quan hệ, mỗi bảng lưu trữ các đối tượng có cùng thuộc tính."
+  },
+  {
+    "id": 47,
+    "text": "Mô hình tổ chức dữ liệu thành các bảng dữ liệu của các đối tượng có?",
+    "choices": [
+      { "key": "A", "text": "Các con chữ giống nhau", "correct": false },
+      { "key": "B", "text": "Các con số giống nhau", "correct": false },
+      { "key": "C", "text": "Các kí tự giống nhau", "correct": false },
+      { "key": "D", "text": "Các thuộc tính giống nhau", "correct": true }
+    ],
+    "explain": "Các đối tượng trong cùng một bảng có các thuộc tính giống nhau."
+  },
+  {
+    "id": 48,
+    "text": "Cơ sở dữ liệu quan hệ là",
+    "choices": [
+      { "key": "A", "text": "CSDL lưu trữ dữ liệu dưới dạng các cột", "correct": false },
+      { "key": "B", "text": "CSDL lưu trữ dữ liệu dưới dạng các đoạn có quan hệ với nhau", "correct": false },
+      { "key": "C", "text": "CSDL lưu trữ dữ liệu dưới dạng các bảng có quan hệ với nhau", "correct": true },
+      { "key": "D", "text": "CSDL lưu trữ dữ liệu dưới dạng các hàng", "correct": false }
+    ],
+    "explain": "CSDL quan hệ lưu trữ dữ liệu dưới dạng các bảng có mối quan hệ với nhau."
+  },
+  {
+    "id": 49,
+    "text": " Bảng Bản thu âm và bảng Ca sĩ có chung thuộc tính nào?",
+    "image":"img_tin11_ck1/cau49.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Chung thuộc tính Aid", "correct": false },
+      { "key": "B", "text": "Chung thuộc tính Sid", "correct": true },
+      { "key": "C", "text": "Chung thuộc tính Mid", "correct": false },
+      { "key": "D", "text": "Chung thuộc tính TenNS", "correct": false }
+    ],
+    "explain": "Hai bảng liên kết với nhau thông qua thuộc tính Sid (mã ca sĩ)."
+  },
+  {
+    "id": 50,
+    "text": "Khoá chính của bảng Ca sĩ và bảng Bản nhạc là?",
+    "image":"img_tin11_ck1/cau50.png",
+    "imageAlt":"CSDL âm nhạc",
+    "choices": [
+      { "key": "A", "text": "Sid và Aid", "correct": false },
+      { "key": "B", "text": "Sid và Mid", "correct": true },
+      { "key": "C", "text": "Mid và Aid", "correct": false },
+      { "key": "D", "text": "Sid", "correct": false }
+    ],
+    "explain": "Bảng Ca sĩ có khóa chính là Sid, bảng Bản nhạc có khóa chính là Mid."
+  },
+  {
+    "id": 51,
+    "text": "CSDL quan hệ tổ chức lưu trữ dữ liệu dưới dạng?",
+    "choices": [
+      { "key": "A", "text": "Các đoạn văn ngắn", "correct": false },
+      { "key": "B", "text": "Các dãy số", "correct": false },
+      { "key": "C", "text": "Các bảng gồm các hàng và cột", "correct": true },
+      { "key": "D", "text": "Các dãy kí tự", "correct": false }
+    ],
+    "explain": "CSDL quan hệ lưu trữ dữ liệu dưới dạng bảng gồm hàng và cột."
+  },
+  {
+    "id": 52,
+    "text": "Mỗi hàng của bảng được gọi là một?",
+    "choices": [
+      { "key": "A", "text": "Trường", "correct": false },
+      { "key": "B", "text": "Thuộc tính", "correct": false },
+      { "key": "C", "text": "Khóa", "correct": false },
+      { "key": "D", "text": "Bản ghi", "correct": true }
+    ],
+    "explain": "Mỗi hàng trong bảng là một bản ghi lưu thông tin của một đối tượng."
+  },
+  {
+    "id": 53,
+    "text": "Bản ghi là?",
+    "choices": [
+      { "key": "A", "text": "Tập hợp các thông tin về một đối tượng cụ thể được quản lý trong bảng", "correct": true },
+      { "key": "B", "text": "Tập hợp các thông tin về một đối tượng cụ thể được quản lý trong cột", "correct": false },
+      { "key": "C", "text": "Tập hợp các thông tin về một đối tượng cụ thể được quản lý trong đoạn", "correct": false },
+      { "key": "D", "text": "Tập hợp các thông tin về một đối tượng cụ thể được quản lý trong hàng", "correct": false }
+    ],
+    "explain": "Bản ghi là tập hợp thông tin mô tả một đối tượng trong bảng."
+  },
+  {
+    "id": 54,
+    "text": "Mỗi cột trong bảng được gọi là?",
+    "choices": [
+      { "key": "A", "text": "Thuộc tính", "correct": false },
+      { "key": "B", "text": "Khóa", "correct": false },
+      { "key": "C", "text": "Bản ghi", "correct": false },
+      { "key": "D", "text": "Trường", "correct": true }
+    ],
+    "explain": "Mỗi cột biểu diễn một thuộc tính của đối tượng."
+  },
+  {
+    "id": 55,
+    "text": "Trường thể hiện?",
+    "choices": [
+      { "key": "A", "text": "Thuộc tính của đối tượng được quản lý trong bảng", "correct": true },
+      { "key": "B", "text": "Định dạng của đối tượng được quản lý trong bảng", "correct": false },
+      { "key": "C", "text": "Đặc điểm của đối tượng được quản lý trong bảng", "correct": false },
+      { "key": "D", "text": "Định dạng của đối tượng được quản lý trong cột", "correct": false }
+    ],
+    "explain": "Trường thể hiện thuộc tính của đối tượng được quản lý trong bảng."
+  },
+   {
+    "id": 56,
+    "text": "SQL là?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Ngôn ngữ truy vấn định chuẩn cho việc định nghĩa, cập nhật, truy xuất và điều khiển dữ liệu từ các CSDL quan hệ",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "Ngôn ngữ thực hiện các thuật toán",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "Ngôn ngữ thực hiện việc thêm, xóa, sửa dữ liệu",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Ngôn ngữ thực hiện việc thêm, xóa, dữ liệu",
+        "correct": false
+      }
+    ],
+    "explain": "SQL là ngôn ngữ truy vấn chuẩn dùng để định nghĩa, cập nhật, truy xuất và điều khiển dữ liệu trong các CSDL quan hệ."
+  },
+  {
+    "id": 57,
+    "text": "Có thể dùng SQL để thao tác trên hệ QTCSDL nào?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Oracle",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "SQL server",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "MySQL",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "Oracle; SQL server; MySQL",
+        "correct": true
+      }
+    ],
+    "explain": "SQL được sử dụng chung cho nhiều hệ quản trị CSDL như Oracle, SQL Server và MySQL."
+  },
+  {
+    "id": 58,
+    "text": "SQL có thành phần nào dưới đây",
+    "choices": [
+      {
+        "key": "A",
+        "text": "DDL",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "text": "DML",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "DCL",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "DDL; DML; DCL",
+        "correct": true
+      }
+    ],
+    "explain": "SQL gồm ba thành phần chính: DDL (định nghĩa dữ liệu), DML (thao tác dữ liệu) và DCL (điều khiển dữ liệu)."
+  },
+  {
+    "id": 59,
+    "text": "Thành phần nào của SQL cung cấp các câu truy vấn cập nhật và truy xuất dữ liệu?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "DML",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "DDL",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "DCL",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "DSL",
+        "correct": false
+      }
+    ],
+    "explain": "DML dùng để thêm, sửa, xóa và truy xuất dữ liệu trong cơ sở dữ liệu."
+  },
+  {
+    "id": 60,
+    "text": "Thành phần nào của SQL cung cấp các câu truy vấn kiểm soát quyền người dùng với CSDL?",
+    "choices": [
+      {
+        "key": "A",
+        "text": "DCL",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "text": "DDL",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "text": "DML",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "text": "DSL",
+        "correct": false
+      }
+    ],
+    "explain": "DCL dùng để cấp quyền và thu hồi quyền truy cập CSDL của người dùng."
+  }
+  ],
+   "truefalse": [
+    {
+      "id": 1,
+      "text": "Khi nói về các nguy cơ trên Internet và biện pháp phòng tránh, các nhận định sau đây là đúng hay sai?",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Tin nhắn rác (spam) chỉ gây phiền nhiễu cho người dùng chứ không chứa các liên kết độc hại.",
+          "answer": false,
+          "explain": "Nhiều tin nhắn rác có thể chứa liên kết độc hại dẫn đến lừa đảo hoặc nhiễm mã độc."
+        },
+        {
+          "key": "b",
+          "text": "Một trong những dấu hiệu của tin nhắn lừa đảo là thường đánh vào tâm lí sợ hãi hoặc lòng tham của người nhận.",
+          "answer": true,
+          "explain": "Kẻ lừa đảo thường tạo cảm giác lo sợ hoặc hứa hẹn lợi ích lớn để dụ người nhận hành động."
+        },
+        {
+          "key": "c",
+          "text": "Để phòng tránh lừa đảo, người dùng nên kiểm tra kỹ địa chỉ email hoặc số điện thoại của người gửi xem có khớp với thông tin chính thức không.",
+          "answer": true,
+          "explain": "Việc kiểm tra thông tin người gửi giúp phát hiện các dấu hiệu giả mạo."
+        },
+        {
+          "key": "d",
+          "text": "Khi nhận được yêu cầu chuyển tiền gấp từ tài khoản mạng xã hội của người thân, ta nên thực hiện ngay để giúp đỡ họ.",
+          "answer": false,
+          "explain": "Tài khoản có thể bị giả mạo, cần xác minh lại bằng cách khác trước khi chuyển tiền."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Về vấn đề bắt nạt qua mạng (cyberbullying), các khẳng định sau đây là đúng hay sai?",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Bắt nạt qua mạng là việc sử dụng công nghệ kĩ thuật số để đe dọa, làm nhục hoặc làm người khác sợ hãi.",
+          "answer": true,
+          "explain": "Đây là định nghĩa đúng về hành vi bắt nạt qua mạng."
+        },
+        {
+          "key": "b",
+          "text": "Hành vi công khai các thông tin cá nhân hoặc hình ảnh nhạy cảm của người khác mà không được phép là một hình thức bắt nạt qua mạng.",
+          "answer": true,
+          "explain": "Việc này xâm phạm quyền riêng tư và gây tổn hại cho nạn nhân."
+        },
+        {
+          "key": "c",
+          "text": "Bắt nạt qua mạng ít nguy hiểm hơn bắt nạt trong đời thực vì nạn nhân có thể dễ dàng tắt máy tính hoặc điện thoại.",
+          "answer": false,
+          "explain": "Bắt nạt qua mạng có thể lan rộng nhanh, gây tổn thương tâm lý nghiêm trọng và lâu dài."
+        },
+        {
+          "key": "d",
+          "text": "Khi là nạn nhân của bắt nạt qua mạng, việc giữ lại các bằng chứng (ảnh chụp màn hình, tin nhắn) là cần thiết để báo cáo với cơ quan chức năng.",
+          "answer": true,
+          "explain": "Bằng chứng giúp cơ quan chức năng xử lý vụ việc chính xác."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Đối với việc bảo vệ thông tin cá nhân và quy tắc ứng xử trên mạng, các nhận định sau đây là đúng hay sai?",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Thông tin cá nhân bao gồm họ tên, địa chỉ nhà, số điện thoại, mật khẩu và các thông tin về tài khoản ngân hàng.",
+          "answer": true,
+          "explain": "Đây đều là những thông tin cần được bảo mật."
+        },
+        {
+          "key": "b",
+          "text": "Việc chia sẻ vị trí thời gian thực (check-in) mọi lúc mọi nơi lên mạng xã hội là một thói quen tốt để kết nối bạn bè.",
+          "answer": false,
+          "explain": "Chia sẻ vị trí thường xuyên có thể gây nguy hiểm cho an toàn cá nhân."
+        },
+        {
+          "key": "c",
+          "text": "Quy tắc \"S-U-R-F\" giúp người dùng ghi nhớ việc: Stay safe (Giữ an toàn), Understand (Hiểu rõ), Reliability (Tin cậy) và Future (Tương lai).",
+          "answer": true,
+          "explain": "Quy tắc này giúp người dùng ứng xử an toàn và có trách nhiệm trên mạng."
+        },
+        {
+          "key": "d",
+          "text": "Khi đăng ký các dịch vụ trực tuyến, chúng ta nên đọc kĩ các điều khoản về quyền riêng tư và chính sách bảo mật thông tin.",
+          "answer": true,
+          "explain": "Việc này giúp hiểu rõ cách thông tin cá nhân được thu thập và sử dụng."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Khi tiếp nhận thông tin trên Internet, các nhận định sau đây về tính tin cậy của thông tin là đúng hay sai?",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Mọi thông tin được đăng tải trên các trang báo điện tử có tên miền .gov hoặc .edu đều có độ tin cậy cao hơn các trang mạng xã hội cá nhân.",
+          "answer": true,
+          "explain": "Các trang này thường thuộc cơ quan chính thống hoặc giáo dục nên độ tin cậy cao hơn."
+        },
+        {
+          "key": "b",
+          "text": "Tin giả (fake news) thường có tiêu đề giật gân, thiếu căn cứ và thường thúc giục người xem chia sẻ nhanh chóng.",
+          "answer": true,
+          "explain": "Đây là đặc điểm phổ biến của tin giả."
+        },
+        {
+          "key": "c",
+          "text": "Nếu một thông tin có rất nhiều lượt Like và Share thì thông tin đó chắc chắn là thông tin chính xác.",
+          "answer": false,
+          "explain": "Lượt tương tác cao không đảm bảo thông tin là đúng sự thật."
+        },
+        {
+          "key": "d",
+          "text": "Một trong những cách kiểm tra thông tin là tìm kiếm xem thông tin đó có được đăng tải đồng loạt trên các cơ quan thông tấn báo chí chính thống hay không.",
+          "answer": true,
+          "explain": "So sánh nhiều nguồn chính thống giúp kiểm chứng độ tin cậy của thông tin."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Về các quy định của pháp luật Việt Nam đối với môi trường mạng, các khẳng định sau đây là đúng hay sai?",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Luật An ninh mạng quy định các hành vi bị nghiêm cấm trên không gian mạng, bao gồm cả việc đưa thông tin sai sự thật.",
+          "answer": true,
+          "explain": "Pháp luật Việt Nam nghiêm cấm việc phát tán thông tin sai sự thật trên mạng."
+        },
+        {
+          "key": "b",
+          "text": "Chỉ những người trên 18 tuổi mới phải chịu trách nhiệm pháp lý khi có hành vi vi phạm trên mạng xã hội.",
+          "answer": false,
+          "explain": "Người chưa đủ 18 tuổi vẫn có thể phải chịu trách nhiệm theo quy định pháp luật."
+        },
+        {
+          "key": "c",
+          "text": "Hành vi xúc phạm danh dự, nhân phẩm của người khác trên mạng có thể bị xử phạt hành chính hoặc truy cứu trách nhiệm hình sự.",
+          "answer": true,
+          "explain": "Đây là hành vi vi phạm pháp luật và có thể bị xử lý nghiêm."
+        },
+        {
+          "key": "d",
+          "text": "Khi phát hiện một hành vi vi phạm pháp luật trên mạng, học sinh nên im lặng để tránh rắc rối cho bản thân.",
+          "answer": false,
+          "explain": "Học sinh nên báo cho người lớn, thầy cô hoặc cơ quan có thẩm quyền."
+        }
+      ]
+    },
+     {
+      "id": 6,
+      "text": "Về khái niệm cơ sở dữ liệu (CSDL) và các thành phần cơ bản:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "CSDL là một tập hợp các dữ liệu có liên quan với nhau, được lưu trữ một cách có hệ thống trên thiết bị nhớ.",
+          "answer": true,
+          "explain": "Đây là khái niệm đúng về cơ sở dữ liệu."
+        },
+        {
+          "key": "b",
+          "text": "Trong một bảng dữ liệu, mỗi hàng được gọi là một trường (field), đại diện cho một thuộc tính của đối tượng cần quản lí.",
+          "answer": false,
+          "explain": "Mỗi hàng là một bản ghi, không phải là một trường."
+        },
+        {
+          "key": "c",
+          "text": "Mỗi cột trong bảng được gọi là một bản ghi (record), chứa toàn bộ các thông tin về một đối tượng cụ thể.",
+          "answer": false,
+          "explain": "Mỗi cột là một trường (thuộc tính), không phải là bản ghi."
+        },
+        {
+          "key": "d",
+          "text": "Việc lưu trữ dữ liệu tập trung trong CSDL giúp hạn chế sự trùng lặp và đảm bảo tính nhất quán của dữ liệu.",
+          "answer": true,
+          "explain": "Lưu trữ tập trung giúp giảm trùng lặp và đảm bảo dữ liệu nhất quán."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Khi nói về cấu trúc của bảng trong CSDL quan hệ:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Mọi hàng trong cùng một bảng phải có cùng một cấu trúc (cùng các cột).",
+          "answer": true,
+          "explain": "Các bản ghi trong cùng bảng phải tuân theo cùng một cấu trúc."
+        },
+        {
+          "key": "b",
+          "text": "Kiểu dữ liệu của một trường (cột) có thể khác nhau giữa các hàng trong bảng đó.",
+          "answer": false,
+          "explain": "Kiểu dữ liệu của mỗi trường là cố định cho toàn bộ bảng."
+        },
+        {
+          "key": "c",
+          "text": "Thứ tự các hàng trong bảng là không quan trọng, không làm thay đổi ý nghĩa của CSDL.",
+          "answer": true,
+          "explain": "Thứ tự các bản ghi không ảnh hưởng đến ý nghĩa của dữ liệu."
+        },
+        {
+          "key": "d",
+          "text": "Tên của các trường trong cùng một bảng không được trùng nhau.",
+          "answer": true,
+          "explain": "Mỗi trường trong bảng phải có tên riêng để phân biệt."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Về khái niệm Khóa (Key) của một bảng:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Khóa là một trường hoặc một tập hợp các trường dùng để phân biệt các bản ghi khác nhau trong bảng.",
+          "answer": true,
+          "explain": "Khóa giúp phân biệt duy nhất các bản ghi trong bảng."
+        },
+        {
+          "key": "b",
+          "text": "Một bảng có thể không cần thiết lập khóa mà vẫn đảm bảo việc truy xuất dữ liệu chính xác tuyệt đối.",
+          "answer": false,
+          "explain": "Không có khóa sẽ khó đảm bảo truy xuất dữ liệu chính xác."
+        },
+        {
+          "key": "c",
+          "text": "Giá trị tại các trường được chọn làm khóa của hai bản ghi bất kì trong một bảng có thể trùng nhau.",
+          "answer": false,
+          "explain": "Giá trị khóa phải là duy nhất cho mỗi bản ghi."
+        },
+        {
+          "key": "d",
+          "text": "Khóa giúp hệ quản trị CSDL thiết lập mối liên kết giữa các bảng với nhau.",
+          "answer": true,
+          "explain": "Khóa (đặc biệt là khóa ngoại) dùng để liên kết các bảng."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Xét ví dụ quản lí thư viện, một bảng SACH có các trường: Mã sách, Tên sách, Tác giả, Năm xuất bản.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Trường Mã sách nên được chọn làm khóa chính vì giá trị của nó là duy nhất cho mỗi cuốn sách.",
+          "answer": true,
+          "explain": "Mã sách là thông tin duy nhất để phân biệt các cuốn sách."
+        },
+        {
+          "key": "b",
+          "text": "Trường Tên sách có thể dùng làm khóa chính vì mỗi cuốn sách chỉ có một tên duy nhất.",
+          "answer": false,
+          "explain": "Nhiều cuốn sách có thể trùng tên nên không phù hợp làm khóa chính."
+        },
+        {
+          "key": "c",
+          "text": "Một hàng trong bảng SACH chứa đầy đủ thông tin về một cuốn sách cụ thể gọi là một bản ghi.",
+          "answer": true,
+          "explain": "Mỗi hàng là một bản ghi lưu thông tin của một cuốn sách."
+        },
+        {
+          "key": "d",
+          "text": "Nếu nhập hai cuốn sách khác nhau nhưng có cùng một Mã sách, hệ quản trị CSDL sẽ vẫn chấp nhận và lưu trữ bình thường.",
+          "answer": false,
+          "explain": "Khóa chính không cho phép các giá trị trùng nhau."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Về vai trò và đặc điểm của CSDL trong thực tế:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "CSDL chỉ được dùng để lưu trữ dữ liệu văn bản, không thể lưu trữ các loại dữ liệu khác như hình ảnh hay âm thanh.",
+          "answer": false,
+          "explain": "CSDL có thể lưu trữ nhiều loại dữ liệu khác nhau."
+        },
+        {
+          "key": "b",
+          "text": "Sử dụng CSDL giúp nhiều người hoặc nhiều ứng dụng có thể khai thác dữ liệu đồng thời.",
+          "answer": true,
+          "explain": "CSDL hỗ trợ truy cập và khai thác dữ liệu đồng thời."
+        },
+        {
+          "key": "c",
+          "text": "CSDL là thành phần cốt lõi của các hệ thống thông tin quản lí như quản lí học sinh, quản lí bán hàng.",
+          "answer": true,
+          "explain": "Hầu hết các hệ thống quản lí đều dựa trên CSDL."
+        },
+        {
+          "key": "d",
+          "text": "Khi dữ liệu trong CSDL thay đổi, các thông tin khai thác từ CSDL đó (như báo cáo, thống kê) cũng sẽ được cập nhật tự động theo.",
+          "answer": true,
+          "explain": "Báo cáo và thống kê luôn dựa trên dữ liệu hiện thời trong CSDL."
+        }
+      ]
+    },
+     {
+      "id": 11,
+      "text": "Xét các khái niệm cơ bản về bảng trong mô hình dữ liệu quan hệ.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Mỗi hàng trong một bảng của cơ sở dữ liệu quan hệ được gọi là một bản ghi (record) hoặc một bộ (tuple).",
+          "answer": true,
+          "explain": "Trong CSDL quan hệ, mỗi hàng biểu diễn một bản ghi hay một bộ dữ liệu."
+        },
+        {
+          "key": "b",
+          "text": "Trong một bảng, có thể tồn tại hai hàng có nội dung hoàn toàn giống nhau ở tất cả các cột.",
+          "answer": false,
+          "explain": "Các bản ghi trong bảng phải được phân biệt với nhau, không được trùng hoàn toàn."
+        },
+        {
+          "key": "c",
+          "text": "Thứ tự các cột trong bảng là cố định và không thể thay đổi nếu muốn bảo toàn ý nghĩa của dữ liệu.",
+          "answer": false,
+          "explain": "Thứ tự các cột không làm thay đổi ý nghĩa logic của dữ liệu."
+        },
+        {
+          "key": "d",
+          "text": "Mỗi cột trong bảng phải có một tên gọi duy nhất và dữ liệu trong cùng một cột phải có cùng kiểu dữ liệu.",
+          "answer": true,
+          "explain": "Tên trường không được trùng nhau và kiểu dữ liệu của cột phải thống nhất."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Về khái niệm khóa chính (Primary Key) trong bảng.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Khóa chính là một tập hợp gồm một hoặc nhiều trường dùng để xác định duy nhất mỗi bản ghi trong bảng.",
+          "answer": true,
+          "explain": "Khóa chính dùng để phân biệt duy nhất các bản ghi trong bảng."
+        },
+        {
+          "key": "b",
+          "text": "Một bảng có thể không có khóa chính mà vẫn đảm bảo tính đúng đắn của cơ sở dữ liệu quan hệ.",
+          "answer": false,
+          "explain": "Không có khóa chính sẽ khó đảm bảo tính toàn vẹn và truy xuất chính xác."
+        },
+        {
+          "key": "c",
+          "text": "Giá trị tại các trường thuộc khóa chính không được phép để trống (null).",
+          "answer": true,
+          "explain": "Khóa chính phải luôn có giá trị để xác định bản ghi."
+        },
+        {
+          "key": "d",
+          "text": "Khi chọn khóa chính, ta nên chọn tập hợp ít trường nhất có thể mà vẫn đảm bảo tính duy nhất.",
+          "answer": true,
+          "explain": "Khóa chính càng đơn giản thì việc quản lý và xử lý càng hiệu quả."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Về mối liên kết và khóa ngoài (Foreign Key).",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Khóa ngoài là một trường (hoặc tập hợp trường) trong một bảng nhưng lại là khóa chính của một bảng khác.",
+          "answer": true,
+          "explain": "Khóa ngoài tham chiếu đến khóa chính của bảng khác."
+        },
+        {
+          "key": "b",
+          "text": "Khóa ngoài được sử dụng để thiết lập mối liên kết giữa dữ liệu ở các bảng khác nhau.",
+          "answer": true,
+          "explain": "Khóa ngoài giúp liên kết dữ liệu giữa các bảng."
+        },
+        {
+          "key": "c",
+          "text": "Giá trị của khóa ngoài tại một hàng bất kỳ bắt buộc phải xuất hiện trong giá trị khóa chính của bảng tham chiếu (hoặc có thể để trống).",
+          "answer": true,
+          "explain": "Giá trị khóa ngoài phải hợp lệ hoặc có thể để trống nếu được cho phép."
+        },
+        {
+          "key": "d",
+          "text": "Tên của trường làm khóa ngoài bắt buộc phải đặt trùng tên với trường làm khóa chính ở bảng tham chiếu.",
+          "answer": false,
+          "explain": "Tên trường không bắt buộc phải trùng, quan trọng là mối quan hệ logic."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Các đặc trưng của một quan hệ (bảng) trong hệ CSDL quan hệ.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Mỗi ô của bảng chỉ chứa một giá trị duy nhất (giá trị nguyên tố), không chứa danh sách hay tập hợp các giá trị.",
+          "answer": true,
+          "explain": "Mỗi ô phải chứa một giá trị đơn theo chuẩn CSDL quan hệ."
+        },
+        {
+          "key": "b",
+          "text": "Một bảng có thể chứa một trường có kiểu dữ liệu là một bảng khác.",
+          "answer": false,
+          "explain": "Trong CSDL quan hệ, trường không được chứa bảng khác."
+        },
+        {
+          "key": "c",
+          "text": "Tên bảng phải là duy nhất trong toàn bộ cơ sở dữ liệu.",
+          "answer": true,
+          "explain": "Tên bảng không được trùng nhau trong cùng một CSDL."
+        },
+        {
+          "key": "d",
+          "text": "Các bản ghi trong bảng có thể có số lượng trường khác nhau tùy vào lượng thông tin nạp vào.",
+          "answer": false,
+          "explain": "Tất cả các bản ghi phải có cùng số lượng trường."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "Về việc thiết lập khóa và chỉ mục (index) trong CSDL.",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Việc xác định khóa chính dựa trên ý nghĩa thực tế của dữ liệu chứ không chỉ dựa trên các giá trị hiện có trong bảng.",
+          "answer": true,
+          "explain": "Khóa chính cần phản ánh đúng bản chất của đối tượng."
+        },
+        {
+          "key": "b",
+          "text": "Một bảng chỉ có thể có tối đa một trường được gọi là khóa (bao gồm cả khóa chính và các loại khóa khác).",
+          "answer": false,
+          "explain": "Một bảng có thể có nhiều loại khóa khác nhau."
+        },
+        {
+          "key": "c",
+          "text": "Khóa ngoài giúp ngăn chặn việc xóa một bản ghi ở bảng \"cha\" khi đang có bản ghi ở bảng \"con\" tham chiếu đến nó.",
+          "answer": true,
+          "explain": "Khóa ngoài giúp đảm bảo toàn vẹn tham chiếu."
+        },
+        {
+          "key": "d",
+          "text": "Khóa chính luôn luôn chỉ bao gồm duy nhất một trường.",
+          "answer": false,
+          "explain": "Khóa chính có thể là khóa ghép gồm nhiều trường."
+        }
+      ]
+    },
+     {
+      "id": 16,
+      "text": "Về khái niệm và đặc điểm của ngôn ngữ SQL:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "SQL là tên viết tắt của Structured Query Language, có nghĩa là ngôn ngữ truy vấn có cấu trúc.",
+          "answer": true,
+          "explain": "SQL là viết tắt của Structured Query Language – ngôn ngữ truy vấn có cấu trúc."
+        },
+        {
+          "key": "b",
+          "text": "SQL chỉ được sử dụng để truy xuất dữ liệu từ các bảng trong cơ sở dữ liệu.",
+          "answer": false,
+          "explain": "SQL còn dùng để tạo, cập nhật, xóa và quản lý dữ liệu cũng như quyền truy cập."
+        },
+        {
+          "key": "c",
+          "text": "SQL là ngôn ngữ chuẩn để tương tác với các hệ quản trị cơ sở dữ liệu quan hệ.",
+          "answer": true,
+          "explain": "SQL là ngôn ngữ chuẩn được dùng trong các hệ QTCSDL quan hệ."
+        },
+        {
+          "key": "d",
+          "text": "Các câu lệnh SQL thường có dạng gần với ngôn ngữ tự nhiên (tiếng Anh).",
+          "answer": true,
+          "explain": "Cú pháp SQL sử dụng các từ khóa tiếng Anh nên khá dễ đọc và dễ hiểu."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Về cấu trúc câu lệnh SELECT cơ bản:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Từ khóa SELECT dùng để chỉ định các trường (cột) dữ liệu muốn hiển thị.",
+          "answer": true,
+          "explain": "SELECT dùng để xác định các cột dữ liệu cần lấy ra."
+        },
+        {
+          "key": "b",
+          "text": "Từ khóa FROM dùng để chỉ định điều kiện lọc dữ liệu.",
+          "answer": false,
+          "explain": "FROM dùng để chỉ định bảng dữ liệu, không phải điều kiện lọc."
+        },
+        {
+          "key": "c",
+          "text": "Từ khóa WHERE dùng để xác định các bảng chứa dữ liệu cần truy vấn.",
+          "answer": false,
+          "explain": "WHERE dùng để lọc dữ liệu theo điều kiện, không dùng để chỉ định bảng."
+        },
+        {
+          "key": "d",
+          "text": "Một câu lệnh SELECT tối thiểu phải có hai mệnh đề là SELECT và FROM.",
+          "answer": true,
+          "explain": "SELECT và FROM là hai mệnh đề cơ bản bắt buộc của câu lệnh SELECT."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Về việc sử dụng các phép toán và ký hiệu trong mệnh đề WHERE:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "SQL sử dụng dấu = để so sánh bằng và dấu <> để so sánh khác.",
+          "answer": true,
+          "explain": "Dấu = dùng so sánh bằng, <> dùng so sánh khác trong SQL."
+        },
+        {
+          "key": "b",
+          "text": "Để lọc các giá trị trong một khoảng, ta sử dụng từ khóa BETWEEN...AND.",
+          "answer": true,
+          "explain": "BETWEEN...AND dùng để chọn các giá trị trong một khoảng xác định."
+        },
+        {
+          "key": "c",
+          "text": "Ký hiệu % trong SQL được sử dụng để đại diện cho một nhóm ký tự bất kỳ trong phép so sánh LIKE.",
+          "answer": true,
+          "explain": "Ký hiệu % đại diện cho chuỗi ký tự bất kỳ khi dùng với LIKE."
+        },
+        {
+          "key": "d",
+          "text": "Các giá trị kiểu chuỗi (văn bản) trong điều kiện WHERE không cần đặt trong dấu nháy đơn.",
+          "answer": false,
+          "explain": "Giá trị kiểu chuỗi phải đặt trong dấu nháy đơn trong SQL."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Về các câu lệnh cập nhật dữ liệu:",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Lệnh INSERT INTO được dùng để thêm các bản ghi mới vào bảng.",
+          "answer": true,
+          "explain": "INSERT INTO dùng để thêm dữ liệu mới vào bảng."
+        },
+        {
+          "key": "b",
+          "text": "Lệnh UPDATE được dùng để thay đổi giá trị của các bản ghi hiện có.",
+          "answer": true,
+          "explain": "UPDATE dùng để chỉnh sửa dữ liệu đã tồn tại trong bảng."
+        },
+        {
+          "key": "c",
+          "text": "Lệnh DELETE dùng để xóa cấu trúc của một bảng khỏi cơ sở dữ liệu.",
+          "answer": false,
+          "explain": "DELETE chỉ xóa dữ liệu, không xóa cấu trúc bảng."
+        },
+        {
+          "key": "d",
+          "text": "Khi dùng lệnh UPDATE hoặc DELETE, nếu không có mệnh đề WHERE, lệnh sẽ tác động lên toàn bộ bản ghi trong bảng.",
+          "answer": true,
+          "explain": "Không có WHERE thì UPDATE hoặc DELETE sẽ áp dụng cho tất cả các bản ghi."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "Về mối quan hệ giữa SQL và Hệ quản trị CSDL (DBMS):",
+      "statements": [
+        {
+          "key": "a",
+          "text": "Người dùng có thể viết các câu lệnh SQL để yêu cầu Hệ quản trị CSDL thực hiện các thao tác trên dữ liệu.",
+          "answer": true,
+          "explain": "SQL là công cụ để người dùng giao tiếp với hệ QTCSDL."
+        },
+        {
+          "key": "b",
+          "text": "Kết quả của một câu lệnh truy vấn SELECT thường là một bảng dữ liệu tạm thời.",
+          "answer": true,
+          "explain": "SELECT trả về một tập kết quả dưới dạng bảng."
+        },
+        {
+          "key": "c",
+          "text": "Mỗi Hệ quản trị CSDL (như MySQL, Access, SQL Server) đều có cách viết SQL hoàn toàn khác nhau, không có điểm chung.",
+          "answer": false,
+          "explain": "Các hệ QTCSDL đều tuân theo chuẩn SQL chung, chỉ khác nhau ở một số mở rộng."
+        },
+        {
+          "key": "d",
+          "text": "SQL giúp người dùng khai thác CSDL mà không cần quan tâm đến cách dữ liệu được lưu trữ vật lý trong máy tính.",
+          "answer": true,
+          "explain": "SQL làm việc ở mức logic, không phụ thuộc cách lưu trữ vật lý."
+        }
+      ]
+    }
+  ]
+}
