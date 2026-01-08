@@ -841,7 +841,7 @@
       { "key": "C", "text": "Việt Nam quê hương tôi", "correct": true },
       { "key": "D", "text": "Du kích sông Thao", "correct": false }
     ],
-    "explain": "Theo dữ liệu ở Hình 13.1d, dòng 0005 TN ứng với bản nhạc Du kích sông Thao."
+    "explain": "Theo dữ liệu ở Hình 13.1d, dòng 0005 TN ứng với bản nhạc Việt Nam quê hương tôi."
   },
   {
     "id": 43,
@@ -854,7 +854,7 @@
       { "key": "C", "text": "Quốc Hương", "correct": false },
       { "key": "D", "text": "Tân nhân", "correct": true }
     ],
-    "explain": "Dòng 0005 TN trong bảng cho biết bản thu âm do ca sĩ Lê Dung thể hiện."
+    "explain": "Dòng 0005 TN trong bảng cho biết bản thu âm do ca sĩ Tân Nhân thể hiện."
   },
   {
     "id": 44,
@@ -865,7 +865,7 @@
       { "key": "C", "text": "Đỗ Nhuận", "correct": true },
       { "key": "D", "text": "Hoàng Việt", "correct": false }
     ],
-    "explain": "Bản nhạc Du kích sông Thao là sáng tác của nhạc sĩ Hoàng Việt."
+    "explain": "Bản nhạc Du kích sông Thao là sáng tác của nhạc sĩ Đỗ Nhuận."
   },
   {
     "id": 45,
@@ -983,7 +983,7 @@
       { "key": "C", "text": "Bản ghi", "correct": false },
       { "key": "D", "text": "Trường", "correct": true }
     ],
-    "explain": "Mỗi cột biểu diễn một thuộc tính của đối tượng."
+    "explain": "Mỗi cột trong bảng được gọi là Trường."
   },
   {
     "id": 55,

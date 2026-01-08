@@ -21,6 +21,8 @@
     .question{padding:20px;display:grid;gap:16px}
     .q-title{font-size:clamp(18px,2.6vw,22px);font-weight:700}
     .q-meta{color:var(--muted);font-size:13px}
+    .q-media{display:block}
+    .q-media img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid #1f2a44;background:#0b1020}
     .choices{display:grid;gap:12px}
     .choice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#0c1428;border:1px solid #1f2a44;border-radius:12px;cursor:pointer;transition:transform .06s ease,border-color .2s ease,background .2s ease}
     .choice:hover{transform:translateY(-1px);border-color:#334a7a}
@@ -73,7 +75,7 @@
     .alert.bad{border-color:#7f1d1d;color:#fecaca}
     .alert.good{border-color:#14532d;color:#86efac}
     /* Ẩn nút nạp JSON và liên kết tải JSON đầy đủ (không ảnh hưởng logic) */
-    #btn-load-json{display:none}
+    #btn-load-json{display:inline-flex}
     a.pill[href*="TN_CK1_Tin11.json"]{display:none}
   </style>
 </head>
@@ -3729,8 +3731,8 @@ return { multiple: [], truefalse: [] }
     }
 
     const rawInline = parseQuizJSON(document.getElementById('quiz-data')?.textContent)
-    // Nếu người dùng chưa dán JSON thật (hai mảng rỗng) thì fallback sang DEMO
-    const raw = rawInline
+    // Uu tien: thu tai JSON ngoai (TN_CK1_Tin11.json) neu trang chay bang server
+    let raw = rawInline
 
     function buildDataset(src){
       return {
@@ -3739,6 +3741,29 @@ return { multiple: [], truefalse: [] }
       }
     }
     let dataset = buildDataset(raw)
+
+    async function loadJSONFromURL(url){
+      const res = await fetch(url, { cache: 'no-store' })
+      if (!res.ok) throw new Error('HTTP ' + res.status)
+      return await res.json()
+    }
+
+    async function initData(){
+      try{
+        const remote = await loadJSONFromURL('TN_CK1_Tin11.json')
+        if ((remote?.multiple||[]).length || (remote?.truefalse||[]).length){
+          raw = remote
+          dataset = buildDataset(raw)
+          setAlert('Da nap du lieu tu TN_CK1_Tin11.json', 'good')
+          return
+        }
+      }catch(err){
+        // Bo qua loi neu chay file:// hoac chua bat server
+      }
+      if (!((raw?.multiple||[]).length || (raw?.truefalse||[]).length)){
+        setAlert('Chua dan JSON hop le vao script#quiz-data', 'bad')
+      }
+    }
 
     let order = []
     let ptr = 0
@@ -3822,6 +3847,14 @@ function buildOrder(){
       }
       const title = document.createElement('div'); title.className = 'q-title'; title.textContent = `Câu hỏi (ID ${q.id}): ${q.text}`; area.appendChild(title)
       const meta = document.createElement('div'); meta.className = 'q-meta'; meta.textContent = 'Chọn một đáp án duy nhất.'; area.appendChild(meta)
+
+      if (q.image){
+        const media = document.createElement('div'); media.className = 'q-media'
+        const img = document.createElement('img'); img.src = q.image; img.alt = q.imageAlt || ''
+        img.loading = 'lazy'
+        media.appendChild(img)
+        area.appendChild(media)
+      }
 
       const choices = document.createElement('div'); choices.className='choices'
       q.choices.forEach((c, i)=>{
@@ -3972,11 +4005,12 @@ function buildOrder(){
     document.addEventListener('contextmenu', (e)=>{ e.preventDefault() }, { capture:true })
     window.addEventListener('keydown', (e)=>{
       if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false }
-    }, { capture:true })
-
-    // ===== Init =====
-    runSelfTests()
-    buildOrder()
+    }, { capture:true })    // ===== Init =====
+    ;(async ()=>{
+      await initData()
+      runSelfTests()
+      buildOrder()
+    })()
   </script>
 </body>
 </html>
