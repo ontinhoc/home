@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Tin học 12 - Bài 16: Định dạng khung (CSS). Box model, block/inline, bộ chọn class/id/thuộc tính và luyện tập vận dụng.">
+    <meta name="keywords"
+        content="Tin học 12, CSS, box model, margin, border, padding, width, height, block, inline, class, id, attribute selector">
+    <meta name="author" content="Ontinhoc">
+    <title>Định Dạng Khung (CSS) | Tin 12 - Bài 16</title>
+    <style>
+        :root {
+            --bg: #f7fafc;
+            --card: #fff;
+            --primary: #0ea5e9;
+            --muted: #64748b;
+            --accent: #0369a1;
+            --radius: 12px;
+            --content-max: 1080px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: #0f172a;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: var(--content-max)
+        }
+
+        header {
+            background: linear-gradient(93deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 30px rgba(14, 165, 233, 0.22)
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem
+        }
+
+        header p {
+            margin: 10px 0 0;
+            opacity: 0.95;
+            max-width: 820px;
+            line-height: 1.5
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0
+        }
+
+        nav a {
+            background: var(--card);
+            padding: 9px 14px;
+            border-radius: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(2, 6, 23, 0.08);
+            transition: transform 0.18s ease, box-shadow 0.18s ease
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.18)
+        }
+
+        main {
+            margin-top: 16px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 22px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+            margin-bottom: 18px
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.45rem
+        }
+
+        h3 {
+            color: #0f766e;
+            margin-top: 16px
+        }
+
+        p {
+            line-height: 1.6
+        }
+
+        ul,
+        ol {
+            margin: 10px 0 10px 22px;
+            padding: 0;
+            line-height: 1.6
+        }
+
+        li {
+            margin-bottom: 8px
+        }
+
+        .note {
+            background: #ecfeff;
+            border-left: 4px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 12px
+        }
+
+        .steps {
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 12px
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+
+        #backToTop {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            display: none;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(3, 105, 161, 0.35);
+            font-size: 1.25rem
+        }
+
+        #backToTop:hover {
+            opacity: 0.92
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 6px
+        }
+
+        @media(max-width:720px) {
+            body {
+                padding: 18px
+            }
+
+            header {
+                padding: 24px
+            }
+
+            header h1 {
+                font-size: 1.45rem
+            }
+
+            nav a {
+                flex: 1 1 160px;
+                text-align: center
+            }
+
+            .card {
+                padding: 18px
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 16: Định dạng khung (CSS) (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["CSS", "box model", "margin", "border", "padding", "block", "inline", "class", "id", "attribute selector", "Tin học 12"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Phân loại phần tử khối và nội tuyến, thiết lập định dạng khung CSS và các bộ chọn đặc biệt, kèm bài tập luyện tập - vận dụng."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn"
+        style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 16: Định dạng khung (CSS)</h1>
+            <p>Bài học tập trung vào box model trong CSS, cách phân biệt phần tử khối và nội tuyến, và các bộ chọn đặc biệt
+                để áp dụng định dạng khung linh hoạt, chính xác.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#phan-loai">Phần tử khối &amp; nội tuyến</a>
+                <a href="#box-model">CSS Box Model</a>
+                <a href="#bo-chon">Bộ chọn đặc biệt</a>
+                <a href="#luyen-tap">Thực hành</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">Mục tiêu</h2>
+                <ul>
+                    <li>Dùng CSS định dạng khung (box model): <code>margin</code>, <code>border</code>, <code>padding</code>, <code>width</code>/<code>height</code>.</li>
+                    <li>Áp dụng CSS cho nhiều bộ chọn: thẻ, class, id, thuộc tính; phân biệt khối (block) và nội tuyến (inline).</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">box model</span>
+                    <span class="badge">block</span>
+                    <span class="badge">inline</span>
+                    <span class="badge">selector</span>
+                </div>
+            </section>
+
+            <section id="phan-loai" class="card" aria-labelledby="phan-loai-title">
+                <h2 id="phan-loai-title">1. Phân loại phần tử khối &amp; nội tuyến</h2>
+                <ul>
+                    <li><strong>Khối (block):</strong> chiếm trọn chiều ngang, thường xuống dòng mới; ví dụ: <code>h1</code>–<code>h6</code>, <code>p</code>, <code>div</code>, <code>section</code>, <code>ul</code>/<code>ol</code>/<code>li</code>, <code>table</code>.</li>
+                    <li><strong>Nội tuyến (inline):</strong> nằm trong dòng, chỉ chiếm nội dung; ví dụ: <code>span</code>, <code>a</code>, <code>img</code>, <code>em</code>, <code>strong</code>.</li>
+                    <li>Thuộc tính <code>display</code> đổi loại hiển thị: <code>block</code> | <code>inline</code> | <code>none</code>.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Gợi ý:</strong> Có thể chuyển <code>span</code> từ inline sang block bằng <code>display: block</code> để áp dụng kích thước rõ ràng.
+                </div>
+            </section>
+
+            <section id="box-model" class="card" aria-labelledby="box-model-title">
+                <h2 id="box-model-title">2. Thiết lập định dạng khung (CSS Box Model)</h2>
+                <ul>
+                    <li>Thành phần khung: <strong>content</strong> → <strong>padding</strong> → <strong>border</strong> → <strong>margin</strong>.</li>
+                    <li>Kích thước: <code>width</code>, <code>height</code> (áp dụng tốt cho phần tử khối).</li>
+                    <li>Đệm: <code>padding</code> (khoảng cách nội dung ↔ viền).</li>
+                    <li>Lề: <code>margin</code> (khoảng cách viền ngoài ↔ xung quanh).</li>
+                    <li>Viền: <code>border-width</code> | <code>border-style</code> | <code>border-color</code> hoặc rút gọn <code>border</code>.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>Ví dụ:</strong>
+                    <ul>
+                        <li><code>h1 { border: 5px ridge blue; width: 200px; padding: 10px; margin: 20px; }</code></li>
+                        <li><code>em { border: 2px double red; }</code></li>
+                    </ul>
+                </div>
+                <div class="note" role="note">
+                    <strong>Ghi nhớ:</strong> thuộc tính khung không kế thừa; nội tuyến không đặt <code>width</code>/<code>height</code> hữu hiệu như khối.
+                </div>
+            </section>
+
+            <section id="bo-chon" class="card" aria-labelledby="bo-chon-title">
+                <h2 id="bo-chon-title">3. Một số bộ chọn đặc biệt của CSS</h2>
+                <h3>a) Class (.ten)</h3>
+                <ul>
+                    <li>Gán cho nhiều phần tử; một phần tử có thể có nhiều class.</li>
+                    <li>Ví dụ: <code>.test</code>, <code>.test.warning</code>, <code>p.test</code>.</li>
+                </ul>
+
+                <h3>b) ID (#ten)</h3>
+                <ul>
+                    <li>Duy nhất trong trang; dùng khi cần định dạng riêng cho một phần tử.</li>
+                    <li>Ví dụ: <code>#home { color: red; }</code>, <code>p#home { font-size: 150%; }</code>.</li>
+                </ul>
+
+                <h3>c) Bộ chọn thuộc tính</h3>
+                <ul>
+                    <li>Áp dụng theo tên/giá trị thuộc tính HTML.</li>
+                    <li>Ví dụ: <code>[href] { border: 1px solid blue; }</code>, <code>a[target="_blank"] { color: red; font-weight: bold; }</code>.</li>
+                </ul>
+
+                <div class="note" role="note">
+                    <strong>Quy tắc đặt tên:</strong> phân biệt hoa–thường; không bắt đầu bằng số; không chứa khoảng trắng/ký tự đặc biệt.
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">4. Thực hành – Luyện tập – Vận dụng</h2>
+                <ul>
+                    <li>Thực hành: tạo bảng 16 tên màu CSS bằng <code>table</code>/<code>caption</code>/<code>tr</code>/<code>th</code>/<code>td</code> và định dạng khung/viền cho bảng &amp; ô.</li>
+                    <li>Luyện tập: ẩn phần tử bằng <code>display: none</code>; giải thích bộ chọn nhóm <code>.test .test_more { background-color: red; }</code>.</li>
+                    <li>Vận dụng: định dạng 3 đoạn <code>p</code> quan trọng: P1 khác biệt, P2 &amp; P3 cùng kiểu (dùng id cho P1, class cho P2 &amp; P3).</li>
+                    <li>Thiết lập khung/viền khác nhau cho từng phía (trái/phải/trên/dưới) bằng <code>margin-*</code>/<code>padding-*</code>/<code>border-*</code>.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">margin</span>
+                    <span class="badge">padding</span>
+                    <span class="badge">border</span>
+                    <span class="badge">display</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, { capture: true });
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+
+</html>
