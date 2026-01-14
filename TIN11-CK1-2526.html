@@ -1,0 +1,5871 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIN11-CK1-2526</title>
+<style>
+:root {
+  --bg: #f7f4ef;
+  --text: #1f1f1f;
+  --grid: #b8b1a5;
+  --header-bg: #e7e1d7;
+}
+body {
+  margin: 24px;
+  font-family: "Times New Roman", serif;
+  color: var(--text);
+  background: var(--bg);
+}
+.sheet {
+  margin: 0 auto 32px;
+  max-width: 1200px;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-weight: 600;
+}
+.header .block {
+  width: 48%;
+}
+.header .block.right {
+  text-align: right;
+}
+.header p {
+  margin: 0 0 4px;
+}
+.title {
+  text-align: center;
+  margin: 16px 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 900px;
+}
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.data-table th, .data-table td {
+  border: 1px solid var(--grid);
+  padding: 6px 8px;
+  vertical-align: top;
+}
+.data-table th {
+  background: var(--header-bg);
+  font-weight: 700;
+  text-align: center;
+}
+.data-table td:first-child {
+  text-align: center;
+}
+.footer {
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+}
+.footer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
+}
+.footer-cell.left { text-align: left; }
+.footer-cell.center { text-align: center; }
+.footer-cell.right { text-align: right; }
+@media (max-width: 900px) {
+  body { margin: 12px; }
+  .sheet { padding: 16px; }
+  .header { flex-direction: column; }
+  .header .block { width: 100%; }
+  .header .block.right { text-align: left; }
+  .footer-row { grid-template-columns: 1fr; row-gap: 6px; }
+  .footer-cell.right, .footer-cell.center { text-align: left; }
+}
+.search-panel {
+  margin: 18px 0 16px;
+  padding: 12px 14px;
+  background: #f2ede5;
+  border: 1px solid var(--grid);
+}
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+.search-panel label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.search-panel input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--grid);
+  font-family: inherit;
+  font-size: 14px;
+}
+.search-actions {
+  display: flex;
+  gap: 8px;
+}
+.search-panel button {
+  padding: 8px 12px;
+  border: 1px solid var(--grid);
+  background: #fff;
+  font-family: inherit;
+  cursor: pointer;
+}
+.search-panel button.primary {
+  background: #2f4f2f;
+  color: #fff;
+  border-color: #2f4f2f;
+}
+.search-hint {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #444;
+}
+.result-message {
+  margin-top: 10px;
+  font-weight: 600;
+}
+.hidden {
+  display: none;
+}
+@media (max-width: 900px) {
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+  .search-actions {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+  }
+  .data-table th, .data-table td {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  .search-panel button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<section class="sheet">
+<div class="title">KẾT QUẢ THI CUỐI KỲ 1 - TIN HỌC 11</div>
+<div class="search-panel" data-table-search>
+  <div class="search-row">
+    <div>
+      <label for="studentSbd">Số báo danh</label>
+      <input id="studentSbd" type="text" autocomplete="off" placeholder="Nhập số báo danh">
+    </div>
+    <div class="search-actions">
+      <button class="primary" type="button" data-search-btn>Tra cứu</button>
+      <button type="button" data-reset-btn>Làm lại</button>
+    </div>
+  </div>
+  <div class="search-hint">Nhập số báo danh để xem điểm.</div>
+  <div class="result-message" data-result-msg></div>
+</div>
+<div class="table-wrap">
+<table class="dataframe data-table">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Họ và tên</th>
+      <th>Ngày sinh</th>
+      <th>Giới</th>
+      <th>Phòng thi</th>
+      <th>Địa điểm thi</th>
+      <th>Số BD</th>
+      <th>Mã đề</th>
+      <th>Trắc nghiệm</th>
+      <th>Tự luận</th>
+      <th>Điểm</th>
+      <th>Ghi chú</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Rơ Lan H Á</td>
+      <td>12/09/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110001</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>0.50</td>
+      <td>6.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Siu Alũk</td>
+      <td>27/04/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110002</td>
+      <td>116.0</td>
+      <td>6.00</td>
+      <td>2.00</td>
+      <td>8.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Lê Thị Hoài An</td>
+      <td>01/09/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110003</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>2.75</td>
+      <td>9.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Nguyễn Văn An</td>
+      <td>21/08/2008</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110004</td>
+      <td>113.0</td>
+      <td>4.00</td>
+      <td>1.00</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Nguyễn Võ Thành An</td>
+      <td>27/01/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110005</td>
+      <td>112.0</td>
+      <td>6.75</td>
+      <td>2.75</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Sằm Thúy An</td>
+      <td>18/10/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110006</td>
+      <td>115.0</td>
+      <td>5.25</td>
+      <td>2.75</td>
+      <td>8.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Đoàn Trúc Quỳnh Anh</td>
+      <td>16/10/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110007</td>
+      <td>117.0</td>
+      <td>5.50</td>
+      <td>1.50</td>
+      <td>7.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Nguyễn Ngọc Anh</td>
+      <td>03/03/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110008</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>0.75</td>
+      <td>6.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Nguyễn Phạm Quỳnh Anh</td>
+      <td>10/10/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110009</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.25</td>
+      <td>8.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Nguyễn Thị Lan Anh</td>
+      <td>02/02/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110010</td>
+      <td>113.0</td>
+      <td>6.00</td>
+      <td>2.50</td>
+      <td>8.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Nguyễn Thị Thiện Anh</td>
+      <td>09/12/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110011</td>
+      <td>116.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Nguyễn Tuấn Anh</td>
+      <td>29/04/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110012</td>
+      <td>117.0</td>
+      <td>4.50</td>
+      <td>1.50</td>
+      <td>6.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Phạm Ngọc Anh</td>
+      <td>06/08/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110013</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>2.25</td>
+      <td>9.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Phạm Tuấn Anh</td>
+      <td>23/10/2008</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110014</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>0.75</td>
+      <td>7.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Rơ Mah Anh</td>
+      <td>18/02/2008</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110015</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Trần Đức Anh</td>
+      <td>20/08/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110016</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>1.75</td>
+      <td>6.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Nguyễn Thị Ánh</td>
+      <td>02/03/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110017</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>0.00</td>
+      <td>5.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Phạm Trọng Bách</td>
+      <td>20/11/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110018</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>2.25</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Lê Quốc Bảo</td>
+      <td>05/05/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110019</td>
+      <td>111.0</td>
+      <td>4.50</td>
+      <td>0.50</td>
+      <td>5.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>Lường Gia Bảo</td>
+      <td>28/10/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110020</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Ngô Đình Gia Bảo</td>
+      <td>07/06/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110021</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>1.50</td>
+      <td>6.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Ngô Gia Bảo</td>
+      <td>08/10/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110022</td>
+      <td>113.0</td>
+      <td>4.75</td>
+      <td>1.50</td>
+      <td>6.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>Trần Gia Bảo</td>
+      <td>26/08/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110023</td>
+      <td>112.0</td>
+      <td>5.50</td>
+      <td>0.00</td>
+      <td>5.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>Kpuih Băng</td>
+      <td>26/11/2008</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110024</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>Siu Blư</td>
+      <td>17/12/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110025</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>2.25</td>
+      <td>9.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>Nguyễn Văn Cách</td>
+      <td>13/12/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110026</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>0.50</td>
+      <td>6.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>Nguyễn Ngọc Cang</td>
+      <td>13/03/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110027</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>2.50</td>
+      <td>9.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>Hà Thị Ngọc Châu</td>
+      <td>04/01/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110028</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>Hoàng Thị Kim Chi</td>
+      <td>24/12/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110029</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>Lê Thị Linh Chi</td>
+      <td>28/08/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110030</td>
+      <td>116.0</td>
+      <td>4.50</td>
+      <td>2.00</td>
+      <td>6.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>Nguyễn Thị Quỳnh Chi</td>
+      <td>28/08/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110031</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>2.25</td>
+      <td>7.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>Phạm Thọ Minh Chí</td>
+      <td>13/11/2009</td>
+      <td>Nam</td>
+      <td>01</td>
+      <td></td>
+      <td>110032</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>2.25</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>Kpuih Chin</td>
+      <td>28/09/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110033</td>
+      <td>112.0</td>
+      <td>2.75</td>
+      <td>0.25</td>
+      <td>3.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>Ksor Chúc</td>
+      <td>25/04/2009</td>
+      <td>Nữ</td>
+      <td>01</td>
+      <td></td>
+      <td>110034</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>0.25</td>
+      <td>5.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>Kpuih Chuyên</td>
+      <td>12/05/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110035</td>
+      <td>112.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>Rah Lan Chương</td>
+      <td>02/04/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110036</td>
+      <td>111.0</td>
+      <td>4.75</td>
+      <td>0.25</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>Trần Thị Kim Cúc</td>
+      <td>27/09/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110037</td>
+      <td>116.0</td>
+      <td>4.50</td>
+      <td>0.00</td>
+      <td>4.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>Nguyễn Hùng Cường</td>
+      <td>19/10/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110038</td>
+      <td>115.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>Mai Văn Danh</td>
+      <td>27/04/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110039</td>
+      <td>112.0</td>
+      <td>5.25</td>
+      <td>2.75</td>
+      <td>8.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>Nguyễn Thanh Danh</td>
+      <td>10/09/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110040</td>
+      <td>116.0</td>
+      <td>3.75</td>
+      <td>0.00</td>
+      <td>3.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>Trần Thành Danh</td>
+      <td>26/05/2008</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110041</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>0.25</td>
+      <td>4.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>Kpuih Diếu</td>
+      <td>07/03/2008</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110042</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>1.00</td>
+      <td>7.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>Trương Thị Huyền Diệu</td>
+      <td>21/09/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110043</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>2.25</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>Siu Doanh</td>
+      <td>09/09/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110044</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>Nguyễn Hoàng Dung</td>
+      <td>26/11/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110045</td>
+      <td>115.0</td>
+      <td>5.25</td>
+      <td>0.50</td>
+      <td>5.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>Dương Văn Dũng</td>
+      <td>07/10/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110046</td>
+      <td>112.0</td>
+      <td>5.50</td>
+      <td>3.00</td>
+      <td>8.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>Đinh Ngọc Dũng</td>
+      <td>14/03/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110047</td>
+      <td>117.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>48</td>
+      <td>Lâm Trí Dũng</td>
+      <td>09/04/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110048</td>
+      <td>116.0</td>
+      <td>6.50</td>
+      <td>1.00</td>
+      <td>7.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>49</td>
+      <td>Tôn Thất Dũng</td>
+      <td>18/06/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110049</td>
+      <td>113.0</td>
+      <td>5.25</td>
+      <td>1.25</td>
+      <td>6.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>Trần Vũ Hoàng Dũng</td>
+      <td>30/10/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110050</td>
+      <td>113.0</td>
+      <td>6.00</td>
+      <td>2.00</td>
+      <td>8.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>51</td>
+      <td>Giản Thùy Duyên</td>
+      <td>17/08/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110051</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>52</td>
+      <td>Nguyễn Minh Duyên</td>
+      <td>06/10/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110052</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td>Phạm Thị Thùy Duyên</td>
+      <td>11/07/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110053</td>
+      <td>117.0</td>
+      <td>5.50</td>
+      <td>0.00</td>
+      <td>5.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>54</td>
+      <td>Siu Duyên</td>
+      <td>02/11/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110054</td>
+      <td>116.0</td>
+      <td>4.50</td>
+      <td>0.50</td>
+      <td>5.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>Nguyễn Ngọc Thiên Dương</td>
+      <td>01/04/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110055</td>
+      <td>115.0</td>
+      <td>6.50</td>
+      <td>1.25</td>
+      <td>7.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>56</td>
+      <td>Phạm Anh Dương</td>
+      <td>28/06/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110056</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>57</td>
+      <td>Hoàng Trường Đan</td>
+      <td>31/05/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110057</td>
+      <td>112.0</td>
+      <td>4.75</td>
+      <td>2.00</td>
+      <td>6.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>58</td>
+      <td>Phan Thị Nhã Đan</td>
+      <td>01/11/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110058</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>0.00</td>
+      <td>6.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>59</td>
+      <td>Nguyễn Thị Anh Đào</td>
+      <td>18/02/2009</td>
+      <td>Nữ</td>
+      <td>02</td>
+      <td></td>
+      <td>110059</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>60</td>
+      <td>Nguyễn Hữu Đạt</td>
+      <td>16/07/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110060</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>0.50</td>
+      <td>7.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>61</td>
+      <td>Nguyễn Phước Tấn Đạt</td>
+      <td>30/04/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110061</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.75</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>62</td>
+      <td>Nguyễn Thành Đạt</td>
+      <td>28/01/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110062</td>
+      <td>113.0</td>
+      <td>4.75</td>
+      <td>0.75</td>
+      <td>5.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>63</td>
+      <td>Nguyễn Thành Đạt</td>
+      <td>04/07/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110063</td>
+      <td>115.0</td>
+      <td>4.75</td>
+      <td>0.75</td>
+      <td>5.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>Phạm Quốc Đạt</td>
+      <td>29/11/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110064</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.25</td>
+      <td>8.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>65</td>
+      <td>Phan Văn Đạt</td>
+      <td>07/02/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110065</td>
+      <td>117.0</td>
+      <td>4.00</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>66</td>
+      <td>Trần Công Đạt</td>
+      <td>19/06/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110066</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>2.75</td>
+      <td>8.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>67</td>
+      <td>Trần Văn Đạt</td>
+      <td>31/08/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110067</td>
+      <td>116.0</td>
+      <td>6.00</td>
+      <td>0.25</td>
+      <td>6.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>Nguyễn Vũ Bảo Đăng</td>
+      <td>18/01/2009</td>
+      <td>Nam</td>
+      <td>02</td>
+      <td></td>
+      <td>110068</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>69</td>
+      <td>Võ Hải Đăng</td>
+      <td>24/11/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110069</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>0.50</td>
+      <td>5.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>70</td>
+      <td>Nguyễn Văn Định</td>
+      <td>22/05/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110070</td>
+      <td>112.0</td>
+      <td>4.25</td>
+      <td>2.50</td>
+      <td>6.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>71</td>
+      <td>Phan Văn Đông</td>
+      <td>09/05/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110071</td>
+      <td>117.0</td>
+      <td>7.00</td>
+      <td>0.00</td>
+      <td>7.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>72</td>
+      <td>Rah Lan Đông</td>
+      <td>16/01/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110072</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>73</td>
+      <td>Tạ Trung Đông</td>
+      <td>09/11/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110073</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>74</td>
+      <td>Hoàng Trung Đức</td>
+      <td>06/10/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110074</td>
+      <td>115.0</td>
+      <td>4.50</td>
+      <td>0.00</td>
+      <td>4.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>Nguyễn Duy Đức</td>
+      <td>11/11/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110075</td>
+      <td>117.0</td>
+      <td>5.75</td>
+      <td>2.00</td>
+      <td>7.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>76</td>
+      <td>Nguyễn Như Đức</td>
+      <td>27/11/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110076</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>77</td>
+      <td>Trần Hữu Trung Đức</td>
+      <td>08/01/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110077</td>
+      <td>117.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>78</td>
+      <td>Siu Enny</td>
+      <td>10/08/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110078</td>
+      <td>115.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>79</td>
+      <td>Nguyễn Anh Gia</td>
+      <td>19/01/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110079</td>
+      <td>112.0</td>
+      <td>5.75</td>
+      <td>2.25</td>
+      <td>8.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>80</td>
+      <td>Phạm Thị Giang</td>
+      <td>26/10/2008</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110080</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>81</td>
+      <td>Rah Lan Gu</td>
+      <td>27/02/2007</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110081</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>2.25</td>
+      <td>8.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>82</td>
+      <td>Kpă Y Gun</td>
+      <td>01/01/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110082</td>
+      <td>115.0</td>
+      <td>6.00</td>
+      <td>0.25</td>
+      <td>6.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>83</td>
+      <td>Kpuih HKhuyêt</td>
+      <td>04/04/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110083</td>
+      <td>116.0</td>
+      <td>4.50</td>
+      <td>0.50</td>
+      <td>5.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>84</td>
+      <td>Rơ Mah Hlôi</td>
+      <td>18/03/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110084</td>
+      <td>117.0</td>
+      <td>6.00</td>
+      <td>0.50</td>
+      <td>6.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>85</td>
+      <td>Nguyễn Ngọc Hà</td>
+      <td>24/04/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110085</td>
+      <td>112.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>86</td>
+      <td>Dương Thị Bích Hạ</td>
+      <td>30/06/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110086</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>2.75</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>87</td>
+      <td>Nguyễn Hoàng Hải</td>
+      <td>25/07/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110087</td>
+      <td>117.0</td>
+      <td>5.00</td>
+      <td>1.00</td>
+      <td>6.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>88</td>
+      <td>Đào Thị Mỹ Hạnh</td>
+      <td>18/02/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110088</td>
+      <td>116.0</td>
+      <td>4.00</td>
+      <td>2.00</td>
+      <td>6.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>89</td>
+      <td>Kpă Hạnh</td>
+      <td>27/10/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110089</td>
+      <td>111.0</td>
+      <td>4.75</td>
+      <td>2.75</td>
+      <td>7.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>90</td>
+      <td>Phan Thị Mỹ Hạnh</td>
+      <td>24/10/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110090</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>91</td>
+      <td>Mai Thị Huyền Hảo</td>
+      <td>07/07/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110091</td>
+      <td>113.0</td>
+      <td>4.50</td>
+      <td>1.00</td>
+      <td>5.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>92</td>
+      <td>Nguyễn Thị Minh Hằng</td>
+      <td>11/07/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110092</td>
+      <td>115.0</td>
+      <td>5.25</td>
+      <td>1.50</td>
+      <td>6.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>93</td>
+      <td>Trương Nguyễn Thanh Hằng</td>
+      <td>22/07/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110093</td>
+      <td>113.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>94</td>
+      <td>Siu Hâm</td>
+      <td>13/04/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110094</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>2.50</td>
+      <td>7.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>95</td>
+      <td>Nguyễn Lê Gia Hân</td>
+      <td>04/07/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110095</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>2.75</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>96</td>
+      <td>Nguyễn Viết Hậu</td>
+      <td>12/08/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110096</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>0.00</td>
+      <td>5.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>97</td>
+      <td>Siu HChu</td>
+      <td>06/07/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110097</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>98</td>
+      <td>Trần Thu Hiền</td>
+      <td>02/05/2009</td>
+      <td>Nữ</td>
+      <td>03</td>
+      <td></td>
+      <td>110098</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>99</td>
+      <td>Phùng Văn Hiển</td>
+      <td>15/02/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110099</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>0.00</td>
+      <td>5.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>Phan Văn Hiệp</td>
+      <td>13/02/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110100</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>Ra Lan Hiệp</td>
+      <td>19/07/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110101</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>2.75</td>
+      <td>7.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>Nguyễn Văn Hiếu</td>
+      <td>30/08/2009</td>
+      <td>Nam</td>
+      <td>03</td>
+      <td></td>
+      <td>110102</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>0.00</td>
+      <td>5.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>Vi Trung Hiếu</td>
+      <td>27/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110103</td>
+      <td>115.0</td>
+      <td>6.00</td>
+      <td>0.50</td>
+      <td>6.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>Hồ Thị Ngọc Hoa</td>
+      <td>02/02/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110104</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>2.75</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>Lê Thị Ngọc Hoa</td>
+      <td>20/08/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110105</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>2.00</td>
+      <td>7.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>Dương Thị Thu Hoài</td>
+      <td>29/11/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110106</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>2.00</td>
+      <td>8.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>107</td>
+      <td>Kpuih Hoan</td>
+      <td>04/06/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110107</td>
+      <td>112.0</td>
+      <td>4.25</td>
+      <td>1.00</td>
+      <td>5.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>108</td>
+      <td>Đào Xuân Hoàng</td>
+      <td>26/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110108</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>2.50</td>
+      <td>9.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>109</td>
+      <td>Hồ Xuân Hoàng</td>
+      <td>25/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110109</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>Nguyễn Công Hoàng</td>
+      <td>21/04/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110110</td>
+      <td>112.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>111</td>
+      <td>Nguyễn Huy Hoàng</td>
+      <td>21/08/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110111</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>0.25</td>
+      <td>6.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>Phạm Lê Vũ Hoàng</td>
+      <td>30/05/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110112</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>0.25</td>
+      <td>5.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>113</td>
+      <td>Trương Ngọc Hoàng</td>
+      <td>14/07/2008</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110113</td>
+      <td></td>
+      <td></td>
+      <td>0.25</td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>114</td>
+      <td>Kpă Hũ</td>
+      <td>07/07/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110114</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>1.50</td>
+      <td>6.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>115</td>
+      <td>Phan Thị Mỹ Huệ</td>
+      <td>19/01/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110115</td>
+      <td>113.0</td>
+      <td>4.75</td>
+      <td>1.50</td>
+      <td>6.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>116</td>
+      <td>Nguyễn Văn Hùng</td>
+      <td>04/09/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110116</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>117</td>
+      <td>Bùi Hữu Huy</td>
+      <td>16/07/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110117</td>
+      <td>116.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>118</td>
+      <td>Bùi Quốc Huy</td>
+      <td>06/12/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110118</td>
+      <td>117.0</td>
+      <td>6.00</td>
+      <td>0.00</td>
+      <td>6.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>119</td>
+      <td>Huỳnh Tấn Huy</td>
+      <td>25/02/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110119</td>
+      <td>112.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>120</td>
+      <td>Ngô Quốc Huy</td>
+      <td>10/02/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110120</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>2.00</td>
+      <td>7.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>121</td>
+      <td>Phan Bá Huy</td>
+      <td>20/06/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110121</td>
+      <td>117.0</td>
+      <td>5.50</td>
+      <td>0.25</td>
+      <td>5.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>Trần Đức Huy</td>
+      <td>18/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110122</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>0.00</td>
+      <td>5.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>Trần Hoàng Huy</td>
+      <td>10/02/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110123</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>2.00</td>
+      <td>7.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>124</td>
+      <td>Võ Văn Huy</td>
+      <td>28/10/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110124</td>
+      <td>112.0</td>
+      <td>5.75</td>
+      <td>2.00</td>
+      <td>7.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>125</td>
+      <td>Trần Thị Bích Huyền</td>
+      <td>20/04/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110125</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>126</td>
+      <td>Nguyễn Quang Hưng</td>
+      <td>26/12/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110126</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>0.50</td>
+      <td>7.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>127</td>
+      <td>Nguyễn Xuân Hưng</td>
+      <td>28/02/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110127</td>
+      <td>113.0</td>
+      <td>6.75</td>
+      <td>2.00</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>Trần Đình Tuấn Hưng</td>
+      <td>13/09/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110128</td>
+      <td>117.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>129</td>
+      <td>Võ Nguyễn Quốc Hưng</td>
+      <td>07/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110129</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.00</td>
+      <td>8.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>Lê Văn Hữu</td>
+      <td>24/04/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110130</td>
+      <td>113.0</td>
+      <td>6.00</td>
+      <td>1.00</td>
+      <td>7.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>131</td>
+      <td>Rah Lan H Hy</td>
+      <td>30/09/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110131</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>Hồ Văn Khanh</td>
+      <td>15/03/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110132</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>2.00</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>Hoàng Kim Khánh</td>
+      <td>26/06/2009</td>
+      <td>Nữ</td>
+      <td>04</td>
+      <td></td>
+      <td>110133</td>
+      <td>113.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>Lương Quốc Khánh</td>
+      <td>08/09/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110134</td>
+      <td>111.0</td>
+      <td>4.50</td>
+      <td>1.50</td>
+      <td>6.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>135</td>
+      <td>Nguyễn Tài Quốc Khánh</td>
+      <td>16/01/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110135</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>0.50</td>
+      <td>7.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>136</td>
+      <td>Ra Lan Khẩn</td>
+      <td>14/03/2009</td>
+      <td>Nam</td>
+      <td>04</td>
+      <td></td>
+      <td>110136</td>
+      <td>113.0</td>
+      <td>4.75</td>
+      <td>0.25</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>Kpuih Khiêm</td>
+      <td>05/10/2007</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110137</td>
+      <td>112.0</td>
+      <td>5.50</td>
+      <td>1.75</td>
+      <td>7.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>138</td>
+      <td>Siu Zi Khoa</td>
+      <td>22/12/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110138</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>0.50</td>
+      <td>4.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>139</td>
+      <td>Dương Minh Khôi</td>
+      <td>12/10/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110139</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>140</td>
+      <td>Rơ Mah Khương</td>
+      <td>30/03/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110140</td>
+      <td>112.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>141</td>
+      <td>Đỗ Tuấn Kiệt</td>
+      <td>01/01/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110141</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>142</td>
+      <td>Huỳnh Anh Kiệt</td>
+      <td>28/08/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110142</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>2.75</td>
+      <td>8.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>143</td>
+      <td>Kpuih Lan</td>
+      <td>10/10/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110143</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>144</td>
+      <td>Nguyễn Lê Tú Lan</td>
+      <td>29/06/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110144</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.75</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>145</td>
+      <td>Phạm Thị Ngọc Lan</td>
+      <td>29/05/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110145</td>
+      <td>111.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>146</td>
+      <td>Trương Thị Mỹ Lan</td>
+      <td>17/11/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110146</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>2.00</td>
+      <td>7.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>147</td>
+      <td>Siu Lê</td>
+      <td>06/12/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110147</td>
+      <td>116.0</td>
+      <td>5.50</td>
+      <td>0.00</td>
+      <td>5.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>148</td>
+      <td>Trần Thị Lê</td>
+      <td>16/02/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110148</td>
+      <td>117.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>149</td>
+      <td>Hồ Thị Mỹ Lệ</td>
+      <td>03/01/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110149</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>150</td>
+      <td>Huỳnh Hồ Nhật Lệ</td>
+      <td>06/01/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110150</td>
+      <td>115.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>151</td>
+      <td>Siu Lệ</td>
+      <td>28/10/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110151</td>
+      <td>116.0</td>
+      <td>5.50</td>
+      <td>0.25</td>
+      <td>5.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>152</td>
+      <td>Lê Thị Kim Liên</td>
+      <td>16/08/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110152</td>
+      <td>117.0</td>
+      <td>4.50</td>
+      <td>0.00</td>
+      <td>4.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>153</td>
+      <td>Rah Lan H Liên</td>
+      <td>01/01/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110153</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>0.25</td>
+      <td>7.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>154</td>
+      <td>Rah Lan Liên</td>
+      <td>06/03/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110154</td>
+      <td>116.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>155</td>
+      <td>Võ Quang Liên</td>
+      <td>23/09/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110155</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>156</td>
+      <td>Rah Lan Lin</td>
+      <td>15/06/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110156</td>
+      <td>112.0</td>
+      <td>3.50</td>
+      <td>0.50</td>
+      <td>4.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>157</td>
+      <td>HồThị Khánh Linh</td>
+      <td>17/06/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110157</td>
+      <td>111.0</td>
+      <td>5.75</td>
+      <td>2.00</td>
+      <td>7.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>158</td>
+      <td>Lý Thị Mai Linh</td>
+      <td>26/09/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110158</td>
+      <td>112.0</td>
+      <td>3.75</td>
+      <td>0.00</td>
+      <td>3.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>159</td>
+      <td>Phạm Nguyễn Thị Mỹ Linh</td>
+      <td>15/01/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110159</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>160</td>
+      <td>Trần Thị Thùy Linh</td>
+      <td>07/03/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110160</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>161</td>
+      <td>Rah Lan Líp</td>
+      <td>21/08/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110161</td>
+      <td>113.0</td>
+      <td>3.25</td>
+      <td>0.00</td>
+      <td>3.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>162</td>
+      <td>Đặng Duy Bảo Long</td>
+      <td>19/01/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110162</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>163</td>
+      <td>Trần Hoàng Long</td>
+      <td>26/09/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110163</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>1.00</td>
+      <td>7.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>164</td>
+      <td>Trần Nhật Long</td>
+      <td>02/01/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110164</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>165</td>
+      <td>Vũ Ngọc Hoàng Long</td>
+      <td>12/02/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110165</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>166</td>
+      <td>Lưu Văn Lộc</td>
+      <td>30/08/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110166</td>
+      <td>115.0</td>
+      <td>3.75</td>
+      <td>0.25</td>
+      <td>4.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>167</td>
+      <td>Phan Tiến Lộc</td>
+      <td>18/09/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110167</td>
+      <td>112.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>Nguyễn Đức Luận</td>
+      <td>18/09/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110168</td>
+      <td>111.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>169</td>
+      <td>Nguyễn Khắc Lục</td>
+      <td>10/07/2009</td>
+      <td>Nam</td>
+      <td>05</td>
+      <td></td>
+      <td>110169</td>
+      <td>112.0</td>
+      <td>3.50</td>
+      <td>0.00</td>
+      <td>3.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>170</td>
+      <td>Nguyễn Huỳnh Thảo Ly</td>
+      <td>13/07/2009</td>
+      <td>Nữ</td>
+      <td>05</td>
+      <td></td>
+      <td>110170</td>
+      <td>115.0</td>
+      <td>6.00</td>
+      <td>1.00</td>
+      <td>7.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>171</td>
+      <td>Cao Thị Thanh Mai</td>
+      <td>30/07/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110171</td>
+      <td>111.0</td>
+      <td>4.75</td>
+      <td>2.75</td>
+      <td>7.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>172</td>
+      <td>Kpuih Thanh Mai</td>
+      <td>13/10/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110172</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>173</td>
+      <td>Nguyễn Như Mai</td>
+      <td>22/04/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110173</td>
+      <td>113.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>174</td>
+      <td>Nguyễn Thị Tuyết Mai</td>
+      <td>13/11/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110174</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>175</td>
+      <td>Lê Phạm Hùng Mãnh</td>
+      <td>08/09/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110175</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>176</td>
+      <td>Dương Thế Mạnh</td>
+      <td>04/11/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110176</td>
+      <td>111.0</td>
+      <td>5.75</td>
+      <td>2.50</td>
+      <td>8.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>177</td>
+      <td>Hoàng Đức Mạnh</td>
+      <td>25/05/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110177</td>
+      <td>116.0</td>
+      <td>5.50</td>
+      <td>2.00</td>
+      <td>7.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>178</td>
+      <td>Nguyễn Văn Mạnh</td>
+      <td>28/10/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110178</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>2.00</td>
+      <td>9.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>179</td>
+      <td>Siu Mạnh</td>
+      <td>12/12/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110179</td>
+      <td>116.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>180</td>
+      <td>Nông Thị Mến</td>
+      <td>30/06/2008</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110180</td>
+      <td>115.0</td>
+      <td>6.25</td>
+      <td>1.00</td>
+      <td>7.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>181</td>
+      <td>Đặng Minh</td>
+      <td>17/05/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110181</td>
+      <td>112.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>182</td>
+      <td>Đỗ Đức Minh</td>
+      <td>20/06/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110182</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>0.00</td>
+      <td>6.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>183</td>
+      <td>Trần Bình Minh</td>
+      <td>16/01/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110183</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>2.00</td>
+      <td>8.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>184</td>
+      <td>Siu H Mơ</td>
+      <td>22/04/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110184</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>185</td>
+      <td>Siu Mun</td>
+      <td>10/02/2006</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110185</td>
+      <td>116.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>186</td>
+      <td>Đặng Thị Trà My</td>
+      <td>21/06/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110186</td>
+      <td>117.0</td>
+      <td>3.75</td>
+      <td>0.50</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>187</td>
+      <td>Đỗ Thị Trà My</td>
+      <td>21/10/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110187</td>
+      <td>112.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>188</td>
+      <td>Lê Trà My</td>
+      <td>09/03/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110188</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>189</td>
+      <td>Nguyễn Phạm Quỳnh My</td>
+      <td>10/10/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110189</td>
+      <td>117.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>190</td>
+      <td>Nguyễn Thị Thảo My</td>
+      <td>29/09/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110190</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>191</td>
+      <td>Phạm Thùy Mỵ</td>
+      <td>16/09/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110191</td>
+      <td>111.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>192</td>
+      <td>Đào Thị Hoài Na</td>
+      <td>24/11/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110192</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>193</td>
+      <td>Kpuih Na</td>
+      <td>30/08/2008</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110193</td>
+      <td>113.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>194</td>
+      <td>Nguyễn Vệ Na</td>
+      <td>27/10/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110194</td>
+      <td>115.0</td>
+      <td>4.50</td>
+      <td>0.00</td>
+      <td>4.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>195</td>
+      <td>Võ Đinh Xuân Na</td>
+      <td>15/08/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110195</td>
+      <td>117.0</td>
+      <td>5.75</td>
+      <td>1.75</td>
+      <td>7.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>196</td>
+      <td>Bùi Hoài Nam</td>
+      <td>03/02/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110196</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>197</td>
+      <td>Đặng Văn Phương Nam</td>
+      <td>02/02/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110197</td>
+      <td>112.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>198</td>
+      <td>Phan Xuân Nam</td>
+      <td>04/01/2009</td>
+      <td>Nam</td>
+      <td>06</td>
+      <td></td>
+      <td>110198</td>
+      <td>115.0</td>
+      <td>6.25</td>
+      <td>1.00</td>
+      <td>7.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>199</td>
+      <td>Hoàng Thị Kim Nga</td>
+      <td>19/08/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110199</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>2.50</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>200</td>
+      <td>Hoàng Thị Hồng Ngát</td>
+      <td>16/03/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110200</td>
+      <td>117.0</td>
+      <td>4.50</td>
+      <td>2.25</td>
+      <td>6.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>201</td>
+      <td>Đào Thị Bảo Ngân</td>
+      <td>12/08/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110201</td>
+      <td>113.0</td>
+      <td>5.75</td>
+      <td>2.50</td>
+      <td>8.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>202</td>
+      <td>Đặng Trúc Ngân</td>
+      <td>23/01/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110202</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>203</td>
+      <td>Lê Thị Kim Ngân</td>
+      <td>27/07/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110203</td>
+      <td>117.0</td>
+      <td>5.00</td>
+      <td>0.50</td>
+      <td>5.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>204</td>
+      <td>Nguyễn Đoàn Kiều Ngân</td>
+      <td>11/07/2009</td>
+      <td>Nữ</td>
+      <td>06</td>
+      <td></td>
+      <td>110204</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>205</td>
+      <td>Nguyễn Thị Thanh Ngân</td>
+      <td>17/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110205</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>206</td>
+      <td>Siu Ngân</td>
+      <td>12/02/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110206</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>1.00</td>
+      <td>6.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>207</td>
+      <td>Đào Đại Nghĩa</td>
+      <td>17/03/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110207</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>208</td>
+      <td>Hồ Văn Khánh Nghĩa</td>
+      <td>22/02/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110208</td>
+      <td>113.0</td>
+      <td>6.00</td>
+      <td>2.50</td>
+      <td>8.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>209</td>
+      <td>Trần Văn Nghĩa</td>
+      <td>01/11/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110209</td>
+      <td>112.0</td>
+      <td>5.75</td>
+      <td>2.75</td>
+      <td>8.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>210</td>
+      <td>Vương Đức Nghĩa</td>
+      <td>23/01/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110210</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>2.50</td>
+      <td>8.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>211</td>
+      <td>Kpuih Nghiệp</td>
+      <td>21/08/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110211</td>
+      <td>116.0</td>
+      <td>3.75</td>
+      <td>2.50</td>
+      <td>6.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>212</td>
+      <td>Đặng Thị Hồng Ngọc</td>
+      <td>03/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110212</td>
+      <td>112.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>213</td>
+      <td>Mai Yến Ngọc</td>
+      <td>20/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110213</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>214</td>
+      <td>Nguyễn Như Ngọc</td>
+      <td>11/02/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110214</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>215</td>
+      <td>Nguyễn Huyền Thảo Nguyên</td>
+      <td>09/05/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110215</td>
+      <td>116.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>216</td>
+      <td>Nguyễn Thành Nguyên</td>
+      <td>10/05/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110216</td>
+      <td>117.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>217</td>
+      <td>Phan Vĩnh Nguyên</td>
+      <td>04/05/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110217</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>1.50</td>
+      <td>7.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>218</td>
+      <td>Trần Xuân Tây Nguyên</td>
+      <td>02/06/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110218</td>
+      <td>115.0</td>
+      <td>4.50</td>
+      <td>1.00</td>
+      <td>5.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>219</td>
+      <td>Vũ Cao Nguyên</td>
+      <td>01/11/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110219</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>220</td>
+      <td>Kpuih Nguyệt</td>
+      <td>03/08/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110220</td>
+      <td>117.0</td>
+      <td>6.00</td>
+      <td>0.00</td>
+      <td>6.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>221</td>
+      <td>Lê Thị Như Nguyệt</td>
+      <td>07/02/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110221</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>0.50</td>
+      <td>5.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td>Siu H Ngư</td>
+      <td>11/05/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110222</td>
+      <td>117.0</td>
+      <td>2.75</td>
+      <td>0.50</td>
+      <td>3.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>223</td>
+      <td>Nguyễn Thị Kim Nhã</td>
+      <td>25/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110223</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.75</td>
+      <td>8.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>224</td>
+      <td>Siu Nhan</td>
+      <td>29/06/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110224</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>2.25</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>225</td>
+      <td>Lường Thiện Nhân</td>
+      <td>01/06/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110225</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.75</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>226</td>
+      <td>Phan Hữu Nhật</td>
+      <td>18/12/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110226</td>
+      <td>112.0</td>
+      <td>5.50</td>
+      <td>2.50</td>
+      <td>8.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>227</td>
+      <td>Rơ Mah Nhật</td>
+      <td>12/12/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110227</td>
+      <td>113.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>228</td>
+      <td>Cao Nguyễn Yến Nhi</td>
+      <td>28/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110228</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>229</td>
+      <td>Đào Thị Yến Nhi</td>
+      <td>17/07/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110229</td>
+      <td>115.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>230</td>
+      <td>Hồ Thị Yến Nhi</td>
+      <td>30/01/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110230</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>2.75</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>231</td>
+      <td>Kpă Nhi</td>
+      <td>09/03/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110231</td>
+      <td>112.0</td>
+      <td>5.50</td>
+      <td>2.25</td>
+      <td>7.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>232</td>
+      <td>Kpuih Nhi</td>
+      <td>08/12/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110232</td>
+      <td>115.0</td>
+      <td>5.75</td>
+      <td>0.50</td>
+      <td>6.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>233</td>
+      <td>Lê Thị Quỳnh Nhi</td>
+      <td>30/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110233</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>234</td>
+      <td>Nguyễn Thị Tâm Nhi</td>
+      <td>28/11/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110234</td>
+      <td>116.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>235</td>
+      <td>Nguyễn Thị Yến Nhi</td>
+      <td>07/09/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110235</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>236</td>
+      <td>Phạm Thị Yến Nhi</td>
+      <td>07/08/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110236</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>237</td>
+      <td>Võ Thị Yến Nhi</td>
+      <td>21/03/2009</td>
+      <td>Nữ</td>
+      <td>07</td>
+      <td></td>
+      <td>110237</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>238</td>
+      <td>Lê Bảo Nhiên</td>
+      <td>09/11/2009</td>
+      <td>Nam</td>
+      <td>07</td>
+      <td></td>
+      <td>110238</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>239</td>
+      <td>Đoàn Ngọc Gia Như</td>
+      <td>18/11/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110239</td>
+      <td>117.0</td>
+      <td>7.00</td>
+      <td>2.50</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>240</td>
+      <td>Lê Thị Quỳnh Như</td>
+      <td>12/08/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110240</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>241</td>
+      <td>Lương Tâm Như</td>
+      <td>01/01/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110241</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>242</td>
+      <td>Nguyễn Thị Quỳnh Như</td>
+      <td>01/07/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110242</td>
+      <td>117.0</td>
+      <td>5.25</td>
+      <td>0.50</td>
+      <td>5.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>243</td>
+      <td>Nguyễn Thị Quỳnh Như</td>
+      <td>11/04/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110243</td>
+      <td>115.0</td>
+      <td>5.25</td>
+      <td>0.00</td>
+      <td>5.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>244</td>
+      <td>Võ Thị Ni</td>
+      <td>12/09/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110244</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>245</td>
+      <td>Nông Phúc Ninh</td>
+      <td>06/07/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110245</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>246</td>
+      <td>Kpă Nỡ</td>
+      <td>04/05/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110246</td>
+      <td>115.0</td>
+      <td>4.75</td>
+      <td>1.50</td>
+      <td>6.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>247</td>
+      <td>Huỳnh An Ny</td>
+      <td>15/02/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110247</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>248</td>
+      <td>Nguyễn Thị Xuân Ny</td>
+      <td>06/10/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110248</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>1.75</td>
+      <td>8.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>249</td>
+      <td>Đoàn Bảo Oanh</td>
+      <td>14/09/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110249</td>
+      <td>115.0</td>
+      <td>6.00</td>
+      <td>0.50</td>
+      <td>6.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>250</td>
+      <td>Siu H Ok</td>
+      <td>09/12/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110250</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>0.00</td>
+      <td>5.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>251</td>
+      <td>Nguyễn Thanh Phi</td>
+      <td>13/10/2008</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110251</td>
+      <td>116.0</td>
+      <td>4.75</td>
+      <td>0.25</td>
+      <td>5.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>252</td>
+      <td>Siu H Phiên</td>
+      <td>19/12/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110252</td>
+      <td>117.0</td>
+      <td>4.00</td>
+      <td>0.50</td>
+      <td>4.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>253</td>
+      <td>Nguyễn Trung Phong</td>
+      <td>30/08/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110253</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>2.75</td>
+      <td>8.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>254</td>
+      <td>Đinh Hữu Thiên Phú</td>
+      <td>08/08/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110254</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>1.50</td>
+      <td>7.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>255</td>
+      <td>Phạm Minh Phúc</td>
+      <td>26/12/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110255</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>256</td>
+      <td>Văn Viết Thiên Phúc</td>
+      <td>21/06/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110256</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>1.50</td>
+      <td>8.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>257</td>
+      <td>Ban Thị Phương</td>
+      <td>07/10/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110257</td>
+      <td>112.0</td>
+      <td>4.75</td>
+      <td>2.00</td>
+      <td>6.75</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>258</td>
+      <td>Biện Hữu Quang</td>
+      <td>11/10/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110258</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>2.25</td>
+      <td>9.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>259</td>
+      <td>Vũ Đình Quang</td>
+      <td>19/02/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110259</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>2.00</td>
+      <td>8.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>260</td>
+      <td>Dương Mạnh Quân</td>
+      <td>08/06/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110260</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>261</td>
+      <td>Phạm Bá Minh Quân</td>
+      <td>31/07/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110261</td>
+      <td>116.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>262</td>
+      <td>Thái Mạnh Quân</td>
+      <td>07/04/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110262</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>Võ Văn Quân</td>
+      <td>29/06/2008</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110263</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>264</td>
+      <td>Kpuih H Qui</td>
+      <td>01/09/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110264</td>
+      <td>113.0</td>
+      <td>4.25</td>
+      <td>2.00</td>
+      <td>6.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>265</td>
+      <td>Võ Văn Quốc</td>
+      <td>29/06/2008</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110265</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>266</td>
+      <td>Đào Thị Hồng Quyên</td>
+      <td>03/01/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110266</td>
+      <td>116.0</td>
+      <td>6.25</td>
+      <td>2.50</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>267</td>
+      <td>Nguyễn Thị Thục Quyên</td>
+      <td>09/07/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110267</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>2.75</td>
+      <td>9.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>268</td>
+      <td>Nguyễn Xuân Quyền</td>
+      <td>08/01/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110268</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>2.75</td>
+      <td>9.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>269</td>
+      <td>Lê Văn Quyết</td>
+      <td>09/03/2009</td>
+      <td>Nam</td>
+      <td>08</td>
+      <td></td>
+      <td>110269</td>
+      <td>116.0</td>
+      <td>6.75</td>
+      <td>2.50</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>270</td>
+      <td>Hồ Kim Quỳnh</td>
+      <td>11/11/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110270</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>271</td>
+      <td>Nguyễn Thị Ngọc Quỳnh</td>
+      <td>21/12/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110271</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>2.50</td>
+      <td>9.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>272</td>
+      <td>Nguyễn Thị Như Quỳnh</td>
+      <td>28/05/2009</td>
+      <td>Nữ</td>
+      <td>08</td>
+      <td></td>
+      <td>110272</td>
+      <td>116.0</td>
+      <td>6.25</td>
+      <td>2.25</td>
+      <td>8.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>273</td>
+      <td>Nguyễn Thị Như Quỳnh</td>
+      <td>24/01/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110273</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>274</td>
+      <td>Nguyễn Thị Như Quỳnh</td>
+      <td>17/08/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110274</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>275</td>
+      <td>Nguyễn Thị Như Quỳnh</td>
+      <td>13/10/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110275</td>
+      <td>115.0</td>
+      <td>5.00</td>
+      <td>0.00</td>
+      <td>5.0</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>276</td>
+      <td>Nguyễn Thị Quỳnh</td>
+      <td>23/12/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110276</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>277</td>
+      <td>Trần Như Quỳnh</td>
+      <td>28/10/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110277</td>
+      <td>117.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>278</td>
+      <td>Trần Thị Như Quỳnh</td>
+      <td>03/11/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110278</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>279</td>
+      <td>Rah Lan Sally</td>
+      <td>05/11/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110279</td>
+      <td>115.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>280</td>
+      <td>Hồ Minh Sang</td>
+      <td>23/06/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110280</td>
+      <td>117.0</td>
+      <td>4.50</td>
+      <td>2.00</td>
+      <td>6.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>281</td>
+      <td>Nguyễn Thanh Sang</td>
+      <td>10/07/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110281</td>
+      <td>115.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>282</td>
+      <td>Nguyễn Xuân Trường Sang</td>
+      <td>14/08/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110282</td>
+      <td>112.0</td>
+      <td>4.25</td>
+      <td>3.00</td>
+      <td>7.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>283</td>
+      <td>Trần Thanh Sang</td>
+      <td>10/11/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110283</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>284</td>
+      <td>Nguyễn Văn Sáng</td>
+      <td>03/04/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110284</td>
+      <td>116.0</td>
+      <td>5.75</td>
+      <td>2.00</td>
+      <td>7.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>285</td>
+      <td>Rah Lan Siên</td>
+      <td>19/04/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110285</td>
+      <td>111.0</td>
+      <td>4.75</td>
+      <td>3.00</td>
+      <td>7.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>286</td>
+      <td>Trần Võ Quốc Sinh</td>
+      <td>02/03/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110286</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>287</td>
+      <td>Nguyễn Thanh Sơn</td>
+      <td>09/02/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110287</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>2.00</td>
+      <td>7.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>288</td>
+      <td>Trần Ngọc Sơn</td>
+      <td>06/06/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110288</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>1.00</td>
+      <td>5.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>289</td>
+      <td>Võ Ngọc Sơn</td>
+      <td>15/01/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110289</td>
+      <td>117.0</td>
+      <td>3.00</td>
+      <td>1.00</td>
+      <td>4.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>290</td>
+      <td>Nguyễn Minh Sự</td>
+      <td>10/12/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110290</td>
+      <td>116.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>291</td>
+      <td>Phan Văn Tài</td>
+      <td>21/06/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110291</td>
+      <td>115.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>292</td>
+      <td>Cao Thị Thanh Tâm</td>
+      <td>11/10/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110292</td>
+      <td>113.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>293</td>
+      <td>Đỗ Thị Minh Tâm</td>
+      <td>04/02/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110293</td>
+      <td>116.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>294</td>
+      <td>Lê Thị Hà Tâm</td>
+      <td>15/08/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110294</td>
+      <td>117.0</td>
+      <td>4.75</td>
+      <td>3.00</td>
+      <td>7.75</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>295</td>
+      <td>Lê Trọng Tấn</td>
+      <td>07/05/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110295</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>296</td>
+      <td>Nguyễn Thị Thư Thái</td>
+      <td>09/10/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110296</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>297</td>
+      <td>Siu Thanh</td>
+      <td>05/03/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110297</td>
+      <td>111.0</td>
+      <td>5.75</td>
+      <td>0.00</td>
+      <td>5.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>298</td>
+      <td>Võ Xuân Thành</td>
+      <td>28/05/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110298</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>299</td>
+      <td>Đinh Thị Thanh Thảo</td>
+      <td>12/05/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110299</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>300</td>
+      <td>Mai Phương Thảo</td>
+      <td>11/09/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110300</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>301</td>
+      <td>Nguyễn Quyết Thắng</td>
+      <td>11/03/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110301</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>1.00</td>
+      <td>6.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>302</td>
+      <td>Nguyễn Văn Quang Thắng</td>
+      <td>05/08/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110302</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>303</td>
+      <td>Kpuih Then</td>
+      <td>10/09/2008</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110303</td>
+      <td>111.0</td>
+      <td>7.00</td>
+      <td>2.00</td>
+      <td>9.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>304</td>
+      <td>Siu Thị</td>
+      <td>06/08/2009</td>
+      <td>Nữ</td>
+      <td>09</td>
+      <td></td>
+      <td>110304</td>
+      <td>116.0</td>
+      <td>4.00</td>
+      <td>3.00</td>
+      <td>7.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>305</td>
+      <td>Kpuih Thiên</td>
+      <td>08/10/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110305</td>
+      <td>113.0</td>
+      <td>4.50</td>
+      <td>3.00</td>
+      <td>7.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>306</td>
+      <td>Lại Hoàng Gia Thiên</td>
+      <td>11/09/2009</td>
+      <td>Nam</td>
+      <td>09</td>
+      <td></td>
+      <td>110306</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>307</td>
+      <td>Huỳnh Văn Nhật Thiện</td>
+      <td>20/07/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110307</td>
+      <td>113.0</td>
+      <td>5.50</td>
+      <td>1.00</td>
+      <td>6.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>308</td>
+      <td>Dương Minh Thoại</td>
+      <td>16/11/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110308</td>
+      <td>111.0</td>
+      <td>5.50</td>
+      <td>0.00</td>
+      <td>5.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>309</td>
+      <td>Lư Thị Mộng Thoại</td>
+      <td>08/07/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110309</td>
+      <td>116.0</td>
+      <td>3.75</td>
+      <td>3.00</td>
+      <td>6.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>310</td>
+      <td>Siu Thơm</td>
+      <td>07/02/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110310</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>311</td>
+      <td>Hoàng Nông Thùy</td>
+      <td>16/01/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110311</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>312</td>
+      <td>Trương Ngọc Kim Thủy</td>
+      <td>22/02/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110312</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>313</td>
+      <td>Ngụy Thị Thanh Thúy</td>
+      <td>22/10/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110313</td>
+      <td>117.0</td>
+      <td>6.50</td>
+      <td>2.00</td>
+      <td>8.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>314</td>
+      <td>Rah Lan H Thúy</td>
+      <td>15/09/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110314</td>
+      <td>112.0</td>
+      <td>4.50</td>
+      <td>1.00</td>
+      <td>5.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>315</td>
+      <td>Hoàng Thị Anh Thư</td>
+      <td>28/10/2008</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110315</td>
+      <td>117.0</td>
+      <td>5.00</td>
+      <td>3.00</td>
+      <td>8.0</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>316</td>
+      <td>Lê Thị Khánh Thư</td>
+      <td>26/05/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110316</td>
+      <td>115.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>317</td>
+      <td>Nguyễn Anh Thư</td>
+      <td>14/11/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110317</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>318</td>
+      <td>Nguyễn Anh Thư</td>
+      <td>21/08/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110318</td>
+      <td>111.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>319</td>
+      <td>Nguyễn Hoàng Anh Thư</td>
+      <td>19/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110319</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>320</td>
+      <td>Nguyễn Ngọc Thanh Thư</td>
+      <td>18/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110320</td>
+      <td>115.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>321</td>
+      <td>Nguyễn Thị Kiều Thư</td>
+      <td>07/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110321</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>1.00</td>
+      <td>6.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>322</td>
+      <td>Rơ Mah H Thư</td>
+      <td>07/10/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110322</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>1.00</td>
+      <td>7.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>323</td>
+      <td>Trần Đoàn Anh Thư</td>
+      <td>02/10/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110323</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>324</td>
+      <td>Võ Hoàng Bảo Thư</td>
+      <td>20/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110324</td>
+      <td>111.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>325</td>
+      <td>Nguyễn Thị Hoài Thương</td>
+      <td>03/11/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110325</td>
+      <td>117.0</td>
+      <td>3.75</td>
+      <td>2.00</td>
+      <td>5.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>326</td>
+      <td>Nguyễn Thị Thương</td>
+      <td>03/09/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110326</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>327</td>
+      <td>Võ Hoàng Bảo Thy</td>
+      <td>20/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110327</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>328</td>
+      <td>Nguyễn Đức Cẩm Tiên</td>
+      <td>15/04/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110328</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>329</td>
+      <td>Trần Cát Tiên</td>
+      <td>29/10/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110329</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>330</td>
+      <td>Nguyễn Trọng Tiến</td>
+      <td>10/08/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110330</td>
+      <td>115.0</td>
+      <td>5.50</td>
+      <td>3.00</td>
+      <td>8.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>331</td>
+      <td>Trần Đức Tiến</td>
+      <td>30/09/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110331</td>
+      <td>112.0</td>
+      <td>5.25</td>
+      <td>2.00</td>
+      <td>7.25</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>332</td>
+      <td>Nguyễn Đình Tiệp</td>
+      <td>09/01/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110332</td>
+      <td>117.0</td>
+      <td>6.50</td>
+      <td>0.00</td>
+      <td>6.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>333</td>
+      <td>Phạm Phước Tín</td>
+      <td>09/04/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110333</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>334</td>
+      <td>Trương Văn Tín</td>
+      <td>01/04/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110334</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>335</td>
+      <td>Trần Thị Diễm Tình</td>
+      <td>15/04/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110335</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>336</td>
+      <td>Nguyễn Quốc Toàn</td>
+      <td>28/05/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110336</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>337</td>
+      <td>Nguyễn Văn Toàn</td>
+      <td>29/08/2009</td>
+      <td>Nam</td>
+      <td>10</td>
+      <td></td>
+      <td>110337</td>
+      <td>113.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>338</td>
+      <td>Nguyễn Thị Thu Trang</td>
+      <td>08/12/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110338</td>
+      <td>111.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>339</td>
+      <td>Nguyễn Thị Thu Trang</td>
+      <td>13/10/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110339</td>
+      <td>116.0</td>
+      <td>4.50</td>
+      <td>3.00</td>
+      <td>7.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>340</td>
+      <td>Nguyễn Thị Thùy Trang</td>
+      <td>12/02/2009</td>
+      <td>Nữ</td>
+      <td>10</td>
+      <td></td>
+      <td>110340</td>
+      <td>113.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>341</td>
+      <td>Phan Nhã Trang</td>
+      <td>09/09/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110341</td>
+      <td>116.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>342</td>
+      <td>Siu Trang</td>
+      <td>14/08/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110342</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>343</td>
+      <td>Trần Mai Trang</td>
+      <td>15/09/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110343</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>344</td>
+      <td>Huỳnh Thị Quỳnh Trâm</td>
+      <td>22/07/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110344</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>345</td>
+      <td>Nguyễn Thị Hoài Trâm</td>
+      <td>16/02/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110345</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>346</td>
+      <td>Nguyễn Nhật Anh Trí</td>
+      <td>13/11/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110346</td>
+      <td>115.0</td>
+      <td>4.00</td>
+      <td>2.00</td>
+      <td>6.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>347</td>
+      <td>Phan Văn Triệu</td>
+      <td>19/09/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110347</td>
+      <td>111.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>348</td>
+      <td>Dương Thị Phương Trinh</td>
+      <td>05/03/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110348</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>349</td>
+      <td>Lê Thị Mỹ Trinh</td>
+      <td>19/01/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110349</td>
+      <td>112.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>350</td>
+      <td>Nguyễn Thị Kiều Trinh</td>
+      <td>20/01/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110350</td>
+      <td>116.0</td>
+      <td>5.25</td>
+      <td>3.00</td>
+      <td>8.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>351</td>
+      <td>Phùng Lê Kiều Trinh</td>
+      <td>19/07/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110351</td>
+      <td>113.0</td>
+      <td>5.00</td>
+      <td>3.00</td>
+      <td>8.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>352</td>
+      <td>Siu Trinh</td>
+      <td>27/06/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110352</td>
+      <td>112.0</td>
+      <td>2.75</td>
+      <td>1.00</td>
+      <td>3.75</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>353</td>
+      <td>Trịnh Thị Kim Trinh</td>
+      <td>10/05/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110353</td>
+      <td>115.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>354</td>
+      <td>Lương Quốc Trọng</td>
+      <td>29/12/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110354</td>
+      <td>116.0</td>
+      <td>5.50</td>
+      <td>3.00</td>
+      <td>8.5</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>355</td>
+      <td>Lê Thị Mộng Trúc</td>
+      <td>10/04/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110355</td>
+      <td>117.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>356</td>
+      <td>Phan Thị Mộng Trúc</td>
+      <td>09/07/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110356</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>357</td>
+      <td>Võ Thị Thanh Trúc</td>
+      <td>01/08/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110357</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>358</td>
+      <td>Trần Xuân Trung</td>
+      <td>31/10/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110358</td>
+      <td>112.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>359</td>
+      <td>Nguyễn Trần Anh Truyền</td>
+      <td>29/01/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110359</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>Dương Đức Trương</td>
+      <td>22/02/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110360</td>
+      <td>117.0</td>
+      <td>7.00</td>
+      <td>0.00</td>
+      <td>7.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>361</td>
+      <td>Dương Duy Trường</td>
+      <td>15/09/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110361</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>362</td>
+      <td>Lê Nhật Trường</td>
+      <td>02/10/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110362</td>
+      <td>113.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>363</td>
+      <td>Lê Phúc Trường</td>
+      <td>04/02/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110363</td>
+      <td>115.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>364</td>
+      <td>Mai Bá Trường</td>
+      <td>22/05/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110364</td>
+      <td>116.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>365</td>
+      <td>Trương Văn Quang Trường</td>
+      <td>30/07/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110365</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>3.00</td>
+      <td>8.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>366</td>
+      <td>Đỗ Thanh Tú</td>
+      <td>30/06/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110366</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>367</td>
+      <td>Rah Lan Tú</td>
+      <td>24/02/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110367</td>
+      <td>116.0</td>
+      <td>4.00</td>
+      <td>2.00</td>
+      <td>6.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>368</td>
+      <td>Nguyễn Thanh Tuấn</td>
+      <td>27/12/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110368</td>
+      <td>117.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>369</td>
+      <td>Trần Quốc Tuấn</td>
+      <td>17/01/2009</td>
+      <td>Nam</td>
+      <td>11</td>
+      <td></td>
+      <td>110369</td>
+      <td>115.0</td>
+      <td>5.25</td>
+      <td>1.00</td>
+      <td>6.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>370</td>
+      <td>Đinh Thị Kim Tuyến</td>
+      <td>11/05/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110370</td>
+      <td>112.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>371</td>
+      <td>Trương Ngọc Ánh Tuyết</td>
+      <td>30/10/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110371</td>
+      <td>113.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>372</td>
+      <td>Dương Minh Quỳnh Tương</td>
+      <td>15/09/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110372</td>
+      <td>116.0</td>
+      <td>5.50</td>
+      <td>3.00</td>
+      <td>8.5</td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>373</td>
+      <td>Bùi Tú Uyên</td>
+      <td>15/08/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110373</td>
+      <td>117.0</td>
+      <td>4.75</td>
+      <td>3.00</td>
+      <td>7.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>374</td>
+      <td>Diệp Bảo Uyên</td>
+      <td>26/11/2009</td>
+      <td>Nữ</td>
+      <td>11</td>
+      <td></td>
+      <td>110374</td>
+      <td>115.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A5</td>
+    </tr>
+    <tr>
+      <td>375</td>
+      <td>Huỳnh Thị Thu Uyên</td>
+      <td>08/10/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110375</td>
+      <td>117.0</td>
+      <td>6.25</td>
+      <td>3.00</td>
+      <td>9.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>376</td>
+      <td>Nguyễn Roãn Thu Uyên</td>
+      <td>07/12/2008</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110376</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>1.00</td>
+      <td>7.25</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>377</td>
+      <td>Siu Rơ Mah Uyên</td>
+      <td>28/02/2008</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110377</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>378</td>
+      <td>Trần Thị Thảo Uyên</td>
+      <td>26/06/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110378</td>
+      <td>113.0</td>
+      <td>5.00</td>
+      <td>3.00</td>
+      <td>8.0</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>379</td>
+      <td>Nguyễn Anh Văn</td>
+      <td>07/02/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110379</td>
+      <td>112.0</td>
+      <td>4.75</td>
+      <td>3.00</td>
+      <td>7.75</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>380</td>
+      <td>Siu Vệ</td>
+      <td>30/05/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110380</td>
+      <td>113.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>381</td>
+      <td>Kpuih Việt</td>
+      <td>24/04/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110381</td>
+      <td>115.0</td>
+      <td>4.25</td>
+      <td>0.00</td>
+      <td>4.25</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>382</td>
+      <td>Phạm Quang Vinh</td>
+      <td>03/08/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110382</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A7</td>
+    </tr>
+    <tr>
+      <td>383</td>
+      <td>Lê Anh Vũ</td>
+      <td>27/09/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110383</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>3.00</td>
+      <td>9.75</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>384</td>
+      <td>Lê Hoàng Vũ</td>
+      <td>06/03/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110384</td>
+      <td>116.0</td>
+      <td>5.75</td>
+      <td>3.00</td>
+      <td>8.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>385</td>
+      <td>Lê Quang Vũ</td>
+      <td>05/03/2008</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110385</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>1.00</td>
+      <td>5.25</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>386</td>
+      <td>Trần Minh Vũ</td>
+      <td>14/05/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110386</td>
+      <td>111.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>387</td>
+      <td>Võ Minh Vũ</td>
+      <td>21/04/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110387</td>
+      <td>117.0</td>
+      <td>4.75</td>
+      <td>0.00</td>
+      <td>4.75</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>388</td>
+      <td>Châu Nguyễn Tường Vy</td>
+      <td>21/03/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110388</td>
+      <td>111.0</td>
+      <td>6.00</td>
+      <td>3.00</td>
+      <td>9.0</td>
+      <td>11A1</td>
+    </tr>
+    <tr>
+      <td>389</td>
+      <td>Lê Chí Vỹ</td>
+      <td>09/01/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110389</td>
+      <td>112.0</td>
+      <td>6.50</td>
+      <td>3.00</td>
+      <td>9.5</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>390</td>
+      <td>Siu H Xiếu</td>
+      <td>15/06/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110390</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>11A8</td>
+    </tr>
+    <tr>
+      <td>391</td>
+      <td>Nguyễn Thị Ái Xuân</td>
+      <td>09/03/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110391</td>
+      <td>112.0</td>
+      <td>7.00</td>
+      <td>3.00</td>
+      <td>10.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>392</td>
+      <td>Lê Văn Xứng</td>
+      <td>02/06/2009</td>
+      <td>Nam</td>
+      <td>12</td>
+      <td></td>
+      <td>110392</td>
+      <td>113.0</td>
+      <td>4.50</td>
+      <td>3.00</td>
+      <td>7.5</td>
+      <td>11A4</td>
+    </tr>
+    <tr>
+      <td>393</td>
+      <td>Bùi Thị Như Ý</td>
+      <td>05/11/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110393</td>
+      <td>115.0</td>
+      <td>6.75</td>
+      <td>0.00</td>
+      <td>6.75</td>
+      <td>11A3</td>
+    </tr>
+    <tr>
+      <td>394</td>
+      <td>Huỳnh Hồ Như Ý</td>
+      <td>09/09/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110394</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>395</td>
+      <td>Trần Thị Như Ý</td>
+      <td>02/10/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110395</td>
+      <td>116.0</td>
+      <td>5.00</td>
+      <td>2.00</td>
+      <td>7.0</td>
+      <td>11A2</td>
+    </tr>
+    <tr>
+      <td>396</td>
+      <td>Kpuih H Yeo</td>
+      <td>02/10/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110396</td>
+      <td>117.0</td>
+      <td>4.25</td>
+      <td>3.00</td>
+      <td>7.25</td>
+      <td>11A6</td>
+    </tr>
+    <tr>
+      <td>397</td>
+      <td>Nguyễn Thị Hải Yến</td>
+      <td>22/10/2009</td>
+      <td>Nữ</td>
+      <td>12</td>
+      <td></td>
+      <td>110397</td>
+      <td>111.0</td>
+      <td>6.25</td>
+      <td>2.00</td>
+      <td>8.25</td>
+      <td>11A5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</section>
+<script>
+(function() {
+  function normalizeText(value) {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\u0111/g, 'd')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function cleanNumber(value) {
+    return value.replace(/\s+/g, '').trim();
+  }
+
+  function initSearch(panel) {
+    var table = panel.parentElement.querySelector('.data-table');
+    if (!table) {
+      return;
+    }
+
+    var headers = Array.from(table.querySelectorAll('thead th'));
+    var sbdIndex = -1;
+
+    headers.forEach(function(th, index) {
+      var key = normalizeText(th.textContent);
+      if (key === 'so bd' || key === 'sbd' || key === 'so bao danh') {
+        sbdIndex = index;
+      }
+    });
+
+    var rows = Array.from(table.querySelectorAll('tbody tr'));
+    rows.forEach(function(row) {
+      row.style.display = 'none';
+    });
+
+    var inputSbd = panel.querySelector('#studentSbd');
+    var searchBtn = panel.querySelector('[data-search-btn]');
+    var resetBtn = panel.querySelector('[data-reset-btn]');
+    var resultMsg = panel.querySelector('[data-result-msg]');
+
+    function setMessage(text, isError) {
+      resultMsg.textContent = text;
+      resultMsg.style.color = isError ? '#9b1b1b' : '#1f1f1f';
+    }
+
+    function resetRows() {
+      rows.forEach(function(row) {
+        row.style.display = 'none';
+      });
+      setMessage('', false);
+    }
+
+    function doSearch() {
+      if (sbdIndex < 0) {
+        setMessage('Không xác định được cột Số báo danh.', true);
+        return;
+      }
+
+      var sbdValue = cleanNumber(inputSbd.value || '');
+
+      if (!sbdValue) {
+        setMessage('Vui lòng nhập số báo danh.', true);
+        resetRows();
+        return;
+      }
+
+      var matchCount = 0;
+      rows.forEach(function(row) {
+        var cells = row.querySelectorAll('td');
+        var rowSbd = cleanNumber(cells[sbdIndex].textContent || '');
+        var isMatch = rowSbd === sbdValue;
+        row.style.display = isMatch ? '' : 'none';
+        if (isMatch) {
+          matchCount += 1;
+        }
+      });
+
+      if (matchCount === 0) {
+        setMessage('Không tìm thấy kết quả phù hợp.', true);
+      } else {
+        setMessage('\u0110\u00e3 t\u00ecm th\u1ea5y ' + matchCount + ' k\u1ebft qu\u1ea3.', false);
+      }
+    }
+
+    searchBtn.addEventListener('click', doSearch);
+    resetBtn.addEventListener('click', function() {
+      inputSbd.value = '';
+      resetRows();
+    });
+
+    inputSbd.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        doSearch();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-table-search]').forEach(initSearch);
+  });
+})();
+</script>
+</body>
+</html>
