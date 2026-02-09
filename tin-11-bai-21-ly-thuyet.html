@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 21: Thực hành cập nhật và truy xuất dữ liệu các bảng. Hướng dẫn thêm, sửa, xóa dữ liệu và truy vấn SQL trong CSDL." />
+    <meta name="keywords" content="Tin học 11, cập nhật dữ liệu, truy xuất dữ liệu, INSERT, UPDATE, DELETE, SELECT, SQL, HeidiSQL, MariaDB" />
+    <meta name="author" content="Ontinhoc">
+    <title>Thực Hành Cập Nhật Và Truy Xuất Dữ Liệu Các Bảng | Tin 11 - Bài 21</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 21: Thực hành cập nhật và truy xuất dữ liệu các bảng (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["INSERT", "UPDATE", "DELETE", "SELECT", "SQL", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hướng dẫn thực hành thêm, sửa, xóa dữ liệu trong bảng CSDL và truy xuất dữ liệu bằng giao diện hoặc câu truy vấn SQL."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 21: Thực hành cập nhật và truy xuất dữ liệu các bảng</h1>
+            <p>Bài học tập trung vào thao tác thêm, sửa, xóa dữ liệu trong bảng CSDL và cách truy xuất dữ liệu bằng giao diện hoặc câu truy vấn SQL.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#noi-dung">Nội dung chính</a>
+                <a href="#luyen-tap">Luyện tập</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết cập nhật dữ liệu (thêm, sửa, xóa) trong bảng CSDL.</li>
+                    <li>Biết truy xuất dữ liệu bằng giao diện và bằng câu truy vấn SQL.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">INSERT</span>
+                    <span class="badge">UPDATE</span>
+                    <span class="badge">DELETE</span>
+                    <span class="badge">SELECT</span>
+                    <span class="badge">SQL</span>
+                </div>
+            </section>
+
+            <section id="noi-dung" class="card" aria-labelledby="noi-dung-title">
+                <h2 id="noi-dung-title">II. Nội dung chính</h2>
+
+                <h3>1. Thêm mới dữ liệu vào bảng</h3>
+                <ul>
+                    <li>Chọn bảng → thẻ Dữ liệu.</li>
+                    <li>Thêm dòng mới bằng phím <code>Insert</code> hoặc chuột phải → Chèn hàng.</li>
+                    <li>Nhập dữ liệu cho từng trường; trường <code>AUTO_INCREMENT</code> không cần nhập.</li>
+                </ul>
+
+                <h3>2. Chỉnh sửa dữ liệu trong bảng</h3>
+                <p>Khi dữ liệu nhập bị sai:</p>
+                <ul>
+                    <li>Nháy đúp vào ô dữ liệu cần sửa.</li>
+                    <li>Nhập lại giá trị đúng → <code>Enter</code>.</li>
+                </ul>
+
+                <h3>3. Xóa dòng dữ liệu trong bảng</h3>
+                <ul>
+                    <li>Chọn dòng cần xóa (Shift: chọn nhiều dòng liền nhau, Ctrl: chọn nhiều dòng rời nhau).</li>
+                    <li>Nhấn <code>Ctrl + Delete</code> hoặc nút Xóa.</li>
+                    <li>Xác nhận <code>OK</code> để xóa.</li>
+                </ul>
+
+                <h3>4. Truy xuất dữ liệu từ bảng</h3>
+                <ul>
+                    <li><strong>a) Truy xuất đơn giản:</strong> Chọn bảng → thẻ Dữ liệu → xem toàn bộ dữ liệu.</li>
+                    <li><strong>b) Sắp xếp dữ liệu:</strong> Nháy vào tên trường (ví dụ: khóa chính). Nháy lại để đổi tăng dần / giảm dần.</li>
+                    <li><strong>c) Tìm kiếm – lọc dữ liệu:</strong> Chuột phải vào cột → Quick Filter. Dùng điều kiện <code>LIKE "%ký_tự%"</code>. Có thể xóa bộ lọc khi không cần.</li>
+                </ul>
+
+                <h3>5. Truy xuất dữ liệu bằng câu truy vấn SQL</h3>
+                <div class="steps" role="note">
+                    <strong>Cú pháp tổng quát:</strong><br>
+                    <code>SELECT danh_sách_trường</code><br>
+                    <code>FROM tên_bảng</code><br>
+                    <code>[WHERE điều_kiện]</code><br>
+                    <code>[ORDER BY tên_trường ASC | DESC];</code>
+                </div>
+                <ul>
+                    <li><code>SELECT</code>: chọn trường cần lấy.</li>
+                    <li><code>FROM</code>: bảng dữ liệu.</li>
+                    <li><code>WHERE</code>: điều kiện lọc.</li>
+                    <li><code>ORDER BY</code>: sắp xếp kết quả.</li>
+                </ul>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">III. Luyện tập – Vận dụng</h2>
+                <ul>
+                    <li>Cập nhật dữ liệu bảng khác (ví dụ: <code>casi</code>).</li>
+                    <li>Truy xuất dữ liệu theo nhiều tiêu chí khác nhau.</li>
+                    <li>Vận dụng với bảng Tỉnh/Thành phố trong CSDL quản lí.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
