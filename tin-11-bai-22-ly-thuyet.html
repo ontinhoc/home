@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 22: Thực hành cập nhật bảng dữ liệu có tham chiếu. Hướng dẫn nhập, sửa, xóa dữ liệu có khóa ngoại và tìm hiểu toàn vẹn tham chiếu trong HeidiSQL/MySQL." />
+    <meta name="keywords" content="Tin học 11, khóa ngoại, tham chiếu, toàn vẹn tham chiếu, cập nhật dữ liệu, HeidiSQL, MySQL" />
+    <meta name="author" content="Ontinhoc">
+    <title>Thực Hành Cập Nhật Bảng Dữ Liệu Có Tham Chiếu | Tin 11 - Bài 22</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 22: Thực hành cập nhật bảng dữ liệu có tham chiếu (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Khóa ngoại", "Tham chiếu", "Toàn vẹn dữ liệu", "HeidiSQL", "MySQL", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hướng dẫn cập nhật dữ liệu bảng có khóa ngoại, thao tác thêm, sửa, xóa và tìm hiểu cơ chế toàn vẹn tham chiếu trong CSDL."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 22: Thực hành cập nhật bảng dữ liệu có tham chiếu</h1>
+            <p>Bài học tập trung vào thao tác cập nhật dữ liệu trong bảng có khóa ngoại và cách hệ quản trị CSDL kiểm soát toàn vẹn tham chiếu khi thêm, sửa, xóa.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#kien-thuc">Kiến thức cốt lõi</a>
+                <a href="#nhiem-vu-1">Nhiệm vụ 1</a>
+                <a href="#nhiem-vu-2">Nhiệm vụ 2</a>
+                <a href="#luyen-tap">Luyện tập</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Hiểu cách nhập và cập nhật dữ liệu cho bảng có khóa ngoại (trường tham chiếu) đến khóa chính của bảng khác.</li>
+                    <li>Nhận biết cách HeidiSQL/MySQL kiểm soát toàn vẹn tham chiếu khi thêm, sửa, xóa dữ liệu.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Khóa ngoại</span>
+                    <span class="badge">Tham chiếu</span>
+                    <span class="badge">Toàn vẹn dữ liệu</span>
+                    <span class="badge">HeidiSQL</span>
+                    <span class="badge">MySQL</span>
+                </div>
+            </section>
+
+            <section id="kien-thuc" class="card" aria-labelledby="kien-thuc-title">
+                <h2 id="kien-thuc-title">II. Kiến thức cốt lõi: cập nhật bảng có tham chiếu</h2>
+                <ul>
+                    <li>Với bảng có khóa ngoại, giá trị ở trường khóa ngoại bắt buộc phải tồn tại trong trường khóa chính của bảng được tham chiếu.</li>
+                    <li>Khi thao tác xóa hoặc sửa có thể làm “đứt liên kết” tham chiếu, hệ QTCSDL sẽ ngăn chặn để đảm bảo tính toàn vẹn dữ liệu (báo lỗi).</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Ghi nhớ:</strong> Khóa ngoại chỉ nhận giá trị hợp lệ từ bảng được tham chiếu. Nếu không, thao tác cập nhật sẽ bị từ chối.
+                </div>
+            </section>
+
+            <section id="nhiem-vu-1" class="card" aria-labelledby="nhiem-vu-1-title">
+                <h2 id="nhiem-vu-1-title">III. Nhiệm vụ 1: Cập nhật bảng <code>bannhac</code></h2>
+                <p>Bảng <code>bannhac</code> gồm các trường: <code>idBannhac</code>, <code>tenBannhac</code>, <code>idNhacsi</code> (trong đó <code>idNhacsi</code> là khóa ngoại tham chiếu đến <code>idNhacsi</code> của bảng <code>nhacsi</code>).</p>
+
+                <h3>a) Thêm mới dữ liệu</h3>
+                <ul>
+                    <li>Mở bảng <code>bannhac</code> → thẻ <strong>Dữ liệu</strong>.</li>
+                    <li>Nhập <code>tenBannhac</code>.</li>
+                    <li>Với <code>idNhacsi</code>: không nhập tùy tiện, chọn từ danh sách vì phải khớp <code>idNhacsi</code> trong bảng <code>nhacsi</code>.</li>
+                </ul>
+
+                <h3>b) Sửa/Cập nhật dữ liệu</h3>
+                <ul>
+                    <li>Nháy đúp vào ô dữ liệu cần sửa (tương tự Bài 21).</li>
+                    <li>Có thể sửa <code>idNhacsi</code> nhưng vẫn phải chọn giá trị hợp lệ (đang tồn tại trong <code>nhacsi</code>).</li>
+                </ul>
+
+                <h3>c) Xóa dữ liệu trong bảng <code>bannhac</code></h3>
+                <ul>
+                    <li>Xóa các dòng bản nhạc như thao tác đã học (tương tự Bài 21).</li>
+                </ul>
+
+                <h3>d) Xóa dữ liệu trong bảng <code>nhacsi</code> (lưu ý quan trọng)</h3>
+                <div class="steps" role="note">
+                    Nếu nhạc sĩ đã được tham chiếu trong <code>bannhac</code> (đã có bản nhạc dùng <code>idNhacsi</code> đó) thì không thể xóa nhạc sĩ tương ứng trong <code>nhacsi</code>.
+                </div>
+                <ul>
+                    <li>MySQL sẽ chặn và báo lỗi vì việc xóa sẽ làm mất toàn vẹn tham chiếu.</li>
+                </ul>
+
+                <h3>e) Truy xuất dữ liệu trong bảng <code>bannhac</code></h3>
+                <ul>
+                    <li>Sắp xếp theo <code>idBannhac</code> giảm dần.</li>
+                    <li>Sắp xếp theo tên bản nhạc.</li>
+                    <li>Lấy danh sách bản nhạc của một nhạc sĩ cụ thể (ví dụ nhạc sĩ Văn Cao).</li>
+                </ul>
+            </section>
+
+            <section id="nhiem-vu-2" class="card" aria-labelledby="nhiem-vu-2-title">
+                <h2 id="nhiem-vu-2-title">IV. Nhiệm vụ 2: Tìm hiểu giao diện ứng dụng quản lí</h2>
+                <p>Quan sát giao diện “Quản lí dữ liệu âm nhạc”:</p>
+                <ul>
+                    <li>Nhập bản nhạc: nhập tên + chọn nhạc sĩ → Nhập.</li>
+                    <li>Tìm kiếm: nhập từ khóa tên bài hát, có thể chọn nhạc sĩ → Tìm.</li>
+                    <li>Danh sách bản nhạc hiển thị theo trang; chọn trang để xem.</li>
+                    <li>Sửa: chọn dòng (radio) → thông tin hiện lên phía trên → sửa → Nhập để lưu.</li>
+                    <li>Xóa: tick checkbox các dòng → Xóa.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Nhận xét:</strong> Giao diện ứng dụng thường hướng theo nghiệp vụ (thao tác hằng ngày), người dùng có thể không cần biết cấu trúc bảng vẫn thao tác được.
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">V. Luyện tập – Vận dụng</h2>
+                <ul>
+                    <li><strong>Luyện tập:</strong> Cập nhật dữ liệu bảng <code>banthuam</code>; truy xuất theo các tiêu chí khác nhau.</li>
+                    <li><strong>Vận dụng:</strong> Thực hành cập nhật và truy xuất bảng Quận/Huyện trong CSDL quản lí danh sách Quận/Huyện – Tỉnh/Thành phố.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey; // Ctrl (Win/Linux) or Cmd (macOS)
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        // Smooth scroll for in-page navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back-to-top button behaviour
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
