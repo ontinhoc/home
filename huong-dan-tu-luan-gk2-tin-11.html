@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Hướng dẫn đề cương phần tự luận Tin học 11 giữa học kỳ 2 năm học 2025-2026 với nội dung HeidiSQL và truy vấn SELECT cơ bản.">
+    <meta name="keywords" content="Tin học 11, tự luận, GK2, HeidiSQL, SELECT, WHERE, ORDER BY, khóa ngoại, cơ sở dữ liệu">
+    <meta name="author" content="Ontinhoc">
+    <title>Hướng dẫn tự luận | Tin 11 - GK2</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Hướng dẫn đề cương phần tự luận Tin học 11 giữa học kỳ 2",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Tin học 11", "GK2", "HeidiSQL", "SELECT", "WHERE", "ORDER BY", "khóa ngoại"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hướng dẫn đề cương phần tự luận Tin học 11 giữa học kỳ 2 năm học 2025-2026, tập trung vào HeidiSQL và truy vấn dữ liệu cơ bản."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Hướng dẫn đề cương phần tự luận - Tin học 11</h1>
+            <p>Giữa học kỳ 2, năm học 2025-2026. Nội dung bám sát thao tác trên HeidiSQL, truy vấn <code>SELECT</code>, lọc dữ liệu và ý nghĩa của việc nhập đúng dữ liệu tham chiếu.</p>
+            <div class="keywords" aria-label="Từ khóa trọng tâm">
+                <span class="badge">HeidiSQL</span>
+                <span class="badge">SELECT</span>
+                <span class="badge">WHERE</span>
+                <span class="badge">ORDER BY</span>
+                <span class="badge">Khóa ngoại</span>
+            </div>
+            <nav aria-label="Mục lục">
+                <a href="#cau-1">Câu 1</a>
+                <a href="#cau-2">Câu 2</a>
+                <a href="#cau-3">Câu 3</a>
+                <a href="#cau-4">Câu 4</a>
+                <a href="#cau-5">Câu 5</a>
+                <a href="#cau-6">Câu 6</a>
+                <a href="#cau-7">Câu 7</a>
+                <a href="#cau-8">Câu 8</a>
+                <a href="#cau-9">Câu 9</a>
+                <a href="#cau-10">Câu 10</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="cau-1" class="card">
+                <h2>Câu 1: Trong giao diện của HeidiSQL, làm thế nào để thêm một bản ghi mới vào một bảng (ví dụ bảng <code>dantoc</code>) mà không cần viết câu lệnh SQL?</h2>
+                <div class="note">
+                    <p><strong>Gợi ý:</strong> Các bước để thêm một bản ghi mới vào bảng <code>dantoc</code> trên HeidiSQL mà không cần dùng lệnh SQL như sau:</p>
+                    <ol class="steps">
+                        <li><strong>Chọn bảng và thẻ dữ liệu:</strong> Nháy chuột chọn tên bảng cần thao tác, sau đó chọn thẻ <strong>Dữ liệu</strong> để hiển thị nội dung bảng.</li>
+                        <li><strong>Tạo hàng mới:</strong> Nhấn phím <code>Insert</code> trên bàn phím hoặc nháy nút phải chuột vào vùng dữ liệu rồi chọn <strong>Chèn hàng</strong>.</li>
+                        <li><strong>Nhập dữ liệu:</strong> Nháy đúp chuột vào từng ô trên hàng mới để nhập thông tin tương ứng cho từng trường. Nếu trường có thuộc tính <code>AUTO_INCREMENT</code> thì không cần nhập.</li>
+                        <li><strong>Hoàn tất:</strong> Nhấn phím <code>Enter</code> để ghi dữ liệu vào bảng.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="cau-2" class="card">
+                <h2>Câu 2: Hãy nêu cấu trúc tổng quát của câu lệnh <code>SELECT</code> dùng để truy xuất dữ liệu. Các thành phần nào là bắt buộc?</h2>
+                <div class="note">
+                    <p><strong>Gợi ý:</strong> Cấu trúc tổng quát của câu lệnh <code>SELECT</code> dùng để truy xuất dữ liệu:</p>
+                    <p><code>SELECT danh_sách_các_trường</code><br><code>FROM ten_bảng</code><br><code>[WHERE biểu_thức_điều_kiện]</code><br><code>[ORDER BY ten_trường [ASC|DESC], ...]</code></p>
+                    <p>Các thành phần bắt buộc để câu lệnh thực thi được là:</p>
+                    <ul>
+                        <li><code>SELECT</code>: Từ khóa để chọn dữ liệu.</li>
+                        <li><code>danh_sách_các_trường</code>: Tên các trường cần lấy hoặc ký tự <code>*</code> để lấy tất cả.</li>
+                        <li><code>FROM</code>: Từ khóa chỉ nguồn dữ liệu.</li>
+                        <li><code>ten_bảng</code>: Tên bảng chứa dữ liệu cần truy xuất.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cau-3" class="card">
+                <h2>Câu 3: Viết câu lệnh SQL để lấy ra tất cả thông tin của các học sinh trong bảng <code>hocsinh</code>.</h2>
+                <div class="note">
+                    <p><strong>Thực hiện câu lệnh SQL:</strong> <code>SELECT * FROM hocsinh;</code></p>
+                </div>
+            </section>
+
+            <section id="cau-4" class="card">
+                <h2>Câu 4: Để lấy danh sách các lớp học từ bảng <code>lophoc</code> và sắp xếp theo năm học giảm dần (năm mới nhất ở trên đầu), bạn dùng câu lệnh nào?</h2>
+                <div class="note">
+                    <p><strong>Thực hiện câu lệnh SQL:</strong> <code>SELECT * FROM lophoc ORDER BY namhoc DESC;</code></p>
+                </div>
+            </section>
+
+            <section id="cau-5" class="card">
+                <h2>Câu 5: Giả sử bảng <code>xa</code> có các trường <code>idXa</code> và <code>tenXa</code>. Hãy viết lệnh lấy ra tên của tất cả các xã.</h2>
+                <div class="note">
+                    <p><strong>Thực hiện câu lệnh SQL:</strong> <code>SELECT tenXa FROM xa;</code></p>
+                </div>
+            </section>
+
+            <section id="cau-6" class="card">
+                <h2>Câu 6: Làm thế nào để lọc ra danh sách học sinh thuộc dân tộc có mã số là 1 (<code>idDantoc = 1</code>)?</h2>
+                <div class="note">
+                    <p><strong>Thực hiện câu lệnh SQL:</strong> <code>SELECT * FROM hocsinh WHERE idDantoc = 1;</code></p>
+                </div>
+            </section>
+
+            <section id="cau-7" class="card">
+                <h2>Câu 7: Trong HeidiSQL, sau khi bạn sửa nội dung một ô dữ liệu trong thẻ "Dữ liệu", làm sao để biết dữ liệu đó đã thực sự được lưu vào CSDL?</h2>
+                <div class="note">
+                    <p><strong>Gợi ý:</strong> Để biết dữ liệu đã thực sự được lưu vào CSDL, ta cần lưu ý 2 điểm sau:</p>
+                    <ol class="steps">
+                        <li><strong>Thao tác xác nhận:</strong> Sau khi sửa xong nội dung trong ô, em phải nhấn phím <code>Enter</code> hoặc di chuyển chuột sang ô khác hay hàng khác. Đây là hành động để HeidiSQL ghi nhận thay đổi.</li>
+                        <li><strong>Dấu hiệu nhận biết:</strong> Nếu sau khi di chuyển sang ô khác mà dữ liệu em vừa sửa vẫn được giữ nguyên và hiển thị bình thường trên bảng, nghĩa là dữ liệu đã được cập nhật thành công vào CSDL.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="cau-8" class="card">
+                <h2>Câu 8: Viết câu lệnh SQL lấy danh sách các lớp học (<code>tenLop</code>) của năm học "2023-2024".</h2>
+                <div class="note">
+                    <p><strong>Thực hiện câu lệnh SQL:</strong> <code>SELECT tenLop FROM lophoc WHERE namhoc = '2023-2024';</code></p>
+                </div>
+            </section>
+
+            <section id="cau-9" class="card">
+                <h2>Câu 9: Sự khác biệt giữa việc sử dụng bộ lọc trực tiếp trên giao diện HeidiSQL và việc viết câu lệnh SQL là gì?</h2>
+                <div class="note">
+                    <p><strong>Gợi ý:</strong> Sự khác biệt chính giữa hai cách thức trên như sau:</p>
+                    <ol class="steps">
+                        <li><strong>Phương pháp thao tác:</strong> Bộ lọc giao diện dùng chuột và menu, thao tác nhanh và trực quan; còn câu lệnh SQL được soạn ở thẻ <strong>Truy vấn</strong>, yêu cầu gõ đúng cú pháp.</li>
+                        <li><strong>Độ linh hoạt:</strong> Giao diện phù hợp với các bộ lọc đơn giản, nhanh gọn; còn SQL linh hoạt hơn, cho phép chọn trường cụ thể, kết hợp nhiều điều kiện bằng <code>AND</code>, <code>OR</code> và sắp xếp chi tiết.</li>
+                        <li><strong>Yêu cầu kiến thức:</strong> Giao diện không cần nhớ cú pháp lệnh, trong khi SQL đòi hỏi nắm vững cấu trúc như <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>...</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="cau-10" class="card">
+                <h2>Câu 10: Tại sao khi thực hành cập nhật dữ liệu, chúng ta thường nhập dữ liệu cho các bảng danh mục (như <code>dantoc</code>, <code>xa</code>) trước khi nhập bảng <code>hocsinh</code>?</h2>
+                <div class="note">
+                    <p><strong>Gợi ý:</strong> Lý do chính là để đảm bảo tính toàn vẹn tham chiếu (<em>Referential Integrity</em>).</p>
+                    <ol class="steps">
+                        <li><strong>Quan hệ khóa ngoại:</strong> Bảng <code>hocsinh</code> thường chứa các trường khóa ngoại như <code>idDantoc</code>, <code>idXa</code> để liên kết với bảng <code>dantoc</code>, <code>xa</code>. Các giá trị này phải tồn tại trước ở bảng danh mục tương ứng.</li>
+                        <li><strong>Tránh lỗi khi nhập liệu:</strong> Nếu nhập học sinh có <code>idDantoc = 5</code> mà bảng <code>dantoc</code> chưa có mã này thì hệ thống sẽ báo lỗi vi phạm khóa ngoại và từ chối lưu. Nhập bảng danh mục trước giúp mọi giá trị tham chiếu đều hợp lệ.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+                <p>----- The End -----</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">↑</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
