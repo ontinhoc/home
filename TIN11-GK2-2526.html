@@ -160,19 +160,19 @@ tbody tr:nth-child(even) {
 </head>
 <body>
 <section class="sheet">
-  <h1 class="title">K?T QU? THI GI?A K? 2 - TIN H?C 11</h1>
+  <h1 class="title">KẾT QUẢ THI GIỮA KỲ 2 - TIN HỌC 11</h1>
   <div class="search-panel" data-table-search>
     <div class="search-row">
       <div>
-        <label for="studentSbd">S? b?o danh</label>
-        <input id="studentSbd" type="text" inputmode="numeric" autocomplete="off" placeholder="Nh?p s? b?o danh">
+        <label for="studentSbd">Số báo danh</label>
+        <input id="studentSbd" type="text" inputmode="numeric" autocomplete="off" placeholder="Nhập số báo danh">
       </div>
       <div class="search-actions">
-        <button class="primary" type="button" data-search-btn>Tra c?u</button>
-        <button type="button" data-reset-btn>L?m l?i</button>
+        <button class="primary" type="button" data-search-btn>Tra cứu</button>
+        <button type="button" data-reset-btn>Làm lại</button>
       </div>
     </div>
-    <div class="search-hint">Nh?p s? b?o danh ?? xem k?t qu? gi?a k? 2 m?n Tin h?c 11.</div>
+    <div class="search-hint">Nhập số báo danh để xem kết quả giữa kỳ 2 môn Tin học 11.</div>
     <div class="result-message" data-result-msg aria-live="polite"></div>
   </div>
   <div class="table-wrap">
@@ -5839,14 +5839,14 @@ tbody tr:nth-child(even) {
 
     function doSearch() {
       if (sbdIndex < 0) {
-        setMessage('Kh?ng x?c ??nh ???c c?t S? b?o danh.', true);
+        setMessage('Không xác định được cột Số báo danh.', true);
         return;
       }
 
       var sbdValue = cleanNumber(inputSbd.value);
       if (!sbdValue) {
         resetRows();
-        setMessage('Vui l?ng nh?p s? b?o danh.', true);
+        setMessage('Vui lòng nhập số báo danh.', true);
         return;
       }
 
@@ -5862,9 +5862,9 @@ tbody tr:nth-child(even) {
       });
 
       if (matchCount === 0) {
-        setMessage('Kh?ng t?m th?y k?t qu? ph? h?p.', true);
+        setMessage('Không tìm thấy kết quả phù hợp.', true);
       } else {
-        setMessage('?? t?m th?y ' + matchCount + ' k?t qu?.', false);
+        setMessage('Đã tìm thấy ' + matchCount + ' kết quả.', false);
       }
     }
 
