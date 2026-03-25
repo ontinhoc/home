@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 25: Phần mềm chỉnh sửa ảnh. Giới thiệu ảnh số, độ phân giải, megapixel và các thao tác cơ bản với phần mềm GIMP như zoom, crop, rotate, resize, export." />
+    <meta name="keywords" content="Tin học 11, Bài 25, phần mềm chỉnh sửa ảnh, ảnh số, bitmap, pixel, độ phân giải, megapixel, GIMP, crop, rotate, resize, export" />
+    <meta name="author" content="Ontinhoc">
+    <title>Phần Mềm Chỉnh Sửa Ảnh | Tin 11 - Bài 25</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 25: Phần mềm chỉnh sửa ảnh (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Ảnh số", "Bitmap", "Pixel", "Độ phân giải", "Megapixel", "GIMP", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Giới thiệu ảnh số, ảnh bitmap, độ phân giải, megapixel và hướng dẫn các thao tác cơ bản khi chỉnh sửa ảnh bằng GIMP."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 25: Phần mềm chỉnh sửa ảnh</h1>
+            <p>Bài học giúp em hiểu ảnh số được tạo bởi các pixel như thế nào, ý nghĩa của độ phân giải, megapixel và làm quen với phần mềm GIMP qua các thao tác chỉnh sửa ảnh cơ bản.</p>
+            <nav aria-label="Mục lục">
+                <a href="#gioi-thieu">Giới thiệu ảnh số</a>
+                <a href="#phan-mem">Phần mềm chỉnh sửa ảnh</a>
+                <a href="#thuc-hanh">Thực hành</a>
+                <a href="#ghi-nho">Ghi nhớ nhanh</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="gioi-thieu" class="card" aria-labelledby="gioi-thieu-title">
+                <h2 id="gioi-thieu-title">I. Giới thiệu ảnh số</h2>
+                <ul>
+                    <li><strong>Ảnh số (digital image)</strong> là biểu diễn số của hình ảnh.</li>
+                    <li><strong>Ảnh bitmap</strong> gồm rất nhiều điểm ảnh (<code>pixel</code>).</li>
+                    <li>Mỗi pixel có vị trí <code>(x, y)</code> và mang thông tin màu sắc, độ sáng.</li>
+                    <li><strong>Độ phân giải (resolution)</strong> thường được đo bằng <code>dpi</code> hoặc <code>ppi</code>, cho biết số điểm ảnh trên 1 inch.</li>
+                    <li>Độ phân giải càng cao thì ảnh càng rõ nét, nhưng dung lượng tệp thường lớn hơn.</li>
+                    <li><strong>Megapixel</strong> là số lượng điểm ảnh của ảnh; <code>1 MP</code> xấp xỉ <code>1 triệu pixel</code>.</li>
+                    <li>Ví dụ: ảnh <code>2560 × 1920</code> có khoảng <code>5 MP</code>.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Kết luận:</strong> Ảnh số là tập hợp các pixel, còn độ phân giải là yếu tố quan trọng quyết định mức độ rõ nét của ảnh.
+                </div>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Ảnh số</span>
+                    <span class="badge">Bitmap</span>
+                    <span class="badge">Pixel</span>
+                    <span class="badge">DPI/PPI</span>
+                    <span class="badge">Megapixel</span>
+                </div>
+            </section>
+
+            <section id="phan-mem" class="card" aria-labelledby="phan-mem-title">
+                <h2 id="phan-mem-title">II. Phần mềm chỉnh sửa ảnh</h2>
+                <ul>
+                    <li>Phần mềm chỉnh sửa ảnh được dùng để chỉnh sửa, làm đẹp ảnh, cắt bỏ phần thừa và thêm chi tiết cần thiết.</li>
+                    <li>Một phần mềm tiêu biểu là <strong>GIMP</strong>, miễn phí và hỗ trợ nhiều định dạng như <code>bmp</code>, <code>jpeg</code>, <code>png</code>...</li>
+                    <li>Tệp gốc của GIMP có phần mở rộng <code>.xcf</code>, cho phép lưu nhiều lớp (<code>layer</code>) để tiếp tục chỉnh sửa.</li>
+                </ul>
+
+                <h3>1. Giao diện GIMP</h3>
+                <p>Giao diện GIMP gồm các thành phần chính sau:</p>
+                <ul>
+                    <li><strong>Thanh bảng chọn:</strong> mở, lưu và thực hiện các thao tác với ảnh.</li>
+                    <li><strong>Bảng công cụ:</strong> di chuyển, cắt, vẽ, thêm hiệu ứng và nhiều chức năng khác.</li>
+                    <li><strong>Hộp tùy chọn công cụ:</strong> dùng để chỉnh thuộc tính của công cụ đang chọn.</li>
+                    <li><strong>Vùng hiển thị ảnh:</strong> nơi quan sát và chỉnh sửa trực tiếp trên ảnh.</li>
+                    <li><strong>Các hộp chức năng:</strong> quản lí lớp (<code>Layer</code>), màu sắc, cọ vẽ...</li>
+                </ul>
+
+                <h3>2. Một số thao tác cơ bản</h3>
+                <ul>
+                    <li><strong>Mở ảnh:</strong> vào <code>File → Open</code> hoặc kéo thả ảnh vào cửa sổ GIMP.</li>
+                    <li><strong>Phóng to / thu nhỏ (Zoom):</strong> dùng công cụ Zoom hoặc giữ <code>Ctrl</code> và lăn con trỏ chuột.</li>
+                    <li><strong>Cắt ảnh (Crop):</strong> chọn vùng cần giữ rồi nhấn <code>Enter</code> để cắt.</li>
+                    <li><strong>Xoay ảnh (Rotate):</strong> chọn công cụ Rotate hoặc nhấn <code>Shift + R</code>, sau đó điều chỉnh góc xoay.</li>
+                </ul>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">III. Thực hành</h2>
+
+                <h3>1. Quan sát, phóng to và thu nhỏ ảnh</h3>
+                <ul>
+                    <li>Dùng công cụ <strong>Zoom</strong> để thay đổi kích thước hiển thị của ảnh trên màn hình.</li>
+                    <li>Thao tác này giúp quan sát chi tiết nhỏ hoặc xem tổng thể bố cục của ảnh.</li>
+                </ul>
+
+                <h3>2. Thay đổi kích thước và độ phân giải</h3>
+                <ul>
+                    <li>Vào menu <code>Image → Scale Image</code>.</li>
+                    <li>Có thể thay đổi <code>Width / Height</code> để điều chỉnh kích thước ảnh.</li>
+                    <li>Có thể thay đổi <code>Resolution</code> để đặt lại độ phân giải theo <code>dpi</code>.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>Lưu ý:</strong> Thay đổi <code>dpi</code> không làm đổi số pixel của ảnh. Thay đổi kích thước ảnh mới làm thay đổi tổng số pixel.
+                </div>
+
+                <h3>3. Xoay, cắt và xuất ảnh</h3>
+                <ul>
+                    <li>Xoay ảnh để chỉnh lại góc hiển thị phù hợp.</li>
+                    <li>Cắt ảnh để chỉ giữ lại vùng nội dung cần thiết.</li>
+                    <li>Xuất ảnh bằng cách vào <code>File → Export</code> rồi chọn định dạng như <code>jpg</code>, <code>png</code>...</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Lưu ý:</strong> Lệnh <code>Save</code> chỉ lưu tệp làm việc dạng <code>.xcf</code>. Muốn dùng ảnh ở các ứng dụng khác, em cần dùng <code>Export</code>.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">IV. Ghi nhớ nhanh</h2>
+                <ul>
+                    <li>Ảnh số là tập hợp các pixel.</li>
+                    <li>Độ phân giải <code>dpi</code> quyết định độ nét của ảnh.</li>
+                    <li>GIMP là phần mềm chỉnh sửa ảnh miễn phí, hỗ trợ nhiều định dạng.</li>
+                    <li>Các thao tác cơ bản cần nhớ: <code>Zoom</code>, <code>Crop</code>, <code>Rotate</code>, <code>Resize</code>, <code>Export</code>.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
