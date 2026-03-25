@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 24: Thực hành sao lưu dữ liệu. Hướng dẫn sao lưu CSDL ra file SQL, phục hồi dữ liệu từ file sao lưu và ghi nhớ quy trình backup, restore an toàn." />
+    <meta name="keywords" content="Tin học 11, Bài 24, sao lưu dữ liệu, backup, restore, phục hồi dữ liệu, SQL, HeidiSQL, CSDL, mymusic" />
+    <meta name="author" content="Ontinhoc">
+    <title>Thực Hành Sao Lưu Dữ Liệu | Tin 11 - Bài 24</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:820px;line-height:1.5}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:#0f766e;margin-top:16px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 24: Thực hành sao lưu dữ liệu (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Sao lưu dữ liệu", "Backup", "Restore", "SQL", "HeidiSQL", "CSDL", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Hướng dẫn thực hành sao lưu cơ sở dữ liệu ra file SQL, phục hồi dữ liệu khi có sự cố và vận dụng quy trình backup, restore."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="btn" style="position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 24: Thực hành sao lưu dữ liệu</h1>
+            <p>Bài học giúp em nắm được cách sao lưu dữ liệu ra tệp SQL và cách phục hồi cơ sở dữ liệu khi gặp sự cố, từ đó bảo đảm an toàn cho hệ CSDL trong quá trình sử dụng.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#khai-niem">Khái niệm chung</a>
+                <a href="#sao-luu">Thực hành sao lưu</a>
+                <a href="#phuc-hoi">Thực hành phục hồi</a>
+                <a href="#luyen-tap">Luyện tập và vận dụng</a>
+                <a href="#ghi-nho">Ghi nhớ nhanh</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Nắm được cách <strong>sao lưu</strong> (<code>backup</code>) dữ liệu.</li>
+                    <li>Nắm được cách <strong>phục hồi</strong> (<code>restore</code>) dữ liệu khi có sự cố.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Backup</span>
+                    <span class="badge">Restore</span>
+                    <span class="badge">SQL</span>
+                    <span class="badge">HeidiSQL</span>
+                    <span class="badge">An toàn dữ liệu</span>
+                </div>
+            </section>
+
+            <section id="khai-niem" class="card" aria-labelledby="khai-niem-title">
+                <h2 id="khai-niem-title">II. Khái niệm chung</h2>
+                <ul>
+                    <li>Cần xây dựng chính sách an toàn dữ liệu để đề phòng sự cố và đảm bảo hoạt động liên tục của hệ CSDL.</li>
+                    <li>Hệ quản trị cơ sở dữ liệu hỗ trợ sao lưu dữ liệu định kì để lưu giữ trạng thái an toàn của hệ thống.</li>
+                    <li>Khi cần, hệ QTCSDL cho phép phục hồi dữ liệu từ bản sao lưu để khôi phục lại cấu trúc và nội dung ban đầu.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Ý nghĩa:</strong> Sao lưu và phục hồi là hai thao tác quan trọng giúp giảm rủi ro mất dữ liệu khi máy tính, phần mềm hoặc tệp dữ liệu gặp sự cố.
+                </div>
+            </section>
+
+            <section id="sao-luu" class="card" aria-labelledby="sao-luu-title">
+                <h2 id="sao-luu-title">III. Nhiệm vụ 1: Thực hành sao lưu CSDL</h2>
+                <h3>Các bước thực hiện</h3>
+                <ul>
+                    <li>Chọn <code>Các công cụ → Xuất CSDL dạng SQL</code>.</li>
+                    <li>Chọn cơ sở dữ liệu cần sao lưu, ví dụ <code>mymusic</code>.</li>
+                    <li>Thiết lập tùy chọn <code>Drop</code> để xóa đối tượng cũ khi phục hồi.</li>
+                    <li>Thiết lập <code>Delete + Insert</code> để xóa dữ liệu cũ trước khi chèn dữ liệu mới.</li>
+                    <li>Chọn kiểu xuất <code>Single .sql file</code>.</li>
+                    <li>Đặt tên tệp sao lưu, ví dụ <code>C:\Temp\_mymusic.sql</code>.</li>
+                    <li>Nhấn <code>Export</code> để bắt đầu sao lưu.</li>
+                </ul>
+                <div class="steps" role="note">
+                    <strong>Lưu ý:</strong> Có thể sao lưu toàn bộ cơ sở dữ liệu hoặc chỉ sao lưu một phần bằng cách chọn từng bảng cần xuất.
+                </div>
+            </section>
+
+            <section id="phuc-hoi" class="card" aria-labelledby="phuc-hoi-title">
+                <h2 id="phuc-hoi-title">IV. Nhiệm vụ 2: Thực hành phục hồi dữ liệu</h2>
+                <h3>Chuẩn bị</h3>
+                <ul>
+                    <li>Có sẵn tệp sao lưu <code>.sql</code>, ví dụ <code>_mymusic.sql</code>.</li>
+                    <li>Có thể phục hồi trên máy mới hoặc xóa CSDL cũ rồi khôi phục lại.</li>
+                </ul>
+
+                <h3>Các bước thực hiện</h3>
+                <ul>
+                    <li>Chọn <code>Tập tin → Load SQL file</code> hoặc dùng phím tắt <code>Ctrl + O</code>.</li>
+                    <li>Mở tệp sao lưu <code>_mymusic.sql</code>.</li>
+                    <li>Nội dung tệp sẽ được tải vào cửa sổ truy vấn.</li>
+                    <li>Nhấn <code>Run</code> hoặc <code>F5</code> để thực thi các lệnh phục hồi.</li>
+                </ul>
+
+                <h3>Kết quả</h3>
+                <ul>
+                    <li>Cơ sở dữ liệu được tạo lại đầy đủ cấu trúc.</li>
+                    <li>Dữ liệu ban đầu được khôi phục trở lại.</li>
+                </ul>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">V. Luyện tập và vận dụng</h2>
+                <h3>1. Luyện tập</h3>
+                <ul>
+                    <li>Thực hành sao lưu và phục hồi bảng <code>banthuam</code> trong cơ sở dữ liệu <code>mymusic</code>.</li>
+                </ul>
+
+                <h3>2. Vận dụng</h3>
+                <ul>
+                    <li>Để chuyển cơ sở dữ liệu sang máy khác: sao lưu dữ liệu, chép tệp <code>.sql</code> sang máy mới rồi thực hiện phục hồi.</li>
+                </ul>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">VI. Ghi nhớ nhanh</h2>
+                <ul>
+                    <li>Sao lưu là xuất dữ liệu ra tệp <code>.sql</code>.</li>
+                    <li>Phục hồi là nạp tệp <code>.sql</code> và chạy các lệnh trong tệp đó.</li>
+                    <li>Luôn sao lưu định kì để đảm bảo an toàn dữ liệu.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        // Harden: block context menu and common DevTools/View-source shortcuts
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
