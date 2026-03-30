@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 12 - Bài 25: Xây dựng phần thân và chân trang web. Tìm hiểu cách tạo nội dung chính, chèn bản đồ, chỉnh sửa đối tượng và thiết lập chân trang bằng Google Sites.">
+    <meta name="keywords" content="Tin học 12, Bài 25, xây dựng phần thân và chân trang web, Google Sites, Insert, Pages, Themes, bản đồ, footer">
+    <meta name="author" content="Ontinhoc">
+    <title>Xây Dựng Phần Thân Và Chân Trang Web | Tin 12 - Bài 25</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --success:#0f766e; --warm:#f97316; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(2,6,23,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:840px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--success);margin-top:16px;margin-bottom:8px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid var(--warm);padding:14px;border-radius:8px;margin-top:12px}
+        .summary{background:#f0fdf4;border-left:4px solid var(--success);padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+        .panel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .panel h3{margin-top:0}
+        .panel ul{margin-bottom:0}
+        .step-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+        .step-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .step-card h3{margin-top:0}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        strong{font-weight:700}
+        @media(max-width:900px){
+            .triptych,.step-list{grid-template-columns:1fr}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 25: Xây dựng phần thân và chân trang web (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Google Sites", "Insert", "Pages", "Themes", "Bản đồ", "Footer", "Tin học 12"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học hướng dẫn tạo phần thân và chân trang web bằng Google Sites, gồm chèn nội dung theo khối, thêm bản đồ, chỉnh sửa đối tượng và thiết lập phần chân trang."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 25: Xây dựng phần thân và chân trang web</h1>
+            <p>Bài học giúp em biết cách xây dựng phần thân là nội dung chính của trang web và phần chân trang bằng Google Sites, đồng thời thực hiện các thao tác chèn, kéo thả và chỉnh sửa nội dung trực quan.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#giao-dien-than">Giao diện phần thân</a>
+                <a href="#tao-than">Tạo phần thân</a>
+                <a href="#ban-do">Thêm bản đồ</a>
+                <a href="#chinh-sua">Chỉnh sửa đối tượng</a>
+                <a href="#chan-trang">Chân trang</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">1. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết cách xây dựng phần thân và chân trang của trang web bằng <strong>Google Sites</strong>.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Insert</span>
+                    <span class="badge">Pages</span>
+                    <span class="badge">Themes</span>
+                    <span class="badge">Block</span>
+                    <span class="badge">Footer</span>
+                </div>
+            </section>
+
+            <section id="giao-dien-than" class="card" aria-labelledby="giao-dien-than-title">
+                <h2 id="giao-dien-than-title">2. Nhiệm vụ 1: Tìm hiểu giao diện tạo phần thân</h2>
+                <p>Khi tạo phần thân của trang web trong Google Sites, em thường làm việc với 3 bảng chọn chính ở cạnh phải.</p>
+                <div class="triptych" aria-label="Ba bảng chọn chính">
+                    <article class="panel">
+                        <h3>Chèn (Insert)</h3>
+                        <ul>
+                            <li>Dùng để thêm nội dung vào trang web.</li>
+                            <li>Đây là bảng quan trọng nhất khi xây dựng phần thân.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Trang (Pages)</h3>
+                        <ul>
+                            <li>Dùng để quản lí các trang trong website.</li>
+                            <li>Giúp thêm, sắp xếp hoặc đổi tên các trang.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Giao diện (Themes)</h3>
+                        <ul>
+                            <li>Dùng để chọn kiểu trình bày chung cho website.</li>
+                            <li>Giúp thay đổi màu sắc và phong cách hiển thị.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <h3>Bảng Chèn gồm 3 nhóm chính</h3>
+                <ul>
+                    <li><strong>Nhóm 1:</strong> <code>Hộp văn bản</code>, <code>Hình ảnh</code>, <code>Nhúng</code>, <code>Drive</code> để chèn nội dung.</li>
+                    <li><strong>Nhóm 2:</strong> các thành phần nội dung có bố cục sẵn, tức các khối trình bày.</li>
+                    <li><strong>Nhóm 3:</strong> các đối tượng khác như mục lục, bản đồ, video, liên kết,...</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Nhận xét:</strong> phần thân trong Google Sites được xây dựng theo từng khối, giúp người dùng dễ thêm, di chuyển và sắp xếp nội dung.
+                </div>
+            </section>
+
+            <section id="tao-than" class="card" aria-labelledby="tao-than-title">
+                <h2 id="tao-than-title">3. Nhiệm vụ 2: Tạo phần thân trang web</h2>
+                <div class="step-list" aria-label="Các bước tạo phần thân trang web">
+                    <article class="step-card">
+                        <h3>Bước 1: Chọn bố cục nội dung</h3>
+                        <ul>
+                            <li>Chọn một bố cục có sẵn, ví dụ bố cục <strong>2 cột</strong>.</li>
+                            <li>Bố cục giúp nội dung được trình bày gọn gàng và cân đối hơn.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 2: Thêm nội dung</h3>
+                        <ul>
+                            <li>Chèn ảnh vào từng khu vực cần thiết.</li>
+                            <li>Thêm tiêu đề và văn bản mô tả dưới ảnh.</li>
+                            <li>Nội dung được tổ chức theo các <strong>khối</strong> riêng biệt.</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="steps" role="note">
+                    <strong>Lưu ý:</strong> chia nội dung theo khối giúp website dễ đọc, dễ chỉnh sửa và thuận tiện khi cần thay đổi bố cục sau này.
+                </div>
+            </section>
+
+            <section id="ban-do" class="card" aria-labelledby="ban-do-title">
+                <h2 id="ban-do-title">4. Nhiệm vụ 3: Thêm bản đồ vào trang web</h2>
+                <h3>Cách chèn bản đồ</h3>
+                <ul>
+                    <li>Dùng <code>Nhúng</code> hoặc chọn trực tiếp công cụ <strong>Bản đồ</strong> từ Google Maps.</li>
+                    <li>Nhập địa điểm hoặc chọn vị trí trên bản đồ.</li>
+                    <li>Nhấn <strong>Chọn</strong> để đưa bản đồ vào trang.</li>
+                </ul>
+
+                <h3>Cách chỉnh sửa bản đồ</h3>
+                <ul>
+                    <li>Kéo các cạnh để thay đổi kích thước bản đồ.</li>
+                    <li>Kéo thả để di chuyển vị trí của bản đồ trong trang web.</li>
+                </ul>
+
+                <div class="summary" role="note">
+                    <strong>Ứng dụng:</strong> bản đồ thường phù hợp với website giới thiệu trường học, doanh nghiệp, địa điểm tham quan hoặc trang thông tin liên hệ.
+                </div>
+            </section>
+
+            <section id="chinh-sua" class="card" aria-labelledby="chinh-sua-title">
+                <h2 id="chinh-sua-title">5. Nhiệm vụ 4: Chỉnh sửa các đối tượng</h2>
+                <ul>
+                    <li>Có thể thay đổi kích thước và di chuyển đối tượng bằng thao tác kéo thả.</li>
+                    <li>Có thể sao chép hoặc xóa đối tượng bằng các nút lệnh tương ứng.</li>
+                    <li>Có thể dùng <code>Undo</code> để hoàn tác.</li>
+                    <li>Có thể dùng <code>Redo</code> để làm lại thao tác vừa hoàn tác.</li>
+                </ul>
+                <div class="note" role="note">
+                    <strong>Mẹo:</strong> nên thường xuyên kiểm tra bố cục sau mỗi lần chỉnh sửa để bảo đảm các đối tượng được sắp xếp cân đối và dễ quan sát trên nhiều thiết bị.
+                </div>
+            </section>
+
+            <section id="chan-trang" class="card" aria-labelledby="chan-trang-title">
+                <h2 id="chan-trang-title">6. Nhiệm vụ 5: Thiết lập chân trang</h2>
+                <h3>Cách thực hiện</h3>
+                <ul>
+                    <li>Cuộn xuống cuối trang.</li>
+                    <li>Chọn <strong>“Thêm chân trang”</strong>.</li>
+                </ul>
+
+                <h3>Nội dung thường có trong chân trang</h3>
+                <ul>
+                    <li>Thông tin bản quyền.</li>
+                    <li>Email, số điện thoại.</li>
+                    <li>Liên kết mạng xã hội.</li>
+                </ul>
+
+                <h3>Đặc điểm</h3>
+                <ul>
+                    <li>Có thể chèn và sắp xếp nội dung giống như ở phần thân.</li>
+                    <li>Phần chân trang thường chứa thông tin bổ sung và thông tin liên hệ.</li>
+                </ul>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">7. Ghi nhớ</h2>
+                <ul>
+                    <li><strong>Phần thân</strong> là nội dung chính, được trình bày theo các khối.</li>
+                    <li><strong>Phần chân trang</strong> chứa thông tin bổ sung và liên hệ.</li>
+                    <li><strong>Thao tác chính:</strong> chèn, kéo thả và chỉnh sửa.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2026 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>

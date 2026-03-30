@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 12 - Bài 24: Xây dựng phần đầu trang web. Tìm hiểu các bước tạo phần đầu trang web bằng Google Sites gồm logo, favicon, tên trang, ảnh nền, tiêu đề và thanh điều hướng.">
+    <meta name="keywords" content="Tin học 12, Bài 24, xây dựng phần đầu trang web, Google Sites, logo, favicon, ảnh nền, tiêu đề trang, thanh điều hướng">
+    <meta name="author" content="Ontinhoc">
+    <title>Xây Dựng Phần Đầu Trang Web | Tin 12 - Bài 24</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --success:#0f766e; --warm:#f97316; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(2,6,23,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:840px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--success);margin-top:16px;margin-bottom:8px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid var(--warm);padding:14px;border-radius:8px;margin-top:12px}
+        .summary{background:#f0fdf4;border-left:4px solid var(--success);padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+        .panel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .panel h3{margin-top:0}
+        .panel p{margin:0 0 8px}
+        .panel ul{margin-bottom:0}
+        .step-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+        .step-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .step-card h3{margin-top:0}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        strong{font-weight:700}
+        @media(max-width:900px){
+            .triptych,.step-list{grid-template-columns:1fr}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 24: Xây dựng phần đầu trang web (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Google Sites", "Logo", "Favicon", "Tiêu đề trang", "Ảnh nền", "Tin học 12"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học hướng dẫn làm quen với Google Sites và trình bày các bước xây dựng phần đầu trang web từ đặt tên, thêm logo, ảnh nền, tiêu đề đến xem trước và xuất bản."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 24: Xây dựng phần đầu trang web</h1>
+            <p>Bài học giúp em biết các bước xây dựng phần đầu trang web bằng Google Sites, từ đặt tên trang, thêm logo, favicon, ảnh nền, tiêu đề cho đến xem trước và xuất bản website.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#lam-quen">Làm quen Google Sites</a>
+                <a href="#giao-dien">Giao diện đầu trang</a>
+                <a href="#cac-buoc">Các bước thực hiện</a>
+                <a href="#luu-y">Lưu ý</a>
+                <a href="#ghi-nho">Ghi nhớ nhanh</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">1. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết các bước xây dựng phần đầu trang web bằng <strong>Google Sites</strong>.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Google Sites</span>
+                    <span class="badge">Header</span>
+                    <span class="badge">Logo</span>
+                    <span class="badge">Favicon</span>
+                    <span class="badge">Xuất bản</span>
+                </div>
+            </section>
+
+            <section id="lam-quen" class="card" aria-labelledby="lam-quen-title">
+                <h2 id="lam-quen-title">2. Làm quen Google Sites</h2>
+                <p>Giao diện chính của Google Sites thường gồm 3 khu vực cơ bản, giúp người dùng nhanh chóng tạo và quản lí website.</p>
+                <div class="triptych" aria-label="Ba khu vực chính của Google Sites">
+                    <article class="panel">
+                        <h3>Thanh trên</h3>
+                        <ul>
+                            <li>Dùng để tìm kiếm và truy cập các ứng dụng Google.</li>
+                            <li>Giúp thao tác nhanh với tài khoản và công cụ liên quan.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Khu tạo web</h3>
+                        <ul>
+                            <li>Cho phép tạo trang web mới.</li>
+                            <li>Có thể chọn tạo trang trống hoặc dùng mẫu có sẵn.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Danh sách trang</h3>
+                        <ul>
+                            <li>Hiển thị các trang web đã tạo trước đó.</li>
+                            <li>Giúp mở lại, tiếp tục chỉnh sửa hoặc quản lí website cũ.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="giao-dien" class="card" aria-labelledby="giao-dien-title">
+                <h2 id="giao-dien-title">3. Giao diện tạo phần đầu trang</h2>
+                <p>Phần đầu trang là khu vực xuất hiện đầu tiên khi người dùng truy cập website. Đây là nơi tạo ấn tượng ban đầu và hỗ trợ điều hướng.</p>
+
+                <h3>Các thành phần chính</h3>
+                <ul>
+                    <li><strong>Logo</strong> và <strong>favicon</strong></li>
+                    <li><strong>Tên trang web</strong></li>
+                    <li><strong>Ảnh nền</strong></li>
+                    <li><strong>Tiêu đề trang</strong></li>
+                    <li><strong>Thanh điều hướng</strong></li>
+                </ul>
+
+                <h3>Một số khu vực chức năng cần biết</h3>
+                <ul>
+                    <li><strong>“Trang web không có tiêu đề”:</strong> dùng để đặt tên file lưu trên Google Drive.</li>
+                    <li><strong>“Nhập tên trang web”:</strong> hiển thị tên trang kèm logo.</li>
+                    <li><strong>“Loại tiêu đề”:</strong> chọn kích thước đầu trang như <code>Bìa</code>, <code>Biểu ngữ lớn</code>, <code>Biểu ngữ</code>, <code>Chỉ tiêu đề</code>.</li>
+                    <li><strong>“Tiêu đề trang”:</strong> nhập tiêu đề và mô tả cho trang.</li>
+                </ul>
+
+                <div class="note" role="note">
+                    <strong>Ý nghĩa:</strong> phần đầu trang cần vừa đẹp mắt vừa rõ ràng để người xem nhận ra chủ đề website ngay từ cái nhìn đầu tiên.
+                </div>
+            </section>
+
+            <section id="cac-buoc" class="card" aria-labelledby="cac-buoc-title">
+                <h2 id="cac-buoc-title">4. Các bước tạo phần đầu trang web</h2>
+                <div class="step-list" aria-label="Các bước tạo phần đầu trang web">
+                    <article class="step-card">
+                        <h3>Bước 1: Tạo trang web</h3>
+                        <ul>
+                            <li>Truy cập <strong>Google Sites</strong>.</li>
+                            <li>Chọn tạo một trang web mới.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 2: Đặt tên và thiết lập thương hiệu</h3>
+                        <ul>
+                            <li>Nhập tên file lưu trữ.</li>
+                            <li>Thêm <strong>logo</strong> với các định dạng như <code>png</code>, <code>jpg</code>, <code>gif</code>.</li>
+                            <li>Thêm <strong>favicon</strong> là ảnh vuông nhỏ.</li>
+                            <li>Nhập tên trang web ngắn gọn, dễ nhớ.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 3: Thiết lập giao diện đầu trang</h3>
+                        <ul>
+                            <li>Chọn loại tiêu đề phù hợp với mục đích trình bày.</li>
+                            <li>Thêm hoặc thay đổi ảnh nền.</li>
+                            <li>Có thể tắt tự động chỉnh độ sáng.</li>
+                            <li>Điều chỉnh vị trí ảnh để hiển thị đẹp hơn.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 4: Thiết lập tiêu đề trang</h3>
+                        <ul>
+                            <li>Nhập tiêu đề chính.</li>
+                            <li>Tùy chỉnh font chữ, cỡ chữ.</li>
+                            <li>Chỉnh màu sắc và căn lề cho phù hợp.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 5: Xem trước và chỉnh sửa</h3>
+                        <ul>
+                            <li>Xem trước giao diện trên <strong>điện thoại</strong>.</li>
+                            <li>Xem trước trên <strong>máy tính bảng</strong>.</li>
+                            <li>Xem trước trên <strong>máy tính</strong>.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 6: Xuất bản</h3>
+                        <ul>
+                            <li>Nhấn <strong>Công bố</strong>.</li>
+                            <li>Nhận địa chỉ <code>URL</code> để truy cập trang web.</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="steps" role="note">
+                    <strong>Quy trình ngắn gọn:</strong> Tạo trang <strong>&rarr;</strong> đặt tên và thương hiệu <strong>&rarr;</strong> chỉnh giao diện đầu trang <strong>&rarr;</strong> nhập tiêu đề <strong>&rarr;</strong> xem trước <strong>&rarr;</strong> xuất bản.
+                </div>
+            </section>
+
+            <section id="luu-y" class="card" aria-labelledby="luu-y-title">
+                <h2 id="luu-y-title">5. Lưu ý quan trọng</h2>
+                <ul>
+                    <li>Tên trang nên ngắn gọn vì có ảnh hưởng đến địa chỉ <code>URL</code>.</li>
+                    <li>Ảnh nền cần phù hợp để chữ trên ảnh vẫn dễ đọc.</li>
+                    <li>Google Sites tự động lưu nội dung vào <strong>Google Drive</strong>.</li>
+                </ul>
+                <div class="summary" role="note">
+                    <strong>Mẹo thực hiện:</strong> hãy ưu tiên tiêu đề rõ ràng, ảnh nền đơn giản và kiểm tra trước trên nhiều thiết bị để bảo đảm phần đầu trang hiển thị đẹp, dễ nhìn và thống nhất.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">Ghi nhớ nhanh</h2>
+                <ul>
+                    <li><strong>Phần đầu trang</strong> gồm: logo + tên trang + ảnh nền + tiêu đề.</li>
+                    <li><strong>Quy trình thực hiện:</strong> Tạo <strong>&rarr;</strong> Thiết lập <strong>&rarr;</strong> Xem trước <strong>&rarr;</strong> Xuất bản.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2026 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
