@@ -1,0 +1,92 @@
+﻿{
+  "exams": [
+    {
+      "id": "exam-0501-mau",
+      "code": "0501-MAU",
+      "title": "De on thi TNTHPT Tin hoc 0501",
+      "description": "De mau de kiem thu he thong on thi, cham diem va thong ke ket qua. Giao vien co the chinh sua hoac nhap de moi bang JSON.",
+      "durationMinutes": 50,
+      "status": "published",
+      "createdAt": "2026-04-04T00:00:00.000Z",
+      "updatedAt": "2026-04-04T00:00:00.000Z",
+      "questions": [
+        {
+          "id": "q-0501-1",
+          "type": "multiple_choice",
+          "text": "Trong mang may tinh, thiet bi nao dung de dinh tuyen goi tin giua cac mang?",
+          "explanation": "Router la thiet bi thuc hien chuc nang dinh tuyen giua cac mang khac nhau.",
+          "choices": [
+            { "key": "A", "text": "Switch", "correct": false },
+            { "key": "B", "text": "Router", "correct": true },
+            { "key": "C", "text": "Hub", "correct": false },
+            { "key": "D", "text": "Access Point", "correct": false }
+          ]
+        },
+        {
+          "id": "q-0501-2",
+          "type": "multiple_choice",
+          "text": "The HTML nao bieu dien tieu de lon nhat tren trang?",
+          "explanation": "Trong HTML, h1 la muc tieu de cao nhat.",
+          "choices": [
+            { "key": "A", "text": "<head>", "correct": false },
+            { "key": "B", "text": "<title>", "correct": false },
+            { "key": "C", "text": "<h1>", "correct": true },
+            { "key": "D", "text": "<p>", "correct": false }
+          ]
+        },
+        {
+          "id": "q-0501-3",
+          "type": "true_false_group",
+          "text": "Danh gia cac nhan dinh sau ve tri tue nhan tao:",
+          "explanation": "AI yeu chi giai quyet tot cac nhiem vu chuyen biet; du lieu huan luyen anh huong manh den ket qua.",
+          "statements": [
+            {
+              "key": "a",
+              "text": "AI tao sinh co the tao van ban hoac hinh anh tu du lieu da hoc.",
+              "answer": true,
+              "explanation": "Day la nang luc dien hinh cua AI tao sinh."
+            },
+            {
+              "key": "b",
+              "text": "AI manh hien da duoc trien khai pho bien trong truong hoc.",
+              "answer": false,
+              "explanation": "AI manh theo nghia tu nhan thuc van chua ton tai thuc te."
+            }
+          ]
+        },
+        {
+          "id": "q-0501-4",
+          "type": "multiple_choice",
+          "text": "Dia chi IP co chuc nang chinh nao sau day?",
+          "explanation": "Dia chi IP dung de dinh danh thiet bi trong mang va ho tro truyen goi tin den dung noi nhan.",
+          "choices": [
+            { "key": "A", "text": "Ma hoa du lieu", "correct": false },
+            { "key": "B", "text": "Dinh danh thiet bi tren mang", "correct": true },
+            { "key": "C", "text": "Nen tep tin", "correct": false },
+            { "key": "D", "text": "Xu ly do hoa", "correct": false }
+          ]
+        },
+        {
+          "id": "q-0501-5",
+          "type": "true_false_group",
+          "text": "Danh gia cac nhan dinh sau ve CSS:",
+          "explanation": "CSS dieu khien cach hien thi cua phan tu HTML, khong thay the HTML trong viec tao cau truc noi dung.",
+          "statements": [
+            {
+              "key": "a",
+              "text": "CSS dung de dinh dang mau sac, bo cuc va kieu chu cua trang web.",
+              "answer": true,
+              "explanation": "CSS chiu trach nhiem ve phan trinh bay giao dien."
+            },
+            {
+              "key": "b",
+              "text": "CSS la ngon ngu dung de thay the hoan toan HTML trong cau truc trang.",
+              "answer": false,
+              "explanation": "HTML tao cau truc, CSS chi dinh dang phan hien thi."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

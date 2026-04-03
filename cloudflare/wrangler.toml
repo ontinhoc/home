@@ -2,12 +2,20 @@ name = "visit-stats-worker"
 main = "worker.js"
 compatibility_date = "2024-09-19"
 
+[[routes]]
+pattern = "api.ontapnhanh.com"
+custom_domain = true
+
 [durable_objects]
 bindings = [
-  { name = "COUNTER_DO", class_name = "CounterDO" }
+  { name = "COUNTER_DO", class_name = "CounterDO" },
+  { name = "EXAM_DO", class_name = "ExamSystemDO" }
 ]
 
 [[migrations]]
 tag = "v1"
-new_classes = ["CounterDO"]
+new_sqlite_classes = ["CounterDO"]
 
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["ExamSystemDO"]

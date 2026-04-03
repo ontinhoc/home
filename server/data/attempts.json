@@ -1,0 +1,193 @@
+{
+  "attempts": [
+    {
+      "id": "attempt-3f64bb5f-72ac-416d-8faa-dd7876fb09c4",
+      "examId": "exam-0501-mau",
+      "examTitle": "Đề ôn thi TNTHPT Tin học 0501",
+      "student": {
+        "name": "annguyeenx",
+        "className": "12a1",
+        "studentCode": "12345678"
+      },
+      "startedAt": "2026-04-03T18:41:02.024Z",
+      "submittedAt": "2026-04-03T18:44:30.887Z",
+      "durationUsedSeconds": 208,
+      "status": "submitted",
+      "answers": {
+        "q-0501-1": "B",
+        "q-0501-2": "C",
+        "q-0501-3": {
+          "a": true,
+          "b": false
+        },
+        "q-0501-4": "B",
+        "q-0501-5": {
+          "a": true,
+          "b": false
+        }
+      },
+      "score": 10,
+      "summary": {
+        "totalPoints": 7,
+        "correctCount": 7,
+        "incorrectCount": 0,
+        "unansweredCount": 0,
+        "answeredCount": 7,
+        "completionRate": 100,
+        "accuracyRate": 100,
+        "durationUsedSeconds": 208
+      },
+      "review": [
+        {
+          "questionId": "q-0501-1",
+          "type": "multiple_choice",
+          "text": "Trong mạng máy tính, thiết bị nào dùng để định tuyến gói tin giữa các mạng?",
+          "submittedAnswer": "B",
+          "correctAnswer": "B",
+          "isCorrect": true,
+          "isAnswered": true,
+          "explanation": "Router là thiết bị thực hiện chức năng định tuyến giữa các mạng khác nhau.",
+          "choices": [
+            {
+              "key": "A",
+              "text": "Switch",
+              "correct": false
+            },
+            {
+              "key": "B",
+              "text": "Router",
+              "correct": true
+            },
+            {
+              "key": "C",
+              "text": "Hub",
+              "correct": false
+            },
+            {
+              "key": "D",
+              "text": "Access Point",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "questionId": "q-0501-2",
+          "type": "multiple_choice",
+          "text": "Thẻ HTML nào biểu diễn tiêu đề lớn nhất trên trang?",
+          "submittedAnswer": "C",
+          "correctAnswer": "C",
+          "isCorrect": true,
+          "isAnswered": true,
+          "explanation": "Trong HTML, h1 là mức tiêu đề cao nhất.",
+          "choices": [
+            {
+              "key": "A",
+              "text": "<head>",
+              "correct": false
+            },
+            {
+              "key": "B",
+              "text": "<title>",
+              "correct": false
+            },
+            {
+              "key": "C",
+              "text": "<h1>",
+              "correct": true
+            },
+            {
+              "key": "D",
+              "text": "<p>",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "questionId": "q-0501-3",
+          "type": "true_false_group",
+          "text": "Đánh giá các nhận định sau về trí tuệ nhân tạo:",
+          "explanation": "AI yếu chỉ giải quyết tốt các nhiệm vụ chuyên biệt; dữ liệu huấn luyện ảnh hưởng mạnh đến kết quả.",
+          "statements": [
+            {
+              "key": "a",
+              "text": "AI tạo sinh có thể tạo văn bản hoặc hình ảnh từ dữ liệu đã học.",
+              "submittedAnswer": true,
+              "correctAnswer": true,
+              "isCorrect": true,
+              "isAnswered": true,
+              "explanation": "Đây là năng lực điển hình của AI tạo sinh."
+            },
+            {
+              "key": "b",
+              "text": "AI mạnh hiện đã được triển khai phổ biến trong trường học.",
+              "submittedAnswer": false,
+              "correctAnswer": false,
+              "isCorrect": true,
+              "isAnswered": true,
+              "explanation": "AI mạnh theo nghĩa tự nhận thức vẫn chưa tồn tại thực tế."
+            }
+          ]
+        },
+        {
+          "questionId": "q-0501-4",
+          "type": "multiple_choice",
+          "text": "Địa chỉ IP có chức năng chính nào sau đây?",
+          "submittedAnswer": "B",
+          "correctAnswer": "B",
+          "isCorrect": true,
+          "isAnswered": true,
+          "explanation": "Địa chỉ IP dùng để định danh thiết bị trong mạng và hỗ trợ truyền gói tin đến đúng nơi nhận.",
+          "choices": [
+            {
+              "key": "A",
+              "text": "Mã hóa dữ liệu",
+              "correct": false
+            },
+            {
+              "key": "B",
+              "text": "Định danh thiết bị trên mạng",
+              "correct": true
+            },
+            {
+              "key": "C",
+              "text": "Nén tệp tin",
+              "correct": false
+            },
+            {
+              "key": "D",
+              "text": "Xử lý đồ họa",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "questionId": "q-0501-5",
+          "type": "true_false_group",
+          "text": "Đánh giá các nhận định sau về CSS:",
+          "explanation": "CSS điều khiển cách hiển thị của phần tử HTML, không thay thế HTML trong việc tạo cấu trúc nội dung.",
+          "statements": [
+            {
+              "key": "a",
+              "text": "CSS dùng để định dạng màu sắc, bố cục và kiểu chữ của trang web.",
+              "submittedAnswer": true,
+              "correctAnswer": true,
+              "isCorrect": true,
+              "isAnswered": true,
+              "explanation": "CSS chịu trách nhiệm về phần trình bày giao diện."
+            },
+            {
+              "key": "b",
+              "text": "CSS là ngôn ngữ dùng để thay thế hoàn toàn HTML trong cấu trúc trang.",
+              "submittedAnswer": false,
+              "correctAnswer": false,
+              "isCorrect": true,
+              "isAnswered": true,
+              "explanation": "HTML tạo cấu trúc, CSS chỉ định dạng phần hiển thị."
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-03T18:44:30.877Z"
+    }
+  ]
+}
