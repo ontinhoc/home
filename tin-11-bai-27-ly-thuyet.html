@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 27: Công cụ vẽ và một số ứng dụng. Tìm hiểu lớp ảnh, các công cụ Paint Brush, Bucket Fill, Gradient, Eraser, Clone, Healing, thiết lập màu sắc và thực hành thay nền trời trong GIMP.">
+    <meta name="keywords" content="Tin học 11, Bài 27, công cụ vẽ, lớp ảnh, layer, Paint Brush, Bucket Fill, Gradient, Eraser, Clone, Healing, Alpha, Foreground, Background, GIMP">
+    <meta name="author" content="Ontinhoc">
+    <title>Công Cụ Vẽ Và Một Số Ứng Dụng | Tin 11 - Bài 27</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --accent-soft:#0f766e; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:860px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--accent-soft);margin-top:18px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+        .tool-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .tool-item h3{margin-top:0}
+        .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+        .compare-item{background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .compare-item strong{display:block;margin-bottom:8px;color:var(--accent)}
+        .summary-list{list-style:none;margin:0;padding:0}
+        .summary-list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+        .summary-list li:last-child{border-bottom:none}
+        .summary-list span{display:inline-block;min-width:18px;color:var(--primary);font-weight:700}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px;margin-top:48px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+            .tool-grid,.compare-grid{grid-template-columns:1fr}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 27: Công cụ vẽ và một số ứng dụng (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Layer", "Paint Brush", "Bucket Fill", "Gradient", "Eraser", "Clone", "Healing", "Alpha", "GIMP", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học giới thiệu lớp ảnh, các công cụ vẽ và chỉnh sửa trong GIMP, cách thiết lập màu sắc và ứng dụng thực hành xóa chi tiết thừa, thay nền trời."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 27: Công cụ vẽ và một số ứng dụng</h1>
+            <p>Bài học giúp em hiểu lớp ảnh trong GIMP, nhận biết vai trò của các công cụ vẽ và chỉnh sửa phổ biến, nắm được cách thiết lập màu sắc và biết vận dụng chúng để xóa chi tiết thừa hoặc thay nền cho ảnh.</p>
+            <nav aria-label="Mục lục">
+                <a href="#layer">Lớp ảnh</a>
+                <a href="#cong-cu-ve">Công cụ vẽ</a>
+                <a href="#mau-sac">Thiết lập màu</a>
+                <a href="#thuc-hanh">Thực hành</a>
+                <a href="#ghi-nho">Ghi nhớ nhanh</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="layer" class="card" aria-labelledby="layer-title">
+                <h2 id="layer-title">I. Giới thiệu về lớp ảnh (Layer)</h2>
+                <div class="tool-grid">
+                    <article class="tool-item" aria-labelledby="layer-khai-niem">
+                        <h3 id="layer-khai-niem">1. Khái niệm</h3>
+                        <ul>
+                            <li><strong>Lớp ảnh (Layer)</strong> là các lớp chồng lên nhau trong một bức ảnh.</li>
+                            <li>Mỗi lớp chứa một phần riêng nên có thể chỉnh sửa độc lập.</li>
+                            <li>Khi ghép lại, các lớp tạo thành kết quả hiển thị cuối cùng của ảnh.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item" aria-labelledby="layer-dac-diem">
+                        <h3 id="layer-dac-diem">2. Đặc điểm</h3>
+                        <ul>
+                            <li>Thứ tự lớp từ dưới lên quyết định lớp nào xuất hiện phía trước.</li>
+                            <li>Có thể thêm, xóa, đổi thứ tự hoặc ẩn/hiện lớp bằng biểu tượng con mắt.</li>
+                            <li>Một lớp được chỉnh sửa sẽ không làm ảnh hưởng trực tiếp đến lớp khác.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>Kết luận:</strong> Layer giúp chỉnh sửa linh hoạt và quản lí từng phần của ảnh dễ hơn, đặc biệt khi cần thay đổi nhiều chi tiết khác nhau trên cùng một sản phẩm.
+                </div>
+
+                <div class="keywords" aria-label="Từ khóa lớp ảnh">
+                    <span class="badge">Layer</span>
+                    <span class="badge">Ẩn / hiện lớp</span>
+                    <span class="badge">Đổi thứ tự lớp</span>
+                    <span class="badge">Chỉnh sửa độc lập</span>
+                </div>
+            </section>
+
+            <section id="cong-cu-ve" class="card" aria-labelledby="cong-cu-ve-title">
+                <h2 id="cong-cu-ve-title">II. Giới thiệu một số công cụ vẽ</h2>
+
+                <div class="tool-grid">
+                    <article class="tool-item" aria-labelledby="ve-them-title">
+                        <h3 id="ve-them-title">1. Nhóm vẽ thêm</h3>
+                        <ul>
+                            <li><strong>Paint Brush:</strong> vẽ nét hoặc bổ sung chi tiết lên ảnh.</li>
+                            <li><strong>Bucket Fill:</strong> tô màu cho một vùng.</li>
+                            <li><strong>Gradient:</strong> tô màu chuyển sắc, tạo nền mềm và tự nhiên.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item" aria-labelledby="tay-title">
+                        <h3 id="tay-title">2. Nhóm tẩy</h3>
+                        <ul>
+                            <li><strong>Eraser:</strong> xóa điểm ảnh tại vùng đang thao tác.</li>
+                            <li>Dùng để loại bỏ phần không mong muốn hoặc làm lộ lớp bên dưới.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item" aria-labelledby="sao-chep-title">
+                        <h3 id="sao-chep-title">3. Nhóm sao chép và chỉnh sửa</h3>
+                        <ul>
+                            <li><strong>Clone:</strong> sao chép chính xác một vùng ảnh sang vị trí khác.</li>
+                            <li><strong>Healing:</strong> sao chép nhưng tự hòa trộn với vùng xung quanh để tự nhiên hơn.</li>
+                            <li>Hai công cụ này thường dùng để xóa khuyết điểm trên ảnh.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <h3>Vai trò của công cụ vẽ</h3>
+                <p>Các công cụ vẽ giúp thêm chi tiết mới, sửa vùng bị lỗi và loại bỏ những chi tiết không mong muốn trên ảnh. Trong thực tế, chúng được dùng nhiều khi chỉnh chân dung, chỉnh phong cảnh hoặc thiết kế poster đơn giản.</p>
+
+                <h3>Phân biệt Clone và Healing</h3>
+                <div class="compare-grid">
+                    <article class="compare-item">
+                        <strong>Clone</strong>
+                        <p>Sao chép y nguyên vùng nguồn, giữ nguyên màu sắc và kết cấu ban đầu. Phù hợp khi cần xóa các vùng có ranh giới rõ hoặc cần giữ chi tiết thật chính xác.</p>
+                    </article>
+                    <article class="compare-item">
+                        <strong>Healing</strong>
+                        <p>Sao chép vùng nguồn nhưng tự điều chỉnh màu để hòa trộn với khu vực xung quanh. Phù hợp với chi tiết nhỏ, vùng da hoặc bề mặt cần cảm giác tự nhiên.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="mau-sac" class="card" aria-labelledby="mau-sac-title">
+                <h2 id="mau-sac-title">III. Thiết lập màu sắc</h2>
+
+                <div class="tool-grid">
+                    <article class="tool-item" aria-labelledby="rgb-alpha-title">
+                        <h3 id="rgb-alpha-title">1. Thành phần màu</h3>
+                        <ul>
+                            <li><strong>RGB</strong> gồm đỏ (R), xanh lá (G), xanh dương (B).</li>
+                            <li><strong>Alpha</strong> thể hiện độ trong suốt của ảnh hoặc lớp ảnh.</li>
+                            <li>Có kênh alpha thì ảnh có thể trong suốt; không có alpha thì giống như một tờ giấy kín.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item" aria-labelledby="fg-bg-title">
+                        <h3 id="fg-bg-title">2. Màu trong GIMP</h3>
+                        <ul>
+                            <li><strong>Foreground</strong> là màu dùng để vẽ hoặc tô.</li>
+                            <li><strong>Background</strong> là màu nền phía sau.</li>
+                            <li>Khi dùng Eraser trên lớp không có alpha, vùng bị xóa sẽ hiện màu nền thay vì trong suốt.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item" aria-labelledby="chon-mau-title">
+                        <h3 id="chon-mau-title">3. Chọn màu</h3>
+                        <ul>
+                            <li>Có thể chọn màu trực tiếp trong bảng màu.</li>
+                            <li>Dùng <strong>Color Picker</strong> để lấy màu ngay từ ảnh đang chỉnh sửa.</li>
+                            <li>Cách này giúp màu vẽ hoặc màu tô đồng nhất với ảnh gốc.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="steps" role="note">
+                    <strong>Ghi nhớ thao tác:</strong> nếu muốn xóa để tạo vùng trong suốt, cần chắc chắn lớp đang làm việc đã có kênh <code>Alpha</code>. Nếu chưa có, việc xóa chỉ làm lộ <code>Background</code>.
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">IV. Thực hành (Ứng dụng)</h2>
+
+                <h3>1. Nhiệm vụ 1: Xóa chi tiết thừa</h3>
+                <ul>
+                    <li>Dùng <strong>Healing</strong> khi cần xóa chi tiết nhỏ và muốn kết quả trông tự nhiên.</li>
+                    <li>Dùng <strong>Clone</strong> khi xóa vùng có ranh giới rõ để tránh lem màu hoặc sai chi tiết.</li>
+                </ul>
+
+                <h3>2. Nhiệm vụ 2: Thay nền trời</h3>
+                <ol>
+                    <li>Nhân đôi lớp ảnh để có bản làm việc an toàn.</li>
+                    <li>Thêm kênh alpha cho lớp ảnh.</li>
+                    <li>Chọn và xóa nền cũ để tạo vùng trong suốt.</li>
+                    <li>Tạo lớp nền mới đặt phía dưới lớp ảnh chính.</li>
+                    <li>Dùng <code>Gradient</code> để tô màu nền trời mới.</li>
+                    <li>Hiển thị lại các lớp và kiểm tra tổng thể để hoàn thiện ảnh.</li>
+                </ol>
+
+                <div class="note" role="note">
+                    <strong>Mẹo thực hành:</strong> nên phóng to ảnh khi xóa chi tiết thừa, chọn vùng nguồn gần khu vực cần sửa và làm từng bước nhỏ để kết quả mượt, tự nhiên hơn.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">V. Ghi nhớ nhanh</h2>
+                <ul class="summary-list">
+                    <li><span>1.</span><div><strong>Layer</strong> giúp chỉnh sửa từng phần ảnh một cách riêng biệt.</div></li>
+                    <li><span>2.</span><div><strong>Clone</strong> sao chép y nguyên, còn <strong>Healing</strong> hòa trộn tự nhiên hơn.</div></li>
+                    <li><span>3.</span><div><strong>Alpha</strong> là độ trong suốt của lớp ảnh hoặc ảnh.</div></li>
+                    <li><span>4.</span><div><strong>Foreground</strong> là màu vẽ, <strong>Background</strong> là màu nền.</div></li>
+                    <li><span>5.</span><div>Các công cụ vẽ giúp thêm chi tiết và sửa lỗi ảnh hiệu quả.</div></li>
+                </ul>
+
+                <div class="keywords" aria-label="Từ khóa ghi nhớ">
+                    <span class="badge">Clone</span>
+                    <span class="badge">Healing</span>
+                    <span class="badge">Alpha</span>
+                    <span class="badge">Foreground</span>
+                    <span class="badge">Background</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
