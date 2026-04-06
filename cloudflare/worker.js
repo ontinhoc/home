@@ -784,8 +784,8 @@ function buildSampleExams() {
   return [{
     id: 'exam-0501-worker',
     code: '0501-MAU',
-    title: 'De on thi TNTHPT Tin hoc 0501',
-    description: 'De mau de kiem thu he thong cloudflare worker. Giao vien co the chinh sua hoac import de moi bang JSON.',
+    title: 'Đề ôn thi TNTHPT Tin học 0501',
+    description: 'Đề mẫu để kiểm thử hệ thống Cloudflare Worker. Giáo viên có thể chỉnh sửa hoặc import đề mới bằng JSON.',
     durationMinutes: 50,
     status: 'published',
     createdAt: now,
@@ -794,8 +794,8 @@ function buildSampleExams() {
       {
         id: 'q-0501-1',
         type: 'multiple_choice',
-        text: 'Trong mang may tinh, thiet bi nao dung de dinh tuyen goi tin giua cac mang?',
-        explanation: 'Router la thiet bi thuc hien chuc nang dinh tuyen giua cac mang khac nhau.',
+        text: 'Trong mạng máy tính, thiết bị nào dùng để định tuyến gói tin giữa các mạng?',
+        explanation: 'Router là thiết bị thực hiện chức năng định tuyến giữa các mạng khác nhau.',
         choices: [
           { key: 'A', text: 'Switch', correct: false },
           { key: 'B', text: 'Router', correct: true },
@@ -806,8 +806,8 @@ function buildSampleExams() {
       {
         id: 'q-0501-2',
         type: 'multiple_choice',
-        text: 'The HTML nao bieu dien tieu de lon nhat tren trang?',
-        explanation: 'Trong HTML, h1 la muc tieu de cao nhat.',
+        text: 'Thẻ HTML nào biểu diễn tiêu đề lớn nhất trên trang?',
+        explanation: 'Trong HTML, h1 là mức tiêu đề cao nhất.',
         choices: [
           { key: 'A', text: '<head>', correct: false },
           { key: 'B', text: '<title>', correct: false },
@@ -818,11 +818,11 @@ function buildSampleExams() {
       {
         id: 'q-0501-3',
         type: 'true_false_group',
-        text: 'Danh gia cac nhan dinh sau ve tri tue nhan tao:',
-        explanation: 'AI yeu chi giai quyet tot cac nhiem vu chuyen biet; du lieu huan luyen anh huong manh den ket qua.',
+        text: 'Đánh giá các nhận định sau về trí tuệ nhân tạo:',
+        explanation: 'AI yếu chỉ giải quyết tốt các nhiệm vụ chuyên biệt; dữ liệu huấn luyện ảnh hưởng mạnh đến kết quả.',
         statements: [
-          { key: 'a', text: 'AI tao sinh co the tao van ban hoac hinh anh tu du lieu da hoc.', answer: true, explanation: 'Day la nang luc dien hinh cua AI tao sinh.' },
-          { key: 'b', text: 'AI manh hien da duoc trien khai pho bien trong truong hoc.', answer: false, explanation: 'AI manh theo nghia tu nhan thuc van chua ton tai thuc te.' }
+          { key: 'a', text: 'AI tạo sinh có thể tạo văn bản hoặc hình ảnh từ dữ liệu đã học.', answer: true, explanation: 'Đây là năng lực điển hình của AI tạo sinh.' },
+          { key: 'b', text: 'AI mạnh hiện đã được triển khai phổ biến trong trường học.', answer: false, explanation: 'AI mạnh theo nghĩa tự nhận thức vẫn chưa tồn tại thực tế.' }
         ]
       }
     ]

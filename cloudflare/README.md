@@ -82,6 +82,31 @@ The current Wrangler login is using the account for `www.congsu@gmail.com`. To m
 
 If the website itself is still hosted elsewhere, that is fine. The important part is that the DNS zone for `ontapnhanh.com` must be active in this same Cloudflare account before the Worker route can be bound.
 
+## Fix Checklist For `Chua ket noi`
+
+If the live page at `https://ontapnhanh.com/on-tnthpt-tin-hoc.html` shows `Chua ket noi`, use this exact checklist:
+
+1. In Cloudflare, confirm the zone `ontapnhanh.com` is `Active` in the same account that runs `wrangler deploy`.
+2. In `Workers & Pages`, open `visit-stats-worker` and confirm the custom domain `api.ontapnhanh.com` is attached.
+3. In `DNS`, remove any manual `A`, `AAAA`, or `CNAME` record for host `api` that conflicts with the Worker custom domain bind.
+4. Especially remove any broken record where `api.ontapnhanh.com` resolves to `AAAA 100::` and has no valid `A` record.
+5. From [cloudflare](c:\Users\csonline\Documents\home\cloudflare), run:
+```bash
+wrangler deploy
+```
+6. If needed, set the admin password secret again:
+```bash
+wrangler secret put ADMIN_PASSWORD
+```
+7. Validate after deploy:
+   - `nslookup api.ontapnhanh.com`
+   - `https://api.ontapnhanh.com/api/health`
+
+Expected result:
+- DNS must no longer return only the broken `AAAA 100::` answer
+- `GET /api/health` must return JSON with `"ok": true`
+- Only after that will the static frontend stop showing `Chua ket noi`
+
 ## Connect The Static Frontend
 
 In [on-tnthpt-tin-hoc.html](c:\Users\csonline\Documents\home\on-tnthpt-tin-hoc.html), set:
@@ -91,6 +116,12 @@ In [on-tnthpt-tin-hoc.html](c:\Users\csonline\Documents\home\on-tnthpt-tin-hoc.h
 ```
 
 The frontend already supports this via `document.documentElement.dataset.apiBase`.
+
+It now also supports temporary fallback configuration through:
+
+- `data-api-fallbacks="https://backup-api.example.com"`
+- `window.ONTHI_API_FALLBACKS`
+- query string override: `?apiBase=https://your-worker.workers.dev`
 
 ## Suggested Hosting Model
 

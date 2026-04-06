@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Website on thi tot nghiep THPT mon Tin hoc voi giao dien lam bai 50 phut, luu ket qua va khu quan tri de cho giao vien.">
-  <title>On Thi TNTHPT Tin Hoc</title>
+  <meta name="description" content="Website ôn thi tốt nghiệp THPT môn Tin học với giao diện làm bài 50 phút, lưu kết quả và khu quản trị đề cho giáo viên.">
+  <title>Ôn Thi TNTHPT Tin Học</title>
   <link rel="stylesheet" href="on-tnthpt-tin-hoc.css">
 </head>
 <body>
@@ -12,24 +12,26 @@
     <section class="hero">
       <div class="hero-top">
         <div>
-          <div class="kicker">On Thi Tot Nghiep THPT • Mon Tin Hoc</div>
-          <h1>He thong luyen de 50 phut cho hoc sinh, kem quan tri de va tong hop ket qua.</h1>
-          <p>Lam bai theo de chon san, tu luu tien do khi dang thi, nop bai tu dong khi het gio va xem lai chi tiet tung cau. Giao vien co the tao de moi, import JSON, phat hanh de va theo doi ket qua theo tung ma de.</p>
+          <div class="kicker">Ôn Thi Tốt Nghiệp THPT • Môn Tin học</div>
+          <h1>Hệ thống luyện đề 50 phút cho học sinh, kèm quản trị đề và tổng hợp kết quả.</h1>
+          <p>Làm bài theo đề chọn sẵn, tự lưu tiến độ khi đang thi, nộp bài tự động khi hết giờ và xem lại chi tiết từng câu. Giáo viên có thể tạo đề mới, nhập JSON, phát hành đề và theo dõi kết quả theo từng mã đề.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" id="jump-student">Vao khu hoc sinh</button>
-            <button class="btn btn-secondary" id="jump-teacher">Vao khu giao vien</button>
+            <button class="btn btn-primary" id="jump-student">Vào khu học sinh</button>
+            <button class="btn btn-secondary" id="jump-teacher">Vào khu giáo viên</button>
           </div>
         </div>
         <div class="status-panel">
-          <div class="status-row"><span>API mac dinh</span><span class="status-value" id="api-base-label">Dang xac dinh</span></div>
-          <div class="status-row"><span>Trang thai server</span><span class="status-value" id="server-status">Dang kiem tra...</span></div>
-          <div class="status-row"><span>De dang publish</span><span class="status-value" id="published-count">0</span></div>
-          <div class="status-row"><span>Thoi gian moi de</span><span class="status-value">50 phut</span></div>
+          <div class="status-row"><span>API ưu tiên</span><span class="status-value" id="api-base-label">Đang xác định</span></div>
+          <div class="status-row"><span>API đang dùng</span><span class="status-value" id="api-active-label">Đang kiểm tra...</span></div>
+          <div class="status-row"><span>Trạng thái server</span><span class="status-value" id="server-status">Đang kiểm tra...</span></div>
+          <div class="status-row"><span>Đề đang phát hành</span><span class="status-value" id="published-count">0</span></div>
+          <div class="status-row"><span>Thời gian mỗi đề</span><span class="status-value">50 phút</span></div>
+          <div class="status-note" id="api-status-detail">Đang thử kết nối tới API...</div>
         </div>
       </div>
-      <div class="switcher" role="tablist" aria-label="Che do su dung">
-        <button class="active" id="tab-student" type="button" role="tab" aria-selected="true">Hoc sinh</button>
-        <button id="tab-teacher" type="button" role="tab" aria-selected="false">Giao vien</button>
+      <div class="switcher" role="tablist" aria-label="Chế độ sử dụng">
+        <button class="active" id="tab-student" type="button" role="tab" aria-selected="true">Học sinh</button>
+        <button id="tab-teacher" type="button" role="tab" aria-selected="false">Giáo viên</button>
       </div>
       <div id="global-message" class="message"></div>
     </section>
@@ -38,33 +40,33 @@
       <div class="layout">
         <div class="panel">
           <div class="panel-header">
-            <h2 class="panel-title">1. Thong tin thi sinh</h2>
-            <p class="panel-subtitle">Thong tin nay duoc luu cung ket qua de giao vien co the tra cuu. Moi luot lam bai se duoc gan voi mot ma luot thi rieng.</p>
+            <h2 class="panel-title">1. Thông tin thí sinh</h2>
+            <p class="panel-subtitle">Thông tin này được lưu cùng kết quả để giáo viên có thể tra cứu. Mỗi lượt làm bài sẽ được gắn với một mã lượt thi riêng.</p>
           </div>
           <div class="panel-body">
             <div class="grid two">
               <div class="field">
-                <label for="student-name">Ho va ten</label>
-                <input id="student-name" type="text" placeholder="Vi du: Nguyen Van A">
+                <label for="student-name">Họ và tên</label>
+                <input id="student-name" type="text" placeholder="Ví dụ: Nguyễn Văn A">
               </div>
               <div class="field">
-                <label for="student-class">Lop</label>
-                <input id="student-class" type="text" placeholder="Vi du: 12A1">
+                <label for="student-class">Lớp</label>
+                <input id="student-class" type="text" placeholder="Ví dụ: 12A1">
               </div>
             </div>
             <div class="grid two" style="margin-top:16px">
               <div class="field">
-                <label for="student-code">Ma hoc sinh / So bao danh</label>
-                <input id="student-code" type="text" placeholder="Vi du: 52120030">
+                <label for="student-code">Mã học sinh / Số báo danh</label>
+                <input id="student-code" type="text" placeholder="Ví dụ: 52120030">
               </div>
               <div class="field">
-                <label for="student-filter">Loc ma de</label>
-                <input id="student-filter" type="text" placeholder="Nhap ma de hoac ten de">
+                <label for="student-filter">Lọc mã đề</label>
+                <input id="student-filter" type="text" placeholder="Nhập mã đề hoặc tên đề">
               </div>
             </div>
             <div class="badge-row" style="margin-top:16px">
-              <span class="badge">Bai lam duoc tu luu trong trinh duyet</span>
-              <span class="badge navy">Khi het 50 phut he thong tu nop bai</span>
+              <span class="badge">Bài làm được tự lưu trong trình duyệt</span>
+              <span class="badge navy">Khi hết 50 phút hệ thống tự nộp bài</span>
             </div>
             <div id="student-message" class="message"></div>
           </div>
@@ -72,13 +74,13 @@
 
         <div class="panel">
           <div class="panel-header">
-            <h2 class="panel-title">2. Chon de thi da phat hanh</h2>
-            <p class="panel-subtitle">Chi cac de o trang thai publish moi xuat hien trong khu hoc sinh.</p>
+            <h2 class="panel-title">2. Chọn đề thi đã phát hành</h2>
+            <p class="panel-subtitle">Chỉ các đề đã phát hành mới xuất hiện trong khu học sinh.</p>
           </div>
           <div class="panel-body">
             <div id="exam-list" class="exam-list"></div>
             <div id="exam-empty" class="empty-state hint-box">
-              Hien chua co de nao duoc phat hanh. Hay chay server Node va publish it nhat mot de trong khu giao vien.
+              Hiện chưa có đề nào được phát hành. Hãy chạy server Node và phát hành ít nhất một đề trong khu giáo viên.
             </div>
           </div>
         </div>
@@ -90,56 +92,56 @@
             <div class="exam-header">
               <div>
                 <div class="badge-row">
-                  <span class="badge" id="active-exam-code">Ma de</span>
-                  <span class="badge navy" id="save-status">Chua bat dau autosave</span>
+                  <span class="badge" id="active-exam-code">Mã đề</span>
+                  <span class="badge navy" id="save-status">Chưa bắt đầu tự lưu</span>
                 </div>
-                <h2 id="active-exam-title">Ten de</h2>
+                <h2 id="active-exam-title">Tên đề</h2>
                 <div class="meta-row">
-                  <span class="badge success" id="active-student-meta">Hoc sinh</span>
-                  <span class="badge warning" id="active-progress-meta">Tien do 0%</span>
+                  <span class="badge success" id="active-student-meta">Học sinh</span>
+                  <span class="badge warning" id="active-progress-meta">Tiến độ 0%</span>
                 </div>
               </div>
               <div class="timer-box">
-                <div class="timer-label">Thoi gian con lai</div>
+                <div class="timer-label">Thời gian còn lại</div>
                 <div class="timer-value" id="timer-value">50:00</div>
               </div>
             </div>
             <div class="exam-content">
               <div class="question-heading">
                 <div>
-                  <div class="question-number" id="question-number">Cau 1</div>
-                  <div class="question-text" id="question-text">Noi dung cau hoi</div>
+                  <div class="question-number" id="question-number">Câu 1</div>
+                  <div class="question-text" id="question-text">Nội dung câu hỏi</div>
                 </div>
               </div>
               <div id="question-answer-zone"></div>
               <div class="toolbar" style="margin-top:22px">
-                <button class="btn btn-soft" id="prev-question">Cau truoc</button>
-                <button class="btn btn-soft" id="next-question">Cau tiep</button>
+                <button class="btn btn-soft" id="prev-question">Câu trước</button>
+                <button class="btn btn-soft" id="next-question">Câu tiếp</button>
               </div>
             </div>
           </div>
 
           <aside class="exam-sidebar">
             <div class="sidebar-block">
-              <h3 class="sidebar-title">Phieu tra loi nhanh</h3>
+              <h3 class="sidebar-title">Phiếu trả lời nhanh</h3>
               <div id="question-nav" class="nav-grid"></div>
             </div>
             <div class="sidebar-block">
-              <h3 class="sidebar-title">Tien do lam bai</h3>
+              <h3 class="sidebar-title">Tiến độ làm bài</h3>
               <div class="progress-row">
-                <span>Da tra loi</span>
+                <span>Đã trả lời</span>
                 <strong id="answered-summary">0/0</strong>
               </div>
               <div class="progress-track">
                 <div class="progress-fill" id="answer-progress"></div>
               </div>
-              <p class="note" id="autosave-note">Tu luu sau moi thao tac va dinh ky trong luc lam bai.</p>
+              <p class="note" id="autosave-note">Tự lưu sau mỗi thao tác và định kỳ trong lúc làm bài.</p>
             </div>
             <div class="sidebar-block">
               <div class="sidebar-actions">
-                <button class="btn btn-primary" id="submit-exam">Nop bai</button>
-                <button class="btn btn-soft" id="save-now">Luu ngay</button>
-                <button class="btn btn-danger" id="leave-exam">Huy luot lam hien tai</button>
+                <button class="btn btn-primary" id="submit-exam">Nộp bài</button>
+                <button class="btn btn-soft" id="save-now">Lưu ngay</button>
+                <button class="btn btn-danger" id="leave-exam">Hủy lượt làm hiện tại</button>
               </div>
             </div>
           </aside>
@@ -149,18 +151,18 @@
       <section class="result-stage" id="result-stage">
         <div class="panel">
           <div class="panel-header">
-            <h2 class="panel-title">Ket qua bai lam</h2>
-            <p class="panel-subtitle">Diem duoc cham o server, sau do tra ve phan tong hop va xem lai chi tiet tung cau.</p>
+            <h2 class="panel-title">Kết quả bài làm</h2>
+            <p class="panel-subtitle">Điểm được chấm ở server, sau đó trả về phần tổng hợp và xem lại chi tiết từng câu.</p>
           </div>
           <div class="panel-body">
             <div class="badge-row">
-              <span class="badge" id="result-exam-badge">Ma de</span>
-              <span class="badge navy" id="result-student-badge">Hoc sinh</span>
+              <span class="badge" id="result-exam-badge">Mã đề</span>
+              <span class="badge navy" id="result-student-badge">Học sinh</span>
             </div>
             <div class="result-grid" id="result-metrics"></div>
             <div class="toolbar">
-              <button class="btn btn-primary" id="start-another">Lam de khac</button>
-              <button class="btn btn-soft" id="back-home">Quay ve danh sach de</button>
+              <button class="btn btn-primary" id="start-another">Làm đề khác</button>
+              <button class="btn btn-soft" id="back-home">Quay về danh sách đề</button>
             </div>
             <div class="review-list" id="review-list"></div>
           </div>
@@ -171,21 +173,21 @@
     <section class="teacher-view" id="teacher-view">
       <div class="panel admin-login active" id="admin-login">
         <div class="panel-header">
-          <h2 class="panel-title">Dang nhap khu giao vien</h2>
-          <p class="panel-subtitle">V1 dung mot mat khau admin don. Hay cau hinh ADMIN_PASSWORD tren server de thay gia tri mac dinh.</p>
+          <h2 class="panel-title">Đăng nhập khu giáo viên</h2>
+          <p class="panel-subtitle">V1 dùng một mật khẩu admin đơn. Hãy cấu hình ADMIN_PASSWORD trên server để thay giá trị mặc định.</p>
         </div>
         <div class="panel-body">
           <div class="grid two">
             <div class="field">
-              <label for="admin-password">Mat khau admin</label>
-              <input id="admin-password" type="password" placeholder="Nhap mat khau quan tri">
+              <label for="admin-password">Mật khẩu admin</label>
+              <input id="admin-password" type="password" placeholder="Nhập mật khẩu quản trị">
             </div>
             <div class="field">
               <label>&nbsp;</label>
-              <button class="btn btn-primary" id="admin-login-btn" style="width:100%">Dang nhap</button>
+              <button class="btn btn-primary" id="admin-login-btn" style="width:100%">Đăng nhập</button>
             </div>
           </div>
-          <div class="note">Neu chua dat bien moi truong, backend hien dung mac dinh TinHoc2026!.</div>
+          <div class="note">Nếu chưa đặt biến môi trường, backend hiện dùng mặc định TinHoc2026!.</div>
           <div id="admin-login-message" class="message"></div>
         </div>
       </div>
@@ -194,26 +196,26 @@
         <div class="layout">
           <div class="panel">
             <div class="panel-header">
-              <h2 class="panel-title">Quan ly de thi</h2>
-              <p class="panel-subtitle">Tao de moi, chinh sua, phat hanh hoac xuat JSON tu cung mot giao dien.</p>
+              <h2 class="panel-title">Quản lý đề thi</h2>
+              <p class="panel-subtitle">Tạo đề mới, chỉnh sửa, phát hành hoặc xuất JSON từ cùng một giao diện.</p>
             </div>
             <div class="panel-body">
               <div class="toolbar">
-                <button class="btn btn-primary" id="new-exam-btn">Tao de moi</button>
-                <button class="btn btn-soft" id="reload-admin-btn">Tai lai danh sach</button>
-                <button class="btn btn-soft" id="logout-admin-btn">Dang xuat</button>
+                <button class="btn btn-primary" id="new-exam-btn">Tạo đề mới</button>
+                <button class="btn btn-soft" id="reload-admin-btn">Tải lại danh sách</button>
+                <button class="btn btn-soft" id="logout-admin-btn">Đăng xuất</button>
               </div>
               <div id="admin-message" class="message"></div>
               <div class="admin-shell">
                 <div class="panel slim-panel">
                   <div class="panel-header">
-                    <h3 class="panel-title panel-title-small">Danh sach de</h3>
-                    <p class="panel-subtitle">Chon mot de de chinh sua hoac xem thong ke.</p>
+                    <h3 class="panel-title panel-title-small">Danh sách đề</h3>
+                    <p class="panel-subtitle">Chọn một đề để chỉnh sửa hoặc xem thống kê.</p>
                   </div>
                   <div class="panel-body">
                     <div class="field">
-                      <label for="admin-filter">Loc theo ma de hoac ten de</label>
-                      <input id="admin-filter" type="text" placeholder="Tim de">
+                      <label for="admin-filter">Lọc theo mã đề hoặc tên đề</label>
+                      <input id="admin-filter" type="text" placeholder="Tìm đề">
                     </div>
                     <div class="list-stack" id="admin-exam-list" style="margin-top:16px"></div>
                   </div>
@@ -222,67 +224,68 @@
                 <div class="grid">
                   <div class="panel">
                     <div class="panel-header">
-                      <h3 class="panel-title panel-title-small">Bien soan de</h3>
-                      <p class="panel-subtitle">Moi de co dinh 50 phut. Ho tro cau 4 lua chon va cum dung/sai.</p>
+                      <h3 class="panel-title panel-title-small">Biên soạn đề</h3>
+                      <p class="panel-subtitle">Mỗi đề cố định 50 phút. Hỗ trợ câu 4 lựa chọn và cụm đúng/sai.</p>
                     </div>
                     <div class="panel-body">
                       <div class="grid two">
                         <div class="field">
-                          <label for="exam-code">Ma de</label>
-                          <input id="exam-code" type="text" placeholder="Vi du: 0501">
+                          <label for="exam-code">Mã đề</label>
+                          <input id="exam-code" type="text" placeholder="Ví dụ: 0501">
                         </div>
                         <div class="field">
-                          <label for="exam-status">Trang thai</label>
+                          <label for="exam-status">Trạng thái</label>
                           <select id="exam-status">
-                            <option value="draft">Nhap</option>
-                            <option value="published">Da publish</option>
+                            <option value="draft">Nháp</option>
+                            <option value="published">Đã phát hành</option>
                           </select>
                         </div>
                       </div>
                       <div class="field" style="margin-top:16px">
-                        <label for="exam-title">Tieu de de</label>
-                        <input id="exam-title" type="text" placeholder="Vi du: De on thi TNTHPT Tin hoc ma 0501">
+                        <label for="exam-title">Tiêu đề đề</label>
+                        <input id="exam-title" type="text" placeholder="Ví dụ: Đề ôn thi TNTHPT Tin học mã 0501">
                       </div>
                       <div class="field" style="margin-top:16px">
-                        <label for="exam-description">Mo ta ngan</label>
-                        <textarea id="exam-description" placeholder="Mo ta pham vi kien thuc hoac ghi chu cho hoc sinh"></textarea>
+                        <label for="exam-description">Mô tả ngắn</label>
+                        <textarea id="exam-description" placeholder="Mô tả phạm vi kiến thức hoặc ghi chú cho học sinh"></textarea>
                       </div>
                       <div class="badge-row" style="margin-top:16px">
-                        <span class="badge">Thoi gian co dinh: 50 phut</span>
-                        <span class="badge navy" id="question-count-badge">0 cau hoi</span>
+                        <span class="badge">Thời gian cố định: 50 phút</span>
+                        <span class="badge navy" id="question-count-badge">0 câu hỏi</span>
                       </div>
                       <div class="toolbar" style="margin-top:18px">
-                        <button class="btn btn-soft" id="add-mc-btn">Them cau 4 lua chon</button>
-                        <button class="btn btn-soft" id="add-tf-btn">Them cau dung/sai</button>
+                        <button class="btn btn-soft" id="add-mc-btn">Thêm câu 4 lựa chọn</button>
+                        <button class="btn btn-soft" id="add-tf-btn">Thêm câu đúng/sai</button>
                       </div>
                       <div id="question-editor-list" class="grid" style="margin-top:18px"></div>
                       <div class="toolbar" style="margin-top:22px">
-                        <button class="btn btn-primary" id="save-exam-btn">Luu de</button>
-                        <button class="btn btn-soft" id="publish-exam-btn">Luu va publish</button>
+                        <button class="btn btn-primary" id="save-exam-btn" type="button">Lưu đề</button>
+                        <button class="btn btn-soft" id="publish-exam-btn" type="button">Lưu và phát hành</button>
                       </div>
+                      <div id="editor-action-message" class="message"></div>
                     </div>
                   </div>
 
                   <div class="panel">
                     <div class="panel-header">
-                      <h3 class="panel-title panel-title-small">Import / Export JSON</h3>
-                      <p class="panel-subtitle">Dan JSON theo schema cua server hoac nap tu file de tao de moi.</p>
+                      <h3 class="panel-title panel-title-small">Nhập / Xuất JSON</h3>
+                      <p class="panel-subtitle">Dán JSON theo schema của server hoặc nạp từ file để tạo đề mới.</p>
                     </div>
                     <div class="panel-body">
                       <div class="field">
-                        <label for="import-json">JSON de thi</label>
+                        <label for="import-json">JSON đề thi</label>
                         <textarea id="import-json" placeholder='{
   "code": "0502",
-  "title": "De moi",
+  "title": "Đề mới",
   "description": "...",
   "status": "draft",
   "questions": []
 }'></textarea>
                       </div>
                       <div class="toolbar" style="margin-top:16px">
-                        <button class="btn btn-primary" id="import-json-btn">Import de tu JSON</button>
-                        <button class="btn btn-soft" id="pick-json-btn">Chon file JSON</button>
-                        <button class="btn btn-soft" id="fill-export-btn">Nap JSON cua de dang chon</button>
+                        <button class="btn btn-primary" id="import-json-btn">Nhập đề từ JSON</button>
+                        <button class="btn btn-soft" id="pick-json-btn">Chọn file JSON</button>
+                        <button class="btn btn-soft" id="fill-export-btn">Nạp JSON của đề đang chọn</button>
                       </div>
                       <input id="json-file-input" type="file" accept="application/json" hidden>
                     </div>
@@ -290,34 +293,34 @@
 
                   <div class="panel">
                     <div class="panel-header">
-                      <h3 class="panel-title panel-title-small">Thong ke ket qua</h3>
-                      <p class="panel-subtitle">Chon de de xem diem trung binh, phan bo diem va chi tiet tung luot lam.</p>
+                      <h3 class="panel-title panel-title-small">Thống kê kết quả</h3>
+                      <p class="panel-subtitle">Chọn đề để xem điểm trung bình, phân bố điểm và chi tiết từng lượt làm.</p>
                     </div>
                     <div class="panel-body">
                       <div class="grid two">
                         <div class="field">
-                          <label for="stats-exam-select">De can xem thong ke</label>
+                          <label for="stats-exam-select">Đề cần xem thống kê</label>
                           <select id="stats-exam-select"></select>
                         </div>
                         <div class="field">
                           <label>&nbsp;</label>
-                          <button class="btn btn-primary" id="load-stats-btn" style="width:100%">Tai thong ke</button>
+                          <button class="btn btn-primary" id="load-stats-btn" style="width:100%">Tải thống kê</button>
                         </div>
                       </div>
                       <div id="stats-metrics" class="stats-grid"></div>
-                      <div id="distribution-box" class="hint-box" style="margin-top:16px">Chua co du lieu thong ke cho de nay.</div>
+                      <div id="distribution-box" class="hint-box" style="margin-top:16px">Chưa có dữ liệu thống kê cho đề này.</div>
                       <div class="table-wrap" style="margin-top:16px">
                         <table>
                           <thead>
                             <tr>
-                              <th>Hoc sinh</th>
-                              <th>Lop</th>
-                              <th>Ma HS/SBD</th>
-                              <th>Diem</th>
-                              <th>Dung/Tong</th>
-                              <th>Thoi gian dung</th>
-                              <th>Nop bai luc</th>
-                              <th>Chi tiet</th>
+                              <th>Học sinh</th>
+                              <th>Lớp</th>
+                              <th>Mã HS/SBD</th>
+                              <th>Điểm</th>
+                              <th>Đúng/Tổng</th>
+                              <th>Thời gian dùng</th>
+                              <th>Nộp bài lúc</th>
+                              <th>Chi tiết</th>
                             </tr>
                           </thead>
                           <tbody id="stats-table-body"></tbody>
@@ -333,18 +336,18 @@
 
           <div class="panel">
             <div class="panel-header">
-              <h2 class="panel-title">Goi y su dung</h2>
-              <p class="panel-subtitle">Quy trinh nhanh de dua he thong vao su dung voi hoc sinh.</p>
+              <h2 class="panel-title">Gợi ý sử dụng</h2>
+              <p class="panel-subtitle">Quy trình nhanh để đưa hệ thống vào sử dụng với học sinh.</p>
             </div>
             <div class="panel-body">
               <div class="hint-box">
-                1. Chay npm install va npm start trong thu muc server/.<br>
-                2. Doi mat khau quan tri bang bien moi truong ADMIN_PASSWORD neu can.<br>
-                3. Vao khu giao vien de tao de hoac import JSON.<br>
-                4. Chuyen de sang trang thai publish.<br>
-                5. Cho hoc sinh mo trang nay va lam bai theo ma de.
+                1. Chạy npm install và npm start trong thư mục server/.<br>
+                2. Đổi mật khẩu quản trị bằng biến môi trường ADMIN_PASSWORD nếu cần.<br>
+                3. Vào khu giáo viên để tạo đề hoặc nhập JSON.<br>
+                4. Chuyển đề sang trạng thái phát hành.<br>
+                5. Cho học sinh mở trang này và làm bài theo mã đề.
               </div>
-              <div class="footer-note">Trang tu dung http://127.0.0.1:3000 khi mo local, hoac dung cung origin khi duoc phuc vu tu server web.</div>
+              <div class="footer-note">Trang ưu tiên data-api-base, có thể override tạm thời bằng tham số <code>?apiBase=https://...</code>. Khi mở local, trang tự thử thêm <code>http://127.0.0.1:3000</code>; khi host online, trang sẽ thử thêm cùng origin nếu có proxy <code>/api</code>.</div>
             </div>
           </div>
         </div>
