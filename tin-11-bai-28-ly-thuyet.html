@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 28: Tạo ảnh động bằng GIMP. Tìm hiểu cách xử lí lớp ảnh, thiết lập khung hình, xem thử hoạt ảnh, thêm thời gian hiển thị và xuất ảnh GIF lặp lại liên tục.">
+    <meta name="keywords" content="Tin học 11, Bài 28, tạo ảnh động, GIF, GIMP, layer, Open as Layers, Lock, Link layers, Merge Down, Playback, Blend">
+    <meta name="author" content="Ontinhoc">
+    <title>Tạo Ảnh Động | Tin 11 - Bài 28</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --accent-soft:#0f766e; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:860px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--accent-soft);margin-top:18px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+        .tool-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .tool-item h3{margin-top:0}
+        .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+        .compare-item{background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .compare-item strong{display:block;margin-bottom:8px;color:var(--accent)}
+        .summary-list{list-style:none;margin:0;padding:0}
+        .summary-list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+        .summary-list li:last-child{border-bottom:none}
+        .summary-list span{display:inline-block;min-width:18px;color:var(--primary);font-weight:700}
+        .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:16px}
+        .timeline-item{background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .timeline-item h3{margin-top:0}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:900px){
+            .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px;margin-top:48px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+            .tool-grid,.compare-grid,.timeline{grid-template-columns:1fr}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 28: Tạo ảnh động (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["GIF", "Layer", "Open as Layers", "Lock", "Link layers", "Merge Down", "Playback", "Blend", "GIMP", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học giới thiệu cách tạo ảnh động bằng GIMP từ nhiều lớp ảnh, thiết lập thời gian cho từng khung hình, thêm hiệu ứng blend và xuất ảnh GIF."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 28: Tạo ảnh động (GIMP)</h1>
+            <p>Bài học giúp em biết cách tạo ảnh động GIF từ nhiều lớp ảnh trong GIMP, xử lí các lớp an toàn hơn bằng khóa, liên kết, gộp lớp và thiết lập thời gian cho từng khung hình trước khi xuất thành ảnh động hoàn chỉnh.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#xu-li-layer">Xử lí lớp ảnh</a>
+                <a href="#thiet-lap-gif">Thiết lập ảnh động</a>
+                <a href="#hieu-ung">Hiệu ứng</a>
+                <a href="#thuc-hanh">Thực hành</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết cách tạo ảnh động <strong>GIF</strong> từ các lớp ảnh (<strong>layers</strong>).</li>
+                    <li>Thực hiện được các thao tác xử lí lớp ảnh và thiết lập ảnh động trong <strong>GIMP</strong>.</li>
+                </ul>
+
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">GIF</span>
+                    <span class="badge">Layer</span>
+                    <span class="badge">Playback</span>
+                    <span class="badge">Blend</span>
+                    <span class="badge">Export As</span>
+                </div>
+            </section>
+
+            <section id="xu-li-layer" class="card" aria-labelledby="xu-li-layer-title">
+                <h2 id="xu-li-layer-title">II. Các thao tác xử lí trên lớp ảnh</h2>
+
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>Mở ảnh thành nhiều lớp</h3>
+                        <ul>
+                            <li>Chọn <code>File → Open as Layers</code>.</li>
+                            <li>Mỗi ảnh được đưa vào sẽ trở thành một lớp riêng.</li>
+                            <li>Cách này rất phù hợp khi chuẩn bị các khung hình cho ảnh động.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Khóa lớp (Lock)</h3>
+                        <ul>
+                            <li>Dùng để tránh chỉnh sửa nhầm lớp đã hoàn thiện.</li>
+                            <li>Nên khóa các lớp không muốn thay đổi trong lúc làm việc.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Gom cụm lớp (Link layers)</h3>
+                        <ul>
+                            <li>Liên kết nhiều lớp để thao tác cùng lúc.</li>
+                            <li>Phù hợp khi cần di chuyển hoặc biến đổi một nhóm khung hình theo cùng cách.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Gộp lớp (Merge Down)</h3>
+                        <ul>
+                            <li>Gộp lớp hiện tại với lớp ngay bên dưới.</li>
+                            <li>Giúp giảm số lượng lớp và hoàn thiện từng khung hình.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>Ý nghĩa:</strong> khi biết quản lí lớp tốt, em sẽ chuẩn bị được các khung hình rõ ràng, tránh nhầm lẫn và tiết kiệm thời gian khi làm ảnh động.
+                </div>
+            </section>
+
+            <section id="thiet-lap-gif" class="card" aria-labelledby="thiet-lap-gif-title">
+                <h2 id="thiet-lap-gif-title">III. Thiết lập ảnh động từ lớp ảnh</h2>
+
+                <h3>Nguyên lí hoạt động</h3>
+                <ul>
+                    <li>Mỗi lớp tương ứng với <strong>một khung hình</strong> của ảnh động.</li>
+                    <li>Các lớp được hiển thị lần lượt từ dưới lên để tạo cảm giác chuyển động.</li>
+                </ul>
+
+                <div class="timeline" aria-label="Quy trình tạo ảnh động">
+                    <article class="timeline-item">
+                        <h3>1. Sắp xếp lớp</h3>
+                        <p>Chuẩn bị các lớp theo đúng thứ tự khung hình muốn hiển thị.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>2. Xem thử</h3>
+                        <p>Dùng <code>Filters → Animation → Playback</code> để kiểm tra chuyển động.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>3. Đặt thời gian</h3>
+                        <p>Thêm thời lượng vào tên lớp, ví dụ <code>Frame 1 (1000ms)</code>.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>4. Xuất GIF</h3>
+                        <p>Chọn <code>File → Export As</code> rồi xuất với đuôi <code>.gif</code>.</p>
+                    </article>
+                </div>
+
+                <h3>Thiết lập khi xuất ảnh động</h3>
+                <ul>
+                    <li>Chọn đúng định dạng <code>.gif</code>.</li>
+                    <li>Bật <strong>As Animation</strong> để tạo ảnh động.</li>
+                    <li>Bật <strong>Loop forever</strong> để ảnh lặp lại liên tục.</li>
+                    <li>Thiết lập thời gian giữa các khung hình nếu cần điều chỉnh thêm.</li>
+                </ul>
+
+                <div class="steps" role="note">
+                    <strong>Ví dụ:</strong> nếu tên lớp là <code>Frame 1 (1000ms)</code> thì khung hình đó sẽ hiển thị trong 1 giây trước khi chuyển sang khung tiếp theo.
+                </div>
+            </section>
+
+            <section id="hieu-ung" class="card" aria-labelledby="hieu-ung-title">
+                <h2 id="hieu-ung-title">IV. Hiệu ứng trong ảnh động</h2>
+
+                <div class="compare-grid">
+                    <article class="compare-item">
+                        <strong>Hiệu ứng Blend (mờ dần)</strong>
+                        <p>Blend tạo thêm các khung trung gian giữa hai trạng thái để chuyển động mượt hơn, tự nhiên hơn thay vì đổi hình đột ngột.</p>
+                    </article>
+                    <article class="compare-item">
+                        <strong>Điều kiện sử dụng</strong>
+                        <p>Cần có ít nhất <strong>3 lớp</strong> để hiệu ứng thể hiện rõ. Người dùng có thể điều chỉnh số khung trung gian bằng tham số <strong>Intermediate frames</strong>.</p>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>Nhận xét:</strong> càng nhiều khung trung gian thì chuyển động càng mượt, nhưng dung lượng tệp GIF cũng có thể tăng lên.
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">V. Thực hành (tóm tắt)</h2>
+
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>Nhiệm vụ 1: Vẽ hình tròn từ các nét</h3>
+                        <ul>
+                            <li>Tạo một layer và vẽ một nét cơ bản.</li>
+                            <li>Nhân bản lớp bằng <strong>Duplicate</strong>.</li>
+                            <li>Dùng <strong>Transform</strong> để xoay từng nét theo vị trí mong muốn.</li>
+                            <li>Gộp các lớp để hoàn thiện hình tròn.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Nhiệm vụ 2: Tạo ảnh động biểu tượng chờ</h3>
+                        <ul>
+                            <li>Tô màu từng nét theo thứ tự xuất hiện.</li>
+                            <li>Mỗi trạng thái màu tương ứng với một lớp.</li>
+                            <li>Xuất thành GIF để tạo hiệu ứng quay của biểu tượng chờ.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="steps" role="note">
+                    <strong>Tóm tắt quy trình:</strong> chuẩn bị nhiều lớp ảnh, sắp xếp thứ tự, đặt thời gian cho từng lớp rồi xuất thành GIF để tạo ảnh động hoàn chỉnh.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">VI. Ghi nhớ quan trọng</h2>
+                <ul class="summary-list">
+                    <li><span>1.</span><div><strong>Ảnh động</strong> là nhiều lớp ảnh hiển thị liên tiếp theo thứ tự.</div></li>
+                    <li><span>2.</span><div>Có thể điều chỉnh <strong>thời gian riêng</strong> cho từng khung hình bằng cách ghi <code>(X ms)</code> trong tên lớp.</div></li>
+                    <li><span>3.</span><div>Khi xuất tệp, cần chọn đúng định dạng <strong>GIF</strong> và bật <strong>Animation</strong> cùng <strong>Loop forever</strong>.</div></li>
+                    <li><span>4.</span><div>Hiệu ứng <strong>Blend</strong> tạo khung trung gian để chuyển động mượt hơn.</div></li>
+                    <li><span>5.</span><div>Muốn tạo ảnh động trong GIMP: chuẩn bị nhiều lớp ảnh → sắp xếp thứ tự → đặt thời gian → xuất GIF.</div></li>
+                </ul>
+
+                <div class="keywords" aria-label="Từ khóa ghi nhớ">
+                    <span class="badge">Open as Layers</span>
+                    <span class="badge">Merge Down</span>
+                    <span class="badge">Playback</span>
+                    <span class="badge">Loop forever</span>
+                    <span class="badge">Intermediate frames</span>
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>

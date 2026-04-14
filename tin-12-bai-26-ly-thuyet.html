@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 12 - Bài 26: Tạo liên kết và thanh điều hướng cho website bằng Google Sites. Tìm hiểu cấu trúc hình cây, trang chủ, trang con, menu điều hướng và cách chèn liên kết Đọc tiếp.">
+    <meta name="keywords" content="Tin học 12, Bài 26, liên kết trang web, thanh điều hướng, menu, Google Sites, trang con, cấu trúc cây, đọc tiếp">
+    <meta name="author" content="Ontinhoc">
+    <title>Tạo Liên Kết Và Thanh Điều Hướng | Tin 12 - Bài 26</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --success:#0f766e; --warm:#f97316; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(2,6,23,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:840px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--success);margin-top:16px;margin-bottom:8px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid var(--warm);padding:14px;border-radius:8px;margin-top:12px}
+        .summary{background:#f0fdf4;border-left:4px solid var(--success);padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+        .panel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .panel h3{margin-top:0}
+        .panel ul{margin-bottom:0}
+        .step-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+        .step-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .step-card h3{margin-top:0}
+        .flow{display:grid;grid-template-columns:1.2fr auto 1fr;gap:12px;align-items:center;margin-top:16px}
+        .flow-box{background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .flow-arrow{font-size:1.8rem;color:var(--accent);text-align:center}
+        .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        strong{font-weight:700}
+        @media(max-width:900px){
+            .triptych,.step-list,.duo{grid-template-columns:1fr}
+            .flow{grid-template-columns:1fr}
+            .flow-arrow{transform:rotate(90deg)}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 26: Tạo liên kết và thanh điều hướng (Tin học 12)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Google Sites", "Liên kết", "Thanh điều hướng", "Trang con", "Cấu trúc cây", "Tin học 12"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học hướng dẫn tạo liên kết giữa các trang, tổ chức website theo cấu trúc cây, tạo trang con và thiết lập thanh điều hướng trong Google Sites."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin học 12 - Bài 26: Tạo liên kết và thanh điều hướng</h1>
+            <p>Bài học giúp em biết cách tạo liên kết giữa các trang web, tổ chức website theo cấu trúc hình cây với trang chủ và trang con, đồng thời thiết lập thanh điều hướng để người xem truy cập nội dung nhanh bằng Google Sites.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#mo-hinh-cay">Mô hình cây</a>
+                <a href="#lien-ket-menu">Liên kết và menu</a>
+                <a href="#tao-trang-con">Tạo trang con</a>
+                <a href="#dieu-huong">Điều hướng</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">1. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Biết cách tạo liên kết giữa các trang web.</li>
+                    <li>Biết thiết lập thanh điều hướng (menu) để truy cập nhanh các trang.</li>
+                    <li>Biết sử dụng <strong>Google Sites</strong> để tổ chức website theo hệ thống trang chủ và trang con.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">Google Sites</span>
+                    <span class="badge">Liên kết</span>
+                    <span class="badge">Menu</span>
+                    <span class="badge">Trang con</span>
+                    <span class="badge">Cấu trúc cây</span>
+                </div>
+            </section>
+
+            <section id="mo-hinh-cay" class="card" aria-labelledby="mo-hinh-cay-title">
+                <h2 id="mo-hinh-cay-title">2. Mô hình tổ chức website theo cấu trúc hình cây</h2>
+                <p>Một website thường được tổ chức từ <strong>trang chủ</strong> đến các <strong>trang con</strong>. Cách sắp xếp này tạo thành một cấu trúc giống cây thư mục, giúp nội dung mạch lạc và dễ tìm.</p>
+
+                <div class="flow" aria-label="Cấu trúc website dạng cây">
+                    <article class="flow-box">
+                        <h3>Trang chủ</h3>
+                        <ul>
+                            <li>Chứa nội dung tóm tắt.</li>
+                            <li>Có các liên kết như <code>Đọc tiếp</code> để mở phần chi tiết.</li>
+                            <li>Đóng vai trò trung tâm điều hướng.</li>
+                        </ul>
+                    </article>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <article class="flow-box">
+                        <h3>Trang con</h3>
+                        <ul>
+                            <li>Chứa nội dung chi tiết hơn.</li>
+                            <li>Có thể tạo nhiều cấp trang con.</li>
+                            <li>Liên kết ngược hoặc liên kết ngang với các trang khác.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="triptych" aria-label="Đặc điểm và lợi ích của cấu trúc cây">
+                    <article class="panel">
+                        <h3>Thành phần</h3>
+                        <ul>
+                            <li>Trang web gồm trang chủ và các trang con.</li>
+                            <li>Mỗi trang đảm nhiệm một nhóm nội dung riêng.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Đặc điểm</h3>
+                        <ul>
+                            <li>Trang chủ chỉ tóm tắt ý chính.</li>
+                            <li>Trang con trình bày chi tiết và đầy đủ hơn.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Lợi ích</h3>
+                        <ul>
+                            <li>Trình bày gọn gàng, dễ đọc.</li>
+                            <li>Tránh làm một trang quá dài và rối.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="summary" role="note">
+                    <strong>Kết luận:</strong> tổ chức website theo cấu trúc cây giúp người đọc định hướng tốt hơn và giúp người thiết kế quản lí nội dung rõ ràng hơn.
+                </div>
+            </section>
+
+            <section id="lien-ket-menu" class="card" aria-labelledby="lien-ket-menu-title">
+                <h2 id="lien-ket-menu-title">3. Liên kết và thanh điều hướng</h2>
+                <div class="duo" aria-label="Liên kết và thanh điều hướng">
+                    <article class="panel">
+                        <h3>Liên kết (Link)</h3>
+                        <ul>
+                            <li>Dùng để chuyển từ trang này sang trang khác.</li>
+                            <li>Thường gắn vào chữ hoặc cụm từ như <code>Đọc tiếp</code>.</li>
+                            <li>Giúp nối trang chủ với các trang con tương ứng.</li>
+                        </ul>
+                    </article>
+                    <article class="panel">
+                        <h3>Thanh điều hướng (Menu)</h3>
+                        <ul>
+                            <li>Chứa các liên kết đến các trang trong website.</li>
+                            <li>Hoạt động như bảng chọn giúp truy cập nhanh.</li>
+                            <li>Trang được mở từ menu thường là các trang con.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>Ý nghĩa:</strong> liên kết là sợi nối giữa các trang, còn thanh điều hướng là nơi tập trung các liên kết quan trọng nhất để người dùng không bị lạc hướng khi xem website.
+                </div>
+            </section>
+
+            <section id="tao-trang-con" class="card" aria-labelledby="tao-trang-con-title">
+                <h2 id="tao-trang-con-title">4. Tạo và sử dụng trang con trong Google Sites</h2>
+                <div class="step-list" aria-label="Các bước tạo và dùng trang con">
+                    <article class="step-card">
+                        <h3>Bước 1: Tạo trang con</h3>
+                        <ul>
+                            <li>Chọn thẻ <strong>Trang (Pages)</strong>.</li>
+                            <li>Chọn lệnh <strong>Thêm trang con</strong>.</li>
+                            <li>Nhập tên trang rồi xác nhận.</li>
+                            <li>Có thể tạo nhiều cấp trang con nếu cần.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 2: Truy cập trang con</h3>
+                        <ul>
+                            <li>Quay lại trang chủ hoặc mở menu điều hướng.</li>
+                            <li>Nháy vào tên trang con để mở nội dung tương ứng.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 3: Thêm nội dung</h3>
+                        <ul>
+                            <li>Chỉnh sửa tiêu đề và hình nền.</li>
+                            <li>Thêm văn bản, hình ảnh, video hoặc nội dung khác.</li>
+                            <li>Trang con nên trình bày nội dung chi tiết hơn trang chủ.</li>
+                        </ul>
+                    </article>
+                    <article class="step-card">
+                        <h3>Bước 4: Tạo liên kết trong bài</h3>
+                        <ul>
+                            <li>Chọn đoạn văn hoặc cụm từ cần gắn link.</li>
+                            <li>Chèn liên kết đến đúng trang con tương ứng.</li>
+                            <li>Có thể dùng cụm từ quen thuộc như <code>Đọc tiếp</code>.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="steps" role="note">
+                    <strong>Lưu ý thao tác:</strong> nên viết ngắn ở trang chủ, sau đó dẫn sang trang con bằng liên kết để website rõ ý, dễ nhìn và dễ mở rộng khi nội dung tăng lên.
+                </div>
+            </section>
+
+            <section id="dieu-huong" class="card" aria-labelledby="dieu-huong-title">
+                <h2 id="dieu-huong-title">5. Thiết lập thanh điều hướng</h2>
+                <ul>
+                    <li>Google Sites có khả năng tự điều chỉnh giao diện theo từng loại thiết bị.</li>
+                    <li>Có thể đặt menu dạng bên để phù hợp với cách hiển thị trên điện thoại.</li>
+                    <li>Việc thay đổi kiểu điều hướng được thực hiện trong <strong>Cài đặt → Điều hướng</strong>.</li>
+                </ul>
+
+                <h3>Khi nào cần chú ý đến menu?</h3>
+                <ul>
+                    <li>Khi website có nhiều trang và nhiều nhóm nội dung.</li>
+                    <li>Khi cần giúp người dùng tìm nhanh phần cần đọc.</li>
+                    <li>Khi muốn giao diện hiển thị tốt trên cả máy tính và điện thoại.</li>
+                </ul>
+
+                <div class="summary" role="note">
+                    <strong>Điểm mạnh của Google Sites:</strong> giao diện điều hướng đã được tối ưu responsive, nên khi em tổ chức trang hợp lí thì menu sẽ hỗ trợ truy cập rất hiệu quả trên nhiều thiết bị.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">6. Ghi nhớ trọng tâm</h2>
+                <ul>
+                    <li>Website thường được tổ chức theo cấu trúc cây: <strong>trang chủ → trang con</strong>.</li>
+                    <li><strong>Liên kết</strong> giúp kết nối và chuyển giữa các trang.</li>
+                    <li><strong>Thanh điều hướng</strong> giúp truy cập nhanh đến các nội dung chính.</li>
+                    <li><strong>Trang chủ</strong> nên ngắn gọn, đóng vai trò giới thiệu và dẫn đến phần chi tiết.</li>
+                    <li><strong>Trang con</strong> nên chứa nội dung đầy đủ, cụ thể và dễ theo dõi.</li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 12. &copy; 2026 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', event => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
