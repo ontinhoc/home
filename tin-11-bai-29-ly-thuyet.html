@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 29: Khám phá phần mềm làm phim. Tìm hiểu vai trò của phần mềm dựng phim, các thành phần giao diện chính, cấu trúc đoạn phim theo track và quy trình tạo video bằng VideoPad.">
+    <meta name="keywords" content="Tin học 11, Bài 29, phần mềm làm phim, VideoPad, storyboard, timeline, track, video track, audio track, xuất video, mp4">
+    <meta name="author" content="Ontinhoc">
+    <title>Khám Phá Phần Mềm Làm Phim | Tin 11 - Bài 29</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --accent-soft:#0f766e; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:860px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--accent-soft);margin-top:18px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+        .tool-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .tool-item h3{margin-top:0}
+        .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+        .compare-item{background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .compare-item strong{display:block;margin-bottom:8px;color:var(--accent)}
+        .timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:16px}
+        .timeline-item{background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .timeline-item h3{margin-top:0}
+        .summary-list{list-style:none;margin:0;padding:0}
+        .summary-list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+        .summary-list li:last-child{border-bottom:none}
+        .summary-list span{display:inline-block;min-width:18px;color:var(--primary);font-weight:700}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:980px){
+            .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px;margin-top:48px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+            .tool-grid,.compare-grid,.timeline{grid-template-columns:1fr}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 29: Khám phá phần mềm làm phim (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["VideoPad", "Storyboard", "Timeline", "Video track", "Audio track", "Xuất video", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học giới thiệu phần mềm làm phim, các thành phần giao diện chính, cấu trúc đoạn phim và quy trình tạo, biên tập, xuất bản video bằng VideoPad."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 29: Khám phá phần mềm làm phim</h1>
+            <p>Bài học giúp em nhận biết vai trò của phần mềm làm phim, hiểu các thành phần chính trong giao diện dựng phim, nắm cấu trúc đoạn phim theo phân cảnh và track, đồng thời biết tạo, biên tập và xuất một video đơn giản bằng VideoPad.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#kham-pha">Khám phá phần mềm</a>
+                <a href="#cau-truc-phim">Cấu trúc đoạn phim</a>
+                <a href="#thuc-hanh">Tạo và biên tập</a>
+                <a href="#xuat-ban">Xuất bản</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">I. Mục tiêu bài học</h2>
+                <ul>
+                    <li>Tạo được đoạn phim từ ảnh và video có sẵn.</li>
+                    <li>Biết biên tập phim để phục vụ học tập và giải trí.</li>
+                </ul>
+
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">VideoPad</span>
+                    <span class="badge">Storyboard</span>
+                    <span class="badge">Timeline</span>
+                    <span class="badge">Video track</span>
+                    <span class="badge">Audio track</span>
+                </div>
+            </section>
+
+            <section id="kham-pha" class="card" aria-labelledby="kham-pha-title">
+                <h2 id="kham-pha-title">II. Khám phá phần mềm làm phim</h2>
+
+                <h3>1. Vai trò của phần mềm</h3>
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>Tạo và chỉnh sửa video</h3>
+                        <ul>
+                            <li>Ghép nội dung từ <strong>ảnh</strong>, <strong>video</strong> và <strong>âm thanh</strong>.</li>
+                            <li>Cắt, sắp xếp và điều chỉnh tư liệu để tạo sản phẩm hoàn chỉnh.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Sắp xếp tư liệu theo thời gian</h3>
+                        <ul>
+                            <li>Mỗi tư liệu được đặt đúng vị trí xuất hiện trong phim.</li>
+                            <li>Thời lượng của từng cảnh quyết định nhịp trình bày nội dung.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <h3>2. Các thành phần chính của phần mềm</h3>
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>Thanh công cụ</h3>
+                        <p>Chứa các lệnh dùng để thêm tư liệu, chỉnh sửa, chèn hiệu ứng và xuất video.</p>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Ngăn tư liệu</h3>
+                        <p>Lưu các tệp đầu vào như ảnh, video, âm thanh để đưa vào dự án.</p>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Ngăn xem trước</h3>
+                        <p>Hiển thị video tại thời điểm đang chọn để người dùng theo dõi và kiểm tra chỉnh sửa.</p>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Con trỏ thời điểm</h3>
+                        <p>Xác định chính xác vị trí đang xem hoặc đang biên tập trên đoạn phim.</p>
+                    </article>
+                </div>
+
+                <div class="compare-grid" aria-label="Hai cách hiển thị tiến trình">
+                    <article class="compare-item">
+                        <strong>Storyboard (Phân cảnh)</strong>
+                        <p>Hiển thị từng cảnh dưới dạng đơn giản, phù hợp khi cần quan sát thứ tự các cảnh trong video.</p>
+                    </article>
+                    <article class="compare-item">
+                        <strong>Timeline (Dòng thời gian)</strong>
+                        <p>Hiển thị chi tiết theo thời gian và theo lớp nội dung, thuận tiện cho việc chỉnh chính xác hình và âm thanh.</p>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>Nhận xét:</strong> phần mềm làm phim không chỉ ghép tư liệu lại với nhau mà còn giúp quản lí thời gian, thứ tự và cách các thành phần phát đồng thời trong cùng một đoạn video.
+                </div>
+            </section>
+
+            <section id="cau-truc-phim" class="card" aria-labelledby="cau-truc-phim-title">
+                <h2 id="cau-truc-phim-title">III. Cấu trúc của một đoạn phim</h2>
+
+                <ul>
+                    <li>Một đoạn phim gồm nhiều <strong>phân cảnh</strong> (scene).</li>
+                    <li>Trong mỗi đoạn phim có thể có nhiều <strong>lớp nội dung</strong> (track).</li>
+                    <li>Các lớp này phát <strong>đồng thời theo thời gian</strong> để tạo ra hình ảnh và âm thanh hoàn chỉnh.</li>
+                </ul>
+
+                <div class="compare-grid">
+                    <article class="compare-item">
+                        <strong>Video track</strong>
+                        <p>Chứa ảnh, đoạn video, chữ mở đầu hoặc kết thúc và các thành phần trực quan khác.</p>
+                    </article>
+                    <article class="compare-item">
+                        <strong>Audio track</strong>
+                        <p>Chứa lời nói, âm thanh môi trường hoặc nhạc nền để tăng hiệu quả truyền đạt.</p>
+                    </article>
+                </div>
+
+                <div class="steps" role="note">
+                    <strong>Cách hiểu đơn giản:</strong> storyboard cho ta nhìn tổng quát theo cảnh, còn timeline cho ta thấy mỗi cảnh kéo dài bao lâu và từng track xuất hiện ở thời điểm nào.
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">IV. Thực hành tạo và biên tập phim</h2>
+
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>Nhiệm vụ 1: Chuẩn bị</h3>
+                        <ul>
+                            <li>Chuẩn bị khoảng <strong>5 ảnh</strong> và <strong>1 video</strong>.</li>
+                            <li>Xây dựng ý tưởng, kịch bản và sắp xếp thứ tự các cảnh trước khi dựng phim.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>Nhiệm vụ 2: Tạo phim</h3>
+                        <ul>
+                            <li>Mở phần mềm <strong>VideoPad</strong>.</li>
+                            <li>Chọn <code>Video Wizard</code> và dùng một mẫu có sẵn để bắt đầu nhanh.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="timeline" aria-label="Các bước tạo phim">
+                    <article class="timeline-item">
+                        <h3>Bước 1</h3>
+                        <p>Khởi động VideoPad để tạo dự án làm phim mới.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 2</h3>
+                        <p>Chọn <code>Video Wizard</code> và chọn mẫu phù hợp với nội dung muốn thực hiện.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 3</h3>
+                        <p>Thêm ảnh, video, âm thanh; biên tập phần mở đầu, kết thúc và xem trước sản phẩm.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 4</h3>
+                        <p>Nhấn <code>Create</code> để phần mềm tạo video hoàn chỉnh theo các lựa chọn đã thiết lập.</p>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 5</h3>
+                        <p>Lưu dự án với đuôi <code>.vpj</code> để có thể mở lại và chỉnh sửa sau này.</p>
+                    </article>
+                </div>
+
+                <h3>Chi tiết biên tập trong bước 3</h3>
+                <div class="tool-grid">
+                    <article class="tool-item">
+                        <h3>3.1. Thêm tư liệu</h3>
+                        <ul>
+                            <li>Chọn ảnh và video mong muốn.</li>
+                            <li>Đưa các tư liệu này vào dự án để sắp xếp lên timeline.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>3.2. Thêm âm thanh</h3>
+                        <ul>
+                            <li>Có thể không dùng nhạc.</li>
+                            <li>Có thể dùng nhạc có sẵn hoặc thêm nhạc riêng phù hợp nội dung.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>3.3. Biên tập mở đầu</h3>
+                        <ul>
+                            <li>Chọn một ảnh làm nền cho phần giới thiệu.</li>
+                            <li>Nhập nội dung chữ để tạo intro rõ chủ đề.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tool-item">
+                        <h3>3.4. Biên tập kết thúc</h3>
+                        <ul>
+                            <li>Thực hiện tương tự phần mở đầu.</li>
+                            <li>Có thể thêm lời cảm ơn, tên nhóm hoặc thông điệp kết thúc.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="note" role="note">
+                    <strong>3.5. Xem trước:</strong> sau khi biên tập, cần kiểm tra lại toàn bộ video để phát hiện lỗi về thứ tự cảnh, chữ, âm thanh hoặc thời lượng rồi mới tạo video cuối cùng.
+                </div>
+            </section>
+
+            <section id="xuat-ban" class="card" aria-labelledby="xuat-ban-title">
+                <h2 id="xuat-ban-title">V. Xuất bản video</h2>
+
+                <ul>
+                    <li>Đặt tên tệp video.</li>
+                    <li>Chọn thư mục lưu phù hợp.</li>
+                    <li>Chọn định dạng xuất, ví dụ <code>.mp4</code>.</li>
+                    <li>Nhấn <code>Create</code> để xuất video ra tệp hoàn chỉnh.</li>
+                </ul>
+
+                <div class="steps" role="note">
+                    <strong>Lưu ý:</strong> tệp <code>.vpj</code> là tệp dự án để chỉnh sửa tiếp, còn tệp video như <code>.mp4</code> là sản phẩm dùng để xem và chia sẻ.
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">VI. Ghi nhớ và luyện tập</h2>
+                <ul class="summary-list">
+                    <li><span>1.</span><div>Phần mềm làm phim giúp <strong>sắp xếp tư liệu</strong>, tạo phân cảnh và ghép thành một đoạn phim hoàn chỉnh.</div></li>
+                    <li><span>2.</span><div>Một đoạn phim thường có ba phần: <strong>mở đầu</strong>, <strong>nội dung chính</strong> và <strong>kết thúc</strong>.</div></li>
+                    <li><span>3.</span><div><strong>Timeline</strong> giúp quản lí thời gian và các lớp nội dung chi tiết hơn <strong>Storyboard</strong>.</div></li>
+                    <li><span>4.</span><div>Cần quan sát các loại tư liệu như <strong>Sequences</strong>, <strong>Video</strong>, <strong>Audio</strong>, <strong>Images</strong> để chọn đúng nguồn khi dựng phim.</div></li>
+                    <li><span>5.</span><div>Có thể tự tạo một video mới với tư liệu khác và chọn nhạc nền theo ý thích để vận dụng bài học.</div></li>
+                </ul>
+
+                <div class="note" role="note">
+                    <strong>Tóm lại:</strong> phần mềm làm phim giúp biến ảnh, video và âm thanh thành một đoạn phim hoàn chỉnh thông qua việc sắp xếp, chỉnh sửa và thêm hiệu ứng theo thời gian.
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
