@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 30: Biên tập phim. Tìm hiểu các công cụ cơ bản để chỉnh sửa hình ảnh, âm thanh, tạo hiệu ứng chuyển cảnh, căn chỉnh thời gian và tạo phụ đề cho phim bằng VideoPad.">
+    <meta name="keywords" content="Tin học 11, Bài 30, biên tập phim, VideoPad, chỉnh sửa hình ảnh, âm thanh, hiệu ứng chuyển cảnh, phụ đề, timeline">
+    <meta name="author" content="Ontinhoc">
+    <title>Biên Tập Phim | Tin 11 - Bài 30</title>
+    <style>
+        :root{--bg:#f7fafc; --card:#fff; --primary:#0ea5e9; --muted:#64748b; --accent:#0369a1; --accent-soft:#0f766e; --radius:12px; --content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:860px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--accent-soft);margin-top:18px}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+        .tool-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .tool-item h3{margin-top:0}
+        .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+        .compare-item{background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .compare-item strong{display:block;margin-bottom:8px;color:var(--accent)}
+        .timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:16px}
+        .timeline-item{background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .timeline-item h3{margin-top:0}
+        .summary-list{list-style:none;margin:0;padding:0}
+        .summary-list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+        .summary-list li:last-child{border-bottom:none}
+        .summary-list span{display:inline-block;min-width:18px;color:var(--primary);font-weight:700}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        @media(max-width:980px){
+            .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px;margin-top:48px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+            .tool-grid,.compare-grid,.timeline{grid-template-columns:1fr}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 30: Biên tập phim (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["VideoPad", "Biên tập phim", "Chỉnh sửa hình ảnh", "Âm thanh", "Hiệu ứng chuyển cảnh", "Phụ đề", "Timeline", "Tin học 11"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học hướng dẫn các công cụ biên tập phim cơ bản, thực hành chỉnh sửa hình ảnh, âm thanh, tạo hiệu ứng chuyển cảnh, căn chỉnh thời gian và tạo phụ đề bằng VideoPad."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 30: Biên tập phim</h1>
+            <p>Bài học giúp em sử dụng được các công cụ cơ bản để chỉnh sửa hình ảnh, âm thanh, tạo hiệu ứng chuyển cảnh, căn chỉnh thời gian và tạo phụ đề cho phim bằng phần mềm VideoPad.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#cong-cu">Công cụ biên tập</a>
+                <a href="#thuc-hanh">Thực hành</a>
+                <a href="#luyen-tap">Luyện tập</a>
+                <a href="#van-dung">Vận dụng</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">🎯 Mục tiêu bài học</h2>
+                <ul>
+                    <li>Sử dụng được các công cụ cơ bản để:</li>
+                    <ul>
+                        <li>Chỉnh sửa hình ảnh, âm thanh</li>
+                        <li>Tạo hiệu ứng chuyển cảnh</li>
+                        <li>Căn chỉnh thời gian</li>
+                        <li>Tạo phụ đề cho phim</li>
+                    </ul>
+                </ul>
+
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">VideoPad</span>
+                    <span class="badge">Biên tập phim</span>
+                    <span class="badge">Chỉnh sửa hình ảnh</span>
+                    <span class="badge">Âm thanh</span>
+                    <span class="badge">Hiệu ứng chuyển cảnh</span>
+                    <span class="badge">Phụ đề</span>
+                </div>
+            </section>
+
+            <section id="cong-cu" class="card" aria-labelledby="cong-cu-title">
+                <h2 id="cong-cu-title">🧩 Các công cụ biên tập phim cơ bản</h2>
+
+                <h3>a) 🖼️ Chỉnh sửa hình ảnh</h3>
+                <div class="tool-item">
+                    <h3>Thao tác chính</h3>
+                    <ul>
+                        <li>Thêm, thay thế, xóa ảnh/video</li>
+                        <li>Điều chỉnh hướng, góc quay</li>
+                        <li>Tạo hiệu ứng hình ảnh</li>
+                    </ul>
+                    <p>Thực hiện qua các lệnh trong ngăn Tư liệu</p>
+                </div>
+
+                <h3>b) 🔊 Chỉnh sửa âm thanh</h3>
+                <div class="tool-item">
+                    <h3>Vai trò</h3>
+                    <p>Tăng chất lượng và cảm xúc cho phim</p>
+                    <h3>Chức năng</h3>
+                    <ul>
+                        <li>Thêm âm thanh</li>
+                        <li>Ghép nối, cắt, chỉnh độ dài</li>
+                        <li>Điều chỉnh âm lượng (ví dụ: fade in/out)</li>
+                    </ul>
+                </div>
+
+                <h3>c) 🎬 Tạo hiệu ứng chuyển cảnh</h3>
+                <div class="tool-item">
+                    <h3>Giúp các cảnh chuyển mượt mà, hấp dẫn hơn</h3>
+                    <p>Áp dụng giữa các đoạn ảnh/video trong phim</p>
+                </div>
+
+                <h3>d) ⏱️ Căn chỉnh thời gian</h3>
+                <div class="tool-item">
+                    <h3>Điều chỉnh thời lượng từng cảnh</h3>
+                    <h3>Đồng bộ</h3>
+                    <ul>
+                        <li>Hình ảnh</li>
+                        <li>Âm thanh</li>
+                        <li>Phụ đề</li>
+                    </ul>
+                    <p>Thực hiện trên ngăn tiến trình (Timeline/Storyboard)</p>
+                </div>
+
+                <h3>e) 📝 Tạo phụ đề</h3>
+                <div class="tool-item">
+                    <h3>Giúp truyền tải nội dung rõ ràng hơn</h3>
+                    <h3>Có thể</h3>
+                    <ul>
+                        <li>Nhập nội dung</li>
+                        <li>Định dạng</li>
+                        <li>Căn chỉnh thời điểm xuất hiện/kết thúc</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="thuc-hanh" class="card" aria-labelledby="thuc-hanh-title">
+                <h2 id="thuc-hanh-title">🛠️ Thực hành biên tập phim</h2>
+
+                <h3>🔹 Nhiệm vụ chung</h3>
+                <ul>
+                    <li>Mở và lưu dự án phim bằng phần mềm (VideoPad)</li>
+                </ul>
+
+                <h3>🔹 Các nhiệm vụ cụ thể</h3>
+                <div class="timeline" aria-label="Các nhiệm vụ cụ thể">
+                    <article class="timeline-item">
+                        <h3>1. Chỉnh sửa ảnh</h3>
+                        <ul>
+                            <li>Thay thế ảnh cũ bằng ảnh mới</li>
+                            <li>Xem trước để kiểm tra kết quả</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>2. Chỉnh sửa âm thanh</h3>
+                        <ul>
+                            <li>Tạo hiệu ứng nhỏ dần (Fade out) ở cuối phim</li>
+                            <li>Thực hiện trên Timeline</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>3. Tạo hiệu ứng chuyển cảnh</h3>
+                        <ul>
+                            <li>Chọn cảnh → áp dụng hiệu ứng → xem trước</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>4. Căn chỉnh thời gian</h3>
+                        <ul>
+                            <li>Thay đổi thời lượng từng cảnh:</li>
+                            <ul>
+                                <li>Nhập trực tiếp hoặc kéo thả</li>
+                            </ul>
+                            <li>Kiểm tra lại sau khi chỉnh</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>5. Tạo phụ đề</h3>
+                        <ul>
+                            <li>Các bước:</li>
+                            <ul>
+                                <li>Xác định thời điểm bắt đầu</li>
+                                <li>Nhập nội dung</li>
+                                <li>Căn chỉnh thời gian</li>
+                                <li>Thêm (Add) và áp dụng (Apply)</li>
+                            </ul>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">📌 Luyện tập</h2>
+                <ul>
+                    <li>Hoàn thiện phim với yêu cầu:</li>
+                    <ul>
+                        <li>Nội dung phù hợp kịch bản</li>
+                        <li>Có hiệu ứng chuyển cảnh hợp lí</li>
+                        <li>Âm thanh phù hợp, hấp dẫn</li>
+                        <li>Phụ đề rõ ràng, dễ theo dõi</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section id="van-dung" class="card" aria-labelledby="van-dung-title">
+                <h2 id="van-dung-title">🚀 Vận dụng</h2>
+                <ul>
+                    <li>Nâng cao chất lượng phim:</li>
+                    <ul>
+                        <li>Thêm ảnh/video</li>
+                        <li>Thay nhạc nền phù hợp</li>
+                        <li>Điều chỉnh thời lượng cảnh bằng kéo thả trên Timeline</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">✅ Ghi nhớ</h2>
+                <div class="note" role="note">
+                    <strong>Biên tập phim gồm 5 yếu tố chính:</strong>
+                    <br>👉 Hình ảnh – Âm thanh – Chuyển cảnh – Thời gian – Phụ đề
+                </div>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
