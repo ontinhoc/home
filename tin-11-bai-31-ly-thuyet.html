@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Tin học 11 - Bài 31: Thực hành tạo phim hoạt hình. Hướng dẫn xây dựng kịch bản, chuẩn bị tư liệu, tạo phim theo kịch bản, bổ sung hội thoại và phụ đề bằng VideoPad.">
+    <meta name="keywords" content="Tin học 11, Bài 31, thực hành tạo phim hoạt hình, VideoPad, kịch bản phim, phụ đề, hội thoại, ghi âm, Video Wizard">
+    <meta name="author" content="Ontinhoc">
+    <title>Thực Hành Tạo Phim Hoạt Hình | Tin 11 - Bài 31</title>
+    <style>
+        :root{--bg:#f7fafc;--card:#fff;--primary:#0ea5e9;--muted:#64748b;--accent:#0369a1;--accent-soft:#0f766e;--radius:12px;--content-max:1080px}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:Inter,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:#0f172a;margin:0;padding:24px;display:flex;justify-content:center}
+        .wrap{width:100%;max-width:var(--content-max)}
+        .home-link{position:fixed;top:12px;left:12px;z-index:50;text-decoration:none;background:#ffffffd9;color:var(--accent);padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 8px 18px rgba(15,23,42,0.12);backdrop-filter:blur(8px)}
+        header{background:linear-gradient(93deg,var(--primary),var(--accent));color:#fff;padding:30px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(14,165,233,0.22)}
+        header h1{margin:0;font-size:1.75rem}
+        header p{margin:10px 0 0;opacity:0.95;max-width:860px;line-height:1.6}
+        nav{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 0}
+        nav a{background:var(--card);padding:9px 14px;border-radius:10px;color:var(--accent);text-decoration:none;font-weight:600;box-shadow:0 1px 4px rgba(2,6,23,0.08);transition:transform 0.18s ease,box-shadow 0.18s ease}
+        nav a:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(3,105,161,0.18)}
+        main{margin-top:16px}
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(15,23,42,0.06);margin-bottom:18px}
+        h2{color:var(--accent);margin-top:0;font-size:1.45rem}
+        h3{color:var(--accent-soft);margin-top:0}
+        p{line-height:1.6}
+        ul,ol{margin:10px 0 10px 22px;padding:0;line-height:1.6}
+        li{margin-bottom:8px}
+        .note{background:#ecfeff;border-left:4px solid var(--primary);padding:14px;border-radius:8px;margin-top:12px}
+        .steps{background:#fff7ed;border-left:4px solid #f97316;padding:14px;border-radius:8px;margin-top:12px}
+        .keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+        .badge{background:#e0f2fe;color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600;font-size:0.9rem}
+        .task-grid,.step-grid,.requirements-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+        .task-item,.step-item,.requirement-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+        .task-item h3,.step-item h3,.requirement-item h3{margin-bottom:10px}
+        .timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+        .timeline-item{background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);border:1px solid #dbeafe;border-radius:12px;padding:16px}
+        .timeline-item h3{margin-bottom:10px}
+        .summary-list{list-style:none;margin:0;padding:0}
+        .summary-list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #e2e8f0}
+        .summary-list li:last-child{border-bottom:none}
+        .summary-list span{display:inline-block;min-width:18px;color:var(--primary);font-weight:700}
+        code{background:#f1f5f9;padding:2px 6px;border-radius:6px}
+        footer{margin-top:20px;text-align:center;color:var(--muted);font-size:0.95rem}
+        #backToTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:none;width:46px;height:46px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 8px 18px rgba(3,105,161,0.35);font-size:1.25rem}
+        #backToTop:hover{opacity:0.92}
+        @media(max-width:980px){
+            .timeline{grid-template-columns:1fr}
+        }
+        @media(max-width:720px){
+            body{padding:18px}
+            .home-link{top:10px;left:10px;padding:9px 12px}
+            header{padding:24px;margin-top:48px}
+            header h1{font-size:1.45rem}
+            nav a{flex:1 1 160px;text-align:center}
+            .card{padding:18px}
+            .task-grid,.step-grid,.requirements-grid,.timeline{grid-template-columns:1fr}
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bài 31: Thực hành tạo phim hoạt hình (Tin học 11)",
+      "author": {"@type": "Person", "name": "Ontinhoc"},
+      "inLanguage": "vi",
+      "keywords": ["Tin học 11", "Bài 31", "Thực hành tạo phim hoạt hình", "VideoPad", "Kịch bản phim", "Phụ đề", "Hội thoại", "Video Wizard"],
+      "publisher": {"@type": "Organization", "name": "Ontinhoc"},
+      "description": "Bài học hướng dẫn xây dựng kịch bản, chuẩn bị tư liệu, tạo phim hoạt hình theo kịch bản, ghi âm hội thoại, thêm phụ đề và xuất bản phim bằng VideoPad."
+    }
+    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'unsafe-inline' 'self'; script-src 'self' 'unsafe-inline';">
+    <link rel="preload" as="script" href="protect.js">
+    <link rel="prefetch" href="index.html">
+    <meta name="referrer" content="no-referrer">
+</head>
+<body oncontextmenu="return false">
+    <a href="index.html" aria-label="Về trang chủ" class="home-link">TRANG CHỦ</a>
+    <div class="wrap">
+        <header>
+            <h1>Tin 11 - Bài 31: Thực hành tạo phim hoạt hình</h1>
+            <p>Bài học giúp em xây dựng kịch bản, chuẩn bị tư liệu, tạo đoạn phim hoạt hình đúng ý tưởng, bổ sung hội thoại và phụ đề để hoàn thiện sản phẩm bằng phần mềm VideoPad.</p>
+            <nav aria-label="Mục lục">
+                <a href="#muc-tieu">Mục tiêu</a>
+                <a href="#nhiem-vu-1">Kịch bản</a>
+                <a href="#nhiem-vu-2">Tạo phim</a>
+                <a href="#nhiem-vu-3">Phụ đề và hội thoại</a>
+                <a href="#luyen-tap">Luyện tập</a>
+                <a href="#van-dung">Vận dụng</a>
+                <a href="#ghi-nho">Ghi nhớ</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="muc-tieu" class="card" aria-labelledby="muc-tieu-title">
+                <h2 id="muc-tieu-title">🎯 Mục tiêu bài học</h2>
+                <ul>
+                    <li>Tạo được đoạn phim hoạt hình từ ảnh.</li>
+                    <li>Thêm hội thoại giữa các nhân vật.</li>
+                    <li>Chèn phụ đề cho phim.</li>
+                </ul>
+                <div class="keywords" aria-label="Từ khóa">
+                    <span class="badge">VideoPad</span>
+                    <span class="badge">Kịch bản phim</span>
+                    <span class="badge">Ghi âm hội thoại</span>
+                    <span class="badge">Phụ đề</span>
+                    <span class="badge">Timeline</span>
+                    <span class="badge">Video Wizard</span>
+                </div>
+            </section>
+
+            <section id="nhiem-vu-1" class="card" aria-labelledby="nhiem-vu-1-title">
+                <h2 id="nhiem-vu-1-title">🧩 Nhiệm vụ 1: Xây dựng kịch bản, chuẩn bị tư liệu</h2>
+                <div class="task-grid">
+                    <article class="task-item">
+                        <h3>Nội dung chính</h3>
+                        <ul>
+                            <li>Muốn tạo phim hoạt hình cần xây dựng kịch bản trước.</li>
+                            <li>Kịch bản phải phù hợp với phần mềm làm phim đang sử dụng.</li>
+                        </ul>
+                    </article>
+                    <article class="task-item">
+                        <h3>Kịch bản gồm</h3>
+                        <ul>
+                            <li>Phân cảnh.</li>
+                            <li>Hình ảnh.</li>
+                            <li>Lời thoại hoặc âm thanh.</li>
+                            <li>Phụ đề.</li>
+                        </ul>
+                    </article>
+                    <article class="task-item">
+                        <h3>Chuẩn bị tư liệu</h3>
+                        <ul>
+                            <li>Ảnh.</li>
+                            <li>Video.</li>
+                            <li>Âm thanh.</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="steps">
+                    <strong>Các bước thực hiện</strong>
+                    <ol>
+                        <li>Nghĩ ý tưởng cho phim.</li>
+                        <li>Viết kịch bản theo bảng mẫu.</li>
+                        <li>Chuẩn bị đầy đủ ảnh, video và âm thanh theo nội dung đã xây dựng.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="nhiem-vu-2" class="card" aria-labelledby="nhiem-vu-2-title">
+                <h2 id="nhiem-vu-2-title">🎬 Nhiệm vụ 2: Tạo đoạn phim hoạt hình theo kịch bản</h2>
+                <div class="step-grid">
+                    <article class="step-item">
+                        <h3>Các bước chính</h3>
+                        <ul>
+                            <li>Khởi động phần mềm VideoPad.</li>
+                            <li>Tạo phim theo đúng kịch bản đã xây dựng.</li>
+                            <li>Có thể chỉnh sửa lại kịch bản khi thực hiện nếu cần.</li>
+                        </ul>
+                    </article>
+                    <article class="step-item">
+                        <h3>Lưu ý quan trọng</h3>
+                        <ul>
+                            <li>Nên dùng tính năng <code>Video Wizard</code>.</li>
+                            <li>Chọn mẫu phim phù hợp với nội dung.</li>
+                            <li>Điều chỉnh thời lượng các phân cảnh hợp lí.</li>
+                            <li>Chọn hiệu ứng chuyển cảnh phù hợp.</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="note" role="note">
+                    <strong>Mẹo thực hành:</strong> Trong quá trình dựng phim, cần xem trước thường xuyên để kiểm tra độ khớp giữa hình ảnh, lời thoại, âm thanh nền và thời gian xuất hiện của từng cảnh.
+                </div>
+            </section>
+
+            <section id="nhiem-vu-3" class="card" aria-labelledby="nhiem-vu-3-title">
+                <h2 id="nhiem-vu-3-title">🎙️ Nhiệm vụ 3: Bổ sung phụ đề và hội thoại</h2>
+                <div class="timeline" aria-label="Các bước bổ sung phụ đề và hội thoại">
+                    <article class="timeline-item">
+                        <h3>Bước 1: Ghi âm hội thoại</h3>
+                        <p>Thao tác: <code>Home → Record → Record Narration</code></p>
+                        <ul>
+                            <li>Quan sát phim trên màn hình khi ghi âm.</li>
+                            <li>Đọc lời thoại tương ứng với từng cảnh.</li>
+                            <li>Điều chỉnh thời lượng cảnh để khớp lời thoại nếu cần.</li>
+                            <li>Sau khi ghi âm, tệp âm thanh được lưu vào ngăn Tư liệu.</li>
+                            <li>Đoạn âm thanh xuất hiện trên Timeline để tiếp tục chỉnh sửa.</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 2: Bổ sung phụ đề</h3>
+                        <ul>
+                            <li>Thêm phụ đề theo đúng kịch bản đã xây dựng.</li>
+                            <li>Đặt phụ đề đúng cảnh, đúng thời điểm xuất hiện.</li>
+                            <li>Kiểm tra lại nội dung để bảo đảm dễ theo dõi.</li>
+                        </ul>
+                    </article>
+                    <article class="timeline-item">
+                        <h3>Bước 3: Lưu và xuất bản phim</h3>
+                        <ul>
+                            <li>Lưu dự án để có thể chỉnh sửa lại sau này.</li>
+                            <li>Xuất bản phim hoạt hình hoàn chỉnh.</li>
+                            <li>Xem lại sản phẩm trước khi chia sẻ.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="luyen-tap" class="card" aria-labelledby="luyen-tap-title">
+                <h2 id="luyen-tap-title">📌 Luyện tập</h2>
+                <ul>
+                    <li>Chia sẻ phim với bạn bè.</li>
+                    <li>Nhận góp ý để chỉnh sửa và hoàn thiện sản phẩm hơn.</li>
+                    <li>Kiểm tra lại độ khớp giữa hình ảnh, nhạc nền, hội thoại và phụ đề.</li>
+                </ul>
+            </section>
+
+            <section id="van-dung" class="card" aria-labelledby="van-dung-title">
+                <h2 id="van-dung-title">🚀 Vận dụng</h2>
+                <p>Hãy tạo một phim hoạt hình hoàn chỉnh với thời lượng dưới 3 phút và đáp ứng đủ các yêu cầu sau:</p>
+                <div class="requirements-grid">
+                    <article class="requirement-item">
+                        <h3>Tư liệu hình ảnh</h3>
+                        <ul>
+                            <li>Có ảnh hoặc video clip.</li>
+                            <li>Nội dung phù hợp với kịch bản.</li>
+                        </ul>
+                    </article>
+                    <article class="requirement-item">
+                        <h3>Âm thanh và hiệu ứng</h3>
+                        <ul>
+                            <li>Có nhạc nền.</li>
+                            <li>Có hiệu ứng chuyển cảnh.</li>
+                        </ul>
+                    </article>
+                    <article class="requirement-item">
+                        <h3>Thông tin hiển thị</h3>
+                        <ul>
+                            <li>Có phụ đề.</li>
+                            <li>Có thuyết minh hoặc hội thoại nhân vật.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="ghi-nho" class="card" aria-labelledby="ghi-nho-title">
+                <h2 id="ghi-nho-title">✅ Ghi nhớ</h2>
+                <ul class="summary-list">
+                    <li><span>1.</span><div>Tạo phim hoạt hình hiệu quả bắt đầu từ một kịch bản rõ ràng, phù hợp với phần mềm sử dụng.</div></li>
+                    <li><span>2.</span><div>Quá trình dựng phim cần kết hợp đồng bộ hình ảnh, âm thanh, hội thoại, phụ đề và thời lượng từng cảnh.</div></li>
+                    <li><span>3.</span><div>Muốn sản phẩm hoàn chỉnh hơn, cần xem trước, nhận góp ý và chỉnh sửa nhiều lần trước khi xuất bản.</div></li>
+                </ul>
+            </section>
+
+            <footer>
+                <p>Tài liệu hỗ trợ giảng dạy và tự học Tin học 11. &copy; 2025 Ontinhoc</p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" title="Về đầu trang" aria-label="Về đầu trang">&uarr;</button>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault(), {capture:true});
+        const blockCombos = (e) => {
+            const k = (e.key || '').toLowerCase();
+            const ctrlLike = e.ctrlKey || e.metaKey;
+            if (e.key === 'F12') return e.preventDefault();
+            if (ctrlLike && (k === 'u' || k === 's' || k === 'p')) return e.preventDefault();
+            if (ctrlLike && e.shiftKey && (k === 'i' || k === 'j' || k === 'c' || k === 'k')) return e.preventDefault();
+        };
+        document.addEventListener('keydown', blockCombos, {capture:true});
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                }
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 220 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <script src="protect.js"></script>
+</body>
+</html>
