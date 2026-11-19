@@ -1680,11 +1680,11 @@
         // Initialize visit stats
         try {
             VisitStats.init({
-                // Using Cloudflare Worker backend mapped under ontapnhanh.com/visit-stats
+                // Cloudflare Worker backend
                 mode: 'worker',
-                namespace: 'ontapnhanh',    // site-wide counters for ontapnhanh.com
+                namespace: 'ontapnhanh',    // Giữ nguyên namespace để bảo lưu số lượt truy cập đã tích lũy
                 onlineStrategy: 'worker',   // global online via Worker
-                baseUrl: 'https://www-congsu.workers.dev'
+                baseUrl: 'https://api.ontapnhanh.com'
             });
         } catch (e) { console && console.warn && console.warn('VisitStats init failed', e); }
     </script>

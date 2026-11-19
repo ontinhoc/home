@@ -6,6 +6,10 @@ compatibility_date = "2024-09-19"
 pattern = "api.ontapnhanh.com"
 custom_domain = true
 
+[[routes]]
+pattern = "api.tinhocthaysu.top"
+custom_domain = true
+
 [durable_objects]
 bindings = [
   { name = "COUNTER_DO", class_name = "CounterDO" },

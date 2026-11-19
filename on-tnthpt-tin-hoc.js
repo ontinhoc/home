@@ -84,7 +84,7 @@ function buildApiUnavailableMessage() {
   const tried = state.apiCandidates.length
     ? state.apiCandidates.map(formatApiBaseLabel).join(' | ')
     : window.location.origin
-  return `API chưa sẵn sàng. Đã thử: ${tried}. Hãy kiểm tra DNS/Cloudflare của api.ontapnhanh.com hoặc cấu hình fallback bằng data-api-fallbacks, window.ONTHI_API_FALLBACKS, hoặc tham số ?apiBase=.`
+  return `API chưa sẵn sàng. Đã thử: ${tried}. Hãy kiểm tra DNS/Cloudflare của api.tinhocthaysu.top / api.ontapnhanh.com hoặc cấu hình fallback bằng data-api-fallbacks, window.ONTHI_API_FALLBACKS, hoặc tham số ?apiBase=.`
 }
 
 const TEXT_FIXES = [
@@ -375,7 +375,7 @@ function renderPublishedExams() {
   const emptyBox = $('#exam-empty')
   if (!state.apiAvailable) {
     container.innerHTML = ''
-    emptyBox.textContent = 'Không tải được danh sách đề thi vì API chưa sẵn sàng. Kiểm tra DNS/Cloudflare của api.ontapnhanh.com hoặc cấu hình fallback API.'
+    emptyBox.textContent = 'Không tải được danh sách đề thi vì API chưa sẵn sàng. Kiểm tra DNS/Cloudflare của api.tinhocthaysu.top / api.ontapnhanh.com hoặc cấu hình fallback API.'
     emptyBox.classList.add('show')
     return
   }
